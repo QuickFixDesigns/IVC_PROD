@@ -1,0 +1,110 @@
+﻿<UserControl x:Class="NeoTracker.Pages.DepartmentEdit"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:src="clr-namespace:NeoTracker.ViewModels"
+             mc:Ignorable="d" >
+    <Grid Style="{StaticResource ContentRoot}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="1"/>
+            <ColumnDefinition Width="auto" MinWidth="200" MaxWidth="420"/>
+            <ColumnDefinition Width="1"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <ScrollViewer Grid.Column="0" >
+            <StackPanel HorizontalAlignment="Left" Margin="0,0,10,0">
+                <mui:ModernButton x:Name="ApplyButton" Click="ApplyButton_Click"/>
+                <mui:ModernButton x:Name="AddUserButton" Click="AddUserButton_Click" IsEnabled="{Binding Department.CanAddUsers}"/>
+                <mui:ModernButton x:Name="CancelButton" Click="CancelButton_Click" />
+                <mui:ModernButton x:Name="DeleteButton" Click="DeleteButton_Click"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <GridSplitter Grid.Column="1" />
+
+        <ScrollViewer Grid.Column="2">
+            <StackPanel Name="panel" Margin="10,0,10,0">
+
+                <StackPanel.BindingGroup>
+                    <BindingGroup Name="bindingGroup"/>
+                </StackPanel.BindingGroup>
+
+                <StackPanel.Resources>
+                    <src:MainViewModel x:Key="DepartmentViewModel"/>
+                    <Style x:Key="textBoxInError" TargetType="TextBox">
+                        <Style.Triggers>
+                            <Trigger Property="Validation.HasError" Value="true">
+                                <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Resources>
+
+                <TextBlock Text="Department" Style="{StaticResource Heading2}" />
+                <Separator Height="10" Background="Transparent"/>
+
+                <Label Content="Name"/>
+                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding Department.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+
+                <Label Content="SortOrder"/>
+                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding Department.SortOrder, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+
+                <Grid>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <Label Content="HeadOfDepartment"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <mui:ModernButton x:Name="ClearHeadOfDepartmentCb" Click="ClearHeadOfDepartmentCb_Click"></mui:ModernButton>
+                    </StackPanel>
+                </Grid>
+
+                <ComboBox DisplayMemberPath="LongName"  SelectedValuePath="UserID" SelectedValue="{Binding Path=Department.HeadOfDepartmentID,UpdateSourceTrigger=LostFocus}" ItemsSource="{Binding Path=Department.Users}"/>
+
+                <Label Content="Message"/>
+                <TextBox TextWrapping="Wrap" AcceptsReturn="True" Style="{StaticResource textBoxInError}" Text="{Binding Department.Msg, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Height="48" />
+
+                <Label Content="Is default"/>
+                <CheckBox IsChecked="{Binding Department.IsDefault, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+
+                <Label Content="IsActive"/>
+                <CheckBox IsChecked="{Binding Department.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                
+                <Label Content="UpdatedBy" />
+                <TextBox  IsReadOnly="True" Text="{Binding Department.UpdatedBy}"  />
+                <Label Content="UpdatedAt" />
+                <TextBox  IsReadOnly="True"  Text="{Binding Department.UpdatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <GridSplitter Grid.Column="3" />
+
+        <ScrollViewer Grid.Column="4">
+            <StackPanel Margin="10,0,10,0">
+
+
+
+                <TextBlock Text="Users" Style="{StaticResource Heading2}"/>
+                <TextBlock Text="Double click to remove"/>
+
+                <Separator Height="20" Background="Transparent"/>
+
+                <ListView x:Name="ListView" ItemsSource="{Binding Department.Users, UpdateSourceTrigger=PropertyChanged}" MouseDoubleClick="ListView_MouseDoubleClick">
+                    <ListView.View>
+                        <GridView x:Name="GridListView">
+                            <GridViewColumn Header="Alias" DisplayMemberBinding="{Binding Alias}" />
+                            <GridViewColumn Header="First name" DisplayMemberBinding="{Binding FirstName}" />
+                            <GridViewColumn Header="Last name" DisplayMemberBinding="{Binding LastName}"  />
+                            <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}" />
+                            <GridViewColumn Header="Email Notifications" DisplayMemberBinding="{Binding EmailNotifications}"  />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
