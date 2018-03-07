@@ -30,21 +30,5 @@ namespace NeoTracker.Models
         public Department Department { get; set; }
         public ProjectItem ProjectItem { get; set; }
         public ProjectEventType ProjectEventType { get; set; }
-
-        //public DepartmentViewModel ToViewModel()
-        //{
-        //    return new DepartmentViewModel()
-        //    {
-        //        DepartmentID = DepartmentID,
-        //        HeadOfDepartmentID = HeadOfDepartmentID,
-        //        Name = Name,
-        //        SortOrder = SortOrder,
-        //        Msg = Msg,
-        //        IsDefault = IsDefault,
-        //        CreatedAt = CreatedAt,
-        //        UpdatedAt = UpdatedAt,
-        //        UpdatedBy = UpdatedBy,
-        //    };
-        //}
     }
 }

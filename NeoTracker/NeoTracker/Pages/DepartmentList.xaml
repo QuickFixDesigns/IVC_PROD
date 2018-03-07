@@ -38,9 +38,9 @@
                                 </GridViewColumn.Header>
                             </GridViewColumn>
 
-                            <GridViewColumn DisplayMemberBinding="{Binding HeadOfDepartmentName}">
+                            <GridViewColumn DisplayMemberBinding="{Binding HeadOfDepartment.LongName}">
                                 <GridViewColumn.Header>
-                                    <GridViewColumnHeader Tag="HeadOfDepartmentName">HeadOfDepartmentName</GridViewColumnHeader>
+                                    <GridViewColumnHeader Tag="HeadOfDepartment">HeadOfDepartmentName</GridViewColumnHeader>
                                 </GridViewColumn.Header>
                             </GridViewColumn>
 

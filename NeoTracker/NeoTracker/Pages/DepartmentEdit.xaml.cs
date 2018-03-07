@@ -95,7 +95,7 @@ namespace NeoTracker.Pages
 
         private void ClearHeadOfDepartmentCb_Click(object sender, RoutedEventArgs e)
         {
-            vm.HeadOfDepartmentID = null;
+            vm.HeadOfDepartment = null;
         }
     }
 }

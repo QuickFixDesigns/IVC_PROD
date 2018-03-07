@@ -28,17 +28,11 @@ namespace NeoTracker.Models
             get { return _SortOrder; }
             set { SetProperty(ref _SortOrder, value); }
         }
-        private int? _HeadOfDepartmentID;
-        public int? HeadOfDepartmentID
+        private User _HeadOfDepartment;
+        public User HeadOfDepartment
         {
-            get { return _HeadOfDepartmentID; }
-            set { SetProperty(ref _HeadOfDepartmentID, value); }
-        }
-        private string _HeadOfDepartmentName;
-        public string HeadOfDepartmentName
-        {
-            get { return _HeadOfDepartmentName; }
-            set { SetProperty(ref _HeadOfDepartmentName, value); }
+            get { return _HeadOfDepartment; }
+            set { SetProperty(ref _HeadOfDepartment, value); }
         }
         private string _Msg;
         public string Msg
@@ -56,8 +50,8 @@ namespace NeoTracker.Models
         {
             get { return DepartmentID != 0; }
         }
-        private List<UserViewModel> _Users = new List<UserViewModel>();
-        public List<UserViewModel> Users
+        private List<User> _Users = new List<User>();
+        public List<User> Users
         {
             get { return _Users; }
             set
@@ -73,7 +67,7 @@ namespace NeoTracker.Models
                 DepartmentID = DepartmentID,
                 Name = Name,
                 SortOrder = SortOrder,
-                HeadOfDepartmentID = HeadOfDepartmentID,
+                HeadOfDepartmentID = HeadOfDepartment.UserID,
                 Msg = Msg,
                 IsDefault = IsDefault,
                 IsActive = IsActive,
@@ -88,22 +82,7 @@ namespace NeoTracker.Models
             {
                 using (var context = new NeoTrackerContext())
                 {
-                    Users = (from u in context.Users
-                             join du in context.DepartmentUsers.Where(x => x.DepartmentID == DepartmentID) on u.UserID equals du.UserID
-                             orderby u.FirstName, u.LastName
-                             select new UserViewModel()
-                             {
-                                 UserID = u.UserID,
-                                 Alias = u.Alias,
-                                 CreatedAt = u.CreatedAt,
-                                 Email = u.Email,
-                                 EmailNotifications = u.EmailNotifications,
-                                 FirstName = u.FirstName,
-                                 LastName = u.LastName,
-                                 IsActive = u.IsActive,
-                                 UpdatedAt = u.UpdatedAt,
-                                 UpdatedBy = u.UpdatedBy
-                             }).ToList();
+                    Users = context.Users.Where(x => x.DepartmentUsers.Any(u => u.DepartmentID == DepartmentID)).OrderBy(x=>x.FirstName).ThenBy(x=>x.LastName).ToList();
                 }
             }
         }
@@ -196,9 +175,9 @@ namespace NeoTracker.Models
             {
                 using (var context = new NeoTrackerContext())
                 {
-                    if(HeadOfDepartmentID == user.UserID)
+                    if(HeadOfDepartment.UserID == user.UserID)
                     {
-                        HeadOfDepartmentID = (int?)null;
+                        HeadOfDepartment = null;
                         context.Entry(this.GetModel()).State = EntityState.Modified;
                         await context.SaveChangesAsync();
                     }

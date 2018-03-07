@@ -13,12 +13,14 @@ namespace NeoTracker.Models
     {
         public int ProjectItemID { get; set; }
 
+        public int ProjectID { get; set; }
+
         [StringLength(25, ErrorMessage = "Cannot be longer than 25 characters.")]
         public string Code { get; set; }
 
-        public int SortOrder { get; set; }
+        public int? SortOrder { get; set; }
 
-        public int StatusID { get; set; }
+        public int? StatusID { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "Cannot be longer than 100 characters.")]
@@ -32,6 +34,7 @@ namespace NeoTracker.Models
         [DataType(DataType.Date)]
         public DateTime? DueDate { get; set; }
 
+        public Project Project { get; set; }
         public Status Status { get; set; }
         public ICollection<ProjectItemOperation> ProjectItemOperations { get; set; }
     }

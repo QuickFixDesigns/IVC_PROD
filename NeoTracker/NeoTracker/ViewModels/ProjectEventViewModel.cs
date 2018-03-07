@@ -13,37 +13,51 @@ using static NeoTracker.ViewModels.MainViewModel;
 
 namespace NeoTracker.Models
 {
-    public class StatusViewModel : ViewModelBase, IDataErrorInfo
+    public class ProjectEventViewModel : ViewModelBase, IDataErrorInfo
     {
-        public int StatusID { get; set; }
+        public int ProjectEventID { get; set; }
 
-        private string _Name;
-        public string Name
+        private string _Description;
+        public string Description
         {
-            get { return _Name; }
-            set { SetProperty(ref _Name, value); }
+            get { return _Description; }
+            set { SetProperty(ref _Description, value); }
         }
-        private int? _SortOrder;
-        public int? SortOrder
+        private Project _Project = new Project();
+        public Project Project
         {
-            get { return _SortOrder; }
-            set { SetProperty(ref _SortOrder, value); }
+            get { return _Project; }
+            set { SetProperty(ref _Project, value); }
         }
-        private bool _IsDeleted;
-        public bool IsDeleted
+        private Department _Department = new Department();
+        public Department Department
         {
-            get { return _IsDeleted; }
-            set { SetProperty(ref _IsDeleted, value); }
+            get { return _Department; }
+            set { SetProperty(ref _Department, value); }
+        }
+        private ProjectItem _ProjectItem = new ProjectItem();
+        public ProjectItem ProjectItem
+        {
+            get { return _ProjectItem; }
+            set { SetProperty(ref _ProjectItem, value); }
+        }
+        private ProjectEventType _ProjectEventType = new ProjectEventType();
+        public ProjectEventType ProjectEventType
+        {
+            get { return _ProjectEventType; }
+            set { SetProperty(ref _ProjectEventType, value); }
         }
         //For database
-        public Status GetModel()
+        public ProjectEvent GetModel()
         {
-            return new Status()
+            return new ProjectEvent()
             {
-                StatusID = StatusID,
-                Name = Name,
-                IsDeleted = IsDeleted,
-                SortOrder = SortOrder,
+                DepartmentID = Department.DepartmentID,
+                Description = Description,
+                ProjectEventID = ProjectEventID,
+                ProjectEventTypeID = ProjectEventType.ProjectEventTypeID,
+                ProjectItemID = ProjectItem.ProjectItemID,
+                ProjectID = Project.ProjectID,
                 IsActive = IsActive,
                 CreatedAt = CreatedAt,
                 UpdatedAt = UpdatedAt,
@@ -55,9 +69,9 @@ namespace NeoTracker.Models
             using (var context = new NeoTrackerContext())
             {
                 var data = GetModel();
-                if (StatusID == 0)
+                if (ProjectEventID == 0)
                 {
-                    context.Statuses.Add(data);
+                    context.ProjectEvents.Add(data);
                 }
                 else
                 {
@@ -66,13 +80,13 @@ namespace NeoTracker.Models
                 await context.SaveChangesAsync();
             }
             EndEdit();
-            App.vm.LoadStatus();
+            App.vm.LoadDepartments();
         }
         public async void Delete()
         {
             bool CanDelete = true;
 
-            var dialog = new QuestionDialog("Do you really want to delete this Status (" + Name + ")?");
+            var dialog = new QuestionDialog("Do you really want to delete this Event (" + Description + ")?");
             dialog.ShowDialog();
             if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
             {
@@ -82,11 +96,11 @@ namespace NeoTracker.Models
                     {
                         var data = GetModel();
                         context.Entry(data).State = EntityState.Deleted;
-                        App.vm.Statuses.Remove(this);
+                        App.vm.ProjectEvents.Remove(this);
                         await context.SaveChangesAsync();
+                        EndEdit();
                     }
                 }
-                EndEdit();
             }
         }
         //For validation
@@ -98,9 +112,9 @@ namespace NeoTracker.Models
 
                 if (columnName == "Name")
                 {
-                    if (string.IsNullOrEmpty(Name) || (Name ?? "").Length > 25)
+                    if (string.IsNullOrEmpty(Description) || (Description ?? "").Length > 255)
                     {
-                        result = "Cannot be empty or more than 25 characters";
+                        result = "Cannot be empty or more than 255 characters";
                     }
                 }
                 return result;

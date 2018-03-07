@@ -118,6 +118,8 @@
     <Compile Include="Pages\DepartmentList.xaml.cs">
       <DependentUpon>DepartmentList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ProjectItemViewModel.cs" />
+    <Compile Include="ViewModels\ProjectEventViewModel.cs" />
     <Compile Include="ViewModels\StatusViewModel.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
     <Compile Include="ViewModels\ProjectEventTypeViewModel.cs" />

@@ -27,21 +27,5 @@ namespace NeoTracker.Models
 
         public ICollection<DepartmentUser> DepartmentUsers { get; set; }
         public ICollection<ProjectItemOperation> ProjectItemOperations { get; set; }
-
-        public DepartmentViewModel ToViewModel()
-        {
-            return new DepartmentViewModel()
-            {
-                DepartmentID = DepartmentID,
-                HeadOfDepartmentID = HeadOfDepartmentID,
-                Name = Name,
-                SortOrder = SortOrder,
-                Msg = Msg,
-                IsDefault = IsDefault,
-                CreatedAt = CreatedAt,
-                UpdatedAt = UpdatedAt,
-                UpdatedBy = UpdatedBy,
-            };
-        }
     }
 }

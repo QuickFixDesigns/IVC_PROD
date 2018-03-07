@@ -13,15 +13,15 @@ using static NeoTracker.ViewModels.MainViewModel;
 
 namespace NeoTracker.Models
 {
-    public class StatusViewModel : ViewModelBase, IDataErrorInfo
+    public class ProjectItemViewModel : ViewModelBase, IDataErrorInfo
     {
-        public int StatusID { get; set; }
+        public int ProjectItemID { get; set; }
 
-        private string _Name;
-        public string Name
+        private string _Code;
+        public string Code
         {
-            get { return _Name; }
-            set { SetProperty(ref _Name, value); }
+            get { return _Code; }
+            set { SetProperty(ref _Code, value); }
         }
         private int? _SortOrder;
         public int? SortOrder
@@ -29,21 +29,52 @@ namespace NeoTracker.Models
             get { return _SortOrder; }
             set { SetProperty(ref _SortOrder, value); }
         }
-        private bool _IsDeleted;
-        public bool IsDeleted
+        private string _Name;
+        public string Name
         {
-            get { return _IsDeleted; }
-            set { SetProperty(ref _IsDeleted, value); }
+            get { return _Name; }
+            set { SetProperty(ref _Name, value); }
         }
-        //For database
-        public Status GetModel()
+
+        private DateTime? _LatestStartDate;
+        public DateTime? LatestStartDate
         {
-            return new Status()
+            get { return _LatestStartDate; }
+            set { SetProperty(ref _LatestStartDate, value); }
+        }
+
+        private DateTime? _DueDate;
+        public DateTime? DueDate
+        {
+            get { return _DueDate; }
+            set { SetProperty(ref _DueDate, value); }
+        }
+        private Project _Project = new Project();
+        public Project Project
+        {
+            get { return _Project; }
+            set { SetProperty(ref _Project, value); }
+        }
+        private Status _Status = new Status();
+        public Status Status
+        {
+            get { return _Status; }
+            set { SetProperty(ref _Status, value); }
+        }
+
+        //For database
+        public ProjectItem GetModel()
+        {
+            return new ProjectItem()
             {
-                StatusID = StatusID,
-                Name = Name,
-                IsDeleted = IsDeleted,
+                ProjectItemID = ProjectItemID,
+                ProjectID = Project.ProjectID,
+                Code = Code,
+                DueDate = DueDate,
+                LatestStartDate = LatestStartDate,
                 SortOrder = SortOrder,
+                StatusID = Status.StatusID,
+                Name = Name,
                 IsActive = IsActive,
                 CreatedAt = CreatedAt,
                 UpdatedAt = UpdatedAt,
@@ -55,9 +86,9 @@ namespace NeoTracker.Models
             using (var context = new NeoTrackerContext())
             {
                 var data = GetModel();
-                if (StatusID == 0)
+                if (ProjectItemID == 0)
                 {
-                    context.Statuses.Add(data);
+                    context.ProjectItems.Add(data);
                 }
                 else
                 {
@@ -66,13 +97,13 @@ namespace NeoTracker.Models
                 await context.SaveChangesAsync();
             }
             EndEdit();
-            App.vm.LoadStatus();
+            App.vm.LoadProjectItems();
         }
         public async void Delete()
         {
             bool CanDelete = true;
 
-            var dialog = new QuestionDialog("Do you really want to delete this Status (" + Name + ")?");
+            var dialog = new QuestionDialog("Do you really want to delete this item (" + Name + ")?");
             dialog.ShowDialog();
             if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
             {
@@ -82,11 +113,11 @@ namespace NeoTracker.Models
                     {
                         var data = GetModel();
                         context.Entry(data).State = EntityState.Deleted;
-                        App.vm.Statuses.Remove(this);
+                        App.vm.ProjectItems.Remove(this);
                         await context.SaveChangesAsync();
+                        EndEdit();
                     }
                 }
-                EndEdit();
             }
         }
         //For validation

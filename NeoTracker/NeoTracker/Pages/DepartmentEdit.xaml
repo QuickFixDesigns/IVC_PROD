@@ -62,7 +62,7 @@
                     </StackPanel>
                 </Grid>
 
-                <ComboBox DisplayMemberPath="LongName"  SelectedValuePath="UserID" SelectedValue="{Binding Path=Department.HeadOfDepartmentID,UpdateSourceTrigger=LostFocus}" ItemsSource="{Binding Path=Department.Users}"/>
+                <ComboBox DisplayMemberPath="LongName" SelectedValuePath="UserID" SelectedValue="{Binding Department.HeadOfDepartment.UserID, UpdateSourceTrigger=PropertyChanged}"  ItemsSource="{Binding Path=Department.Users}"/>
 
                 <Label Content="Message"/>
                 <TextBox TextWrapping="Wrap" AcceptsReturn="True" Style="{StaticResource textBoxInError}" Text="{Binding Department.Msg, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Height="48" />

@@ -94,7 +94,7 @@ namespace NeoTracker.Models
             {
                 using (var context = new NeoTrackerContext())
                 {
-                    Departments = (from d in context.Departments
+                    Departments = (from d in context.Departments.Include(x=>x.HeadOfDepartment)
                                    join du in context.DepartmentUsers.Where(x => x.UserID == UserID) on d.DepartmentID equals du.DepartmentID
                                    orderby d.Name
                                    select new DepartmentViewModel()
@@ -102,7 +102,7 @@ namespace NeoTracker.Models
                                        DepartmentID = d.DepartmentID,
                                        Name = d.Name,
                                        SortOrder = d.SortOrder,
-                                       HeadOfDepartmentID = d.HeadOfDepartmentID,
+                                       HeadOfDepartment = d.HeadOfDepartment,
                                        IsActive = d.IsActive,
                                        IsDefault = d.IsDefault,
                                        Msg = d.Msg,

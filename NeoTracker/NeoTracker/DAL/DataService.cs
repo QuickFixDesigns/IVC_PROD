@@ -30,10 +30,29 @@ namespace NeoTracker.DAL
                     Name = x.Name,
                     SortOrder = x.SortOrder,
                     IsActive = x.IsActive,
-                    HeadOfDepartmentID = x.HeadOfDepartmentID,
-                    HeadOfDepartmentName = x.HeadOfDepartmentID.HasValue ? x.HeadOfDepartment.LongName : App.BlankStr,
+                    HeadOfDepartment = x.HeadOfDepartment,
                     Msg = x.Msg,
                     IsDefault = x.IsDefault,
+                    CreatedAt = x.CreatedAt,
+                    UpdatedAt = x.UpdatedAt,
+                    UpdatedBy = x.UpdatedBy
+                }).ToList();
+            }
+        }
+        public async Task<List<ProjectEventViewModel>> GetProjectEventList(int? ProjectID)
+        {
+            using (var context = new NeoTrackerContext())
+            {
+                var data = await context.ProjectEvents.Include(x => x.Project).Include(x => x.ProjectItem).Include(x=>x.ProjectEventType).Include(x => x.Department).OrderByDescending(x => x.CreatedAt).ToListAsync();
+                return data.Select(x => new ProjectEventViewModel()
+                {
+                    ProjectEventID = x.ProjectEventID,
+                    Department = x.Department,
+                    Description = x.Description,
+                    Project = x.Project,
+                    ProjectEventType = x.ProjectEventType,
+                    ProjectItem = x.ProjectItem,
+                    IsActive = x.IsActive,
                     CreatedAt = x.CreatedAt,
                     UpdatedAt = x.UpdatedAt,
                     UpdatedBy = x.UpdatedBy
@@ -50,6 +69,28 @@ namespace NeoTracker.DAL
                     ProjectEventTypeID = x.ProjectEventTypeID,
                     Name = x.Name,
                     NotificateDepartment = x.NotificateDepartment,
+                    SortOrder = x.SortOrder,
+                    IsActive = x.IsActive,
+                    CreatedAt = x.CreatedAt,
+                    UpdatedAt = x.UpdatedAt,
+                    UpdatedBy = x.UpdatedBy
+                }).ToList();
+            }
+        }
+        public async Task<List<ProjectItemViewModel>> GetProjectItemList(int? ProjectID)
+        {
+            using (var context = new NeoTrackerContext())
+            {
+                var data = await context.ProjectItems.Include(x=>x.Project).Include(x => x.Status).OrderBy(x => x.SortOrder).ThenBy(x=>x.Name).ToListAsync();
+                return data.Select(x => new ProjectItemViewModel()
+                {
+                    ProjectItemID = x.ProjectItemID,
+                    Code = x.Code,
+                    DueDate = x.DueDate,
+                    LatestStartDate = x.LatestStartDate,
+                    Status = x.Status,
+                    Project = x.Project,
+                    Name = x.Name,
                     SortOrder = x.SortOrder,
                     IsActive = x.IsActive,
                     CreatedAt = x.CreatedAt,
