@@ -76,8 +76,29 @@
     <Compile Include="Assets\Buttons.cs" />
     <Compile Include="Assets\Navigation.cs" />
     <Compile Include="Assets\Utilities.cs" />
+    <Compile Include="DAL\Comm.cs">
+      <DependentUpon>IvcContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Comm2.cs">
+      <DependentUpon>IvcContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\DataService.cs" />
     <Compile Include="DAL\Initializer.cs" />
+    <Compile Include="DAL\IvcContext.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IvcContext.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\IvcContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IvcContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\IvcContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IvcContext.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\ProjectEventType.cs" />
@@ -88,6 +109,15 @@
     <Compile Include="Models\DepartmentUser.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Pages\Dialogs\OrderDialog.xaml.cs">
+      <DependentUpon>OrderDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ProjectList.xaml.cs">
+      <DependentUpon>ProjectList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ProjectEdit.xaml.cs">
+      <DependentUpon>ProjectEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\StatusEdit.xaml.cs">
       <DependentUpon>StatusEdit.xaml</DependentUpon>
     </Compile>
@@ -118,6 +148,7 @@
     <Compile Include="Pages\DepartmentList.xaml.cs">
       <DependentUpon>DepartmentList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="ViewModels\ProjectItemViewModel.cs" />
     <Compile Include="ViewModels\ProjectEventViewModel.cs" />
     <Compile Include="ViewModels\StatusViewModel.cs" />
@@ -137,6 +168,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\Dialogs\OrderDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ProjectList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ProjectEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\StatusEdit.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -205,9 +248,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="DAL\IvcContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>IvcContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DAL\IvcContext.edmx.diagram">
+      <DependentUpon>IvcContext.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="DAL\IvcContext.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>IvcContext.edmx</DependentUpon>
+      <LastGenOutput>IvcContext.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DAL\IvcContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>IvcContext.edmx</DependentUpon>
+      <LastGenOutput>IvcContext.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

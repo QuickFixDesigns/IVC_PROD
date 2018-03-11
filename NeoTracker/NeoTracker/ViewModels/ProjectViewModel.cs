@@ -23,12 +23,6 @@ namespace NeoTracker.Models
             get { return _Code; }
             set { SetProperty(ref _Code, value); }
         }
-        private string _OrderNumber;
-        public string OrderNumber
-        {
-            get { return _OrderNumber; }
-            set { SetProperty(ref _OrderNumber, value); }
-        }
         private string _Name;
         public string Name
         {
@@ -101,6 +95,30 @@ namespace NeoTracker.Models
                 }
             }
         }
+        public void LoadItems()
+        {
+            if (ProjectID != 0)
+            {
+                using (var context = new NeoTrackerContext())
+                {
+                    //Users = (from u in context.Users
+                    //         join du in context.DepartmentUsers.Where(x => x.DepartmentID == DepartmentID) on u.UserID equals du.UserID
+                    //         orderby u.FirstName, u.LastName
+                    //         select new UserViewModel()
+                    //         {
+                    //             UserID = u.UserID,
+                    //             Alias = u.Alias,
+                    //             CreatedAt = u.CreatedAt,
+                    //             Email = u.Email,
+                    //             EmailNotifications = u.EmailNotifications,
+                    //             FirstName = u.FirstName,
+                    //             LastName = u.LastName,
+                    //             UpdatedAt = u.UpdatedAt,
+                    //             UpdatedBy = u.UpdatedBy
+                    //         }).ToList();
+                }
+            }
+        }
         public async void Save()
         {
             using (var context = new NeoTrackerContext())
@@ -117,7 +135,7 @@ namespace NeoTracker.Models
                 await context.SaveChangesAsync();
             }
             EndEdit();
-            App.vm.LoadDepartments();
+            //App.vm.LoadDepartments();
         }
         public async void Delete()
         {

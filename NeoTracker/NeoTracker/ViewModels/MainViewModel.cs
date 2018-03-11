@@ -28,6 +28,18 @@ namespace NeoTracker.ViewModels
             Departments = await ds.GetDepartmentList();
             IsReady = true;
         }
+        public async void LoadOrders()
+        {
+            IsReady = false;
+            Orders = await ds.GetOrderList();
+            IsReady = true;
+        }
+        public async void LoadProjects()
+        {
+            IsReady = false;
+            Projects = await ds.GetProjectList();
+            IsReady = true;
+        }
         public async void LoadProjectEvents()
         {
             IsReady = false;
@@ -72,6 +84,15 @@ namespace NeoTracker.ViewModels
             get { return _IsReady; }
             set { SetProperty(ref _IsReady, value && CurrentUSer!=null); }
         }
+        //GENIUS DB
+        private List<OrderViewModel> _Orders = new List<OrderViewModel>();
+        public List<OrderViewModel> Orders
+        {
+            get { return _Orders; }
+            set { SetProperty(ref _Orders, value); }
+        }
+
+
         //Departments
         private List<DepartmentViewModel> _Departments = new List<DepartmentViewModel>();
         public List<DepartmentViewModel> Departments

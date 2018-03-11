@@ -39,12 +39,44 @@ namespace NeoTracker.DAL
                 }).ToList();
             }
         }
+
+        public async Task<List<ProjectViewModel>> GetProjectList()
+        {
+            using (var context = new NeoTrackerContext())
+            {
+                return await context.Projects.Select(x => new ProjectViewModel()
+                {
+                    Code = x.Code,
+                    Comment = x.Comment,
+                    Name = x.Name,
+                    Priority = x.Priority,
+                    ProjectID =x.ProjectID,
+                    IsActive = x.IsActive,
+                    CreatedAt = x.CreatedAt,
+                    UpdatedAt = x.UpdatedAt,
+                    UpdatedBy = x.UpdatedBy
+                }).ToListAsync();
+            }
+        }
+
+        public async Task<List<OrderViewModel>> GetOrderList()
+        {
+            using (var context = new IVCLIVEDBEntities())
+            {
+                return await context.Comms.Where(x => x.Datecli > DateTime.Today).Select(x => new OrderViewModel()
+                {
+                    Code = x.No_Com,
+                    Date = x.Datecli,
+                    Po = x.No_Po,
+                }).ToListAsync();
+            }
+        }
+
         public async Task<List<ProjectEventViewModel>> GetProjectEventList(int? ProjectID)
         {
             using (var context = new NeoTrackerContext())
             {
-                var data = await context.ProjectEvents.Include(x => x.Project).Include(x => x.ProjectItem).Include(x=>x.ProjectEventType).Include(x => x.Department).OrderByDescending(x => x.CreatedAt).ToListAsync();
-                return data.Select(x => new ProjectEventViewModel()
+                return await context.ProjectEvents.Include(x => x.Project).Include(x => x.ProjectItem).Include(x => x.ProjectEventType).Include(x => x.Department).OrderByDescending(x => x.CreatedAt).Select(x => new ProjectEventViewModel()
                 {
                     ProjectEventID = x.ProjectEventID,
                     Department = x.Department,
@@ -56,7 +88,7 @@ namespace NeoTracker.DAL
                     CreatedAt = x.CreatedAt,
                     UpdatedAt = x.UpdatedAt,
                     UpdatedBy = x.UpdatedBy
-                }).ToList();
+                }).ToListAsync();
             }
         }
         public async Task<List<ProjectEventTypeViewModel>> GetProjectEventTypeList()
@@ -81,7 +113,7 @@ namespace NeoTracker.DAL
         {
             using (var context = new NeoTrackerContext())
             {
-                var data = await context.ProjectItems.Include(x=>x.Project).Include(x => x.Status).OrderBy(x => x.SortOrder).ThenBy(x=>x.Name).ToListAsync();
+                var data = await context.ProjectItems.Include(x => x.Project).Include(x => x.Status).OrderBy(x => x.SortOrder).ThenBy(x => x.Name).ToListAsync();
                 return data.Select(x => new ProjectItemViewModel()
                 {
                     ProjectItemID = x.ProjectItemID,
@@ -107,7 +139,7 @@ namespace NeoTracker.DAL
                 return data.Select(x => new StatusViewModel()
                 {
                     StatusID = x.StatusID,
-                    SortOrder= x.SortOrder,
+                    SortOrder = x.SortOrder,
                     Name = x.Name,
                     IsDeleted = x.IsDeleted,
                     IsActive = x.IsActive,
