@@ -5,11 +5,27 @@
                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                   xmlns:mui="http://firstfloorsoftware.com/ModernUI"
                   mc:Ignorable="d" 
-                  d:DesignHeight="600" d:DesignWidth="500">
+                  d:DesignHeight="600" d:DesignWidth="500"
+                  >
 
     <ScrollViewer >
         <StackPanel>
-            <ListView x:Name="ListView" ItemsSource="{Binding Orders}">
+            
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="SearchBox" Grid.Column="0"></TextBox>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
+                    <mui:ModernButton x:Name="ApplyfilterBtn" Click="ApplyfilterBtn_Click"></mui:ModernButton>
+                    <mui:ModernButton x:Name="RemoveFilterBtn" Click="RemoveFilterBtn_Click"></mui:ModernButton>
+                </StackPanel>
+            </Grid>
+
+            <ListView x:Name="ListView" SelectionMode="Single" ItemsSource="{Binding Orders, UpdateSourceTrigger=PropertyChanged}">
                 <ListView.View>
                     <GridView x:Name="GridListView">
                         

@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using static NeoTracker.ViewModels.MainViewModel;
 
@@ -60,15 +61,12 @@ namespace NeoTracker.Models
         {
             return new Project()
             {
-                //ProjectID = ProjectID,
-                //Name = Name,
-                //SortOrder = SortOrder,
-                //HeadOfDepartmentID = HeadOfDepartmentID,
-                //Msg = Msg,
-                //IsActive = IsActive,
-                //CreatedAt = CreatedAt,
-                //UpdatedAt = UpdatedAt,
-                UpdatedBy = UpdatedBy
+                ProjectID = ProjectID,
+                Name = Name,
+                Code = Code,
+                Comment = Comment,
+                Priority = Priority,
+                IsActive = IsActive,
             };
         }
         public void LoadEvents()
@@ -198,6 +196,32 @@ namespace NeoTracker.Models
                 //{
                 //    ModernDialog.ShowMessage("No Users to add...", FirstFloor.ModernUI.Resources.NavigationFailed, MessageBoxButton.OK);
                 //}
+            }
+        }
+        public async void Initialize(string code)
+        {
+            using (var IvcContext = new IVCLIVEDBEntities())
+            using (var context = new NeoTrackerContext())
+            {
+                Code = code;
+                var project = GetModel();
+                project.IsActive = true;
+                var ProjectItems = await IvcContext.Comm2.Where(x => x.No_Com == Code).Select(x => new ProjectItem()
+                {
+                    Code = x.Item,
+                    Name = x.Des,
+                    DueDate = x.Dateliv,
+                    ProjectID = ProjectID,
+                    LatestStartDate = x.DateJobProductionStart,
+                    IsActive = true,
+                    SortOrder = x.Ligneitm,
+                    SortKey = x.Clef,
+                }).ToListAsync();
+                project.ProjectItems = ProjectItems;
+
+                context.Projects.Add(project);
+                //context.ProjectItems.AddRange(ProjectItems);
+                await context.SaveChangesAsync();
             }
         }
         //For validation

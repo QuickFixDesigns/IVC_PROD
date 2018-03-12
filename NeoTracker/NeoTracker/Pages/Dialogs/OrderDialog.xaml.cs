@@ -1,4 +1,5 @@
 ﻿using FirstFloor.ModernUI.Windows.Controls;
+using NeoTracker.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,25 +26,55 @@ namespace NeoTracker.Pages.Dialogs
         public OrderDialog(string title)
         {
             InitializeComponent();
+            DataContext = App.vm.Orders;
+            Title = title;
 
             App.vm.LoadOrders();
-            DataContext = App.vm;
-            Title = title;
+
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(App.vm.Orders);
+            view.Filter = i => UserFilter(i);
+
+            ListView.ItemsSource = view;
 
             Button okBtn = this.OkButton;
             okBtn.Click += (s, ee) => { UpdateProjectCode(); };
             this.Buttons = new Button[] { okBtn, this.CancelButton };
         }
-
-        private EventHandler SaveOrderCode()
+        private bool UserFilter(object item)
         {
-            throw new NotImplementedException();
+            if (String.IsNullOrEmpty(SearchBox.Text))
+            {
+                return true;
+            }
+            else
+            {
+                var order = item as OrderViewModel;
+                return order.Code.Contains(SearchBox.Text) || order.Po.Contains(SearchBox.Text);
+            }
         }
-
         private void UpdateProjectCode()
         {
-            App.vm.Project.Code = "";
-            Close();
+            if (ListView.SelectedIndex != -1)
+            {
+                var order = (OrderViewModel)ListView.SelectedItem;
+                App.vm.Project.Initialize(order.Code);
+            }
+        }
+
+        private void ApplyfilterBtn_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(ListView.ItemsSource).Refresh();
+        }
+
+        private void RemoveFilterBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SearchBox.Text = string.Empty;
+            CollectionViewSource.GetDefaultView(ListView.ItemsSource).Refresh();
+        }
+
+        private void SearchBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(ListView.ItemsSource).Refresh();
         }
     }
 }

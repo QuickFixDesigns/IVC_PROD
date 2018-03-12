@@ -18,6 +18,7 @@ namespace NeoTracker.Models
         [StringLength(25, ErrorMessage = "Cannot be longer than 25 characters.")]
         public string Code { get; set; }
 
+        public int? SortKey { get; set; }
         public int? SortOrder { get; set; }
 
         public int? StatusID { get; set; }
