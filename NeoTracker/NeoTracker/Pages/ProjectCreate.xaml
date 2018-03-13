@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="NeoTracker.Pages.ProjectEdit"
+﻿<UserControl x:Class="NeoTracker.Pages.ProjectCreate"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -10,16 +10,18 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="1"/>
-            <ColumnDefinition Width="auto" MinWidth="200" MaxWidth="420"/>
-            <ColumnDefinition Width="1"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto" MinWidth="460"/>
         </Grid.ColumnDefinitions>
 
         <ScrollViewer Grid.Column="0" >
             <StackPanel HorizontalAlignment="Left" Margin="0,0,10,0">
                 <mui:ModernButton x:Name="ApplyButton" Click="ApplyButton_Click"/>
                 <mui:ModernButton x:Name="CancelButton" Click="CancelButton_Click" />
-                <mui:ModernButton x:Name="DeleteButton" Click="DeleteButton_Click"/>
+
+                <Separator Height="10" Background="Transparent"/>
+                
+                <mui:ModernButton x:Name="ApplyfilterBtn" Click="ApplyfilterBtn_Click"/>
+                <mui:ModernButton x:Name="RemoveFilterBtn" Click="RemoveFilterBtn_Click"/>
             </StackPanel>
         </ScrollViewer>
 
@@ -43,37 +45,45 @@
                     </Style>
                 </StackPanel.Resources>
 
-                <TextBlock Text="Project" Style="{StaticResource Heading2}" />
+                <TextBlock Text="Create new project" Style="{StaticResource Heading2}" />
                 <Separator Height="10" Background="Transparent"/>
-
-                <Label Content="Code"/>
-                <TextBox  IsReadOnly="True" Style="{StaticResource textBoxInError}" Text="{Binding Project.Code, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Label Content="Name"/>
                 <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding Project.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
-                <Label Content="Priority"/>
-                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding Project.Priority, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <Separator Height="10" Background="Transparent"/>
 
-                <Label Content="Comment"/>
-                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding Project.Comment, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <Label Content="Search box"/>
+                <TextBox x:Name="SearchBox" Grid.Column="0"></TextBox>
+                
+                <Separator Height="10" Background="Transparent"/>
+                
+                <ListView x:Name="ListView" SelectionMode="Single" ItemsSource="{Binding Orders, UpdateSourceTrigger=PropertyChanged}">
+                    <ListView.View>
+                        <GridView x:Name="GridListView">
 
-                <Label Content="IsActive"/>
-                <CheckBox IsChecked="{Binding ProjectEventType.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                            <GridViewColumn DisplayMemberBinding="{Binding Code}">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="Code">Code</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
 
-                <Label Content="UpdatedBy" />
-                <TextBox  IsReadOnly="True" Text="{Binding ProjectEventType.UpdatedBy}"  />
-                <Label Content="UpdatedAt" />
-                <TextBox  IsReadOnly="True"  Text="{Binding ProjectEventType.UpdatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
+                            <GridViewColumn DisplayMemberBinding="{Binding Po}">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="Po">Po</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+
+                            <GridViewColumn DisplayMemberBinding="{Binding Date }">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="Date ">Date</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
             </StackPanel>
         </ScrollViewer>
-
-        <GridSplitter Grid.Column="3" />
-        <mui:ModernTab Grid.Column="4" SelectedSource="Pages/ProjectItemList.xaml">
-            <mui:ModernTab.Links>
-                <mui:Link DisplayName="Items" Source="Pages/ProjectItemList.xaml"/>
-                <mui:Link DisplayName="Events" Source="Pages/ProjectEventList.xaml"/>
-            </mui:ModernTab.Links>
-        </mui:ModernTab>
     </Grid>
 </UserControl>

@@ -7,9 +7,13 @@
         ContentSource="/Pages/ProjectList.xaml">
 
     <mui:ModernWindow.MenuLinkGroups>
-        <mui:LinkGroup DisplayName="welcome">
+        <mui:LinkGroup DisplayName="Projects">
             <mui:LinkGroup.Links>
-                <mui:Link DisplayName="Projects" Source="/Pages/ProjectList.xaml" />
+                <mui:Link DisplayName="List" Source="/Pages/ProjectList.xaml" />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+        <mui:LinkGroup DisplayName="admin">
+            <mui:LinkGroup.Links>
                 <mui:Link DisplayName="Departments" Source="/Pages/DepartmentList.xaml" />
                 <mui:Link DisplayName="Users" Source="/Pages/UserList.xaml"/>
                 <mui:Link DisplayName="ProjectEventType" Source="/Pages/ProjectEventTypeList.xaml"/>

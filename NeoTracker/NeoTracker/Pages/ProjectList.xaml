@@ -22,7 +22,7 @@
         <GridSplitter Grid.Column="1" />
         <ScrollViewer Grid.Column="2 " Margin="{StaticResource SplitRight}">
             <StackPanel>
-                <ListView x:Name="ListView" ItemsSource="{Binding Departments}" MouseDoubleClick="ListView_MouseDoubleClick">
+                <ListView x:Name="ListView" ItemsSource="{Binding Projects}" MouseDoubleClick="ListView_MouseDoubleClick">
                     <ListView.View>
                         <GridView x:Name="GridListView">
 

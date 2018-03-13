@@ -36,6 +36,12 @@ namespace NeoTracker.ViewModels
             get { return _IsActive; }
             set { SetProperty(ref _IsActive, value); }
         }
+        private bool _CanDelete;
+        public bool CanDelete
+        {
+            get { return _CanDelete; }
+            set { SetProperty(ref _CanDelete, value); }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

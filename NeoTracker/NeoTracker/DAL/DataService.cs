@@ -50,7 +50,7 @@ namespace NeoTracker.DAL
                     Comment = x.Comment,
                     Name = x.Name,
                     Priority = x.Priority,
-                    ProjectID =x.ProjectID,
+                    ProjectID = x.ProjectID,
                     IsActive = x.IsActive,
                     CreatedAt = x.CreatedAt,
                     UpdatedAt = x.UpdatedAt,
@@ -71,7 +71,6 @@ namespace NeoTracker.DAL
                 }).ToListAsync();
             }
         }
-
         public async Task<List<ProjectEventViewModel>> GetProjectEventList(int? ProjectID)
         {
             using (var context = new NeoTrackerContext())

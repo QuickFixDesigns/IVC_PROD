@@ -38,6 +38,7 @@ namespace NeoTracker
             App.vm.LoadUsers();
             App.vm.LoadProjectEventTypes();
             App.vm.LoadStatus();
+            App.vm.LoadProjects();
         }
     }
 }

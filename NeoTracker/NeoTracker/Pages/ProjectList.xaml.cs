@@ -48,7 +48,7 @@ namespace NeoTracker.Pages
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
             App.vm.Project = new ProjectViewModel();
-            App.nav.NavigateTo("/Pages/ProjectEdit.xaml");
+            App.nav.NavigateTo("/Pages/ProjectCreate.xaml");
         }
 
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)

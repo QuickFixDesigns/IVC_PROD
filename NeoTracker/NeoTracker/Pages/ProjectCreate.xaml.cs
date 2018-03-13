@@ -26,35 +26,53 @@ namespace NeoTracker.Pages
     /// <summary>
     /// Interaction logic for DepartmentEdit.xaml
     /// </summary>
-    public partial class ProjectEdit : UserControl, IContent
+    public partial class ProjectCreate : UserControl, IContent
     {
         private Buttons btn = new Buttons();
         private Utilities util = new Utilities();
         private ProjectViewModel vm;
 
-        public ProjectEdit()
+        public ProjectCreate()
         {
             InitializeComponent();
             btn.SetButton(ApplyButton, true, "Apply");
-            btn.SetButton(DeleteButton, true, "Delete");
             btn.SetButton(CancelButton, true, "Cancel");
+            btn.SetButton(ApplyfilterBtn, true, "Filter");
+            btn.SetButton(RemoveFilterBtn, true, "Unfilter");
+
+            App.vm.LoadOrders();
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(App.vm.Orders);
+            view.Filter = i => UserFilter(i);
+
+            ListView.ItemsSource = view;
         }
+        private bool UserFilter(object item)
+        {
+            if (String.IsNullOrEmpty(SearchBox.Text))
+            {
+                return true;
+            }
+            else
+            {
+                var order = item as OrderViewModel;
+                return order.Code.Contains(SearchBox.Text) || order.Po.Contains(SearchBox.Text);
+            }
+        }
+
 
         private void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
-            vm.Save();
-            App.nav.GoBack();
+            if (ListView.SelectedIndex != -1)
+            {
+                var order = (OrderViewModel)ListView.SelectedItem;
+                vm.Create(order.Code);
+                App.nav.NavigateTo("/Pages/ProjectEdit.xaml");
+            }
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             vm.CancelEdit();
-            App.nav.GoBack();
-        }
-
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
-        {
-            vm.Delete();
             App.nav.GoBack();
         }
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
@@ -69,9 +87,8 @@ namespace NeoTracker.Pages
 
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
-            App.nav.SetLastUri("/Pages/ProjectEventTypeEdit.xaml");
+            App.nav.SetLastUri("/Pages/ProjectList.xaml");
             vm = App.vm.Project;
-            vm.LoadItemsAsync();
             vm.BeginEdit();
         }
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
@@ -79,9 +96,15 @@ namespace NeoTracker.Pages
             //throw new NotImplementedException();
         }
 
-        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void ApplyfilterBtn_Click(object sender, RoutedEventArgs e)
         {
+            CollectionViewSource.GetDefaultView(ListView.ItemsSource).Refresh();
+        }
 
+        private void RemoveFilterBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SearchBox.Text = string.Empty;
+            CollectionViewSource.GetDefaultView(ListView.ItemsSource).Refresh();
         }
     }
 }

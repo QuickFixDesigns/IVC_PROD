@@ -109,8 +109,11 @@
     <Compile Include="Models\DepartmentUser.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Pages\Dialogs\OrderDialog.xaml.cs">
-      <DependentUpon>OrderDialog.xaml</DependentUpon>
+    <Compile Include="Pages\ProjectCreate.xaml.cs">
+      <DependentUpon>ProjectCreate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ProjectItemList.xaml.cs">
+      <DependentUpon>ProjectItemList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ProjectList.xaml.cs">
       <DependentUpon>ProjectList.xaml</DependentUpon>
@@ -168,9 +171,13 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\Dialogs\OrderDialog.xaml">
+    <Page Include="Pages\ProjectCreate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ProjectItemList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ProjectList.xaml">
       <Generator>MSBuild:Compile</Generator>

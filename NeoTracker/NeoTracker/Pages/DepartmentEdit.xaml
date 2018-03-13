@@ -72,7 +72,7 @@
 
                 <Label Content="IsActive"/>
                 <CheckBox IsChecked="{Binding Department.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
-                
+
                 <Label Content="UpdatedBy" />
                 <TextBox  IsReadOnly="True" Text="{Binding Department.UpdatedBy}"  />
                 <Label Content="UpdatedAt" />
@@ -85,9 +85,7 @@
 
         <ScrollViewer Grid.Column="4">
             <StackPanel Margin="10,0,10,0">
-
-
-
+                
                 <TextBlock Text="Users" Style="{StaticResource Heading2}"/>
                 <TextBlock Text="Double click to remove"/>
 

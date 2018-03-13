@@ -46,16 +46,16 @@ namespace NeoTracker.Models
         {
             get { return ProjectID != 0; }
         }
-        //private List<UserViewModel> _Users = new List<UserViewModel>();
-        //public List<UserViewModel> Users
-        //{
-        //    get { return _Users; }
-        //    set
-        //    {
-        //        SetProperty(ref _Users, value);
-        //        CanDelete = !value.Any() && CanAddItems;
-        //    }
-        //}
+        private List<ProjectItemViewModel> _ProjectItems = new List<ProjectItemViewModel>();
+        public List<ProjectItemViewModel> ProjectItems
+        {
+            get { return _ProjectItems; }
+            set
+            {
+                SetProperty(ref _ProjectItems, value);
+                CanDelete = !value.Any() && ProjectID != 0;
+            }
+        }
         //For database
         public Project GetModel()
         {
@@ -93,28 +93,55 @@ namespace NeoTracker.Models
                 }
             }
         }
-        public void LoadItems()
+        public async void LoadItemsAsync()
         {
             if (ProjectID != 0)
             {
-                using (var context = new NeoTrackerContext())
+                ProjectItems = await GetProjectItemList(ProjectID);
+            }
+        }
+        public async Task<List<ProjectItemViewModel>> GetProjectItemList(int ProjectID)
+        {
+            using (var context = new NeoTrackerContext())
+            {
+                return await context.ProjectItems.Include(x => x.Status).Where(x => x.ProjectID == ProjectID).Select(x => new ProjectItemViewModel()
                 {
-                    //Users = (from u in context.Users
-                    //         join du in context.DepartmentUsers.Where(x => x.DepartmentID == DepartmentID) on u.UserID equals du.UserID
-                    //         orderby u.FirstName, u.LastName
-                    //         select new UserViewModel()
-                    //         {
-                    //             UserID = u.UserID,
-                    //             Alias = u.Alias,
-                    //             CreatedAt = u.CreatedAt,
-                    //             Email = u.Email,
-                    //             EmailNotifications = u.EmailNotifications,
-                    //             FirstName = u.FirstName,
-                    //             LastName = u.LastName,
-                    //             UpdatedAt = u.UpdatedAt,
-                    //             UpdatedBy = u.UpdatedBy
-                    //         }).ToList();
-                }
+                    Code = x.Code,
+                    SortOrder = x.SortOrder,
+                    Status = x.Status,
+                    DueDate = x.DueDate,
+                    LatestStartDate = x.LatestStartDate,
+                    Name = x.Name,
+                    ProjectItemID = x.ProjectItemID,
+                    IsActive = x.IsActive,
+                    CreatedAt = x.CreatedAt,
+                    UpdatedAt = x.UpdatedAt,
+                    UpdatedBy = x.UpdatedBy
+                }).ToListAsync();
+            }
+        }
+        public async void Create(string code)
+        {
+            using (var IvcContext = new IVCLIVEDBEntities())
+            using (var context = new NeoTrackerContext())
+            {
+                var project = GetModel();
+                project.IsActive = true;
+                var ProjectItems = await IvcContext.Comm2.Where(x => x.No_Com == Code).Select(x => new ProjectItem()
+                {
+                    Code = x.Item,
+                    Name = x.Des,
+                    DueDate = x.Dateliv,
+                    ProjectID = ProjectID,
+                    LatestStartDate = x.DateJobProductionStart,
+                    IsActive = true,
+                    SortOrder = x.Ligneitm,
+                    SortKey = x.Clef,
+                }).ToListAsync();
+                project.ProjectItems = ProjectItems;
+
+                context.Projects.Add(project);
+                await context.SaveChangesAsync();
             }
         }
         public async void Save()
@@ -122,18 +149,12 @@ namespace NeoTracker.Models
             using (var context = new NeoTrackerContext())
             {
                 var data = GetModel();
-                if (ProjectID == 0)
-                {
-                    context.Projects.Add(data);
-                }
-                else
-                {
-                    context.Entry(data).State = EntityState.Modified;
-                }
+
+                context.Entry(data).State = EntityState.Modified;
                 await context.SaveChangesAsync();
             }
             EndEdit();
-            //App.vm.LoadDepartments();
+            App.vm.LoadProjects();
         }
         public async void Delete()
         {
@@ -196,32 +217,6 @@ namespace NeoTracker.Models
                 //{
                 //    ModernDialog.ShowMessage("No Users to add...", FirstFloor.ModernUI.Resources.NavigationFailed, MessageBoxButton.OK);
                 //}
-            }
-        }
-        public async void Initialize(string code)
-        {
-            using (var IvcContext = new IVCLIVEDBEntities())
-            using (var context = new NeoTrackerContext())
-            {
-                Code = code;
-                var project = GetModel();
-                project.IsActive = true;
-                var ProjectItems = await IvcContext.Comm2.Where(x => x.No_Com == Code).Select(x => new ProjectItem()
-                {
-                    Code = x.Item,
-                    Name = x.Des,
-                    DueDate = x.Dateliv,
-                    ProjectID = ProjectID,
-                    LatestStartDate = x.DateJobProductionStart,
-                    IsActive = true,
-                    SortOrder = x.Ligneitm,
-                    SortKey = x.Clef,
-                }).ToListAsync();
-                project.ProjectItems = ProjectItems;
-
-                context.Projects.Add(project);
-                //context.ProjectItems.AddRange(ProjectItems);
-                await context.SaveChangesAsync();
             }
         }
         //For validation
