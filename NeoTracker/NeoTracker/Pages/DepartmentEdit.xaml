@@ -83,26 +83,10 @@
 
         <GridSplitter Grid.Column="3" />
 
-        <ScrollViewer Grid.Column="4">
-            <StackPanel Margin="10,0,10,0">
-                
-                <TextBlock Text="Users" Style="{StaticResource Heading2}"/>
-                <TextBlock Text="Double click to remove"/>
-
-                <Separator Height="20" Background="Transparent"/>
-
-                <ListView x:Name="ListView" ItemsSource="{Binding Department.Users, UpdateSourceTrigger=PropertyChanged}" MouseDoubleClick="ListView_MouseDoubleClick">
-                    <ListView.View>
-                        <GridView x:Name="GridListView">
-                            <GridViewColumn Header="Alias" DisplayMemberBinding="{Binding Alias}" />
-                            <GridViewColumn Header="First name" DisplayMemberBinding="{Binding FirstName}" />
-                            <GridViewColumn Header="Last name" DisplayMemberBinding="{Binding LastName}"  />
-                            <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}" />
-                            <GridViewColumn Header="Email Notifications" DisplayMemberBinding="{Binding EmailNotifications}"  />
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </StackPanel>
-        </ScrollViewer>
+        <mui:ModernTab Grid.Column="4" SelectedSource="Pages/DepartmentUserList.xaml">
+            <mui:ModernTab.Links>
+                <mui:Link DisplayName="Users" Source="Pages/DepartmentUserList.xaml"/>
+            </mui:ModernTab.Links>
+        </mui:ModernTab>
     </Grid>
 </UserControl>

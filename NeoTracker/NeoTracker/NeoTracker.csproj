@@ -75,6 +75,7 @@
     </Compile>
     <Compile Include="Assets\Buttons.cs" />
     <Compile Include="Assets\Navigation.cs" />
+    <Compile Include="Assets\RelayCommand.cs" />
     <Compile Include="Assets\Utilities.cs" />
     <Compile Include="DAL\Comm.cs">
       <DependentUpon>IvcContext.tt</DependentUpon>
@@ -111,6 +112,12 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Pages\ProjectCreate.xaml.cs">
       <DependentUpon>ProjectCreate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DepartmentUserList.xaml.cs">
+      <DependentUpon>DepartmentUserList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ProjectEventList.xaml.cs">
+      <DependentUpon>ProjectEventList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ProjectItemList.xaml.cs">
       <DependentUpon>ProjectItemList.xaml</DependentUpon>
@@ -172,6 +179,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\ProjectCreate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\DepartmentUserList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ProjectEventList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

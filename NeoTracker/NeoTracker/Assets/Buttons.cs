@@ -9,7 +9,7 @@ using System.Windows.Media;
 
 namespace NeoTracker.Content
 {
-    class Buttons
+    public class Buttons
     {
         public void SetButton(ModernButton btn, bool IsLarge, string icon)
         {

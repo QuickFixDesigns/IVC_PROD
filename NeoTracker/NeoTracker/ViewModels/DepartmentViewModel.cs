@@ -1,4 +1,5 @@
-﻿using FirstFloor.ModernUI.Windows.Controls;
+﻿using FirstFloor.ModernUI.Presentation;
+using FirstFloor.ModernUI.Windows.Controls;
 using NeoTracker.DAL;
 using NeoTracker.Pages.Dialogs;
 using NeoTracker.ViewModels;
@@ -9,6 +10,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 using static NeoTracker.ViewModels.MainViewModel;
 
 namespace NeoTracker.Models
@@ -67,7 +69,7 @@ namespace NeoTracker.Models
                 DepartmentID = DepartmentID,
                 Name = Name,
                 SortOrder = SortOrder,
-                HeadOfDepartmentID = HeadOfDepartment.UserID,
+                HeadOfDepartmentID = HeadOfDepartment != null ? HeadOfDepartment.UserID : (int?)null,
                 Msg = Msg,
                 IsDefault = IsDefault,
                 IsActive = IsActive,
@@ -82,7 +84,7 @@ namespace NeoTracker.Models
             {
                 using (var context = new NeoTrackerContext())
                 {
-                    Users = context.Users.Where(x => x.DepartmentUsers.Any(u => u.DepartmentID == DepartmentID)).OrderBy(x=>x.FirstName).ThenBy(x=>x.LastName).ToList();
+                    Users = context.Users.Where(x => x.DepartmentUsers.Any(u => u.DepartmentID == DepartmentID)).OrderBy(x => x.FirstName).ThenBy(x => x.LastName).ToList();
                 }
             }
         }
@@ -130,7 +132,7 @@ namespace NeoTracker.Models
         {
             using (var context = new NeoTrackerContext())
             {
-                var list = context.Users.Where(x => !context.DepartmentUsers.Any(y => y.DepartmentID == DepartmentID && y.UserID==x.UserID)).ToList().Select(x => new SelectItem()
+                var list = context.Users.Where(x => !context.DepartmentUsers.Any(y => y.DepartmentID == DepartmentID && y.UserID == x.UserID)).ToList().Select(x => new SelectItem()
                 {
                     Value = x.UserID,
                     Text = x.LongName
@@ -167,7 +169,7 @@ namespace NeoTracker.Models
                 }
             }
         }
-        public async void RemoveUser(UserViewModel user)
+        public async void RemoveUser(User user)
         {
             var dialog = new QuestionDialog("Do you want to remove this user (" + user.LongName + ")?");
             dialog.ShowDialog();
@@ -175,10 +177,10 @@ namespace NeoTracker.Models
             {
                 using (var context = new NeoTrackerContext())
                 {
-                    if(HeadOfDepartment.UserID == user.UserID)
+                    if (HeadOfDepartment!=null && HeadOfDepartment.UserID == user.UserID)
                     {
                         HeadOfDepartment = null;
-                        context.Entry(this.GetModel()).State = EntityState.Modified;
+                        context.Entry(GetModel()).State = EntityState.Modified;
                         await context.SaveChangesAsync();
                     }
                     var data = await context.DepartmentUsers.FirstOrDefaultAsync(x => x.UserID == user.UserID && x.DepartmentID == DepartmentID);

@@ -29,8 +29,7 @@ namespace NeoTracker.Pages
     public partial class DepartmentEdit : UserControl, IContent
     {
         private Buttons btn = new Buttons();
-        private Utilities util = new Utilities();
-        private DepartmentViewModel vm;
+        private DepartmentViewModel vm = new DepartmentViewModel();
 
         public DepartmentEdit()
         {
@@ -64,13 +63,6 @@ namespace NeoTracker.Pages
         {
             vm.AddUsers();
         }
-        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            if (ListView.SelectedIndex != -1)
-            {
-                vm.RemoveUser(((UserViewModel)ListView.SelectedItem));
-            }
-        }
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {
             //throw new NotImplementedException();
@@ -83,11 +75,11 @@ namespace NeoTracker.Pages
 
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
-            App.nav.SetLastUri("/Pages/DepartmentEdit.xaml");
             vm = App.vm.Department;
-            vm.BeginEdit();
             vm.LoadUsers();
-            util.AutoFitListView(GridListView);
+            App.nav.SetLastUri("/Pages/DepartmentEdit.xaml");
+            vm.BeginEdit();
+
         }
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
