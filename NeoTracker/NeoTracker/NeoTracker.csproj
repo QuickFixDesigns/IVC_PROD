@@ -113,7 +113,7 @@
     <Compile Include="Pages\ProjectCreate.xaml.cs">
       <DependentUpon>ProjectCreate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\DepartmentUserList.xaml.cs">
+    <Compile Include="Pages\Admin\DepartmentUserList.xaml.cs">
       <DependentUpon>DepartmentUserList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ProjectEventList.xaml.cs">
@@ -128,16 +128,16 @@
     <Compile Include="Pages\ProjectEdit.xaml.cs">
       <DependentUpon>ProjectEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\StatusEdit.xaml.cs">
+    <Compile Include="Pages\Admin\StatusEdit.xaml.cs">
       <DependentUpon>StatusEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ProjectEventTypeEdit.xaml.cs">
+    <Compile Include="Pages\Admin\ProjectEventTypeEdit.xaml.cs">
       <DependentUpon>ProjectEventTypeEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\StatusList.xaml.cs">
+    <Compile Include="Pages\Admin\StatusList.xaml.cs">
       <DependentUpon>StatusList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ProjectEventTypeList.xaml.cs">
+    <Compile Include="Pages\Admin\ProjectEventTypeList.xaml.cs">
       <DependentUpon>ProjectEventTypeList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Dialogs\QuestionDialog.xaml.cs">
@@ -146,16 +146,16 @@
     <Compile Include="Pages\Dialogs\SelectDialog.xaml.cs">
       <DependentUpon>SelectDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\UserEdit.xaml.cs">
+    <Compile Include="Pages\Admin\UserEdit.xaml.cs">
       <DependentUpon>UserEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\DepartmentEdit.xaml.cs">
+    <Compile Include="Pages\Admin\DepartmentEdit.xaml.cs">
       <DependentUpon>DepartmentEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\UserList.xaml.cs">
+    <Compile Include="Pages\Admin\UserList.xaml.cs">
       <DependentUpon>UserList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\DepartmentList.xaml.cs">
+    <Compile Include="Pages\Admin\DepartmentList.xaml.cs">
       <DependentUpon>DepartmentList.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\OrderViewModel.cs" />
@@ -182,7 +182,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\DepartmentUserList.xaml">
+    <Page Include="Pages\Admin\DepartmentUserList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -202,19 +202,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\StatusEdit.xaml">
+    <Page Include="Pages\Admin\StatusEdit.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ProjectEventTypeEdit.xaml">
+    <Page Include="Pages\Admin\ProjectEventTypeEdit.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\StatusList.xaml">
+    <Page Include="Pages\Admin\StatusList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ProjectEventTypeList.xaml">
+    <Page Include="Pages\Admin\ProjectEventTypeList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -226,19 +226,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\UserEdit.xaml">
+    <Page Include="Pages\Admin\UserEdit.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\DepartmentEdit.xaml">
+    <Page Include="Pages\Admin\DepartmentEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\UserList.xaml">
+    <Page Include="Pages\Admin\UserList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\DepartmentList.xaml">
+    <Page Include="Pages\Admin\DepartmentList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

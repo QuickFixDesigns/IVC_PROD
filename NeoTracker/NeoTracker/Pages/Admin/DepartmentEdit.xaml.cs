@@ -21,7 +21,7 @@ using System.Data.Entity;
 using static NeoTracker.ViewModels.MainViewModel;
 using NeoTracker.Pages.Dialogs;
 
-namespace NeoTracker.Pages
+namespace NeoTracker.Pages.Admin
 {
     /// <summary>
     /// Interaction logic for DepartmentEdit.xaml
@@ -77,7 +77,7 @@ namespace NeoTracker.Pages
         {
             vm = App.vm.Department;
             vm.LoadUsers();
-            App.nav.SetLastUri("/Pages/DepartmentEdit.xaml");
+            App.nav.SetLastUri("/Pages/Admin/DepartmentEdit.xaml");
             vm.BeginEdit();
 
         }

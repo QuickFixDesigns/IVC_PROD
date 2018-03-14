@@ -16,54 +16,46 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FirstFloor.ModernUI.Windows.Navigation;
+using NeoTracker.DAL;
+using System.Data.Entity;
+using static NeoTracker.ViewModels.MainViewModel;
+using NeoTracker.Pages.Dialogs;
 
-namespace NeoTracker.Pages
+namespace NeoTracker.Pages.Admin
 {
     /// <summary>
     /// Interaction logic for DepartmentEdit.xaml
     /// </summary>
-    public partial class UserEdit : UserControl, IContent
+    public partial class ProjectEventTypeEdit : UserControl, IContent
     {
         private Buttons btn = new Buttons();
         private Utilities util = new Utilities();
-        private UserViewModel vm;
+        private ProjectEventTypeViewModel vm;
 
-        public UserEdit()
+        public ProjectEventTypeEdit()
         {
             InitializeComponent();
             btn.SetButton(ApplyButton, true, "Apply");
-            btn.SetButton(AddDepartmentButton, true, "Create");
             btn.SetButton(DeleteButton, true, "Delete");
             btn.SetButton(CancelButton, true, "Cancel");
         }
 
         private void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
-            App.vm.User.Save();
+            vm.Save();
             App.nav.GoBack();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            App.vm.User.CancelEdit();
+            vm.CancelEdit();
             App.nav.GoBack();
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            App.vm.User.Delete();
+            vm.Delete();
             App.nav.GoBack();
-        }
-        private void AddDepartmentButton_Click(object sender, RoutedEventArgs e)
-        {
-            vm.AddDepartments();
-        }
-        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            if (ListView.SelectedIndex != -1)
-            {
-                vm.RemoveDepartment(((DepartmentViewModel)ListView.SelectedItem));
-            }
         }
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {
@@ -77,13 +69,10 @@ namespace NeoTracker.Pages
 
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
-            App.nav.SetLastUri("/Pages/UserEdit.xaml");
-            vm = App.vm.User;
+            App.nav.SetLastUri("/Pages/Admin/ProjectEventTypeEdit.xaml");
+            vm = App.vm.ProjectEventType;
             vm.BeginEdit();
-            vm.LoadDepartments();
-            util.AutoFitListView(GridListView);
         }
-
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
             //throw new NotImplementedException();

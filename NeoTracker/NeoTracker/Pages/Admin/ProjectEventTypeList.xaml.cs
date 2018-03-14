@@ -20,7 +20,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FirstFloor.ModernUI.Windows.Navigation;
 
-namespace NeoTracker.Pages
+namespace NeoTracker.Pages.Admin
 {
     /// <summary>
     /// Interaction logic for Departments.xaml
@@ -41,14 +41,14 @@ namespace NeoTracker.Pages
             if (ListView.SelectedIndex != -1)
             {
                 App.vm.ProjectEventType = ((ProjectEventTypeViewModel)ListView.SelectedItem);
-                App.nav.NavigateTo("/Pages/ProjectEventTypeEdit.xaml");
+                App.nav.NavigateTo("/Pages/Admin/ProjectEventTypeEdit.xaml");
             }
         }
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
             App.vm.ProjectEventType = new ProjectEventTypeViewModel();
-            App.nav.NavigateTo("/Pages/ProjectEventTypeEdit.xaml");
+            App.nav.NavigateTo("/Pages/Admin/ProjectEventTypeEdit.xaml");
         }
 
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
@@ -63,7 +63,7 @@ namespace NeoTracker.Pages
 
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
-            App.nav.SetLastUri("/Pages/ProjectEventTypeList.xaml");
+            App.nav.SetLastUri("/Pages/Admin/ProjectEventTypeList.xaml");
             util.AutoFitListView(GridListView);
         }
 
