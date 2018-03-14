@@ -26,19 +26,18 @@ namespace NeoTracker.Pages
     /// <summary>
     /// Interaction logic for DepartmentEdit.xaml
     /// </summary>
-    public partial class ProjectEdit : UserControl, IContent
+    public partial class ProjectEventEdit : UserControl, IContent
     {
         private Buttons btn = new Buttons();
         private Utilities util = new Utilities();
-        private ProjectViewModel vm;
+        private ProjectEventViewModel vm;
 
-        public ProjectEdit()
+        public ProjectEventEdit()
         {
             InitializeComponent();
             btn.SetButton(ApplyButton, true, "Apply");
             btn.SetButton(DeleteButton, true, "Delete");
             btn.SetButton(CancelButton, true, "Cancel");
-            btn.SetButton(AddEventButton, true, "Create");
         }
 
         private void ApplyButton_Click(object sender, RoutedEventArgs e)
@@ -71,9 +70,7 @@ namespace NeoTracker.Pages
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
             App.nav.SetLastUri("/Pages/ProjectEdit.xaml");
-            vm = App.vm.Project;
-            App.vm.Project.LoadItems();
-            App.vm.Project.LoadEventsAsync();
+            vm = App.vm.ProjectEvent;
             vm.BeginEdit();
         }
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
@@ -86,15 +83,19 @@ namespace NeoTracker.Pages
 
         }
 
-        private void AddEventButton_Click(object sender, RoutedEventArgs e)
+        private void ClearDepartment_Click(object sender, RoutedEventArgs e)
         {
-            tab.SelectedSource = new Uri("Pages/ProjectEventList.xaml", UriKind.Relative);
 
-            App.vm.ProjectEvent = new ProjectEventViewModel()
-            {
-                Project = vm.GetModel()
-            };
-            App.nav.NavigateTo("/Pages/ProjectEventEdit.xaml");
+        }
+
+        private void ClearItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ClearProjectEventType_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

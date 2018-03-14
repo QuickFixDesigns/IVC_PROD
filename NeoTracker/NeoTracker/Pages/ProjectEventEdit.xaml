@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="NeoTracker.Pages.ProjectEdit"
+﻿<UserControl x:Class="NeoTracker.Pages.ProjectEventEdit"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,8 +11,6 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="1"/>
             <ColumnDefinition Width="auto" MinWidth="200" MaxWidth="420"/>
-            <ColumnDefinition Width="1"/>
-            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <ScrollViewer Grid.Column="0" >
@@ -20,7 +18,6 @@
                 <mui:ModernButton x:Name="ApplyButton" Click="ApplyButton_Click"/>
                 <mui:ModernButton x:Name="CancelButton" Click="CancelButton_Click" />
                 <mui:ModernButton x:Name="DeleteButton" Click="DeleteButton_Click"/>
-                <mui:ModernButton x:Name="AddEventButton" Click="AddEventButton_Click"/>
             </StackPanel>
         </ScrollViewer>
 
@@ -34,7 +31,7 @@
                 </StackPanel.BindingGroup>
 
                 <StackPanel.Resources>
-                    <src:MainViewModel x:Key="ProjectViewModel"/>
+                    <src:MainViewModel x:Key="ProjectEventViewModel"/>
                     <Style x:Key="textBoxInError" TargetType="TextBox">
                         <Style.Triggers>
                             <Trigger Property="Validation.HasError" Value="true">
@@ -44,20 +41,42 @@
                     </Style>
                 </StackPanel.Resources>
 
-                <TextBlock Text="Project" Style="{StaticResource Heading2}" />
+                <TextBlock Text="Event" Style="{StaticResource Heading2}" />
                 <Separator Height="10" Background="Transparent"/>
 
-                <Label Content="Code"/>
-                <TextBox  IsReadOnly="True" Style="{StaticResource textBoxInError}" Text="{Binding Project.Code, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <Label Content="Description"/>
+                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding ProjectEvent.Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
-                <Label Content="Name"/>
-                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding Project.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
-                <Label Content="Priority"/>
-                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding Project.Priority, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <Grid>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <Label Content="Department"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <mui:ModernButton x:Name="ClearDepartment" Click="ClearDepartment_Click"></mui:ModernButton>
+                    </StackPanel>
+                </Grid>
+                <ComboBox DisplayMemberPath="Name" SelectedValuePath="DepartmentID" SelectedValue="{Binding ProjectEvent.Department.DepartmentID, UpdateSourceTrigger=PropertyChanged}"  ItemsSource="{Binding Path=Departments}"/>
 
-                <Label Content="Comment"/>
-                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding Project.Comment, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <Grid>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <Label Content="Item"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <mui:ModernButton x:Name="ClearItem" Click="ClearItem_Click"></mui:ModernButton>
+                    </StackPanel>
+                </Grid>
+                <ComboBox DisplayMemberPath="Name" SelectedValuePath="ProjectItemID" SelectedValue="{Binding ProjectEvent.ProjectItem.ProjectItemID, UpdateSourceTrigger=PropertyChanged}"  ItemsSource="{Binding Path=Project.ProjectItems}"/>
+
+                <Grid>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <Label Content="ProjectEventType"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <mui:ModernButton x:Name="ClearProjectEventType" Click="ClearProjectEventType_Click"></mui:ModernButton>
+                    </StackPanel>
+                </Grid>
+                <ComboBox DisplayMemberPath="Name" SelectedValuePath="ProjectEventTypeID" SelectedValue="{Binding ProjectEvent.ProjectEventType.ProjectEventTypeID, UpdateSourceTrigger=PropertyChanged}"  ItemsSource="{Binding Path=ProjectEventTypes}"/>
 
                 <Label Content="IsActive"/>
                 <CheckBox IsChecked="{Binding ProjectEventType.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
@@ -68,14 +87,5 @@
                 <TextBox  IsReadOnly="True"  Text="{Binding ProjectEventType.UpdatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
             </StackPanel>
         </ScrollViewer>
-
-        <GridSplitter Grid.Column="3" />
-        
-        <mui:ModernTab x:Name="tab" Grid.Column="4" SelectedSource="Pages/ProjectItemList.xaml">
-            <mui:ModernTab.Links>
-                <mui:Link DisplayName="Items" Source="Pages/ProjectItemList.xaml"/>
-                <mui:Link DisplayName="Events" Source="Pages/ProjectEventList.xaml"/>
-            </mui:ModernTab.Links>
-        </mui:ModernTab>
     </Grid>
 </UserControl>

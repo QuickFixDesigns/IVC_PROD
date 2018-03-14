@@ -116,6 +116,9 @@
     <Compile Include="Pages\Admin\DepartmentUserList.xaml.cs">
       <DependentUpon>DepartmentUserList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ProjectEventEdit.xaml.cs">
+      <DependentUpon>ProjectEventEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ProjectEventList.xaml.cs">
       <DependentUpon>ProjectEventList.xaml</DependentUpon>
     </Compile>
@@ -183,6 +186,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\Admin\DepartmentUserList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ProjectEventEdit.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -53,7 +53,17 @@ namespace NeoTracker.Models
             set
             {
                 SetProperty(ref _ProjectItems, value);
-                CanDelete = !value.Any() && ProjectID != 0;
+                CanDelete = !value.Any() && !ProjectEvents.Any() && ProjectID != 0;
+            }
+        }
+        private List<ProjectEventViewModel> _ProjectEvents = new List<ProjectEventViewModel>();
+        public List<ProjectEventViewModel> ProjectEvents
+        {
+            get { return _ProjectEvents; }
+            set
+            {
+                SetProperty(ref _ProjectEvents, value);
+                CanDelete = !value.Any() && !ProjectItems.Any() && ProjectID != 0;
             }
         }
         //For database
@@ -69,31 +79,14 @@ namespace NeoTracker.Models
                 IsActive = IsActive,
             };
         }
-        public void LoadEvents()
+        public async void LoadEventsAsync()
         {
             if (ProjectID != 0)
             {
-                using (var context = new NeoTrackerContext())
-                {
-                    //Users = (from u in context.Users
-                    //         join du in context.DepartmentUsers.Where(x => x.DepartmentID == DepartmentID) on u.UserID equals du.UserID
-                    //         orderby u.FirstName, u.LastName
-                    //         select new UserViewModel()
-                    //         {
-                    //             UserID = u.UserID,
-                    //             Alias = u.Alias,
-                    //             CreatedAt = u.CreatedAt,
-                    //             Email = u.Email,
-                    //             EmailNotifications = u.EmailNotifications,
-                    //             FirstName = u.FirstName,
-                    //             LastName = u.LastName,
-                    //             UpdatedAt = u.UpdatedAt,
-                    //             UpdatedBy = u.UpdatedBy
-                    //         }).ToList();
-                }
+                ProjectEvents = await GetProjectEventList(ProjectID);
             }
         }
-        public async void LoadItemsAsync()
+        public async void LoadItems()
         {
             if (ProjectID != 0)
             {
@@ -113,6 +106,25 @@ namespace NeoTracker.Models
                     LatestStartDate = x.LatestStartDate,
                     Name = x.Name,
                     ProjectItemID = x.ProjectItemID,
+                    IsActive = x.IsActive,
+                    CreatedAt = x.CreatedAt,
+                    UpdatedAt = x.UpdatedAt,
+                    UpdatedBy = x.UpdatedBy
+                }).ToListAsync();
+            }
+        }
+        public async Task<List<ProjectEventViewModel>> GetProjectEventList(int ProjectID)
+        {
+            using (var context = new NeoTrackerContext())
+            {
+                return await context.ProjectEvents.Include(x => x.Department).Include(x => x.ProjectItem).Include(x => x.Project).Include(x => x.ProjectEventType).Where(x => x.ProjectID == ProjectID).Select(x => new ProjectEventViewModel()
+                {
+                    Department = x.Department,
+                    Description = x.Description,
+                    Project = x.Project,
+                    ProjectEventType = x.ProjectEventType,
+                    ProjectEventID = x.ProjectEventID,
+                    ProjectItem = x.ProjectItem,
                     IsActive = x.IsActive,
                     CreatedAt = x.CreatedAt,
                     UpdatedAt = x.UpdatedAt,

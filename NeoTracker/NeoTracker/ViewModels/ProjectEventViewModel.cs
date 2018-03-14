@@ -52,11 +52,11 @@ namespace NeoTracker.Models
         {
             return new ProjectEvent()
             {
-                DepartmentID = Department.DepartmentID,
+                DepartmentID = Department.DepartmentID!=0 ? Department.DepartmentID : (int?)null,
                 Description = Description,
                 ProjectEventID = ProjectEventID,
                 ProjectEventTypeID = ProjectEventType.ProjectEventTypeID,
-                ProjectItemID = ProjectItem.ProjectItemID,
+                ProjectItemID = ProjectItem.ProjectItemID!=0 ? ProjectItem.ProjectItemID : (int?)null,
                 ProjectID = Project.ProjectID,
                 IsActive = IsActive,
                 CreatedAt = CreatedAt,
