@@ -2,24 +2,8 @@
 using NeoTracker.Content;
 using NeoTracker.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using FirstFloor.ModernUI.Windows.Navigation;
-using NeoTracker.DAL;
-using System.Data.Entity;
-using static NeoTracker.ViewModels.MainViewModel;
-using NeoTracker.Pages.Dialogs;
 
 namespace NeoTracker.Pages
 {
@@ -44,19 +28,19 @@ namespace NeoTracker.Pages
         private void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
             vm.Save();
-            App.nav.GoBack();
+            App.nav.GoBack(this);
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             vm.CancelEdit();
-            App.nav.GoBack();
+            App.nav.GoBack(this);
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             vm.Delete();
-            App.nav.GoBack();
+            App.nav.GoBack(this);
         }
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {
@@ -72,18 +56,13 @@ namespace NeoTracker.Pages
         {
             App.nav.SetLastUri("/Pages/ProjectEdit.xaml");
             vm = App.vm.Project;
-            App.vm.Project.LoadItems();
-            App.vm.Project.LoadEventsAsync();
+            vm.LoadItems();
+            vm.LoadEvents();
             vm.BeginEdit();
         }
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
             //throw new NotImplementedException();
-        }
-
-        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-
         }
 
         private void AddEventButton_Click(object sender, RoutedEventArgs e)
@@ -94,7 +73,7 @@ namespace NeoTracker.Pages
             {
                 Project = vm.GetModel()
             };
-            App.nav.NavigateTo("/Pages/ProjectEventEdit.xaml");
+            App.nav.NavigateTo("/Pages/ProjectEventEdit.xaml", this);
         }
     }
 }

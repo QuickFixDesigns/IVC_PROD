@@ -23,7 +23,7 @@ namespace NeoTracker.Models
             get { return _Description; }
             set { SetProperty(ref _Description, value); }
         }
-        private Project _Project = new Project();
+        private Project _Project;
         public Project Project
         {
             get { return _Project; }
@@ -56,7 +56,7 @@ namespace NeoTracker.Models
                 Description = Description,
                 ProjectEventID = ProjectEventID,
                 ProjectEventTypeID = ProjectEventType.ProjectEventTypeID,
-                ProjectItemID = ProjectItem.ProjectItemID!=0 ? ProjectItem.ProjectItemID : (int?)null,
+                ProjectItemID = ProjectItem.ProjectItemID !=0 ? ProjectItem.ProjectItemID : (int?)null,
                 ProjectID = Project.ProjectID,
                 IsActive = IsActive,
                 CreatedAt = CreatedAt,
@@ -80,7 +80,7 @@ namespace NeoTracker.Models
                 await context.SaveChangesAsync();
             }
             EndEdit();
-            App.vm.LoadDepartments();
+            //App.vm.LoadDepartments();
         }
         public async void Delete()
         {
@@ -110,11 +110,18 @@ namespace NeoTracker.Models
             {
                 string result = null;
 
-                if (columnName == "Name")
+                if (columnName == "ProjectEventType")
                 {
-                    if (string.IsNullOrEmpty(Description) || (Description ?? "").Length > 255)
+                    if (ProjectEventType == null || ProjectEventType.ProjectEventTypeID == 0)
                     {
-                        result = "Cannot be empty or more than 255 characters";
+                        result = "A ProjectEventType is required!";
+                    }
+                }
+                if (columnName == "Description")
+                {
+                    if (string.IsNullOrEmpty(Description))
+                    {
+                        result = "A Description is required!";
                     }
                 }
                 return result;

@@ -24,7 +24,7 @@ namespace NeoTracker.Models
         public int? StatusID { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "Cannot be longer than 100 characters.")]
+        [StringLength(255, ErrorMessage = "Cannot be longer than 255 characters.")]
         public string Name { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]

@@ -40,19 +40,19 @@ namespace NeoTracker.Pages.Admin
         private void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
             App.vm.User.Save();
-            App.nav.GoBack();
+            App.nav.GoBack(this);
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             App.vm.User.CancelEdit();
-            App.nav.GoBack();
+            App.nav.GoBack(this);
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             App.vm.User.Delete();
-            App.nav.GoBack();
+            App.nav.GoBack(this);
         }
         private void AddDepartmentButton_Click(object sender, RoutedEventArgs e)
         {

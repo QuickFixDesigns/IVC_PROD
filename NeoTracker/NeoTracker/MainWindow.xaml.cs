@@ -31,8 +31,6 @@ namespace NeoTracker
         {
             InitializeComponent();
             this.DataContext = App.vm;
-            App.nav.InitNavigation();
-
             App.vm.Authentificate();
             App.vm.LoadDepartments();
             App.vm.LoadUsers();

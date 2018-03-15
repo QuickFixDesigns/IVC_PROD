@@ -41,14 +41,14 @@ namespace NeoTracker.Pages.Admin
             if (ListView.SelectedIndex != -1)
             {
                 App.vm.Status = ((StatusViewModel)ListView.SelectedItem);
-                App.nav.NavigateTo("/Pages/Admin/StatusEdit.xaml");
+                App.nav.NavigateTo("/Pages/Admin/StatusEdit.xaml", this);
             }
         }
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
             App.vm.Status = new StatusViewModel();
-            App.nav.NavigateTo("/Pages/Admin/StatusEdit.xaml");
+            App.nav.NavigateTo("/Pages/Admin/StatusEdit.xaml", this);
         }
 
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)

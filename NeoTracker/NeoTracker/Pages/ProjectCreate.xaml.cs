@@ -66,14 +66,14 @@ namespace NeoTracker.Pages
             {
                 var order = (OrderViewModel)ListView.SelectedItem;
                 vm.Create(order.Code);
-                App.nav.NavigateTo("/Pages/ProjectEdit.xaml");
+                App.nav.NavigateTo("/Pages/ProjectEdit.xaml", this);
             }
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             vm.CancelEdit();
-            App.nav.GoBack();
+            App.nav.GoBack(this);
         }
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {

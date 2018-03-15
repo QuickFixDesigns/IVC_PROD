@@ -22,7 +22,6 @@ namespace NeoTracker.Models
         public int ProjectEventTypeID { get; set; }
 
         [Required]
-        [StringLength(255, ErrorMessage = "Cannot be longer than 255 characters.")]
         public string Description { get; set; }
 
         //navigation

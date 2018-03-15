@@ -79,7 +79,7 @@ namespace NeoTracker.Models
                 IsActive = IsActive,
             };
         }
-        public async void LoadEventsAsync()
+        public async void LoadEvents()
         {
             if (ProjectID != 0)
             {
@@ -139,7 +139,7 @@ namespace NeoTracker.Models
             {
                 var project = GetModel();
                 project.IsActive = true;
-                var ProjectItems = await IvcContext.Comm2.Where(x => x.No_Com == Code).Select(x => new ProjectItem()
+                var ProjectItems = await IvcContext.Comm2.Where(x => x.No_Com == code).Select(x => new ProjectItem()
                 {
                     Code = x.Item,
                     Name = x.Des,

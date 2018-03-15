@@ -10,7 +10,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="1"/>
-            <ColumnDefinition Width="auto" MinWidth="200" MaxWidth="420"/>
+            <ColumnDefinition Width="auto" MinWidth="420" MaxWidth="420"/>
         </Grid.ColumnDefinitions>
 
         <ScrollViewer Grid.Column="0" >
@@ -24,14 +24,14 @@
         <GridSplitter Grid.Column="1" />
 
         <ScrollViewer Grid.Column="2">
-            <StackPanel Name="panel" Margin="10,0,10,0">
+            <StackPanel Name="panel" Margin="10,0,10,0" MaxWidth="400">
 
                 <StackPanel.BindingGroup>
                     <BindingGroup Name="bindingGroup"/>
                 </StackPanel.BindingGroup>
 
                 <StackPanel.Resources>
-                    <src:MainViewModel x:Key="ProjectEventViewModel"/>
+                    <src:MainViewModel x:Key="ProjectEvent"/>
                     <Style x:Key="textBoxInError" TargetType="TextBox">
                         <Style.Triggers>
                             <Trigger Property="Validation.HasError" Value="true">
@@ -44,19 +44,14 @@
                 <TextBlock Text="Event" Style="{StaticResource Heading2}" />
                 <Separator Height="10" Background="Transparent"/>
 
+                <Label Content="ProjectEventType"/>
+                <ComboBox DisplayMemberPath="Name" SelectedValuePath="ProjectEventTypeID" SelectedValue="{Binding ProjectEvent.ProjectEventType.ProjectEventTypeID, UpdateSourceTrigger=PropertyChanged}"  ItemsSource="{Binding Path=ProjectEventTypes}"/>
+
+
                 <Label Content="Description"/>
-                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding ProjectEvent.Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
-
-
-                <Grid>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                        <Label Content="Department"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <mui:ModernButton x:Name="ClearDepartment" Click="ClearDepartment_Click"></mui:ModernButton>
-                    </StackPanel>
-                </Grid>
-                <ComboBox DisplayMemberPath="Name" SelectedValuePath="DepartmentID" SelectedValue="{Binding ProjectEvent.Department.DepartmentID, UpdateSourceTrigger=PropertyChanged}"  ItemsSource="{Binding Path=Departments}"/>
+                <TextBox Height="100" TextWrapping="Wrap" AcceptsReturn="True" Style="{StaticResource textBoxInError}" 
+                         HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
+                         Text="{Binding ProjectEvent.Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" MaxWidth="400"/>
 
                 <Grid>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
@@ -70,17 +65,20 @@
 
                 <Grid>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                        <Label Content="ProjectEventType"/>
+                        <Label Content="Department"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <mui:ModernButton x:Name="ClearProjectEventType" Click="ClearProjectEventType_Click"></mui:ModernButton>
+                        <mui:ModernButton x:Name="ClearDepartment" Click="ClearDepartment_Click"></mui:ModernButton>
                     </StackPanel>
                 </Grid>
-                <ComboBox DisplayMemberPath="Name" SelectedValuePath="ProjectEventTypeID" SelectedValue="{Binding ProjectEvent.ProjectEventType.ProjectEventTypeID, UpdateSourceTrigger=PropertyChanged}"  ItemsSource="{Binding Path=ProjectEventTypes}"/>
+                <ComboBox x:Name="DepartmentCb"  DisplayMemberPath="Name" SelectedValuePath="DepartmentID" SelectedValue="{Binding ProjectEvent.Department.DepartmentID, UpdateSourceTrigger=PropertyChanged}"  ItemsSource="{Binding Path=Departments}"/>
+
 
                 <Label Content="IsActive"/>
                 <CheckBox IsChecked="{Binding ProjectEventType.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
+                <Label Content="CreatedAt" />
+                <TextBox  IsReadOnly="True"  Text="{Binding ProjectEventType.CreatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
                 <Label Content="UpdatedBy" />
                 <TextBox  IsReadOnly="True" Text="{Binding ProjectEventType.UpdatedBy}"  />
                 <Label Content="UpdatedAt" />

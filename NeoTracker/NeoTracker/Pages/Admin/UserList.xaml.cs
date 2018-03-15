@@ -40,14 +40,14 @@ namespace NeoTracker.Pages.Admin
             if (ListView.SelectedIndex != -1)
             {
                 App.vm.User = ((UserViewModel)ListView.SelectedItem);
-                App.nav.NavigateTo("/Pages/Admin/UserEdit.xaml");
+                App.nav.NavigateTo("/Pages/Admin/UserEdit.xaml", this);
             }
         }
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
             App.vm.User = new UserViewModel();
-            App.nav.NavigateTo("/Pages/Admin/UserEdit.xaml");
+            App.nav.NavigateTo("/Pages/Admin/UserEdit.xaml", this);
         }
 
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)

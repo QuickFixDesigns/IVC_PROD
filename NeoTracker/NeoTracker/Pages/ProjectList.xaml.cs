@@ -41,14 +41,14 @@ namespace NeoTracker.Pages
             if (ListView.SelectedIndex != -1)
             {
                 App.vm.Project = ((ProjectViewModel)ListView.SelectedItem);
-                App.nav.NavigateTo("/Pages/ProjectEdit.xaml");
+                App.nav.NavigateTo("/Pages/ProjectEdit.xaml", this);
             }
         }
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
             App.vm.Project = new ProjectViewModel();
-            App.nav.NavigateTo("/Pages/ProjectCreate.xaml");
+            App.nav.NavigateTo("/Pages/ProjectCreate.xaml", this);
         }
 
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)

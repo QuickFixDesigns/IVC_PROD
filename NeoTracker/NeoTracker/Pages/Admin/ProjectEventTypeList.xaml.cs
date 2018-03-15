@@ -41,14 +41,14 @@ namespace NeoTracker.Pages.Admin
             if (ListView.SelectedIndex != -1)
             {
                 App.vm.ProjectEventType = ((ProjectEventTypeViewModel)ListView.SelectedItem);
-                App.nav.NavigateTo("/Pages/Admin/ProjectEventTypeEdit.xaml");
+                App.nav.NavigateTo("/Pages/Admin/ProjectEventTypeEdit.xaml", this);
             }
         }
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
             App.vm.ProjectEventType = new ProjectEventTypeViewModel();
-            App.nav.NavigateTo("/Pages/Admin/ProjectEventTypeEdit.xaml");
+            App.nav.NavigateTo("/Pages/Admin/ProjectEventTypeEdit.xaml", this);
         }
 
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)

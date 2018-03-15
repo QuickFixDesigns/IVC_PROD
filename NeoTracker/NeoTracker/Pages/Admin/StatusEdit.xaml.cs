@@ -43,19 +43,19 @@ namespace NeoTracker.Pages.Admin
         private void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
             vm.Save();
-            App.nav.GoBack();
+            App.nav.GoBack(this);
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             vm.CancelEdit();
-            App.nav.GoBack();
+            App.nav.GoBack(this);
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             vm.Delete();
-            App.nav.GoBack();
+            App.nav.GoBack(this);
         }
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {

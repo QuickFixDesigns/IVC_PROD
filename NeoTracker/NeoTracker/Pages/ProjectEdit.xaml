@@ -60,12 +60,14 @@
                 <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding Project.Comment, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Label Content="IsActive"/>
-                <CheckBox IsChecked="{Binding ProjectEventType.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
-
+                <CheckBox IsChecked="{Binding Project.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                
+                <Label Content="CreatedAt" />
+                <TextBox  IsReadOnly="True" Text="{Binding Project.CreatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
                 <Label Content="UpdatedBy" />
-                <TextBox  IsReadOnly="True" Text="{Binding ProjectEventType.UpdatedBy}"  />
+                <TextBox  IsReadOnly="True" Text="{Binding Project.UpdatedBy}"  />
                 <Label Content="UpdatedAt" />
-                <TextBox  IsReadOnly="True"  Text="{Binding ProjectEventType.UpdatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
+                <TextBox  IsReadOnly="True"  Text="{Binding Project.UpdatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
             </StackPanel>
         </ScrollViewer>
 

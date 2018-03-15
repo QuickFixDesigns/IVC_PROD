@@ -41,14 +41,14 @@ namespace NeoTracker.Pages.Admin
             if (ListView.SelectedIndex != -1)
             {
                 App.vm.Department = ((DepartmentViewModel)ListView.SelectedItem);
-                App.nav.NavigateTo("/Pages/Admin/DepartmentEdit.xaml");
+                App.nav.NavigateTo("/Pages/Admin/DepartmentEdit.xaml", this);
             }
         }
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
             App.vm.Department = new DepartmentViewModel();
-            App.nav.NavigateTo("/Pages/Admin/DepartmentEdit.xaml");
+            App.nav.NavigateTo("/Pages/Admin/DepartmentEdit.xaml", this);
         }
 
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
