@@ -52,11 +52,11 @@ namespace NeoTracker.Models
         {
             return new ProjectEvent()
             {
-                DepartmentID = Department.DepartmentID!=0 ? Department.DepartmentID : (int?)null,
+                DepartmentID = Department!=null && Department.DepartmentID!=0 ? Department.DepartmentID : (int?)null,
                 Description = Description,
                 ProjectEventID = ProjectEventID,
                 ProjectEventTypeID = ProjectEventType.ProjectEventTypeID,
-                ProjectItemID = ProjectItem.ProjectItemID !=0 ? ProjectItem.ProjectItemID : (int?)null,
+                ProjectItemID = ProjectItem!=null && ProjectItem.ProjectItemID !=0 ? ProjectItem.ProjectItemID : (int?)null,
                 ProjectID = Project.ProjectID,
                 IsActive = IsActive,
                 CreatedAt = CreatedAt,
@@ -110,7 +110,7 @@ namespace NeoTracker.Models
             {
                 string result = null;
 
-                if (columnName == "ProjectEventType")
+                if (columnName == "ProjectEventType.ProjectEventTypeID")
                 {
                     if (ProjectEventType == null || ProjectEventType.ProjectEventTypeID == 0)
                     {

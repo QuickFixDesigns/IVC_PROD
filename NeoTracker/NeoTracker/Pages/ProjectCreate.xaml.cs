@@ -37,8 +37,7 @@ namespace NeoTracker.Pages
             InitializeComponent();
             btn.SetButton(ApplyButton, true, "Apply");
             btn.SetButton(CancelButton, true, "Cancel");
-            btn.SetButton(ApplyfilterBtn, true, "Filter");
-            btn.SetButton(RemoveFilterBtn, true, "Unfilter");
+            btn.SetButton(RemoveFilterBtn, false, "Reset");
 
             App.vm.LoadOrders();
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(App.vm.Orders);
@@ -104,6 +103,11 @@ namespace NeoTracker.Pages
         private void RemoveFilterBtn_Click(object sender, RoutedEventArgs e)
         {
             SearchBox.Text = string.Empty;
+            CollectionViewSource.GetDefaultView(ListView.ItemsSource).Refresh();
+            ListView.SelectedIndex = -1;
+        }
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
             CollectionViewSource.GetDefaultView(ListView.ItemsSource).Refresh();
         }
     }

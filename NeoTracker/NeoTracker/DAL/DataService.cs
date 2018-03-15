@@ -44,7 +44,7 @@ namespace NeoTracker.DAL
         {
             using (var context = new NeoTrackerContext())
             {
-                return await context.Projects.Select(x => new ProjectViewModel()
+                return await context.Projects.Include(x => x.ProjectItems).Select(x => new ProjectViewModel()
                 {
                     Code = x.Code,
                     Comment = x.Comment,
@@ -54,7 +54,7 @@ namespace NeoTracker.DAL
                     IsActive = x.IsActive,
                     CreatedAt = x.CreatedAt,
                     UpdatedAt = x.UpdatedAt,
-                    UpdatedBy = x.UpdatedBy
+                    UpdatedBy = x.UpdatedBy,
                 }).ToListAsync();
             }
         }

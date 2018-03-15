@@ -45,7 +45,7 @@
                 <Separator Height="10" Background="Transparent"/>
 
                 <Label Content="ProjectEventType"/>
-                <ComboBox DisplayMemberPath="Name" SelectedValuePath="ProjectEventTypeID" SelectedValue="{Binding ProjectEvent.ProjectEventType.ProjectEventTypeID, UpdateSourceTrigger=PropertyChanged}"  ItemsSource="{Binding Path=ProjectEventTypes}"/>
+                <ComboBox DisplayMemberPath="Name" SelectedValuePath="ProjectEventTypeID" SelectedValue="{Binding ProjectEvent.ProjectEventType.ProjectEventTypeID,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"  ItemsSource="{Binding Path=ProjectEventTypes}"/>
 
 
                 <Label Content="Description"/>

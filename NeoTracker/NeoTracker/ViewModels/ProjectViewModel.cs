@@ -18,6 +18,11 @@ namespace NeoTracker.Models
     {
         public int ProjectID { get; set; }
 
+        public bool CanCreate
+        {
+            get { return ProjectID != 0 && !string.IsNullOrEmpty(Name); }
+        }
+
         private string _Code;
         public string Code
         {
@@ -134,11 +139,12 @@ namespace NeoTracker.Models
         }
         public async void Create(string code)
         {
+            Code = code;
+            IsActive = true;
             using (var IvcContext = new IVCLIVEDBEntities())
             using (var context = new NeoTrackerContext())
             {
                 var project = GetModel();
-                project.IsActive = true;
                 var ProjectItems = await IvcContext.Comm2.Where(x => x.No_Com == code).Select(x => new ProjectItem()
                 {
                     Code = x.Item,
@@ -154,7 +160,12 @@ namespace NeoTracker.Models
 
                 context.Projects.Add(project);
                 await context.SaveChangesAsync();
+
+                ProjectID = project.ProjectID;
+                LoadItems();
             }
+            EndEdit();
+            App.vm.LoadProjects();
         }
         public async void Save()
         {
@@ -170,65 +181,18 @@ namespace NeoTracker.Models
         }
         public async void Delete()
         {
-            bool CanDelete = true;
-
             var dialog = new QuestionDialog("Do you really want to delete this Project (" + Name + ")?");
             dialog.ShowDialog();
             if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
             {
                 using (var context = new NeoTrackerContext())
                 {
-
-                    if (CanDelete)
-                    {
-                        var data = GetModel();
-                        context.Entry(data).State = EntityState.Deleted;
-                        App.vm.Projects.Remove(this);
-                        await context.SaveChangesAsync();
-                    }
+                    var data = GetModel();
+                    context.Entry(data).State = EntityState.Deleted;
+                    App.vm.Projects.Remove(this);
+                    await context.SaveChangesAsync();
                 }
                 EndEdit();
-            }
-        }
-        public void AddEvent()
-        {
-            using (var context = new NeoTrackerContext())
-            {
-                //var list = context.Users.Where(x => !context.DepartmentUsers.Any(y => y.DepartmentID == DepartmentID && y.UserID==x.UserID)).ToList().Select(x => new SelectItem()
-                //{
-                //    Value = x.UserID,
-                //    Text = x.LongName
-                //}).OrderBy(x => x.Text).ToList();
-
-                //if (list.Any())
-                //{
-                //    App.vm.SelectItemList = list;
-                //    var dialog = new SelectDialog("Select users");
-                //    dialog.ShowDialog();
-
-                //    if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
-                //    {
-                //        var result = App.vm.SelectItemList.Where(x => x.IsSelected).ToList();
-
-                //        if (result.Any())
-                //        {
-                //            foreach (var item in result)
-                //            {
-                //                context.DepartmentUsers.Add(new DepartmentUser()
-                //                {
-                //                    DepartmentID = DepartmentID,
-                //                    UserID = item.Value
-                //                });
-                //            }
-                //            await context.SaveChangesAsync();
-                //            LoadUsers();
-                //        }
-                //    }
-                //}
-                //else
-                //{
-                //    ModernDialog.ShowMessage("No Users to add...", FirstFloor.ModernUI.Resources.NavigationFailed, MessageBoxButton.OK);
-                //}
             }
         }
         //For validation

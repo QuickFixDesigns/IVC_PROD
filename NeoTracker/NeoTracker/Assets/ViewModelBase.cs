@@ -42,7 +42,6 @@ namespace NeoTracker.ViewModels
             get { return _CanDelete; }
             set { SetProperty(ref _CanDelete, value); }
         }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

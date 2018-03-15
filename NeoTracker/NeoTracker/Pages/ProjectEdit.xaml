@@ -19,8 +19,8 @@
             <StackPanel HorizontalAlignment="Left" Margin="0,0,10,0">
                 <mui:ModernButton x:Name="ApplyButton" Click="ApplyButton_Click"/>
                 <mui:ModernButton x:Name="CancelButton" Click="CancelButton_Click" />
-                <mui:ModernButton x:Name="DeleteButton" Click="DeleteButton_Click"/>
-                <mui:ModernButton x:Name="AddEventButton" Click="AddEventButton_Click"/>
+                <mui:ModernButton x:Name="DeleteButton" Click="DeleteButton_Click" IsEnabled="{Binding CanDelete}"/>
+                <mui:ModernButton x:Name="AddEventButton" Click="AddEventButton_Click" IsEnabled="{Binding CanCreate}"/>
             </StackPanel>
         </ScrollViewer>
 
