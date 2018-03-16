@@ -79,8 +79,8 @@ namespace NeoTracker.Models
                 }
                 await context.SaveChangesAsync();
             }
+            App.vm.LoadProjectEvents();
             EndEdit();
-            //App.vm.LoadDepartments();
         }
         public async void Delete()
         {
@@ -110,13 +110,6 @@ namespace NeoTracker.Models
             {
                 string result = null;
 
-                if (columnName == "ProjectEventType.ProjectEventTypeID")
-                {
-                    if (ProjectEventType == null || ProjectEventType.ProjectEventTypeID == 0)
-                    {
-                        result = "A ProjectEventType is required!";
-                    }
-                }
                 if (columnName == "Description")
                 {
                     if (string.IsNullOrEmpty(Description))

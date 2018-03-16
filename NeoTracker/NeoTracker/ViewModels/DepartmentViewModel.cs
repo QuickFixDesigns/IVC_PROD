@@ -59,6 +59,7 @@ namespace NeoTracker.Models
             set
             {
                 SetProperty(ref _Users, value);
+                CanDelete = !value.Any() && DepartmentID != 0;
             }
         }
         //For database

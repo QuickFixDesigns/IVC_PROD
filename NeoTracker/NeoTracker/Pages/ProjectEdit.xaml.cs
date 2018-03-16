@@ -2,6 +2,7 @@
 using NeoTracker.Content;
 using NeoTracker.Models;
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -71,7 +72,8 @@ namespace NeoTracker.Pages
 
             App.vm.ProjectEvent = new ProjectEventViewModel()
             {
-                Project = vm.GetModel()
+                Project = vm.GetModel(),
+                ProjectEventType = App.vm.ProjectEventTypes.FirstOrDefault().GetModel(),
             };
             App.nav.NavigateTo("/Pages/ProjectEventEdit.xaml", this);
         }

@@ -23,8 +23,7 @@ namespace NeoTracker.DAL
         {
             using (var context = new NeoTrackerContext())
             {
-                var data = await context.Departments.Include(x => x.HeadOfDepartment).OrderBy(x => x.Name).ToListAsync();
-                return data.Select(x => new DepartmentViewModel()
+                return await context.Departments.Include(x => x.HeadOfDepartment).OrderBy(x => x.Name).Select(x => new DepartmentViewModel()
                 {
                     DepartmentID = x.DepartmentID,
                     Name = x.Name,
@@ -36,7 +35,7 @@ namespace NeoTracker.DAL
                     CreatedAt = x.CreatedAt,
                     UpdatedAt = x.UpdatedAt,
                     UpdatedBy = x.UpdatedBy
-                }).ToList();
+                }).ToListAsync();
             }
         }
 
@@ -94,8 +93,7 @@ namespace NeoTracker.DAL
         {
             using (var context = new NeoTrackerContext())
             {
-                var data = await context.ProjectEventTypes.OrderBy(x => x.Name).ToListAsync();
-                return data.Select(x => new ProjectEventTypeViewModel()
+                return await context.ProjectEventTypes.OrderBy(x => x.Name).Select(x => new ProjectEventTypeViewModel()
                 {
                     ProjectEventTypeID = x.ProjectEventTypeID,
                     Name = x.Name,
@@ -105,15 +103,14 @@ namespace NeoTracker.DAL
                     CreatedAt = x.CreatedAt,
                     UpdatedAt = x.UpdatedAt,
                     UpdatedBy = x.UpdatedBy
-                }).ToList();
+                }).ToListAsync();
             }
         }
         public async Task<List<ProjectItemViewModel>> GetProjectItemList(int? ProjectID)
         {
             using (var context = new NeoTrackerContext())
             {
-                var data = await context.ProjectItems.Include(x => x.Project).Include(x => x.Status).OrderBy(x => x.SortOrder).ThenBy(x => x.Name).ToListAsync();
-                return data.Select(x => new ProjectItemViewModel()
+                return await context.ProjectItems.Include(x => x.Project).Include(x => x.Status).OrderBy(x => x.SortOrder).ThenBy(x => x.Name).Select(x => new ProjectItemViewModel()
                 {
                     ProjectItemID = x.ProjectItemID,
                     Code = x.Code,
@@ -127,15 +124,14 @@ namespace NeoTracker.DAL
                     CreatedAt = x.CreatedAt,
                     UpdatedAt = x.UpdatedAt,
                     UpdatedBy = x.UpdatedBy
-                }).ToList();
+                }).ToListAsync();
             }
         }
         public async Task<List<StatusViewModel>> GetStatusList()
         {
             using (var context = new NeoTrackerContext())
             {
-                var data = await context.Statuses.OrderBy(x => x.Name).ToListAsync();
-                return data.Select(x => new StatusViewModel()
+                return await context.Statuses.OrderBy(x => x.Name).Select(x => new StatusViewModel()
                 {
                     StatusID = x.StatusID,
                     SortOrder = x.SortOrder,
@@ -145,15 +141,14 @@ namespace NeoTracker.DAL
                     CreatedAt = x.CreatedAt,
                     UpdatedAt = x.UpdatedAt,
                     UpdatedBy = x.UpdatedBy
-                }).ToList();
+                }).ToListAsync();
             }
         }
         public async Task<List<UserViewModel>> GetUserList()
         {
             using (var context = new NeoTrackerContext())
             {
-                var data = await context.Users.OrderBy(x => x.FirstName).ThenBy(x => x.LastName).ToListAsync();
-                return data.Select(x => new UserViewModel()
+                return await context.Users.OrderBy(x => x.FirstName).ThenBy(x => x.LastName).Select(x => new UserViewModel()
                 {
                     UserID = x.UserID,
                     Alias = x.Alias,
@@ -165,7 +160,7 @@ namespace NeoTracker.DAL
                     CreatedAt = x.CreatedAt,
                     UpdatedAt = x.UpdatedAt,
                     UpdatedBy = x.UpdatedBy
-                }).ToList();
+                }).ToListAsync();
             }
         }
     }
