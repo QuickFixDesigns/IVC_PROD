@@ -38,5 +38,28 @@ namespace NeoTracker.Models
         public Project Project { get; set; }
         public Status Status { get; set; }
         public ICollection<ProjectItemOperation> ProjectItemOperations { get; set; }
+
+        //public UserViewModel ToViewModel()
+        //{
+        //    return new UserViewModel()
+        //    {
+        //        UserID = UserID,
+        //        Alias = Alias,
+        //        CreatedAt = CreatedAt,
+        //        Email = Email,
+        //        EmailNotifications = EmailNotifications,
+        //        FirstName = FirstName,
+        //        LastName = LastName,
+        //        UpdatedAt = UpdatedAt,
+        //        UpdatedBy = UpdatedBy
+        //    };
+        //}
+        public override bool Equals(object obj)
+        {
+            if (obj == null || !(obj is ProjectItem))
+                return false;
+
+            return ((ProjectItem)obj).ProjectItemID == this.ProjectItemID;
+        }
     }
 }

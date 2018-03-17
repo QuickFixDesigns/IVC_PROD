@@ -56,5 +56,12 @@ namespace NeoTracker.Models
                 UpdatedBy = UpdatedBy
             };
         }
+        public override bool Equals(object obj)
+        {
+            if (obj == null || !(obj is User))
+                return false;
+
+            return ((User)obj).UserID == this.UserID;
+        }
     }
 }

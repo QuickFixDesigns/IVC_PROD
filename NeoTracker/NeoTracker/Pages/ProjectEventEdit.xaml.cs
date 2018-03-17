@@ -69,8 +69,8 @@ namespace NeoTracker.Pages
 
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
-            App.nav.SetLastUri("/Pages/ProjectEdit.xaml");
             vm = App.vm.ProjectEvent;
+            App.nav.SetLastUri("/Pages/ProjectEdit.xaml");
             vm.BeginEdit();
         }
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)

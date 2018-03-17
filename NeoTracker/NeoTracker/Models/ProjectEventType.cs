@@ -29,11 +29,20 @@ namespace NeoTracker.Models
             {
                 ProjectEventTypeID = ProjectEventTypeID,
                 Name = Name,
+                NotificateDepartment = NotificateDepartment,
+                SortOrder = SortOrder,
                 IsActive = IsActive,
                 CreatedAt = CreatedAt,
                 UpdatedAt = UpdatedAt,
                 UpdatedBy = UpdatedBy,
             };
+        }
+        public override bool Equals(object obj)
+        {
+            if (obj == null || !(obj is ProjectEventType))
+                return false;
+
+            return ((ProjectEventType)obj).ProjectEventTypeID == this.ProjectEventTypeID;
         }
     }
 }

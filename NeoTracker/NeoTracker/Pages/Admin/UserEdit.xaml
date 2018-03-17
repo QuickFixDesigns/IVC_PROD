@@ -69,9 +69,9 @@
                 <CheckBox IsChecked="{Binding User.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                 
                 <Label Content="UpdatedBy" />
-                <TextBox  IsReadOnly="True" Text="{Binding User.UpdatedBy}"  />
+                <TextBox  IsReadOnly="True" Text="{Binding User.UpdatedBy, UpdateSourceTrigger=PropertyChanged}"  />
                 <Label Content="UpdatedAt" />
-                <TextBox  IsReadOnly="True"  Text="{Binding User.UpdatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
+                <TextBox  IsReadOnly="True"  Text="{Binding User.UpdatedAt,StringFormat={}{0:yyyy-MM-dd}, UpdateSourceTrigger=PropertyChanged}"  />
 
             </StackPanel>
         </ScrollViewer>

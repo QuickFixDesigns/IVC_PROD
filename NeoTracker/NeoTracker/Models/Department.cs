@@ -27,5 +27,28 @@ namespace NeoTracker.Models
 
         public ICollection<DepartmentUser> DepartmentUsers { get; set; }
         public ICollection<ProjectItemOperation> ProjectItemOperations { get; set; }
+
+        //public UserViewModel ToViewModel()
+        //{
+        //    return new UserViewModel()
+        //    {
+        //        UserID = UserID,
+        //        Alias = Alias,
+        //        CreatedAt = CreatedAt,
+        //        Email = Email,
+        //        EmailNotifications = EmailNotifications,
+        //        FirstName = FirstName,
+        //        LastName = LastName,
+        //        UpdatedAt = UpdatedAt,
+        //        UpdatedBy = UpdatedBy
+        //    };
+        //}
+        public override bool Equals(object obj)
+        {
+            if (obj == null || !(obj is Department))
+                return false;
+
+            return ((Department)obj).DepartmentID == this.DepartmentID;
+        }
     }
 }

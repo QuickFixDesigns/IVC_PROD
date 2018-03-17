@@ -121,7 +121,6 @@ namespace NeoTracker.Models
                 if (UserID == 0)
                 {
                     context.Users.Add(data);
-                    App.vm.Users.Add(this);
                 }
                 else
                 {
@@ -130,6 +129,7 @@ namespace NeoTracker.Models
                 await context.SaveChangesAsync();
             }
             EndEdit();
+            App.vm.LoadUsers();
         }
         public async void Delete()
         {

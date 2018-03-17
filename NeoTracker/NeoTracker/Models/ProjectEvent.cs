@@ -29,5 +29,6 @@ namespace NeoTracker.Models
         public Department Department { get; set; }
         public ProjectItem ProjectItem { get; set; }
         public ProjectEventType ProjectEventType { get; set; }
+
     }
 }

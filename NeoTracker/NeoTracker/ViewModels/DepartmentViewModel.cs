@@ -30,7 +30,7 @@ namespace NeoTracker.Models
             get { return _SortOrder; }
             set { SetProperty(ref _SortOrder, value); }
         }
-        private User _HeadOfDepartment;
+        private User _HeadOfDepartment = new User();
         public User HeadOfDepartment
         {
             get { return _HeadOfDepartment; }
@@ -70,7 +70,7 @@ namespace NeoTracker.Models
                 DepartmentID = DepartmentID,
                 Name = Name,
                 SortOrder = SortOrder,
-                HeadOfDepartmentID = HeadOfDepartment != null ? HeadOfDepartment.UserID : (int?)null,
+                HeadOfDepartmentID = HeadOfDepartment != null && HeadOfDepartment.UserID != 0 ? HeadOfDepartment.UserID : (int?)null,
                 Msg = Msg,
                 IsDefault = IsDefault,
                 IsActive = IsActive,
@@ -178,7 +178,7 @@ namespace NeoTracker.Models
             {
                 using (var context = new NeoTrackerContext())
                 {
-                    if (HeadOfDepartment!=null && HeadOfDepartment.UserID == user.UserID)
+                    if (HeadOfDepartment != null && HeadOfDepartment.UserID == user.UserID)
                     {
                         HeadOfDepartment = null;
                         context.Entry(GetModel()).State = EntityState.Modified;
