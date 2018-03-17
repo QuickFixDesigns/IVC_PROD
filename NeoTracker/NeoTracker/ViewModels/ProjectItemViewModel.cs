@@ -141,5 +141,12 @@ namespace NeoTracker.Models
         {
             get { return this[null]; }
         }
+        public override bool Equals(object obj)
+        {
+            if (obj == null || !(obj is ProjectItemViewModel))
+                return false;
+
+            return ((ProjectItemViewModel)obj).ProjectItemID == this.ProjectItemID;
+        }
     }
 }

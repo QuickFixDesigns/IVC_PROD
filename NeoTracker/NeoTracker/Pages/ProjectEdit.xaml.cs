@@ -73,7 +73,7 @@ namespace NeoTracker.Pages
             App.vm.ProjectEvent = new ProjectEventViewModel()
             {
                 Project = vm.GetModel(),
-                ProjectEventType = App.vm.ProjectEventTypes.FirstOrDefault().GetModel(),
+                ProjectEventType = App.vm.ProjectEventTypes.OrderBy(x=>x.SortOrder).ThenBy(x=>x.Name).FirstOrDefault(),
             };
             App.nav.NavigateTo("/Pages/ProjectEventEdit.xaml", this);
         }

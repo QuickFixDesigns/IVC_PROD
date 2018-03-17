@@ -215,5 +215,12 @@ namespace NeoTracker.Models
         {
             get { return this[null]; }
         }
+        public override bool Equals(object obj)
+        {
+            if (obj == null || !(obj is DepartmentViewModel))
+                return false;
+
+            return ((DepartmentViewModel)obj).DepartmentID == this.DepartmentID;
+        }
     }
 }

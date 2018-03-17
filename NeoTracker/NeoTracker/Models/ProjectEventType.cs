@@ -37,12 +37,5 @@ namespace NeoTracker.Models
                 UpdatedBy = UpdatedBy,
             };
         }
-        public override bool Equals(object obj)
-        {
-            if (obj == null || !(obj is ProjectEventType))
-                return false;
-
-            return ((ProjectEventType)obj).ProjectEventTypeID == this.ProjectEventTypeID;
-        }
     }
 }

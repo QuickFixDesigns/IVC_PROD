@@ -29,20 +29,20 @@ namespace NeoTracker.Models
             get { return _Project; }
             set { SetProperty(ref _Project, value); }
         }
-        private Department _Department = new Department();
-        public Department Department
+        private DepartmentViewModel _Department = new DepartmentViewModel();
+        public DepartmentViewModel Department
         {
             get { return _Department; }
             set { SetProperty(ref _Department, value); }
         }
-        private ProjectItem _ProjectItem = new ProjectItem();
-        public ProjectItem ProjectItem
+        private ProjectItemViewModel _ProjectItem = new ProjectItemViewModel();
+        public ProjectItemViewModel ProjectItem
         {
             get { return _ProjectItem; }
             set { SetProperty(ref _ProjectItem, value); }
         }
-        private ProjectEventType _ProjectEventType = new ProjectEventType();
-        public ProjectEventType ProjectEventType
+        private ProjectEventTypeViewModel _ProjectEventType = new ProjectEventTypeViewModel();
+        public ProjectEventTypeViewModel ProjectEventType
         {
             get { return _ProjectEventType; }
             set { SetProperty(ref _ProjectEventType, value); }

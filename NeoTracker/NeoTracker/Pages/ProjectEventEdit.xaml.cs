@@ -38,6 +38,8 @@ namespace NeoTracker.Pages
             btn.SetButton(ApplyButton, true, "Apply");
             btn.SetButton(DeleteButton, true, "Delete");
             btn.SetButton(CancelButton, true, "Cancel");
+            btn.SetButton(ClearDepartment, false, "Reset");
+            btn.SetButton(ClearItem, false, "Reset");
         }
 
         private void ApplyButton_Click(object sender, RoutedEventArgs e)
@@ -79,12 +81,12 @@ namespace NeoTracker.Pages
         }
         private void ClearDepartment_Click(object sender, RoutedEventArgs e)
         {
-            vm.Department.DepartmentID = 0;
+            vm.Department = null;
         }
 
         private void ClearItem_Click(object sender, RoutedEventArgs e)
         {
-            vm.ProjectItem.ProjectItemID = 0 ;
+            vm.ProjectItem = null ;
         }
     }
 }

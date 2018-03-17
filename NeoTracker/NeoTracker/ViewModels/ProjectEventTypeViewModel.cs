@@ -109,5 +109,12 @@ namespace NeoTracker.Models
         {
             get { return this[null]; }
         }
+        public override bool Equals(object obj)
+        {
+            if (obj == null || !(obj is ProjectEventTypeViewModel))
+                return false;
+
+            return ((ProjectEventTypeViewModel)obj).ProjectEventTypeID == this.ProjectEventTypeID;
+        }
     }
 }

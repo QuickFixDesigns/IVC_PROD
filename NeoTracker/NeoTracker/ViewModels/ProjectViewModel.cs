@@ -16,6 +16,7 @@ namespace NeoTracker.Models
 {
     public class ProjectViewModel : ViewModelBase, IDataErrorInfo
     {
+        private DataService ds = new DataService();
         public int ProjectID { get; set; }
 
         public bool CanCreate
@@ -88,7 +89,7 @@ namespace NeoTracker.Models
         {
             if (ProjectID != 0)
             {
-                ProjectEvents = await GetProjectEventList(ProjectID);
+                ProjectEvents = await ds.GetProjectEventList(ProjectID);
             }
         }
         public async void LoadItems()
@@ -111,25 +112,6 @@ namespace NeoTracker.Models
                     LatestStartDate = x.LatestStartDate,
                     Name = x.Name,
                     ProjectItemID = x.ProjectItemID,
-                    IsActive = x.IsActive,
-                    CreatedAt = x.CreatedAt,
-                    UpdatedAt = x.UpdatedAt,
-                    UpdatedBy = x.UpdatedBy
-                }).ToListAsync();
-            }
-        }
-        public async Task<List<ProjectEventViewModel>> GetProjectEventList(int ProjectID)
-        {
-            using (var context = new NeoTrackerContext())
-            {
-                return await context.ProjectEvents.Include(x => x.Department).Include(x => x.ProjectItem).Include(x => x.Project).Include(x => x.ProjectEventType).Where(x => x.ProjectID == ProjectID).Select(x => new ProjectEventViewModel()
-                {
-                    Department = x.Department,
-                    Description = x.Description,
-                    Project = x.Project,
-                    ProjectEventType = x.ProjectEventType,
-                    ProjectEventID = x.ProjectEventID,
-                    ProjectItem = x.ProjectItem,
                     IsActive = x.IsActive,
                     CreatedAt = x.CreatedAt,
                     UpdatedAt = x.UpdatedAt,
