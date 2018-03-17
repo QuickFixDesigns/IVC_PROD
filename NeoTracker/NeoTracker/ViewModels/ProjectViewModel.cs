@@ -127,6 +127,8 @@ namespace NeoTracker.Models
             using (var context = new NeoTrackerContext())
             {
                 var project = GetModel();
+                var Operations = await context.Departments.Where(d => d.IsDefault).ToListAsync();
+
                 var ProjectItems = await IvcContext.Comm2.Where(x => x.No_Com == code).Select(x => new ProjectItem()
                 {
                     Code = x.Item,
@@ -138,9 +140,24 @@ namespace NeoTracker.Models
                     SortOrder = x.Ligneitm,
                     SortKey = x.Clef,
                 }).ToListAsync();
-                project.ProjectItems = ProjectItems;
 
-                context.Projects.Add(project);
+                foreach (var item in ProjectItems)
+                {
+                    item.ProjectItemOperations = new List<ProjectItemOperation>();
+                    foreach (var o in Operations)
+                    {
+                        item.ProjectItemOperations.Add(new ProjectItemOperation()
+                        {
+                            Code = "From Genius?",
+                            DepartmentID = o.DepartmentID,
+                            IsActive = true,
+                            Name = "From genius?",
+                            Progress = 0,
+                            SortOrder = o.SortOrder,
+                        });
+                    }
+                }
+                project.ProjectItems = ProjectItems;
                 await context.SaveChangesAsync();
 
                 ProjectID = project.ProjectID;
