@@ -116,7 +116,17 @@ namespace NeoTracker.DAL
                         Name = x.ProjectItem.Name,
                         //Project = x.ProjectItem.Project,
                         ProjectItemID = x.ProjectItem.ProjectItemID,
-                        Status = x.ProjectItem.Status,
+                        Status = x.ProjectItem.StatusID.HasValue ? new StatusViewModel()
+                        {
+                            CreatedAt = x.ProjectItem.Status.CreatedAt,
+                            IsActive = x.ProjectItem.Status.IsActive,
+                            IsDeleted = x.ProjectItem.Status.IsDeleted,
+                            Name = x.ProjectItem.Status.Name,
+                            SortOrder = x.ProjectItem.Status.SortOrder,
+                            StatusID = x.ProjectItem.Status.StatusID,
+                            UpdatedAt = x.ProjectItem.Status.UpdatedAt,
+                            UpdatedBy = x.ProjectItem.Status.UpdatedBy,
+                        } : null,
                     } : null,
                     IsActive = x.IsActive,
                     CreatedAt = x.CreatedAt,
@@ -146,14 +156,46 @@ namespace NeoTracker.DAL
         {
             using (var context = new NeoTrackerContext())
             {
-                return await context.ProjectItems.Include(x => x.Project).Include(x => x.Status).OrderBy(x => x.SortOrder).ThenBy(x => x.Name).Select(x => new ProjectItemViewModel()
+                return await context.ProjectItems.Where(x=>x.ProjectID== ProjectID).Include(x => x.Project).Include(x => x.Status).OrderBy(x => x.SortOrder).ThenBy(x => x.Name).Select(x => new ProjectItemViewModel()
                 {
                     ProjectItemID = x.ProjectItemID,
                     Code = x.Code,
                     DueDate = x.DueDate,
                     LatestStartDate = x.LatestStartDate,
-                    Status = x.Status,
-                    Project = x.Project,
+                    Status = x.StatusID.HasValue ? new StatusViewModel()
+                    {
+                        CreatedAt = x.Status.CreatedAt,
+                        IsActive = x.Status.IsActive,
+                        IsDeleted = x.Status.IsDeleted,
+                        Name = x.Status.Name,
+                        SortOrder = x.Status.SortOrder,
+                        StatusID = x.Status.StatusID,
+                        UpdatedAt = x.Status.UpdatedAt,
+                        UpdatedBy = x.Status.UpdatedBy,
+                    } : null,
+                    ProjectID = x.ProjectID,
+                    Name = x.Name,
+                    SortOrder = x.SortOrder,
+                    IsActive = x.IsActive,
+                    CreatedAt = x.CreatedAt,
+                    UpdatedAt = x.UpdatedAt,
+                    UpdatedBy = x.UpdatedBy
+                }).ToListAsync();
+            }
+        }
+        public async Task<List<OperationViewModel>> GetOperationList(int? ProjectID)
+        {
+            using (var context = new NeoTrackerContext())
+            {
+                return await context.ProjectItemOperations.Include(x => x.Department).OrderBy(x => x.SortOrder).ThenBy(x => x.Name).Select(x => new OperationViewModel()
+                {
+                    Department = x.Department,
+                    EndDate = x.EndDate,
+                    ItemID = x.ProjectItemID,
+                    OperationID = x.ProjectItemOperationID,
+                    OperationTime = x.OperationTime,
+                    Progress = x.Progress,
+                    StartDate = x.StartDate,
                     Name = x.Name,
                     SortOrder = x.SortOrder,
                     IsActive = x.IsActive,

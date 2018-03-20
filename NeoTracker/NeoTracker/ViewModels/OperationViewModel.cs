@@ -13,19 +13,11 @@ using static NeoTracker.ViewModels.MainViewModel;
 
 namespace NeoTracker.Models
 {
-    public class ProjectItemViewModel : ViewModelBase, IDataErrorInfo
+    public class OperationViewModel : ViewModelBase, IDataErrorInfo
     {
-        private DataService ds = new DataService();
+        public int OperationID { get; set; }
+        public int ItemID { get; set; }
 
-        public int ProjectItemID { get; set; }
-        public int ProjectID { get; set; }
-
-        private string _Code;
-        public string Code
-        {
-            get { return _Code; }
-            set { SetProperty(ref _Code, value); }
-        }
         private int? _SortOrder;
         public int? SortOrder
         {
@@ -39,70 +31,65 @@ namespace NeoTracker.Models
             set { SetProperty(ref _Name, value); }
         }
 
-        private DateTime? _LatestStartDate;
-        public DateTime? LatestStartDate
+        private DateTime? _StartDate;
+        public DateTime? StartDate
         {
-            get { return _LatestStartDate; }
-            set { SetProperty(ref _LatestStartDate, value); }
+            get { return _StartDate; }
+            set { SetProperty(ref _StartDate, value); }
         }
 
-        private DateTime? _DueDate;
-        public DateTime? DueDate
+        private DateTime? _EndDate;
+        public DateTime? EndDate
         {
-            get { return _DueDate; }
-            set { SetProperty(ref _DueDate, value); }
+            get { return _EndDate; }
+            set { SetProperty(ref _EndDate, value); }
         }
-        private StatusViewModel _Status = new StatusViewModel();
-        public StatusViewModel Status
+        private decimal _Progress;
+        public decimal Progress
         {
-            get { return _Status; }
-            set { SetProperty(ref _Status, value); }
+            get { return _Progress; }
+            set { SetProperty(ref _Progress, value); }
         }
-        private List<OperationViewModel> _Operations = new List<OperationViewModel>();
-        public List<OperationViewModel> Operations
+        private decimal _OperationTime;
+        public decimal OperationTime
         {
-            get { return _Operations; }
-            set
-            {
-                SetProperty(ref _Operations, value);
-                CanDelete = !value.Any() && ProjectItemID != 0;
-            }
+            get { return _OperationTime; }
+            set { SetProperty(ref _OperationTime, value); }
         }
-
+        private Department _Department = new Department();
+        public Department Department
+        {
+            get { return _Department; }
+            set { SetProperty(ref _Department, value); }
+        }
         //For database
-        public ProjectItem GetModel()
+        public ProjectItemOperation GetModel()
         {
-            return new ProjectItem()
+            return new ProjectItemOperation()
             {
-                ProjectItemID = ProjectItemID,
-                ProjectID = ProjectID,
-                Code = Code,
-                DueDate = DueDate,
-                LatestStartDate = LatestStartDate,
+                DepartmentID = Department != null && Department.DepartmentID != 0 ? Department.DepartmentID : (int?)null,
                 SortOrder = SortOrder,
-                StatusID = Status !=null && Status.StatusID !=0 ? Status.StatusID : (int?) null,
                 Name = Name,
+                EndDate = EndDate,
+                OperationTime = OperationTime,
+                Progress = Progress,
+                ProjectItemID = ItemID,
+                ProjectItemOperationID = OperationID,
+                StartDate = StartDate,
                 IsActive = IsActive,
                 CreatedAt = CreatedAt,
                 UpdatedAt = UpdatedAt,
                 UpdatedBy = UpdatedBy
             };
         }
-        public async void LoadOperations()
-        {
-            if (ProjectItemID != 0)
-            {
-                Operations = await ds.GetOperationList(ProjectID);
-            }
-        }
         public async void Save()
         {
             using (var context = new NeoTrackerContext())
             {
                 var data = GetModel();
-                if (ProjectItemID == 0)
+                if (OperationID == 0)
                 {
-                    context.ProjectItems.Add(data);
+                    context.ProjectItemOperations.Add(data);
                 }
                 else
                 {
@@ -111,13 +98,13 @@ namespace NeoTracker.Models
                 await context.SaveChangesAsync();
             }
             EndEdit();
-            App.vm.Project.LoadItems();
+            App.vm.ProjectItem.LoadOperations();
         }
         public async void Delete()
         {
             bool CanDelete = true;
 
-            var dialog = new QuestionDialog("Do you really want to delete this item (" + Name + ")?");
+            var dialog = new QuestionDialog("Do you really want to delete this operation (" + Name + ")?");
             dialog.ShowDialog();
             if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
             {
@@ -127,7 +114,7 @@ namespace NeoTracker.Models
                     {
                         var data = GetModel();
                         context.Entry(data).State = EntityState.Deleted;
-                        App.vm.Project.ProjectItems.Remove(this);
+                        App.vm.ProjectItem.Operations.Remove(this);
                         await context.SaveChangesAsync();
                         EndEdit();
                     }
@@ -143,9 +130,9 @@ namespace NeoTracker.Models
 
                 if (columnName == "Name")
                 {
-                    if (string.IsNullOrEmpty(Name) || (Name ?? "").Length > 255)
+                    if (string.IsNullOrEmpty(Name) || (Name ?? "").Length > 25)
                     {
-                        result = "Cannot be empty or more than 255 characters";
+                        result = "Cannot be empty or more than 25 characters";
                     }
                 }
                 return result;
@@ -157,10 +144,10 @@ namespace NeoTracker.Models
         }
         public override bool Equals(object obj)
         {
-            if (obj == null || !(obj is ProjectItemViewModel))
+            if (obj == null || !(obj is OperationViewModel))
                 return false;
 
-            return ((ProjectItemViewModel)obj).ProjectItemID == this.ProjectItemID;
+            return ((OperationViewModel)obj).OperationID == this.OperationID;
         }
     }
 }

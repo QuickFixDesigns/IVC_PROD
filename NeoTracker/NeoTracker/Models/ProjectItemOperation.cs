@@ -15,9 +15,6 @@ namespace NeoTracker.Models
 
         public int ProjectItemID { get; set; }
 
-        [StringLength(25, ErrorMessage = "Cannot be longer than 25 characters.")]
-        public string Code { get; set; }
-
         public int? SortOrder { get; set; }
 
         public int? DepartmentID { get; set; }
@@ -33,6 +30,9 @@ namespace NeoTracker.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime? EndDate { get; set; }
+
+        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:P0}")]
+        public decimal OperationTime { get; set; }
 
         [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:P0}")]
         public decimal Progress { get; set; }

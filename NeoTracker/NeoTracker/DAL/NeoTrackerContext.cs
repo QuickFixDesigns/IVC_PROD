@@ -31,6 +31,7 @@ namespace NeoTracker.DAL
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<ProjectEvent> ProjectEvents { get; set; }
         public virtual DbSet<ProjectItem> ProjectItems { get; set; }
+        public virtual DbSet<ProjectItemOperation> ProjectItemOperations { get; set; }
         public virtual DbSet<ProjectEventType> ProjectEventTypes { get; set; }
         public virtual DbSet<Status> Statuses { get; set; }
         public virtual DbSet<User> Users { get; set; }

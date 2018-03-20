@@ -79,7 +79,7 @@ namespace NeoTracker.Models
                 }
                 await context.SaveChangesAsync();
             }
-            App.vm.LoadProjectEvents();
+            App.vm.Project.LoadEvents();
             EndEdit();
         }
         public async void Delete()
@@ -96,7 +96,7 @@ namespace NeoTracker.Models
                     {
                         var data = GetModel();
                         context.Entry(data).State = EntityState.Deleted;
-                        App.vm.ProjectEvents.Remove(this);
+                        App.vm.Project.ProjectEvents.Remove(this);
                         await context.SaveChangesAsync();
                         EndEdit();
                     }

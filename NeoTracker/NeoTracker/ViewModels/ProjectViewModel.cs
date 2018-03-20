@@ -96,27 +96,7 @@ namespace NeoTracker.Models
         {
             if (ProjectID != 0)
             {
-                ProjectItems = await GetProjectItemList(ProjectID);
-            }
-        }
-        public async Task<List<ProjectItemViewModel>> GetProjectItemList(int ProjectID)
-        {
-            using (var context = new NeoTrackerContext())
-            {
-                return await context.ProjectItems.Include(x => x.Status).Where(x => x.ProjectID == ProjectID).Select(x => new ProjectItemViewModel()
-                {
-                    Code = x.Code,
-                    SortOrder = x.SortOrder,
-                    Status = x.Status,
-                    DueDate = x.DueDate,
-                    LatestStartDate = x.LatestStartDate,
-                    Name = x.Name,
-                    ProjectItemID = x.ProjectItemID,
-                    IsActive = x.IsActive,
-                    CreatedAt = x.CreatedAt,
-                    UpdatedAt = x.UpdatedAt,
-                    UpdatedBy = x.UpdatedBy
-                }).ToListAsync();
+                ProjectItems = await ds.GetProjectItemList(ProjectID);
             }
         }
         public async void Create(string code)
@@ -148,7 +128,7 @@ namespace NeoTracker.Models
                     {
                         item.ProjectItemOperations.Add(new ProjectItemOperation()
                         {
-                            Code = "From Genius?",
+                            OperationTime = 0,
                             DepartmentID = o.DepartmentID,
                             IsActive = true,
                             Name = "From genius?",

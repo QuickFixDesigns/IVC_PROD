@@ -116,6 +116,9 @@
     <Compile Include="Pages\Admin\DepartmentUserList.xaml.cs">
       <DependentUpon>DepartmentUserList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ProjectItemEdit.xaml.cs">
+      <DependentUpon>ProjectItemEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ProjectEventEdit.xaml.cs">
       <DependentUpon>ProjectEventEdit.xaml</DependentUpon>
     </Compile>
@@ -162,6 +165,7 @@
       <DependentUpon>DepartmentList.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\OrderViewModel.cs" />
+    <Compile Include="ViewModels\OperationViewModel.cs" />
     <Compile Include="ViewModels\ProjectItemViewModel.cs" />
     <Compile Include="ViewModels\ProjectEventViewModel.cs" />
     <Compile Include="ViewModels\StatusViewModel.cs" />
@@ -186,6 +190,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\Admin\DepartmentUserList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ProjectItemEdit.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

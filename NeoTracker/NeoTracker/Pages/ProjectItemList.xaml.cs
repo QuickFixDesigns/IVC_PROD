@@ -1,6 +1,7 @@
 ﻿using FirstFloor.ModernUI.Windows;
 using FirstFloor.ModernUI.Windows.Navigation;
 using NeoTracker.Content;
+using NeoTracker.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +32,11 @@ namespace NeoTracker.Pages
         }
         private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            if (ListView.SelectedIndex != -1)
+            {
+                App.vm.ProjectItem = ((ProjectItemViewModel)ListView.SelectedItem);
+                App.nav.NavigateTo("/Pages/ProjectItemEdit.xaml", this);
+            }
         }
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {

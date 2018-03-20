@@ -33,15 +33,10 @@ namespace NeoTracker.Pages
         }
         private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //NavigationWindow nav = Application.Current.MainWindow as NavigationWindow;
-            //nav.Navigate(new System.Uri("/Pages/ProjectEventEdit.xaml", UriKind.RelativeOrAbsolute));
-
             if (ListView.SelectedIndex != -1)
             {
                 App.vm.ProjectEvent = ((ProjectEventViewModel)ListView.SelectedItem);
                 App.nav.NavigateTo("/Pages/ProjectEventEdit.xaml", this);
-                //BBCodeBlock bbBlock = new BBCodeBlock();
-                //bbBlock.LinkNavigator.Navigate(new Uri(url, UriKind.Relative), this, NavigationHelper.FrameTop);
             }
         }
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)

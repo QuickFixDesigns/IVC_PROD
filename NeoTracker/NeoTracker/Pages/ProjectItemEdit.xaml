@@ -1,0 +1,85 @@
+﻿<UserControl x:Class="NeoTracker.Pages.ProjectItemEdit"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:src="clr-namespace:NeoTracker.ViewModels"
+             mc:Ignorable="d" >
+    <Grid Style="{StaticResource ContentRoot}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="1"/>
+            <ColumnDefinition Width="auto" MinWidth="420" MaxWidth="420"/>
+        </Grid.ColumnDefinitions>
+
+        <ScrollViewer Grid.Column="0" >
+            <StackPanel HorizontalAlignment="Left" Margin="0,0,10,0">
+                <mui:ModernButton x:Name="ApplyButton" Click="ApplyButton_Click"/>
+                <mui:ModernButton x:Name="CancelButton" Click="CancelButton_Click" />
+                <!--<mui:ModernButton x:Name="DeleteButton" Click="DeleteButton_Click"/>-->
+            </StackPanel>
+        </ScrollViewer>
+
+        <GridSplitter Grid.Column="1" />
+
+        <ScrollViewer Grid.Column="2">
+            <StackPanel Name="panel" Margin="10,0,10,0" MaxWidth="400">
+
+                <StackPanel.BindingGroup>
+                    <BindingGroup Name="bindingGroup"/>
+                </StackPanel.BindingGroup>
+
+                <StackPanel.Resources>
+                    <src:MainViewModel x:Key="ProjectItemViewModel"/>
+                    <Style x:Key="textBoxInError" TargetType="TextBox">
+                        <Style.Triggers>
+                            <Trigger Property="Validation.HasError" Value="true">
+                                <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Resources>
+
+                <TextBlock Text="Item" Style="{StaticResource Heading2}" />
+                <Separator Height="10" Background="Transparent"/>
+
+                <Label Content="Code"/>
+                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding ProjectItem.Code, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+
+                <Label Content="SortOrder"/>
+                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding ProjectItem.SortOrder, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+
+                <Label Content="Name"/>
+                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding ProjectItem.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+
+                <Label Content="LatestStartDate" />
+                <TextBox  Text="{Binding ProjectItem.LatestStartDate,StringFormat={}{0:yyyy-MM-dd}}"  />
+
+                <Label Content="DueDate" />
+                <TextBox  Text="{Binding ProjectItem.DueDate,StringFormat={}{0:yyyy-MM-dd}}"  />
+                
+                <Grid>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <Label Content="Status"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <mui:ModernButton x:Name="ClearStatus" Click="ClearStatus_Click"></mui:ModernButton>
+                    </StackPanel>
+                </Grid>
+                <ComboBox ItemsSource="{Binding Path=Statuses}" DisplayMemberPath="Name" SelectedItem="{Binding ProjectItem.Status, UpdateSourceTrigger=LostFocus}"/>
+
+
+                <Label Content="IsActive"/>
+                <CheckBox IsChecked="{Binding ProjectItem.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+
+                <Label Content="CreatedAt" />
+                <TextBox  IsReadOnly="True"  Text="{Binding ProjectItem.CreatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
+                <Label Content="UpdatedBy" />
+                <TextBox  IsReadOnly="True" Text="{Binding ProjectItem.UpdatedBy}"  />
+                <Label Content="UpdatedAt" />
+                <TextBox  IsReadOnly="True"  Text="{Binding ProjectItem.UpdatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
