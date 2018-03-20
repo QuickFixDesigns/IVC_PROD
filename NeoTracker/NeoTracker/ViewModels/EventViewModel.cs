@@ -13,36 +13,46 @@ using static NeoTracker.ViewModels.MainViewModel;
 
 namespace NeoTracker.Models
 {
-    public class ProjectEventTypeViewModel : ViewModelBase, IDataErrorInfo
+    public class EventViewModel : ViewModelBase, IDataErrorInfo
     {
-        public int ProjectEventTypeID { get; set; }
-        private string _Name;
-        public string Name
+        public int EventID { get; set; }
+        public int ProjectID { get; set; }
+
+        private string _Description;
+        public string Description
         {
-            get { return _Name; }
-            set { SetProperty(ref _Name, value); }
+            get { return _Description; }
+            set { SetProperty(ref _Description, value); }
         }
-        private int? _SortOrder;
-        public int? SortOrder
+        private DepartmentViewModel _Department = new DepartmentViewModel();
+        public DepartmentViewModel Department
         {
-            get { return _SortOrder; }
-            set { SetProperty(ref _SortOrder, value); }
+            get { return _Department; }
+            set { SetProperty(ref _Department, value); }
         }
-        private bool _NotificateDepartment;
-        public bool NotificateDepartment
+        private ItemViewModel _EventItem = new ItemViewModel();
+        public ItemViewModel EventItem
         {
-            get { return _NotificateDepartment; }
-            set { SetProperty(ref _NotificateDepartment, value); }
+            get { return _EventItem; }
+            set { SetProperty(ref _EventItem, value); }
+        }
+        private EventTypeViewModel _EventType = new EventTypeViewModel();
+        public EventTypeViewModel EventType
+        {
+            get { return _EventType; }
+            set { SetProperty(ref _EventType, value); }
         }
         //For database
-        public ProjectEventType GetModel()
+        public Event GetModel()
         {
-            return new ProjectEventType()
+            return new Event()
             {
-                ProjectEventTypeID = ProjectEventTypeID,
-                Name = Name,
-                NotificateDepartment = NotificateDepartment,
-                SortOrder = SortOrder,
+                DepartmentID = Department!=null && Department.DepartmentID!=0 ? Department.DepartmentID : (int?)null,
+                Description = Description,
+                EventID = EventID,
+                EventTypeID = EventType.EventTypeID,
+                ItemID = EventItem != null && EventItem.ItemID !=0 ? EventItem.ItemID : (int?)null,
+                ProjectID = ProjectID,
                 IsActive = IsActive,
                 CreatedAt = CreatedAt,
                 UpdatedAt = UpdatedAt,
@@ -54,9 +64,9 @@ namespace NeoTracker.Models
             using (var context = new NeoTrackerContext())
             {
                 var data = GetModel();
-                if (ProjectEventTypeID == 0)
+                if (EventID == 0)
                 {
-                    context.ProjectEventTypes.Add(data);
+                    context.Events.Add(data);
                 }
                 else
                 {
@@ -64,28 +74,28 @@ namespace NeoTracker.Models
                 }
                 await context.SaveChangesAsync();
             }
+            App.vm.Project.LoadEvents();
             EndEdit();
-            App.vm.LoadProjectEventTypes();
         }
         public async void Delete()
         {
             bool CanDelete = true;
-            var dialog = new QuestionDialog("Do you really want to delete this ProjectEventType (" + Name + ")?");
+
+            var dialog = new QuestionDialog("Do you really want to delete this Event (" + Description + ")?");
             dialog.ShowDialog();
             if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
             {
                 using (var context = new NeoTrackerContext())
                 {
-
                     if (CanDelete)
                     {
                         var data = GetModel();
                         context.Entry(data).State = EntityState.Deleted;
-                        App.vm.ProjectEventTypes.Remove(this);
+                        App.vm.Project.Events.Remove(this);
                         await context.SaveChangesAsync();
+                        EndEdit();
                     }
                 }
-                EndEdit();
             }
         }
         //For validation
@@ -95,11 +105,11 @@ namespace NeoTracker.Models
             {
                 string result = null;
 
-                if (columnName == "Name")
+                if (columnName == "Description")
                 {
-                    if (string.IsNullOrEmpty(Name) || (Name ?? "").Length > 25)
+                    if (string.IsNullOrEmpty(Description))
                     {
-                        result = "Cannot be empty or more than 25 characters";
+                        result = "A Description is required!";
                     }
                 }
                 return result;
@@ -108,13 +118,6 @@ namespace NeoTracker.Models
         public string Error
         {
             get { return this[null]; }
-        }
-        public override bool Equals(object obj)
-        {
-            if (obj == null || !(obj is ProjectEventTypeViewModel))
-                return false;
-
-            return ((ProjectEventTypeViewModel)obj).ProjectEventTypeID == this.ProjectEventTypeID;
         }
     }
 }

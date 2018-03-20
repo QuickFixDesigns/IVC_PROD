@@ -26,13 +26,13 @@ namespace NeoTracker.Pages
     /// <summary>
     /// Interaction logic for DepartmentEdit.xaml
     /// </summary>
-    public partial class ProjectItemEdit : UserControl, IContent
+    public partial class ItemEdit : UserControl, IContent
     {
         private Buttons btn = new Buttons();
         private Utilities util = new Utilities();
-        private ProjectItemViewModel vm;
+        private ItemViewModel vm;
 
-        public ProjectItemEdit()
+        public ItemEdit()
         {
             InitializeComponent();
             btn.SetButton(ApplyButton, true, "Apply");
@@ -69,8 +69,8 @@ namespace NeoTracker.Pages
 
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
-            vm = App.vm.ProjectItem;
-            App.nav.SetLastUri("/Pages/ProjectItemEdit.xaml");
+            vm = App.vm.Item;
+            App.nav.SetLastUri("/Pages/ItemEdit.xaml");
             vm.BeginEdit();
         }
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)

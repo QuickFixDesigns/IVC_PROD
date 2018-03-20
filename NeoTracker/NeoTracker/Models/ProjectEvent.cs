@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 
 namespace NeoTracker.Models
 {
-    public class ProjectEvent : EntityBase
+    public class Event : EntityBase
     {
-        public int ProjectEventID { get; set; }
+        public int EventID { get; set; }
 
         public int ProjectID { get; set; }
 
-        public int? ProjectItemID { get; set; }
+        public int? ItemID { get; set; }
 
         public int? DepartmentID { get; set; }
 
-        public int ProjectEventTypeID { get; set; }
+        public int EventTypeID { get; set; }
 
         [Required]
         public string Description { get; set; }
@@ -27,8 +27,8 @@ namespace NeoTracker.Models
         //navigation
         public Project Project { get; set; }
         public Department Department { get; set; }
-        public ProjectItem ProjectItem { get; set; }
-        public ProjectEventType ProjectEventType { get; set; }
+        public Item Item { get; set; }
+        public EventType EventType { get; set; }
 
     }
 }

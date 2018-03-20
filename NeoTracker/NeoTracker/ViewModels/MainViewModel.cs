@@ -52,10 +52,10 @@ namespace NeoTracker.ViewModels
             Users = await ds.GetUserList();
             IsReady = true;
         }
-        public async void LoadProjectEventTypes()
+        public async void LoadEventTypes()
         {
             IsReady = false;
-            ProjectEventTypes = await ds.GetProjectEventTypeList();
+            EventTypes = await ds.GetEventTypeList();
             IsReady = true;
         }
 
@@ -107,17 +107,17 @@ namespace NeoTracker.ViewModels
             get { return _Project; }
             set { SetProperty(ref _Project, value); }
         }
-        private ProjectEventViewModel _ProjectEvent = new ProjectEventViewModel();
-        public ProjectEventViewModel ProjectEvent
+        private EventViewModel _Event = new EventViewModel();
+        public EventViewModel Event
         {
-            get { return _ProjectEvent; }
-            set { SetProperty(ref _ProjectEvent, value); }
+            get { return _Event; }
+            set { SetProperty(ref _Event, value); }
         }
-        private ProjectItemViewModel _ProjectItem = new ProjectItemViewModel();
-        public ProjectItemViewModel ProjectItem
+        private ItemViewModel _Item = new ItemViewModel();
+        public ItemViewModel Item
         {
-            get { return _ProjectItem; }
-            set { SetProperty(ref _ProjectItem, value); }
+            get { return _Item; }
+            set { SetProperty(ref _Item, value); }
         }
         private OperationViewModel _Operation = new OperationViewModel();
         public OperationViewModel Operation
@@ -125,18 +125,18 @@ namespace NeoTracker.ViewModels
             get { return _Operation; }
             set { SetProperty(ref _Operation, value); }
         }
-        //ProjectEventType
-        private List<ProjectEventTypeViewModel> _ProjectEventTypes = new List<ProjectEventTypeViewModel>();
-        public List<ProjectEventTypeViewModel> ProjectEventTypes
+        //EventType
+        private List<EventTypeViewModel> _EventTypes = new List<EventTypeViewModel>();
+        public List<EventTypeViewModel> EventTypes
         {
-            get { return _ProjectEventTypes; }
-            set { SetProperty(ref _ProjectEventTypes, value); }
+            get { return _EventTypes; }
+            set { SetProperty(ref _EventTypes, value); }
         }
-        private ProjectEventTypeViewModel _ProjectEventType = new ProjectEventTypeViewModel();
-        public ProjectEventTypeViewModel ProjectEventType
+        private EventTypeViewModel _EventType = new EventTypeViewModel();
+        public EventTypeViewModel EventType
         {
-            get { return _ProjectEventType; }
-            set { SetProperty(ref _ProjectEventType, value); }
+            get { return _EventType; }
+            set { SetProperty(ref _EventType, value); }
         }
         //Status
         private List<StatusViewModel> _Statuses = new List<StatusViewModel>();

@@ -68,14 +68,14 @@ namespace NeoTracker.Pages
 
         private void AddEventButton_Click(object sender, RoutedEventArgs e)
         {
-            tab.SelectedSource = new Uri("Pages/ProjectEventList.xaml", UriKind.Relative);
+            tab.SelectedSource = new Uri("Pages/EventList.xaml", UriKind.Relative);
 
-            App.vm.ProjectEvent = new ProjectEventViewModel()
+            App.vm.Event = new EventViewModel()
             {
-                Project = vm.GetModel(),
-                ProjectEventType = App.vm.ProjectEventTypes.OrderBy(x=>x.SortOrder).ThenBy(x=>x.Name).FirstOrDefault(),
+                ProjectID = vm.ProjectID,
+                EventType = App.vm.EventTypes.OrderBy(x=>x.SortOrder).ThenBy(x=>x.Name).FirstOrDefault(),
             };
-            App.nav.NavigateTo("/Pages/ProjectEventEdit.xaml", this);
+            App.nav.NavigateTo("/Pages/EventEdit.xaml", this);
         }
     }
 }

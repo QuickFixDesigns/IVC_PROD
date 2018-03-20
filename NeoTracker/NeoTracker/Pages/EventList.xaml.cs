@@ -1,4 +1,5 @@
 ﻿using FirstFloor.ModernUI.Windows;
+using FirstFloor.ModernUI.Windows.Controls;
 using FirstFloor.ModernUI.Windows.Navigation;
 using NeoTracker.Content;
 using NeoTracker.Models;
@@ -20,13 +21,13 @@ using System.Windows.Shapes;
 namespace NeoTracker.Pages
 {
     /// <summary>
-    /// Interaction logic for ProjectItemList.xaml
+    /// Interaction logic for ItemList.xaml
     /// </summary>
-    public partial class ProjectItemList : UserControl, IContent
+    public partial class EventList : UserControl, IContent
     {
         private Utilities util = new Utilities();
 
-        public ProjectItemList()
+        public EventList()
         {
             InitializeComponent();
         }
@@ -34,8 +35,8 @@ namespace NeoTracker.Pages
         {
             if (ListView.SelectedIndex != -1)
             {
-                App.vm.ProjectItem = ((ProjectItemViewModel)ListView.SelectedItem);
-                App.nav.NavigateTo("/Pages/ProjectItemEdit.xaml", this);
+                App.vm.Event = ((EventViewModel)ListView.SelectedItem);
+                App.nav.NavigateTo("/Pages/EventEdit.xaml", this);
             }
         }
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)

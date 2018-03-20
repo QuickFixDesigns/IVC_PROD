@@ -34,7 +34,7 @@ namespace NeoTracker
             App.vm.Authentificate();
             App.vm.LoadDepartments();
             App.vm.LoadUsers();
-            App.vm.LoadProjectEventTypes();
+            App.vm.LoadEventTypes();
             App.vm.LoadStatus();
             App.vm.LoadProjects();
         }

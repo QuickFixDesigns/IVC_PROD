@@ -73,10 +73,10 @@
 
         <GridSplitter Grid.Column="3" />
         
-        <mui:ModernTab x:Name="tab" Grid.Column="4" SelectedSource="Pages/ProjectItemList.xaml">
+        <mui:ModernTab x:Name="tab" Grid.Column="4" SelectedSource="Pages/ItemList.xaml">
             <mui:ModernTab.Links>
-                <mui:Link DisplayName="Items" Source="Pages/ProjectItemList.xaml"/>
-                <mui:Link DisplayName="Events" Source="Pages/ProjectEventList.xaml"/>
+                <mui:Link DisplayName="Items" Source="Pages/ItemList.xaml"/>
+                <mui:Link DisplayName="Events" Source="Pages/EventList.xaml"/>
             </mui:ModernTab.Links>
         </mui:ModernTab>
     </Grid>

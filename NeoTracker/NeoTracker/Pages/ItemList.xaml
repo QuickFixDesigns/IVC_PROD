@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="NeoTracker.Pages.ProjectItemList"
+﻿<UserControl x:Class="NeoTracker.Pages.ItemList"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -10,7 +10,7 @@
         <ScrollViewer Grid.Column="4">
             <StackPanel Margin="10,0,10,0">
 
-                <ListView x:Name="ListView" ItemsSource="{Binding Project.ProjectItems, UpdateSourceTrigger=PropertyChanged}" MouseDoubleClick="ListView_MouseDoubleClick">
+                <ListView x:Name="ListView" ItemsSource="{Binding Project.Items, UpdateSourceTrigger=PropertyChanged}" MouseDoubleClick="ListView_MouseDoubleClick">
                     <ListView.View>
                         <GridView x:Name="GridListView">
                             <GridViewColumn Header="SortOrder" DisplayMemberBinding="{Binding SortOrder}" />

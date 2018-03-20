@@ -52,24 +52,24 @@ namespace NeoTracker.Models
         {
             get { return ProjectID != 0; }
         }
-        private List<ProjectItemViewModel> _ProjectItems = new List<ProjectItemViewModel>();
-        public List<ProjectItemViewModel> ProjectItems
+        private List<ItemViewModel> _Items = new List<ItemViewModel>();
+        public List<ItemViewModel> Items
         {
-            get { return _ProjectItems; }
+            get { return _Items; }
             set
             {
-                SetProperty(ref _ProjectItems, value);
-                CanDelete = !value.Any() && !ProjectEvents.Any() && ProjectID != 0;
+                SetProperty(ref _Items, value);
+                CanDelete = !value.Any() && !Events.Any() && ProjectID != 0;
             }
         }
-        private List<ProjectEventViewModel> _ProjectEvents = new List<ProjectEventViewModel>();
-        public List<ProjectEventViewModel> ProjectEvents
+        private List<EventViewModel> _Events = new List<EventViewModel>();
+        public List<EventViewModel> Events
         {
-            get { return _ProjectEvents; }
+            get { return _Events; }
             set
             {
-                SetProperty(ref _ProjectEvents, value);
-                CanDelete = !value.Any() && !ProjectItems.Any() && ProjectID != 0;
+                SetProperty(ref _Events, value);
+                CanDelete = !value.Any() && !Items.Any() && ProjectID != 0;
             }
         }
         //For database
@@ -89,14 +89,14 @@ namespace NeoTracker.Models
         {
             if (ProjectID != 0)
             {
-                ProjectEvents = await ds.GetProjectEventList(ProjectID);
+                Events = await ds.GetEventList(ProjectID);
             }
         }
         public async void LoadItems()
         {
             if (ProjectID != 0)
             {
-                ProjectItems = await ds.GetProjectItemList(ProjectID);
+                Items = await ds.GetItemList(ProjectID);
             }
         }
         public async void Create(string code)
@@ -109,7 +109,7 @@ namespace NeoTracker.Models
                 var project = GetModel();
                 var Operations = await context.Departments.Where(d => d.IsDefault).ToListAsync();
 
-                var ProjectItems = await IvcContext.Comm2.Where(x => x.No_Com == code).Select(x => new ProjectItem()
+                var Items = await IvcContext.Comm2.Where(x => x.No_Com == code).Select(x => new Item()
                 {
                     Code = x.Item,
                     Name = x.Des,
@@ -121,12 +121,12 @@ namespace NeoTracker.Models
                     SortKey = x.Clef,
                 }).ToListAsync();
 
-                foreach (var item in ProjectItems)
+                foreach (var item in Items)
                 {
-                    item.ProjectItemOperations = new List<ProjectItemOperation>();
+                    item.ItemOperations = new List<ItemOperation>();
                     foreach (var o in Operations)
                     {
-                        item.ProjectItemOperations.Add(new ProjectItemOperation()
+                        item.ItemOperations.Add(new ItemOperation()
                         {
                             OperationTime = 0,
                             DepartmentID = o.DepartmentID,
@@ -137,7 +137,8 @@ namespace NeoTracker.Models
                         });
                     }
                 }
-                project.ProjectItems = ProjectItems;
+                project.Items = Items;
+                context.Projects.Add(project);
                 await context.SaveChangesAsync();
 
                 ProjectID = project.ProjectID;

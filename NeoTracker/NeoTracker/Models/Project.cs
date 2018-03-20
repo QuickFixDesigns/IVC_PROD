@@ -27,8 +27,8 @@ namespace NeoTracker.Models
         public string Comment { get; set; }
 
         //navigation
-        public ICollection<ProjectEvent> ProjectEvents { get; set; }
-        public ICollection<ProjectItem> ProjectItems { get; set; }
+        public ICollection<Event> Events { get; set; }
+        public ICollection<Item> Items { get; set; }
 
         //public DepartmentViewModel ToViewModel()
         //{

@@ -13,11 +13,11 @@ using static NeoTracker.ViewModels.MainViewModel;
 
 namespace NeoTracker.Models
 {
-    public class ProjectItemViewModel : ViewModelBase, IDataErrorInfo
+    public class ItemViewModel : ViewModelBase, IDataErrorInfo
     {
         private DataService ds = new DataService();
 
-        public int ProjectItemID { get; set; }
+        public int ItemID { get; set; }
         public int ProjectID { get; set; }
 
         private string _Code;
@@ -65,16 +65,16 @@ namespace NeoTracker.Models
             set
             {
                 SetProperty(ref _Operations, value);
-                CanDelete = !value.Any() && ProjectItemID != 0;
+                CanDelete = !value.Any() && ItemID != 0;
             }
         }
 
         //For database
-        public ProjectItem GetModel()
+        public Item GetModel()
         {
-            return new ProjectItem()
+            return new Item()
             {
-                ProjectItemID = ProjectItemID,
+                ItemID = ItemID,
                 ProjectID = ProjectID,
                 Code = Code,
                 DueDate = DueDate,
@@ -90,7 +90,7 @@ namespace NeoTracker.Models
         }
         public async void LoadOperations()
         {
-            if (ProjectItemID != 0)
+            if (ItemID != 0)
             {
                 Operations = await ds.GetOperationList(ProjectID);
             }
@@ -100,9 +100,9 @@ namespace NeoTracker.Models
             using (var context = new NeoTrackerContext())
             {
                 var data = GetModel();
-                if (ProjectItemID == 0)
+                if (ItemID == 0)
                 {
-                    context.ProjectItems.Add(data);
+                    context.Items.Add(data);
                 }
                 else
                 {
@@ -127,7 +127,7 @@ namespace NeoTracker.Models
                     {
                         var data = GetModel();
                         context.Entry(data).State = EntityState.Deleted;
-                        App.vm.Project.ProjectItems.Remove(this);
+                        App.vm.Project.Items.Remove(this);
                         await context.SaveChangesAsync();
                         EndEdit();
                     }
@@ -157,10 +157,10 @@ namespace NeoTracker.Models
         }
         public override bool Equals(object obj)
         {
-            if (obj == null || !(obj is ProjectItemViewModel))
+            if (obj == null || !(obj is ItemViewModel))
                 return false;
 
-            return ((ProjectItemViewModel)obj).ProjectItemID == this.ProjectItemID;
+            return ((ItemViewModel)obj).ItemID == this.ItemID;
         }
     }
 }

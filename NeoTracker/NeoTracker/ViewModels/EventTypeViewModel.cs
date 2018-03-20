@@ -13,69 +13,36 @@ using static NeoTracker.ViewModels.MainViewModel;
 
 namespace NeoTracker.Models
 {
-    public class OperationViewModel : ViewModelBase, IDataErrorInfo
+    public class EventTypeViewModel : ViewModelBase, IDataErrorInfo
     {
-        public int OperationID { get; set; }
-        public int ItemID { get; set; }
-
-        private int? _SortOrder;
-        public int? SortOrder
-        {
-            get { return _SortOrder; }
-            set { SetProperty(ref _SortOrder, value); }
-        }
+        public int EventTypeID { get; set; }
         private string _Name;
         public string Name
         {
             get { return _Name; }
             set { SetProperty(ref _Name, value); }
         }
-
-        private DateTime? _StartDate;
-        public DateTime? StartDate
+        private int? _SortOrder;
+        public int? SortOrder
         {
-            get { return _StartDate; }
-            set { SetProperty(ref _StartDate, value); }
+            get { return _SortOrder; }
+            set { SetProperty(ref _SortOrder, value); }
         }
-
-        private DateTime? _EndDate;
-        public DateTime? EndDate
+        private bool _NotificateDepartment;
+        public bool NotificateDepartment
         {
-            get { return _EndDate; }
-            set { SetProperty(ref _EndDate, value); }
-        }
-        private decimal _Progress;
-        public decimal Progress
-        {
-            get { return _Progress; }
-            set { SetProperty(ref _Progress, value); }
-        }
-        private decimal _OperationTime;
-        public decimal OperationTime
-        {
-            get { return _OperationTime; }
-            set { SetProperty(ref _OperationTime, value); }
-        }
-        private Department _Department = new Department();
-        public Department Department
-        {
-            get { return _Department; }
-            set { SetProperty(ref _Department, value); }
+            get { return _NotificateDepartment; }
+            set { SetProperty(ref _NotificateDepartment, value); }
         }
         //For database
-        public ItemOperation GetModel()
+        public EventType GetModel()
         {
-            return new ItemOperation()
+            return new EventType()
             {
-                DepartmentID = Department != null && Department.DepartmentID != 0 ? Department.DepartmentID : (int?)null,
-                SortOrder = SortOrder,
+                EventTypeID = EventTypeID,
                 Name = Name,
-                EndDate = EndDate,
-                OperationTime = OperationTime,
-                Progress = Progress,
-                ItemID = ItemID,
-                ItemOperationID = OperationID,
-                StartDate = StartDate,
+                NotificateDepartment = NotificateDepartment,
+                SortOrder = SortOrder,
                 IsActive = IsActive,
                 CreatedAt = CreatedAt,
                 UpdatedAt = UpdatedAt,
@@ -87,9 +54,9 @@ namespace NeoTracker.Models
             using (var context = new NeoTrackerContext())
             {
                 var data = GetModel();
-                if (OperationID == 0)
+                if (EventTypeID == 0)
                 {
-                    context.ItemOperations.Add(data);
+                    context.EventTypes.Add(data);
                 }
                 else
                 {
@@ -98,27 +65,27 @@ namespace NeoTracker.Models
                 await context.SaveChangesAsync();
             }
             EndEdit();
-            App.vm.Item.LoadOperations();
+            App.vm.LoadEventTypes();
         }
         public async void Delete()
         {
             bool CanDelete = true;
-
-            var dialog = new QuestionDialog("Do you really want to delete this operation (" + Name + ")?");
+            var dialog = new QuestionDialog("Do you really want to delete this EventType (" + Name + ")?");
             dialog.ShowDialog();
             if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
             {
                 using (var context = new NeoTrackerContext())
                 {
+
                     if (CanDelete)
                     {
                         var data = GetModel();
                         context.Entry(data).State = EntityState.Deleted;
-                        App.vm.Item.Operations.Remove(this);
+                        App.vm.EventTypes.Remove(this);
                         await context.SaveChangesAsync();
-                        EndEdit();
                     }
                 }
+                EndEdit();
             }
         }
         //For validation
@@ -144,10 +111,10 @@ namespace NeoTracker.Models
         }
         public override bool Equals(object obj)
         {
-            if (obj == null || !(obj is OperationViewModel))
+            if (obj == null || !(obj is EventTypeViewModel))
                 return false;
 
-            return ((OperationViewModel)obj).OperationID == this.OperationID;
+            return ((EventTypeViewModel)obj).EventTypeID == this.EventTypeID;
         }
     }
 }

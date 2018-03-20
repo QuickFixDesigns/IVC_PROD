@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace NeoTracker.Models
 {
-    public class ProjectEventType : EntityBase
+    public class EventType : EntityBase
     {
-        public int ProjectEventTypeID { get; set; }
+        public int EventTypeID { get; set; }
 
         [Required]
         [StringLength(25, ErrorMessage = "Cannot be longer than 25 characters.")]
@@ -20,14 +20,14 @@ namespace NeoTracker.Models
         public int? SortOrder { get; set; }
         public bool NotificateDepartment { get; set; }
 
-        public ICollection<ProjectEvent> ProjectEvents { get; set; }
+        public ICollection<Event> Events { get; set; }
 
 
-        public ProjectEventTypeViewModel ToViewModel()
+        public EventTypeViewModel ToViewModel()
         {
-            return new ProjectEventTypeViewModel()
+            return new EventTypeViewModel()
             {
-                ProjectEventTypeID = ProjectEventTypeID,
+                EventTypeID = EventTypeID,
                 Name = Name,
                 NotificateDepartment = NotificateDepartment,
                 SortOrder = SortOrder,

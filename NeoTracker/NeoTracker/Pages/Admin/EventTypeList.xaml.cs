@@ -25,12 +25,12 @@ namespace NeoTracker.Pages.Admin
     /// <summary>
     /// Interaction logic for Departments.xaml
     /// </summary>
-    public partial class ProjectEventTypeList : UserControl, IContent
+    public partial class EventTypeList : UserControl, IContent
     {
         private Buttons btn = new Buttons();
         private Utilities util = new Utilities();
 
-        public ProjectEventTypeList()
+        public EventTypeList()
         {
             InitializeComponent();
             btn.SetButton(CreateButton, true, "Create");
@@ -40,15 +40,15 @@ namespace NeoTracker.Pages.Admin
         {
             if (ListView.SelectedIndex != -1)
             {
-                App.vm.ProjectEventType = ((ProjectEventTypeViewModel)ListView.SelectedItem);
-                App.nav.NavigateTo("/Pages/Admin/ProjectEventTypeEdit.xaml", this);
+                App.vm.EventType = ((EventTypeViewModel)ListView.SelectedItem);
+                App.nav.NavigateTo("/Pages/Admin/EventTypeEdit.xaml", this);
             }
         }
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
-            App.vm.ProjectEventType = new ProjectEventTypeViewModel();
-            App.nav.NavigateTo("/Pages/Admin/ProjectEventTypeEdit.xaml", this);
+            App.vm.EventType = new EventTypeViewModel();
+            App.nav.NavigateTo("/Pages/Admin/EventTypeEdit.xaml", this);
         }
 
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
@@ -63,7 +63,7 @@ namespace NeoTracker.Pages.Admin
 
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
-            App.nav.SetLastUri("/Pages/Admin/ProjectEventTypeList.xaml");
+            App.nav.SetLastUri("/Pages/Admin/EventTypeList.xaml");
             util.AutoFitListView(GridListView);
         }
 

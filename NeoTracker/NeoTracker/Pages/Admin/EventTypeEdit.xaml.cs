@@ -1,6 +1,4 @@
 ﻿using FirstFloor.ModernUI.Windows;
-using FirstFloor.ModernUI.Windows.Controls;
-using FirstFloor.ModernUI.Windows.Navigation;
 using NeoTracker.Content;
 using NeoTracker.Models;
 using System;
@@ -17,31 +15,51 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FirstFloor.ModernUI.Windows.Navigation;
+using NeoTracker.DAL;
+using System.Data.Entity;
+using static NeoTracker.ViewModels.MainViewModel;
+using NeoTracker.Pages.Dialogs;
 
-namespace NeoTracker.Pages
+namespace NeoTracker.Pages.Admin
 {
     /// <summary>
-    /// Interaction logic for ProjectItemList.xaml
+    /// Interaction logic for DepartmentEdit.xaml
     /// </summary>
-    public partial class ProjectEventList : UserControl, IContent
+    public partial class EventTypeEdit : UserControl, IContent
     {
+        private Buttons btn = new Buttons();
         private Utilities util = new Utilities();
+        private EventTypeViewModel vm;
 
-        public ProjectEventList()
+        public EventTypeEdit()
         {
             InitializeComponent();
+            btn.SetButton(ApplyButton, true, "Apply");
+            btn.SetButton(DeleteButton, true, "Delete");
+            btn.SetButton(CancelButton, true, "Cancel");
         }
-        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+
+        private void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
-            if (ListView.SelectedIndex != -1)
-            {
-                App.vm.ProjectEvent = ((ProjectEventViewModel)ListView.SelectedItem);
-                App.nav.NavigateTo("/Pages/ProjectEventEdit.xaml", this);
-            }
+            vm.Save();
+            App.nav.GoBack(this);
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            vm.CancelEdit();
+            App.nav.GoBack(this);
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            vm.Delete();
+            App.nav.GoBack(this);
         }
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
@@ -51,9 +69,10 @@ namespace NeoTracker.Pages
 
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
-            util.AutoFitListView(GridListView);
+            App.nav.SetLastUri("/Pages/Admin/EventTypeEdit.xaml");
+            vm = App.vm.EventType;
+            vm.BeginEdit();
         }
-
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
             //throw new NotImplementedException();

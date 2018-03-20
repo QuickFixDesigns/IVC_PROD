@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace NeoTracker.Models
 {
-    public class ProjectItem : EntityBase
+    public class Item : EntityBase
     {
-        public int ProjectItemID { get; set; }
+        public int ItemID { get; set; }
 
         public int ProjectID { get; set; }
 
@@ -37,7 +37,7 @@ namespace NeoTracker.Models
 
         public Project Project { get; set; }
         public Status Status { get; set; }
-        public ICollection<ProjectItemOperation> ProjectItemOperations { get; set; }
+        public ICollection<ItemOperation> ItemOperations { get; set; }
 
         //public UserViewModel ToViewModel()
         //{
@@ -56,10 +56,10 @@ namespace NeoTracker.Models
         //}
         public override bool Equals(object obj)
         {
-            if (obj == null || !(obj is ProjectItem))
+            if (obj == null || !(obj is Item))
                 return false;
 
-            return ((ProjectItem)obj).ProjectItemID == this.ProjectItemID;
+            return ((Item)obj).ItemID == this.ItemID;
         }
     }
 }

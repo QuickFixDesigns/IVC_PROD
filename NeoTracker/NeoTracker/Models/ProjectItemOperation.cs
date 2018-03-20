@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace NeoTracker.Models
 {
-    public class ProjectItemOperation : EntityBase
+    public class ItemOperation : EntityBase
     {
-        public int ProjectItemOperationID { get; set; }
+        public int ItemOperationID { get; set; }
 
-        public int ProjectItemID { get; set; }
+        public int ItemID { get; set; }
 
         public int? SortOrder { get; set; }
 
@@ -38,7 +38,7 @@ namespace NeoTracker.Models
         public decimal Progress { get; set; }
 
         //navigation
-        public ProjectItem ProjectItem { get; set; }
+        public Item Item { get; set; }
         public Department Department { get; set; }
 
         //public DepartmentViewModel ToViewModel()

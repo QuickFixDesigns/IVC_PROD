@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="NeoTracker.Pages.Admin.ProjectEventTypeEdit"
+﻿<UserControl x:Class="NeoTracker.Pages.Admin.EventTypeEdit"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -32,7 +32,7 @@
                 </StackPanel.BindingGroup>
 
                 <StackPanel.Resources>
-                    <src:MainViewModel x:Key="ProjectEventTypeViewModel"/>
+                    <src:MainViewModel x:Key="EventTypeViewModel"/>
                     <Style x:Key="textBoxInError" TargetType="TextBox">
                         <Style.Triggers>
                             <Trigger Property="Validation.HasError" Value="true">
@@ -42,25 +42,25 @@
                     </Style>
                 </StackPanel.Resources>
 
-                <TextBlock Text="ProjectEventType" Style="{StaticResource Heading2}" />
+                <TextBlock Text="EventType" Style="{StaticResource Heading2}" />
                 <Separator Height="10" Background="Transparent"/>
 
                 <Label Content="Name"/>
-                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding ProjectEventType.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding EventType.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Label Content="SortOrder"/>
-                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding ProjectEventType.SortOrder, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding EventType.SortOrder, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Label Content="NotificateDepartment"/>
-                <CheckBox IsChecked="{Binding ProjectEventType.NotificateDepartment, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <CheckBox IsChecked="{Binding EventType.NotificateDepartment, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                 
                 <Label Content="IsActive"/>
-                <CheckBox IsChecked="{Binding ProjectEventType.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <CheckBox IsChecked="{Binding EventType.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Label Content="UpdatedBy" />
-                <TextBox  IsReadOnly="True" Text="{Binding ProjectEventType.UpdatedBy}"  />
+                <TextBox  IsReadOnly="True" Text="{Binding EventType.UpdatedBy}"  />
                 <Label Content="UpdatedAt" />
-                <TextBox  IsReadOnly="True"  Text="{Binding ProjectEventType.UpdatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
+                <TextBox  IsReadOnly="True"  Text="{Binding EventType.UpdatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
 
             </StackPanel>
         </ScrollViewer>

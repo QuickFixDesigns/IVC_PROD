@@ -9,7 +9,7 @@
     
     <Grid Style="{StaticResource ContentRoot}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" MinWidth="100"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="1"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>

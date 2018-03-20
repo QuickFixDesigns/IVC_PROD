@@ -26,7 +26,7 @@ namespace NeoTracker.Models
         public User HeadOfDepartment { get; set; }
 
         public ICollection<DepartmentUser> DepartmentUsers { get; set; }
-        public ICollection<ProjectItemOperation> ProjectItemOperations { get; set; }
+        public ICollection<ItemOperation> ItemOperations { get; set; }
 
         //public UserViewModel ToViewModel()
         //{

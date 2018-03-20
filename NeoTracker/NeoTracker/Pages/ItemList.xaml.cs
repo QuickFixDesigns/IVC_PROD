@@ -17,22 +17,30 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace NeoTracker.Pages.Admin
+namespace NeoTracker.Pages
 {
     /// <summary>
     /// Interaction logic for ItemList.xaml
     /// </summary>
-    public partial class DepartmentUserList : UserControl, IContent
+    public partial class ItemList : UserControl, IContent
     {
         private Utilities util = new Utilities();
 
-        public DepartmentUserList()
+        public ItemList()
         {
             InitializeComponent();
         }
+        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (ListView.SelectedIndex != -1)
+            {
+                App.vm.Item = ((ItemViewModel)ListView.SelectedItem);
+                App.nav.NavigateTo("/Pages/ItemEdit.xaml", this);
+            }
+        }
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
@@ -48,13 +56,6 @@ namespace NeoTracker.Pages.Admin
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
             //throw new NotImplementedException();
-        }
-        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            if (ListView.SelectedIndex != -1)
-            {
-                App.vm.Department.RemoveUser(((User)ListView.SelectedItem));
-            }
         }
     }
 }

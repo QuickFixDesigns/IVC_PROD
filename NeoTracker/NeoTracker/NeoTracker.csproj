@@ -116,17 +116,17 @@
     <Compile Include="Pages\Admin\DepartmentUserList.xaml.cs">
       <DependentUpon>DepartmentUserList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ProjectItemEdit.xaml.cs">
-      <DependentUpon>ProjectItemEdit.xaml</DependentUpon>
+    <Compile Include="Pages\ItemEdit.xaml.cs">
+      <DependentUpon>ItemEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ProjectEventEdit.xaml.cs">
-      <DependentUpon>ProjectEventEdit.xaml</DependentUpon>
+    <Compile Include="Pages\EventEdit.xaml.cs">
+      <DependentUpon>EventEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ProjectEventList.xaml.cs">
-      <DependentUpon>ProjectEventList.xaml</DependentUpon>
+    <Compile Include="Pages\EventList.xaml.cs">
+      <DependentUpon>EventList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ProjectItemList.xaml.cs">
-      <DependentUpon>ProjectItemList.xaml</DependentUpon>
+    <Compile Include="Pages\ItemList.xaml.cs">
+      <DependentUpon>ItemList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ProjectList.xaml.cs">
       <DependentUpon>ProjectList.xaml</DependentUpon>
@@ -137,14 +137,14 @@
     <Compile Include="Pages\Admin\StatusEdit.xaml.cs">
       <DependentUpon>StatusEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Admin\ProjectEventTypeEdit.xaml.cs">
-      <DependentUpon>ProjectEventTypeEdit.xaml</DependentUpon>
+    <Compile Include="Pages\Admin\EventTypeEdit.xaml.cs">
+      <DependentUpon>EventTypeEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Admin\StatusList.xaml.cs">
       <DependentUpon>StatusList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Admin\ProjectEventTypeList.xaml.cs">
-      <DependentUpon>ProjectEventTypeList.xaml</DependentUpon>
+    <Compile Include="Pages\Admin\EventTypeList.xaml.cs">
+      <DependentUpon>EventTypeList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Dialogs\QuestionDialog.xaml.cs">
       <DependentUpon>QuestionDialog.xaml</DependentUpon>
@@ -166,11 +166,11 @@
     </Compile>
     <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="ViewModels\OperationViewModel.cs" />
-    <Compile Include="ViewModels\ProjectItemViewModel.cs" />
-    <Compile Include="ViewModels\ProjectEventViewModel.cs" />
+    <Compile Include="ViewModels\ItemViewModel.cs" />
+    <Compile Include="ViewModels\EventViewModel.cs" />
     <Compile Include="ViewModels\StatusViewModel.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
-    <Compile Include="ViewModels\ProjectEventTypeViewModel.cs" />
+    <Compile Include="ViewModels\EventTypeViewModel.cs" />
     <Compile Include="ViewModels\SelectItem.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\DepartmentViewModel.cs" />
@@ -193,19 +193,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ProjectItemEdit.xaml">
+    <Page Include="Pages\ItemEdit.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ProjectEventEdit.xaml">
+    <Page Include="Pages\EventEdit.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ProjectEventList.xaml">
+    <Page Include="Pages\EventList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ProjectItemList.xaml">
+    <Page Include="Pages\ItemList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -221,7 +221,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\Admin\ProjectEventTypeEdit.xaml">
+    <Page Include="Pages\Admin\EventTypeEdit.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -229,7 +229,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\Admin\ProjectEventTypeList.xaml">
+    <Page Include="Pages\Admin\EventTypeList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

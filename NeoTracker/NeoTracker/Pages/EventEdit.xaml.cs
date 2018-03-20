@@ -21,23 +21,25 @@ using System.Data.Entity;
 using static NeoTracker.ViewModels.MainViewModel;
 using NeoTracker.Pages.Dialogs;
 
-namespace NeoTracker.Pages.Admin
+namespace NeoTracker.Pages
 {
     /// <summary>
     /// Interaction logic for DepartmentEdit.xaml
     /// </summary>
-    public partial class ProjectEventTypeEdit : UserControl, IContent
+    public partial class EventEdit : UserControl, IContent
     {
         private Buttons btn = new Buttons();
         private Utilities util = new Utilities();
-        private ProjectEventTypeViewModel vm;
+        private EventViewModel vm;
 
-        public ProjectEventTypeEdit()
+        public EventEdit()
         {
             InitializeComponent();
             btn.SetButton(ApplyButton, true, "Apply");
             btn.SetButton(DeleteButton, true, "Delete");
             btn.SetButton(CancelButton, true, "Cancel");
+            btn.SetButton(ClearDepartment, false, "Reset");
+            btn.SetButton(ClearItem, false, "Reset");
         }
 
         private void ApplyButton_Click(object sender, RoutedEventArgs e)
@@ -69,13 +71,22 @@ namespace NeoTracker.Pages.Admin
 
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
-            App.nav.SetLastUri("/Pages/Admin/ProjectEventTypeEdit.xaml");
-            vm = App.vm.ProjectEventType;
+            vm = App.vm.Event;
+            App.nav.SetLastUri("/Pages/ProjectEdit.xaml");
             vm.BeginEdit();
         }
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
             //throw new NotImplementedException();
+        }
+        private void ClearDepartment_Click(object sender, RoutedEventArgs e)
+        {
+            vm.Department = null;
+        }
+
+        private void ClearItem_Click(object sender, RoutedEventArgs e)
+        {
+            vm.EventItem = null ;
         }
     }
 }
