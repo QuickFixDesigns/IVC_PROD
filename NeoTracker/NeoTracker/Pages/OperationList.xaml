@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="NeoTracker.Pages.OperationList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Style="{StaticResource ContentRoot}">
+        <ScrollViewer Grid.Column="4">
+            <StackPanel Margin="10,0,10,0">
+
+                <ListView x:Name="ListView" ItemsSource="{Binding Item.Operations, UpdateSourceTrigger=PropertyChanged}" MouseDoubleClick="ListView_MouseDoubleClick">
+                    <ListView.View>
+                        <GridView x:Name="GridListView">
+                            <GridViewColumn Header="SortOrder" DisplayMemberBinding="{Binding SortOrder}" />
+                            <GridViewColumn Header="Department" DisplayMemberBinding="{Binding Department.Name}" />
+                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
+                            <GridViewColumn Header="StartDate" DisplayMemberBinding="{Binding StartDate,StringFormat={}{0:yyyy-MM-dd}}"  />
+                            <GridViewColumn Header="EndDate" DisplayMemberBinding="{Binding EndDate,StringFormat={}{0:yyyy-MM-dd}}" />
+                            <GridViewColumn Header="OperationTime" DisplayMemberBinding="{Binding OperationTime}" />
+                            <GridViewColumn Header="Progress" DisplayMemberBinding="{Binding Progress}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

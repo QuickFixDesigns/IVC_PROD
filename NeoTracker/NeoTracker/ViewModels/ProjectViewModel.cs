@@ -123,10 +123,10 @@ namespace NeoTracker.Models
 
                 foreach (var item in Items)
                 {
-                    item.ItemOperations = new List<ItemOperation>();
+                    item.Operations = new List<Operation>();
                     foreach (var o in Operations)
                     {
-                        item.ItemOperations.Add(new ItemOperation()
+                        item.Operations.Add(new Operation()
                         {
                             OperationTime = 0,
                             DepartmentID = o.DepartmentID,

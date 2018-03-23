@@ -46,7 +46,10 @@ namespace NeoTracker.Pages.Admin
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
-            App.vm.User = new UserViewModel();
+            App.vm.User = new UserViewModel()
+            {
+                IsActive = true,
+            };
             App.nav.NavigateTo("/Pages/Admin/UserEdit.xaml", this);
         }
 

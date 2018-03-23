@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace NeoTracker.Models
 {
-    public class ItemOperation : EntityBase
+    public class Operation : EntityBase
     {
-        public int ItemOperationID { get; set; }
+        public int OperationID { get; set; }
 
         public int ItemID { get; set; }
 

@@ -26,7 +26,7 @@ namespace NeoTracker.Models
         public User HeadOfDepartment { get; set; }
 
         public ICollection<DepartmentUser> DepartmentUsers { get; set; }
-        public ICollection<ItemOperation> ItemOperations { get; set; }
+        public ICollection<Operation> ItemOperations { get; set; }
 
         //public UserViewModel ToViewModel()
         //{
@@ -49,6 +49,16 @@ namespace NeoTracker.Models
                 return false;
 
             return ((Department)obj).DepartmentID == this.DepartmentID;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
         }
     }
 }

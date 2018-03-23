@@ -70,6 +70,7 @@ namespace NeoTracker.Pages
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
             vm = App.vm.Item;
+            vm.LoadOperations();
             App.nav.SetLastUri("/Pages/ItemEdit.xaml");
             vm.BeginEdit();
         }

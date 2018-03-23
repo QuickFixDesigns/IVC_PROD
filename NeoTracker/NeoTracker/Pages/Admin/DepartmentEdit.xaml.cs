@@ -77,12 +77,13 @@ namespace NeoTracker.Pages.Admin
         {
             vm = App.vm.Department;
             vm.LoadUsers();
-            App.nav.SetLastUri("/Pages/Admin/DepartmentEdit.xaml");
             vm.BeginEdit();
+            App.nav.SetLastUri("/Pages/Admin/DepartmentEdit.xaml");
 
         }
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
+            App.vm.Department = null;
         }
 
         private void ClearHeadOfDepartmentCb_Click(object sender, RoutedEventArgs e)

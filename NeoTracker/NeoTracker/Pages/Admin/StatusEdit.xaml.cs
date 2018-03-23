@@ -75,7 +75,7 @@ namespace NeoTracker.Pages.Admin
         }
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
-            //throw new NotImplementedException();
+            App.vm.Status = null;
         }
     }
 }

@@ -1,9 +1,8 @@
 ﻿using FirstFloor.ModernUI.Windows;
 using FirstFloor.ModernUI.Windows.Controls;
+using FirstFloor.ModernUI.Windows.Navigation;
 using NeoTracker.Content;
-using NeoTracker.DAL;
 using NeoTracker.Models;
-using NeoTracker.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,45 +17,31 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using FirstFloor.ModernUI.Windows.Navigation;
 
-namespace NeoTracker.Pages.Admin
+namespace NeoTracker.Pages
 {
     /// <summary>
-    /// Interaction logic for Departments.xaml
+    /// Interaction logic for ItemList.xaml
     /// </summary>
-    public partial class DepartmentList : UserControl, IContent
+    public partial class OperationList : UserControl, IContent
     {
-        private Buttons btn = new Buttons();
         private Utilities util = new Utilities();
 
-        public DepartmentList()
+        public OperationList()
         {
             InitializeComponent();
-            btn.SetButton(CreateButton, true, "Create");
-            util.AutoFitListView(GridListView);
         }
         private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (ListView.SelectedIndex != -1)
             {
-                App.vm.Department = ((DepartmentViewModel)ListView.SelectedItem);
-                App.nav.NavigateTo("/Pages/Admin/DepartmentEdit.xaml", this);
+                //App.vm.Event = ((EventViewModel)ListView.SelectedItem);
+                //App.nav.NavigateTo("/Pages/EventEdit.xaml", this);
             }
         }
-
-        private void CreateButton_Click(object sender, RoutedEventArgs e)
-        {
-            App.vm.Department = new DepartmentViewModel()
-            {
-                IsActive = true,
-            };
-            App.nav.NavigateTo("/Pages/Admin/DepartmentEdit.xaml", this);
-        }
-
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
@@ -66,7 +51,6 @@ namespace NeoTracker.Pages.Admin
 
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
-            App.nav.SetLastUri("/Pages/Admin/DepartmentList.xaml");
             util.AutoFitListView(GridListView);
         }
 

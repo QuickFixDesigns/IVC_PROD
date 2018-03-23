@@ -222,5 +222,15 @@ namespace NeoTracker.Models
 
             return ((DepartmentViewModel)obj).DepartmentID == this.DepartmentID;
         }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

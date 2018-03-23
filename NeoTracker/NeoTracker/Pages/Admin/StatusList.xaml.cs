@@ -47,7 +47,10 @@ namespace NeoTracker.Pages.Admin
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
-            App.vm.Status = new StatusViewModel();
+            App.vm.Status = new StatusViewModel()
+            {
+                IsActive = true,
+            };
             App.nav.NavigateTo("/Pages/Admin/StatusEdit.xaml", this);
         }
 

@@ -92,7 +92,7 @@ namespace NeoTracker.Models
         {
             if (ItemID != 0)
             {
-                Operations = await ds.GetOperationList(ProjectID);
+                Operations = await ds.GetOperationList(ItemID);
             }
         }
         public async void Save()
@@ -161,6 +161,16 @@ namespace NeoTracker.Models
                 return false;
 
             return ((ItemViewModel)obj).ItemID == this.ItemID;
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }

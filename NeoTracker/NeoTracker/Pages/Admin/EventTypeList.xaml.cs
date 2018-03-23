@@ -47,7 +47,11 @@ namespace NeoTracker.Pages.Admin
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
-            App.vm.EventType = new EventTypeViewModel();
+            App.vm.EventType = new EventTypeViewModel()
+            {
+                IsActive = true,
+            };
+
             App.nav.NavigateTo("/Pages/Admin/EventTypeEdit.xaml", this);
         }
 

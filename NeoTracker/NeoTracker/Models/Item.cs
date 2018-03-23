@@ -37,7 +37,7 @@ namespace NeoTracker.Models
 
         public Project Project { get; set; }
         public Status Status { get; set; }
-        public ICollection<ItemOperation> ItemOperations { get; set; }
+        public ICollection<Operation> Operations { get; set; }
 
         //public UserViewModel ToViewModel()
         //{
@@ -60,6 +60,16 @@ namespace NeoTracker.Models
                 return false;
 
             return ((Item)obj).ItemID == this.ItemID;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
         }
     }
 }

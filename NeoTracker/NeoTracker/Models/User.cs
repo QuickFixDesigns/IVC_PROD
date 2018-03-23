@@ -63,5 +63,15 @@ namespace NeoTracker.Models
 
             return ((User)obj).UserID == this.UserID;
         }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

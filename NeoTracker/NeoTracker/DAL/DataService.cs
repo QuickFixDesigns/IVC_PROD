@@ -23,7 +23,7 @@ namespace NeoTracker.DAL
         {
             using (var context = new NeoTrackerContext())
             {
-                return await context.Departments.Include(x => x.HeadOfDepartment).OrderBy(x => x.Name).Select(x => new DepartmentViewModel()
+                return await context.Departments.Include(x => x.HeadOfDepartment).OrderBy(x => x.SortOrder).ThenBy(x=>x.Name).Select(x => new DepartmentViewModel()
                 {
                     DepartmentID = x.DepartmentID,
                     Name = x.Name,
@@ -43,7 +43,7 @@ namespace NeoTracker.DAL
         {
             using (var context = new NeoTrackerContext())
             {
-                return await context.Projects.Include(x => x.Items).Select(x => new ProjectViewModel()
+                return await context.Projects.Include(x => x.Items).OrderBy(x=>x.Name).Select(x => new ProjectViewModel()
                 {
                     Code = x.Code,
                     Comment = x.Comment,
@@ -60,9 +60,12 @@ namespace NeoTracker.DAL
 
         public async Task<List<OrderViewModel>> GetOrderList()
         {
-            using (var context = new IVCLIVEDBEntities())
+            using (var context = new NeoTrackerContext())
+            using (var Genius = new IVCLIVEDBEntities())
             {
-                return await context.Comms.Where(x => x.Datecli > DateTime.Today).Select(x => new OrderViewModel()
+                var projects = context.Projects.Select(x=>x.Code).ToArray();
+
+                return await Genius.Comms.Where(x => x.Datecli > DateTime.Today && !projects.Contains(x.No_Com)).OrderBy(x=>x.No_Com).Select(x => new OrderViewModel()
                 {
                     Code = x.No_Com,
                     Date = x.Datecli,
@@ -79,16 +82,16 @@ namespace NeoTracker.DAL
                     EventID = x.EventID,
                     Department = x.DepartmentID.HasValue ? new DepartmentViewModel()
                     {
-                        CreatedAt = x.Department.CreatedAt,
+                        //CreatedAt = x.Department.CreatedAt,
                         DepartmentID = x.Department.DepartmentID,
                         //HeadOfDepartment = x.Department.HeadOfDepartment,
-                        IsActive = x.Department.IsActive,
-                        IsDefault = x.Department.IsDefault,
-                        Msg = x.Department.Msg,
+                        //IsActive = x.Department.IsActive,
+                        //IsDefault = x.Department.IsDefault,
+                        //Msg = x.Department.Msg,
                         Name = x.Department.Name,
-                        SortOrder = x.Department.SortOrder,
-                        UpdatedAt = x.Department.UpdatedAt,
-                        UpdatedBy = x.Department.UpdatedBy,
+                        //SortOrder = x.Department.SortOrder,
+                        //UpdatedAt = x.Department.UpdatedAt,
+                        //UpdatedBy = x.Department.UpdatedBy,
                     } : null,
                     Description = x.Description,
                     ProjectID = x.ProjectID,
@@ -96,36 +99,36 @@ namespace NeoTracker.DAL
                     {
                         EventTypeID = x.EventTypeID,
                         Name = x.EventType.Name,
-                        NotificateDepartment = x.EventType.NotificateDepartment,
-                        SortOrder = x.EventType.SortOrder,
-                        IsActive = x.EventType.IsActive,
-                        CreatedAt = x.EventType.CreatedAt,
-                        UpdatedAt = x.EventType.UpdatedAt,
-                        UpdatedBy = x.EventType.UpdatedBy,
+                        //NotificateDepartment = x.EventType.NotificateDepartment,
+                        //SortOrder = x.EventType.SortOrder,
+                        //IsActive = x.EventType.IsActive,
+                        //CreatedAt = x.EventType.CreatedAt,
+                        //UpdatedAt = x.EventType.UpdatedAt,
+                        //UpdatedBy = x.EventType.UpdatedBy,
                     },
                     EventItem = x.ItemID.HasValue ? new ItemViewModel()
                     {
-                        IsActive = x.Item.IsActive,
+                        //IsActive = x.Item.IsActive,
                         Code = x.Item.Code,
-                        CreatedAt = x.Item.CreatedAt,
-                        UpdatedBy = x.Item.UpdatedBy,
-                        UpdatedAt = x.Item.UpdatedAt,
-                        SortOrder = x.Item.SortOrder,
-                        DueDate = x.Item.DueDate,
-                        LatestStartDate = x.Item.LatestStartDate,
+                        //CreatedAt = x.Item.CreatedAt,
+                        //UpdatedBy = x.Item.UpdatedBy,
+                        //UpdatedAt = x.Item.UpdatedAt,
+                        //SortOrder = x.Item.SortOrder,
+                        //DueDate = x.Item.DueDate,
+                        //LatestStartDate = x.Item.LatestStartDate,
                         Name = x.Item.Name,
                         //Project = x.Item.Project,
                         ItemID = x.Item.ItemID,
                         Status = x.Item.StatusID.HasValue ? new StatusViewModel()
                         {
-                            CreatedAt = x.Item.Status.CreatedAt,
-                            IsActive = x.Item.Status.IsActive,
-                            IsDeleted = x.Item.Status.IsDeleted,
+                            //CreatedAt = x.Item.Status.CreatedAt,
+                            //IsActive = x.Item.Status.IsActive,
+                            //IsDeleted = x.Item.Status.IsDeleted,
                             Name = x.Item.Status.Name,
-                            SortOrder = x.Item.Status.SortOrder,
+                            //SortOrder = x.Item.Status.SortOrder,
                             StatusID = x.Item.Status.StatusID,
-                            UpdatedAt = x.Item.Status.UpdatedAt,
-                            UpdatedBy = x.Item.Status.UpdatedBy,
+                            //UpdatedAt = x.Item.Status.UpdatedAt,
+                            //UpdatedBy = x.Item.Status.UpdatedBy,
                         } : null,
                     } : null,
                     IsActive = x.IsActive,
@@ -139,7 +142,7 @@ namespace NeoTracker.DAL
         {
             using (var context = new NeoTrackerContext())
             {
-                return await context.EventTypes.OrderBy(x => x.Name).Select(x => new EventTypeViewModel()
+                return await context.EventTypes.OrderBy(x => x.SortOrder).ThenBy(x=>x.Name).Select(x => new EventTypeViewModel()
                 {
                     EventTypeID = x.EventTypeID,
                     Name = x.Name,
@@ -164,14 +167,14 @@ namespace NeoTracker.DAL
                     LatestStartDate = x.LatestStartDate,
                     Status = x.StatusID.HasValue ? new StatusViewModel()
                     {
-                        CreatedAt = x.Status.CreatedAt,
-                        IsActive = x.Status.IsActive,
-                        IsDeleted = x.Status.IsDeleted,
+                        //CreatedAt = x.Status.CreatedAt,
+                        //IsActive = x.Status.IsActive,
+                        //IsDeleted = x.Status.IsDeleted,
                         Name = x.Status.Name,
-                        SortOrder = x.Status.SortOrder,
+                        //SortOrder = x.Status.SortOrder,
                         StatusID = x.Status.StatusID,
-                        UpdatedAt = x.Status.UpdatedAt,
-                        UpdatedBy = x.Status.UpdatedBy,
+                        //UpdatedAt = x.Status.UpdatedAt,
+                        //UpdatedBy = x.Status.UpdatedBy,
                     } : null,
                     ProjectID = x.ProjectID,
                     Name = x.Name,
@@ -183,16 +186,16 @@ namespace NeoTracker.DAL
                 }).ToListAsync();
             }
         }
-        public async Task<List<OperationViewModel>> GetOperationList(int? ProjectID)
+        public async Task<List<OperationViewModel>> GetOperationList(int ItemID)
         {
             using (var context = new NeoTrackerContext())
             {
-                return await context.ItemOperations.Include(x => x.Department).OrderBy(x => x.SortOrder).ThenBy(x => x.Name).Select(x => new OperationViewModel()
+                return await context.Operations.Where(x=>x.ItemID == ItemID).Include(x => x.Department).OrderBy(x => x.SortOrder).ThenBy(x => x.Name).Select(x => new OperationViewModel()
                 {
                     Department = x.Department,
                     EndDate = x.EndDate,
                     ItemID = x.ItemID,
-                    OperationID = x.ItemOperationID,
+                    OperationID = x.OperationID,
                     OperationTime = x.OperationTime,
                     Progress = x.Progress,
                     StartDate = x.StartDate,
@@ -209,7 +212,7 @@ namespace NeoTracker.DAL
         {
             using (var context = new NeoTrackerContext())
             {
-                return await context.Statuses.OrderBy(x => x.Name).Select(x => new StatusViewModel()
+                return await context.Statuses.OrderBy(x => x.SortOrder).ThenBy(x=>x.Name).Select(x => new StatusViewModel()
                 {
                     StatusID = x.StatusID,
                     SortOrder = x.SortOrder,

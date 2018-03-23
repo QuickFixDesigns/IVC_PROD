@@ -69,13 +69,13 @@ namespace NeoTracker.Pages.Admin
 
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
-            App.nav.SetLastUri("/Pages/Admin/EventTypeEdit.xaml");
             vm = App.vm.EventType;
             vm.BeginEdit();
+            App.nav.SetLastUri("/Pages/Admin/EventTypeEdit.xaml");
         }
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
-            //throw new NotImplementedException();
+            App.vm.EventType = null;
         }
     }
 }

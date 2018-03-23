@@ -116,5 +116,15 @@ namespace NeoTracker.Models
 
             return ((EventTypeViewModel)obj).EventTypeID == this.EventTypeID;
         }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

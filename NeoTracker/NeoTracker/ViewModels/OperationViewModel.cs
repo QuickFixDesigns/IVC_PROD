@@ -63,9 +63,9 @@ namespace NeoTracker.Models
             set { SetProperty(ref _Department, value); }
         }
         //For database
-        public ItemOperation GetModel()
+        public Operation GetModel()
         {
-            return new ItemOperation()
+            return new Operation()
             {
                 DepartmentID = Department != null && Department.DepartmentID != 0 ? Department.DepartmentID : (int?)null,
                 SortOrder = SortOrder,
@@ -74,7 +74,7 @@ namespace NeoTracker.Models
                 OperationTime = OperationTime,
                 Progress = Progress,
                 ItemID = ItemID,
-                ItemOperationID = OperationID,
+                OperationID = OperationID,
                 StartDate = StartDate,
                 IsActive = IsActive,
                 CreatedAt = CreatedAt,
@@ -89,7 +89,7 @@ namespace NeoTracker.Models
                 var data = GetModel();
                 if (OperationID == 0)
                 {
-                    context.ItemOperations.Add(data);
+                    context.Operations.Add(data);
                 }
                 else
                 {
@@ -148,6 +148,16 @@ namespace NeoTracker.Models
                 return false;
 
             return ((OperationViewModel)obj).OperationID == this.OperationID;
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }
