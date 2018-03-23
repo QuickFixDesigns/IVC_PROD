@@ -16,8 +16,8 @@
                             <GridViewColumn Header="SortOrder" DisplayMemberBinding="{Binding SortOrder}" />
                             <GridViewColumn Header="Code" DisplayMemberBinding="{Binding Code}" />
                             <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"  />
-                            <GridViewColumn Header="LatestStartDate" DisplayMemberBinding="{Binding LatestStartDate}" />
-                            <GridViewColumn Header="DueDate" DisplayMemberBinding="{Binding DueDate}"  />
+                            <GridViewColumn Header="LatestStartDate" DisplayMemberBinding="{Binding LatestStartDate,StringFormat={}{0:yyyy-MM-dd}}" />
+                            <GridViewColumn Header="DueDate" DisplayMemberBinding="{Binding DueDate,StringFormat={}{0:yyyy-MM-dd}}"  />
                             <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status.Name}"  />
                         </GridView>
                     </ListView.View>

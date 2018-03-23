@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="NeoTracker.Pages.OperationEdit"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:src="clr-namespace:NeoTracker.ViewModels"
+             mc:Ignorable="d" >
+    <Grid Style="{StaticResource ContentRoot}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="1"/>
+            <ColumnDefinition Width="auto" MinWidth="420" MaxWidth="420"/>
+        </Grid.ColumnDefinitions>
+
+        <ScrollViewer Grid.Column="0" >
+            <StackPanel HorizontalAlignment="Left" Margin="0,0,10,0">
+                <mui:ModernButton x:Name="ApplyButton" Click="ApplyButton_Click"/>
+                <mui:ModernButton x:Name="CancelButton" Click="CancelButton_Click" />
+                <mui:ModernButton x:Name="DeleteButton" Click="DeleteButton_Click"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <GridSplitter Grid.Column="1" />
+
+        <ScrollViewer Grid.Column="2">
+            <StackPanel Name="panel" Margin="10,0,10,0" MaxWidth="400">
+
+                <StackPanel.BindingGroup>
+                    <BindingGroup Name="bindingGroup"/>
+                </StackPanel.BindingGroup>
+
+                <StackPanel.Resources>
+                    <src:MainViewModel x:Key="OperationViewModel"/>
+                    <Style x:Key="textBoxInError" TargetType="TextBox">
+                        <Style.Triggers>
+                            <Trigger Property="Validation.HasError" Value="true">
+                                <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Resources>
+
+                <TextBlock Text="Operation" Style="{StaticResource Heading2}" />
+                <Separator Height="10" Background="Transparent"/>
+
+                <Label Content="SortOrder" />
+                <TextBox Text="{Binding Operation.SortOrder, UpdateSourceTrigger=PropertyChanged}"  />
+
+                <Label Content="Department" />
+                <TextBox  IsReadOnly="True"  Text="{Binding Operation.Department.Name}"  />
+
+                <Label Content="Name" />
+                <TextBox Text="{Binding Operation.Name, UpdateSourceTrigger=PropertyChanged}"  />
+
+                <Label Content="StartDate" />
+                <TextBox Text="{Binding Operation.StartDate, UpdateSourceTrigger=PropertyChanged,StringFormat={}{0:yyyy-MM-dd}}"  />
+
+                <Label Content="EndDate" />
+                <TextBox Text="{Binding Operation.EndDate, UpdateSourceTrigger=PropertyChanged,StringFormat={}{0:yyyy-MM-dd}}"  />
+
+                <Label Content="OperationTime" />
+                <TextBox Text="{Binding Operation.OperationTime, UpdateSourceTrigger=PropertyChanged}"  />
+
+                <Label Content="Progress" />
+                <TextBox Text="{Binding Operation.Progress, UpdateSourceTrigger=PropertyChanged}"  />
+
+                <Label Content="IsActive"/>
+                <CheckBox IsChecked="{Binding Operation.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+
+                <Label Content="CreatedAt" />
+                <TextBox  IsReadOnly="True"  Text="{Binding Operation.CreatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
+                <Label Content="UpdatedBy" />
+                <TextBox  IsReadOnly="True" Text="{Binding Operation.UpdatedBy}"  />
+                <Label Content="UpdatedAt" />
+                <TextBox  IsReadOnly="True"  Text="{Binding Operation.UpdatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
