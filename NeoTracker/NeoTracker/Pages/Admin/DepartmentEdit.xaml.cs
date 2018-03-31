@@ -34,16 +34,17 @@ namespace NeoTracker.Pages.Admin
         public DepartmentEdit()
         {
             InitializeComponent();
-            btn.SetButton(ApplyButton, true, "Apply");
-            btn.SetButton(AddUserButton, true, "Create");
-            btn.SetButton(DeleteButton, true, "Delete");
-            btn.SetButton(CancelButton, true, "Cancel");
-            btn.SetButton(ClearHeadOfDepartmentCb, false, "Reset");
+            btn.SetButton(ApplyButton, true, "Apply", null, null);
+            btn.SetButton(DeleteButton, true, "Delete", null, null);
+            btn.SetButton(CancelButton, true, "Cancel", null, null);
+
+            btn.SetButton(AddUserButton, true, "Create", "Add users", "Add users to department");
+            btn.SetButton(ClearHeadOfDepartmentCb, false, "Reset", null, null);
         }
 
-        private void ApplyButton_Click(object sender, RoutedEventArgs e)
+        private async Task ApplyButton_ClickAsync(object sender, RoutedEventArgs e)
         {
-            vm.Save();
+            await vm.Save();
             App.nav.GoBack(this);
         }
 
@@ -53,15 +54,19 @@ namespace NeoTracker.Pages.Admin
             App.nav.GoBack(this);
         }
 
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        private async Task DeleteButton_ClickAsync(object sender, RoutedEventArgs e)
         {
-            vm.Delete();
+            await vm.Delete();
             App.nav.GoBack(this);
         }
 
-        private void AddUserButton_Click(object sender, RoutedEventArgs e)
+        private async Task AddUserButton_Click(object sender, RoutedEventArgs e)
         {
-            vm.AddUsers();
+            await vm.AddUsers();
+        }
+        private void AddOperationButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {
@@ -76,7 +81,6 @@ namespace NeoTracker.Pages.Admin
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
             vm = App.vm.Department;
-            vm.LoadUsers();
             vm.BeginEdit();
             App.nav.SetLastUri("/Pages/Admin/DepartmentEdit.xaml");
 

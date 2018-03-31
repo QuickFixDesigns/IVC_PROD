@@ -53,10 +53,18 @@
 
                 <Label Content="NotificateDepartment"/>
                 <CheckBox IsChecked="{Binding EventType.NotificateDepartment, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
-                
+
+                <Label Content="IsPriceChange"/>
+                <CheckBox IsChecked="{Binding EventType.IsPriceChange, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+
+                <Label Content="IsDueDateChange"/>
+                <CheckBox IsChecked="{Binding EventType.IsDueDateChange, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+
                 <Label Content="IsActive"/>
                 <CheckBox IsChecked="{Binding EventType.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
+                <Label Content="CreatedAt" />
+                <TextBox  IsReadOnly="True"  Text="{Binding EventType.CreatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
                 <Label Content="UpdatedBy" />
                 <TextBox  IsReadOnly="True" Text="{Binding EventType.UpdatedBy}"  />
                 <Label Content="UpdatedAt" />

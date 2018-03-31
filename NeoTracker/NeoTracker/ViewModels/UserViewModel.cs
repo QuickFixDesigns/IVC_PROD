@@ -8,6 +8,8 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Linq;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 using static NeoTracker.ViewModels.MainViewModel;
 
@@ -88,128 +90,152 @@ namespace NeoTracker.Models
                 UpdatedBy = UpdatedBy
             };
         }
-        public void LoadDepartments()
+        public async Task LoadDepartments()
         {
             if (UserID != 0)
             {
                 using (var context = new NeoTrackerContext())
                 {
-                    Departments = (from d in context.Departments.Include(x=>x.HeadOfDepartment)
-                                   join du in context.DepartmentUsers.Where(x => x.UserID == UserID) on d.DepartmentID equals du.DepartmentID
-                                   orderby d.Name
-                                   select new DepartmentViewModel()
-                                   {
-                                       DepartmentID = d.DepartmentID,
-                                       Name = d.Name,
-                                       SortOrder = d.SortOrder,
-                                       HeadOfDepartment = d.HeadOfDepartment,
-                                       IsActive = d.IsActive,
-                                       IsDefault = d.IsDefault,
-                                       Msg = d.Msg,
-                                       CreatedAt = d.CreatedAt,
-                                       UpdatedAt = d.UpdatedAt,
-                                       UpdatedBy = d.UpdatedBy,
-                                   }).ToList();
+                    Departments = await (from d in context.Departments.Include(x => x.HeadOfDepartment)
+                                         join du in context.DepartmentUsers.Where(x => x.UserID == UserID) on d.DepartmentID equals du.DepartmentID
+                                         orderby d.SortOrder, d.Name
+                                         select new DepartmentViewModel()
+                                         {
+                                             DepartmentID = d.DepartmentID,
+                                             Name = d.Name,
+                                             SortOrder = d.SortOrder,
+                                             HeadOfDepartment = d.HeadOfDepartment,
+                                             IsActive = d.IsActive,
+                                             CreatedAt = d.CreatedAt,
+                                             UpdatedAt = d.UpdatedAt,
+                                             UpdatedBy = d.UpdatedBy,
+                                         }).ToListAsync();
                 }
             }
         }
-        public async void Save()
+        public async Task Save()
         {
-            using (var context = new NeoTrackerContext())
-            {
-                var data = GetModel();
-                if (UserID == 0)
-                {
-                    context.Users.Add(data);
-                }
-                else
-                {
-                    context.Entry(data).State = EntityState.Modified;
-                }
-                await context.SaveChangesAsync();
-            }
-            EndEdit();
-            App.vm.LoadUsers();
-        }
-        public async void Delete()
-        {
-            bool CanDelete = true;
-
-            var dialog = new QuestionDialog("Do you really want to delete this user (" + LongName + ")?");
-            dialog.ShowDialog();
-            if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
+            try
             {
                 using (var context = new NeoTrackerContext())
                 {
-                    if (CanDelete)
+                    var data = GetModel();
+                    if (UserID == 0)
                     {
-                        var data = GetModel();
-                        context.Entry(data).State = EntityState.Deleted;
-                        await context.SaveChangesAsync();
-                        App.vm.Users.Remove(this);
-                        EndEdit();
+                        context.Users.Add(data);
                     }
+                    else
+                    {
+                        context.Entry(data).State = EntityState.Modified;
+                    }
+                    await context.SaveChangesAsync();
                 }
+                EndEdit();
+                await App.vm.LoadUsers();
+            }
+            catch (Exception e)
+            {
+                App.vm.UserMsg = e.Message.ToString();
             }
         }
-        public async void AddDepartments()
+        public async Task Delete()
         {
-            using (var context = new NeoTrackerContext())
+            try
             {
-                var list = context.Departments.Where(x => !context.DepartmentUsers.Any(y => y.UserID == UserID && y.DepartmentID == x.DepartmentID)).ToList().Select(x => new SelectItem()
+                var dialog = new QuestionDialog("Do you really want to delete this user (" + LongName + ")?");
+                dialog.ShowDialog();
+                if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
                 {
-                    Value = x.DepartmentID,
-                    Text = x.Name
-                }).OrderBy(x => x.Text).ToList();
-
-                if (list.Any())
-                {
-                    App.vm.SelectItemList = list;
-                    var dialog = new SelectDialog("Select departments");
-                    dialog.ShowDialog();
-
-                    if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
+                    using (var context = new NeoTrackerContext())
                     {
-                        var result = App.vm.SelectItemList.Where(x => x.IsSelected).ToList();
-
-                        if (result.Any())
+                        if (CanDelete)
                         {
-                            foreach (var item in result)
-                            {
-                                context.DepartmentUsers.Add(new DepartmentUser()
-                                {
-                                    DepartmentID = item.Value,
-                                    UserID = UserID
-                                });
-                            }
+                            var data = GetModel();
+                            context.Entry(data).State = EntityState.Deleted;
                             await context.SaveChangesAsync();
-                            LoadDepartments();
+                            App.vm.Users.Remove(this);
+                            EndEdit();
                         }
                     }
                 }
-                else
-                {
-                    ModernDialog.ShowMessage("No departments to add...", FirstFloor.ModernUI.Resources.NavigationFailed, MessageBoxButton.OK);
-                }
+            }
+            catch (Exception e)
+            {
+                App.vm.UserMsg = e.Message.ToString();
             }
         }
-        public async void RemoveDepartment(DepartmentViewModel department)
+        public async Task AddDepartments()
         {
-            var dialog = new QuestionDialog("Do you want to remove this department (" + department.Name + ")?");
-            dialog.ShowDialog();
-            if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
+            try
             {
                 using (var context = new NeoTrackerContext())
                 {
-                    var data = await context.DepartmentUsers.FirstOrDefaultAsync(x => x.DepartmentID == department.DepartmentID && x.UserID == UserID);
-                    if (data != null)
+                    var list = context.Departments.Where(x => !context.DepartmentUsers.Any(y => y.UserID == UserID && y.DepartmentID == x.DepartmentID)).ToList().Select(x => new SelectItem()
                     {
-                        context.Entry(data).State = EntityState.Deleted;
-                        await context.SaveChangesAsync();
-                        LoadDepartments();
+                        Value = x.DepartmentID,
+                        Text = x.Name
+                    }).OrderBy(x => x.Text).ToList();
+
+                    if (list.Any())
+                    {
+                        App.vm.SelectItemList = list;
+                        var dialog = new SelectDialog("Select departments");
+                        dialog.ShowDialog();
+
+                        if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
+                        {
+                            var result = App.vm.SelectItemList.Where(x => x.IsSelected).ToList();
+
+                            if (result.Any())
+                            {
+                                foreach (var item in result)
+                                {
+                                    context.DepartmentUsers.Add(new DepartmentUser()
+                                    {
+                                        DepartmentID = item.Value,
+                                        UserID = UserID
+                                    });
+                                }
+                                await context.SaveChangesAsync();
+                                await LoadDepartments();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        App.vm.UserMsg = "There's no departments to add!!!";
                     }
                 }
-            };
+            }
+            catch (Exception e)
+            {
+                App.vm.UserMsg = e.Message.ToString();
+            }
+        }
+        public async Task RemoveDepartment(DepartmentViewModel department)
+        {
+            try
+            {
+                var dialog = new QuestionDialog("Do you want to remove this department (" + department.Name + ")?");
+                dialog.ShowDialog();
+                if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
+                {
+                    using (var context = new NeoTrackerContext())
+                    {
+                        var data = await context.DepartmentUsers.FirstOrDefaultAsync(x => x.DepartmentID == department.DepartmentID && x.UserID == UserID);
+                        if (data != null)
+                        {
+                            context.Entry(data).State = EntityState.Deleted;
+                            await context.SaveChangesAsync();
+                            await LoadDepartments();
+                        }
+                    }
+                };
+            }
+            catch (Exception e)
+            {
+                App.vm.UserMsg = e.Message.ToString();
+            }
         }
         //For validation
         public string this[string columnName]

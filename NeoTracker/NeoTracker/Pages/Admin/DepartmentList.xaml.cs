@@ -33,14 +33,16 @@ namespace NeoTracker.Pages.Admin
         public DepartmentList()
         {
             InitializeComponent();
-            btn.SetButton(CreateButton, true, "Create");
-            util.AutoFitListView(GridListView);
+            btn.SetButton(CreateButton, true, "Create", "New Department", "Create new department");
         }
-        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private async Task ListView_MouseDoubleClickAsync(object sender, MouseButtonEventArgs e)
         {
             if (ListView.SelectedIndex != -1)
             {
                 App.vm.Department = ((DepartmentViewModel)ListView.SelectedItem);
+                await App.vm.Department.LoadUsers();
+                await App.vm.Department.LoadOperations();
+
                 App.nav.NavigateTo("/Pages/Admin/DepartmentEdit.xaml", this);
             }
         }

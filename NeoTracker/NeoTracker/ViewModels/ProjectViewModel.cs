@@ -85,22 +85,24 @@ namespace NeoTracker.Models
                 IsActive = IsActive,
             };
         }
-        public async void LoadEvents()
+        public async Task LoadEvents()
         {
             if (ProjectID != 0)
             {
                 Events = await ds.GetEventList(ProjectID);
             }
         }
-        public async void LoadItems()
+        public async Task LoadItems()
         {
             if (ProjectID != 0)
             {
                 Items = await ds.GetItemList(ProjectID);
             }
         }
-        public async void Create(string code)
+        public async Task Create(string code)
         {
+            try
+            {
             Code = code;
             IsActive = true;
             using (var IvcContext = new IVCLIVEDBEntities())
@@ -146,9 +148,16 @@ namespace NeoTracker.Models
             }
             EndEdit();
             App.vm.LoadProjects();
+            }
+            catch (Exception e)
+            {
+                App.vm.UserMsg = e.Message.ToString();
+            }
         }
-        public async void Save()
+        public async Task Save()
         {
+            try
+            {
             using (var context = new NeoTrackerContext())
             {
                 var data = GetModel();
@@ -158,9 +167,16 @@ namespace NeoTracker.Models
             }
             EndEdit();
             App.vm.LoadProjects();
+            }
+            catch (Exception e)
+            {
+                App.vm.UserMsg = e.Message.ToString();
+            }
         }
-        public async void Delete()
+        public async Task Delete()
         {
+            try
+            {
             var dialog = new QuestionDialog("Do you really want to delete this Project (" + Name + ")?");
             dialog.ShowDialog();
             if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
@@ -173,6 +189,11 @@ namespace NeoTracker.Models
                     await context.SaveChangesAsync();
                 }
                 EndEdit();
+            }
+            }
+            catch (Exception e)
+            {
+                App.vm.UserMsg = e.Message.ToString();
             }
         }
         //For validation

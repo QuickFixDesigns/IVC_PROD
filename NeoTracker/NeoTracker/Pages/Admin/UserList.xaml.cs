@@ -33,13 +33,14 @@ namespace NeoTracker.Pages.Admin
         public UserList()
         {
             InitializeComponent();
-            btn.SetButton(CreateButton, true, "Create");
+            btn.SetButton(CreateButton, true, "Create", "New user", "Create new user");
         }
-        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private async Task ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (ListView.SelectedIndex != -1)
             {
                 App.vm.User = ((UserViewModel)ListView.SelectedItem);
+                await App.vm.User.LoadDepartments();
                 App.nav.NavigateTo("/Pages/Admin/UserEdit.xaml", this);
             }
         }

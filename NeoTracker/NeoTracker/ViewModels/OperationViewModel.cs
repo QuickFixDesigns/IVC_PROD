@@ -8,6 +8,8 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Linq;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 using static NeoTracker.ViewModels.MainViewModel;
 
@@ -44,17 +46,17 @@ namespace NeoTracker.Models
             get { return _EndDate; }
             set { SetProperty(ref _EndDate, value); }
         }
-        private decimal _Progress;
-        public decimal Progress
-        {
-            get { return _Progress; }
-            set { SetProperty(ref _Progress, value); }
-        }
         private decimal _OperationTime;
         public decimal OperationTime
         {
             get { return _OperationTime; }
             set { SetProperty(ref _OperationTime, value); }
+        }
+        private bool _IsCompleted;
+        public bool IsCompleted
+        {
+            get { return _IsCompleted; }
+            set { SetProperty(ref _IsCompleted, value); }
         }
         private Department _Department = new Department();
         public Department Department
@@ -72,7 +74,7 @@ namespace NeoTracker.Models
                 Name = Name,
                 EndDate = EndDate,
                 OperationTime = OperationTime,
-                Progress = Progress,
+                IsCompleted = IsCompleted,
                 ItemID = ItemID,
                 OperationID = OperationID,
                 StartDate = StartDate,
@@ -82,8 +84,10 @@ namespace NeoTracker.Models
                 UpdatedBy = UpdatedBy
             };
         }
-        public async void Save()
+        public async Task Save()
         {
+            try
+            {
             using (var context = new NeoTrackerContext())
             {
                 var data = GetModel();
@@ -98,12 +102,17 @@ namespace NeoTracker.Models
                 await context.SaveChangesAsync();
             }
             EndEdit();
-            App.vm.Item.LoadOperations();
+            await App.vm.Item.LoadOperations();
+            }
+            catch (Exception e)
+            {
+                App.vm.UserMsg = e.Message.ToString();
+            }
         }
-        public async void Delete()
+        public async Task Delete()
         {
-            bool CanDelete = true;
-
+            try
+            {
             var dialog = new QuestionDialog("Do you really want to delete this operation (" + Name + ")?");
             dialog.ShowDialog();
             if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
@@ -120,6 +129,11 @@ namespace NeoTracker.Models
                     }
                 }
             }
+            }
+            catch (Exception e)
+            {
+                App.vm.UserMsg = e.Message.ToString();
+            }
         }
         //For validation
         public string this[string columnName]
@@ -130,9 +144,25 @@ namespace NeoTracker.Models
 
                 if (columnName == "Name")
                 {
-                    if (string.IsNullOrEmpty(Name) || (Name ?? "").Length > 25)
+                    if (string.IsNullOrEmpty(Name) || (Name ?? "").Length > 100)
                     {
-                        result = "Cannot be empty or more than 25 characters";
+                        result = "Cannot be empty or more than 100 characters";
+                    }
+                }
+                if (columnName == "SortOrder")
+                {
+                    Regex regex = new Regex("[^0-9]+");
+                    if (regex.IsMatch(SortOrder.ToString()))
+                    {
+                        result = "Cannot be a text value";
+                    }
+                }
+                if (columnName == "OperationTime")
+                {
+                    Regex regex = new Regex("[^0-9]+");
+                    if (regex.IsMatch(OperationTime.ToString()))
+                    {
+                        result = "Cannot be a text value";
                     }
                 }
                 return result;
@@ -142,6 +172,8 @@ namespace NeoTracker.Models
         {
             get { return this[null]; }
         }
+
+
         public override bool Equals(object obj)
         {
             if (obj == null || !(obj is OperationViewModel))

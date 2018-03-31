@@ -33,7 +33,7 @@ namespace NeoTracker.Pages
             InitializeComponent();
             buttons.SetButton(DepartmentList, true, "Excel");
         }
-        private async void DepartmentList_Click(object sender, RoutedEventArgs e)
+        private async Task DepartmentList_Click(object sender, RoutedEventArgs e)
         {
             using (var context = new NeoTrackerContext())
             {

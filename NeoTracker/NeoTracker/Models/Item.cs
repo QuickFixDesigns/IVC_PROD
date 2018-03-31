@@ -15,13 +15,13 @@ namespace NeoTracker.Models
 
         public int ProjectID { get; set; }
 
-        [StringLength(25, ErrorMessage = "Cannot be longer than 25 characters.")]
+        [StringLength(50, ErrorMessage = "Cannot be longer than 50 characters.")]
         public string Code { get; set; }
 
         public int? SortKey { get; set; }
         public int? SortOrder { get; set; }
 
-        public int? StatusID { get; set; }
+        public int StatusID { get; set; }
 
         [Required]
         [StringLength(255, ErrorMessage = "Cannot be longer than 255 characters.")]
@@ -29,31 +29,17 @@ namespace NeoTracker.Models
 
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
-        public DateTime? LatestStartDate { get; set; }
+        public DateTime? DueDate { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
-        public DateTime? DueDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
+        //navigation
         public Project Project { get; set; }
         public Status Status { get; set; }
         public ICollection<Operation> Operations { get; set; }
 
-        //public UserViewModel ToViewModel()
-        //{
-        //    return new UserViewModel()
-        //    {
-        //        UserID = UserID,
-        //        Alias = Alias,
-        //        CreatedAt = CreatedAt,
-        //        Email = Email,
-        //        EmailNotifications = EmailNotifications,
-        //        FirstName = FirstName,
-        //        LastName = LastName,
-        //        UpdatedAt = UpdatedAt,
-        //        UpdatedBy = UpdatedBy
-        //    };
-        //}
         public override bool Equals(object obj)
         {
             if (obj == null || !(obj is Item))

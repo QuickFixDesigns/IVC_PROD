@@ -19,7 +19,6 @@
             <StackPanel HorizontalAlignment="Left" Margin="0,0,10,0">
                 <mui:ModernButton x:Name="ApplyButton" Click="ApplyButton_Click"/>
                 <mui:ModernButton x:Name="CancelButton" Click="CancelButton_Click" />
-                <!--<mui:ModernButton x:Name="DeleteButton" Click="DeleteButton_Click"/>-->
             </StackPanel>
         </ScrollViewer>
 
@@ -47,28 +46,22 @@
                 <Separator Height="10" Background="Transparent"/>
 
                 <Label Content="Code"/>
-                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding Item.Code, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <TextBox  IsReadOnly="True" Style="{StaticResource textBoxInError}" Text="{Binding Item.Code, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Label Content="SortOrder"/>
-                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding Item.SortOrder, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <TextBox  IsReadOnly="True" Style="{StaticResource textBoxInError}" Text="{Binding Item.SortOrder, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Label Content="Name"/>
-                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding Item.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
-
-                <Label Content="LatestStartDate" />
-                <TextBox  Text="{Binding Item.LatestStartDate,StringFormat={}{0:yyyy-MM-dd}}"  />
+                <TextBox  IsReadOnly="True" Style="{StaticResource textBoxInError}" Text="{Binding Item.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Label Content="DueDate" />
                 <TextBox  Text="{Binding Item.DueDate,StringFormat={}{0:yyyy-MM-dd}}"  />
-                
-                <Grid>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                        <Label Content="Status"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <mui:ModernButton x:Name="ClearStatus" Click="ClearStatus_Click"></mui:ModernButton>
-                    </StackPanel>
-                </Grid>
+
+                <Label Content="EndDate" />
+                <TextBox  Text="{Binding Item.EndDate,StringFormat={}{0:yyyy-MM-dd}}"  />
+
+
+                <Label Content="Status"/>
                 <ComboBox ItemsSource="{Binding Path=Statuses}" DisplayMemberPath="Name" SelectedItem="{Binding Item.Status, UpdateSourceTrigger=LostFocus}"/>
 
 
@@ -91,6 +84,6 @@
                 <mui:Link DisplayName="Operations" Source="Pages/OperationList.xaml"/>
             </mui:ModernTab.Links>
         </mui:ModernTab>
-        
+
     </Grid>
 </UserControl>

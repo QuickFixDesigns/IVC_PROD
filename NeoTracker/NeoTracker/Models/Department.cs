@@ -18,31 +18,17 @@ namespace NeoTracker.Models
         public string Name { get; set; }
 
         public int? SortOrder { get; set; }
+
         public int? HeadOfDepartmentID { get; set; }
-        public string Msg { get; set; }
-        public bool IsDefault { get; set; }
 
         [ForeignKey("HeadOfDepartmentID")]
         public User HeadOfDepartment { get; set; }
 
+        //navigation
         public ICollection<DepartmentUser> DepartmentUsers { get; set; }
+        public ICollection<DepartmentOperation> DepartmentOperations { get; set; }
         public ICollection<Operation> ItemOperations { get; set; }
 
-        //public UserViewModel ToViewModel()
-        //{
-        //    return new UserViewModel()
-        //    {
-        //        UserID = UserID,
-        //        Alias = Alias,
-        //        CreatedAt = CreatedAt,
-        //        Email = Email,
-        //        EmailNotifications = EmailNotifications,
-        //        FirstName = FirstName,
-        //        LastName = LastName,
-        //        UpdatedAt = UpdatedAt,
-        //        UpdatedBy = UpdatedBy
-        //    };
-        //}
         public override bool Equals(object obj)
         {
             if (obj == null || !(obj is Department))

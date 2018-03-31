@@ -1,4 +1,5 @@
-﻿using NeoTracker.DAL;
+﻿using FirstFloor.ModernUI.Windows.Controls;
+using NeoTracker.DAL;
 using NeoTracker.Models;
 using NeoTracker.ViewModels;
 using System;
@@ -14,7 +15,7 @@ namespace NeoTracker.ViewModels
     {
         private DataService ds = new DataService();
 
-        public async void Authentificate()
+        public async Task Authentificate()
         {
             IsReady = false;
             CurrentUSer = await ds.GetUser("karrick_Mercier@hotmail.com");
@@ -22,37 +23,37 @@ namespace NeoTracker.ViewModels
         }
 
         //Load collections
-        public async void LoadDepartments()
+        public async Task LoadDepartments()
         {
             IsReady = false;
             Departments = await ds.GetDepartmentList();
             IsReady = true;
         }
-        public void LoadOrders()
+        public async Task LoadOrders()
         {
             IsReady = false;
-            Orders = Task.Run(async () => { return await ds.GetOrderList(); }).Result;
+            Orders = await ds.GetOrderList();
             IsReady = true;
         }
-        public async void LoadProjects()
+        public async Task LoadProjects()
         {
             IsReady = false;
             Projects = await ds.GetProjectList();
             IsReady = true;
         }
-        public async void LoadStatus()
+        public async Task LoadStatus()
         {
             IsReady = false;
             Statuses = await ds.GetStatusList();
             IsReady = true;
         }
-        public async void LoadUsers()
+        public async Task LoadUsers()
         {
             IsReady = false;
             Users = await ds.GetUserList();
             IsReady = true;
         }
-        public async void LoadEventTypes()
+        public async Task LoadEventTypes()
         {
             IsReady = false;
             EventTypes = await ds.GetEventTypeList();
@@ -72,6 +73,21 @@ namespace NeoTracker.ViewModels
             get { return _IsReady; }
             set { SetProperty(ref _IsReady, value && CurrentUSer != null); }
         }
+
+        private string _UserMsg = string.Empty;
+        public string UserMsg
+        {
+            get { return _UserMsg; }
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                {
+                    ModernDialog.ShowMessage(value, "User message", System.Windows.MessageBoxButton.OK);
+                }
+            }
+        }
+
+
         //GENIUS DB
         private List<OrderViewModel> _Orders = new List<OrderViewModel>();
         public List<OrderViewModel> Orders

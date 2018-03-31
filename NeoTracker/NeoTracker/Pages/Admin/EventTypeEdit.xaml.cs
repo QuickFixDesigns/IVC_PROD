@@ -35,14 +35,14 @@ namespace NeoTracker.Pages.Admin
         public EventTypeEdit()
         {
             InitializeComponent();
-            btn.SetButton(ApplyButton, true, "Apply");
-            btn.SetButton(DeleteButton, true, "Delete");
-            btn.SetButton(CancelButton, true, "Cancel");
+            btn.SetButton(ApplyButton, true, "Apply", null, null);
+            btn.SetButton(DeleteButton, true, "Delete", null, null);
+            btn.SetButton(CancelButton, true, "Cancel", null, null);
         }
 
-        private void ApplyButton_Click(object sender, RoutedEventArgs e)
+        private async Task ApplyButton_Click(object sender, RoutedEventArgs e)
         {
-            vm.Save();
+            await vm.Save();
             App.nav.GoBack(this);
         }
 
@@ -52,9 +52,9 @@ namespace NeoTracker.Pages.Admin
             App.nav.GoBack(this);
         }
 
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        private async Task DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            vm.Delete();
+            await vm.Delete();
             App.nav.GoBack(this);
         }
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)

@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NeoTracker.Models
 {
@@ -34,27 +28,10 @@ namespace NeoTracker.Models
         [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:P0}")]
         public decimal OperationTime { get; set; }
 
-        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:P0}")]
-        public decimal Progress { get; set; }
+        public bool IsCompleted { get; set; }
 
         //navigation
         public Item Item { get; set; }
         public Department Department { get; set; }
-
-        //public DepartmentViewModel ToViewModel()
-        //{
-        //    return new DepartmentViewModel()
-        //    {
-        //        DepartmentID = DepartmentID,
-        //        HeadOfDepartmentID = HeadOfDepartmentID,
-        //        Name = Name,
-        //        SortOrder = SortOrder,
-        //        Msg = Msg,
-        //        IsDefault = IsDefault,
-        //        CreatedAt = CreatedAt,
-        //        UpdatedAt = UpdatedAt,
-        //        UpdatedBy = UpdatedBy,
-        //    };
-        //}
     }
 }

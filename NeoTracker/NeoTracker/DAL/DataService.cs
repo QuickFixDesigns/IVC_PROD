@@ -30,8 +30,6 @@ namespace NeoTracker.DAL
                     SortOrder = x.SortOrder,
                     IsActive = x.IsActive,
                     HeadOfDepartment = x.HeadOfDepartment,
-                    Msg = x.Msg,
-                    IsDefault = x.IsDefault,
                     CreatedAt = x.CreatedAt,
                     UpdatedAt = x.UpdatedAt,
                     UpdatedBy = x.UpdatedBy

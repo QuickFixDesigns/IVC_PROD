@@ -8,6 +8,8 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Linq;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 using static NeoTracker.ViewModels.MainViewModel;
 
@@ -19,6 +21,7 @@ namespace NeoTracker.Models
 
         public int ItemID { get; set; }
         public int ProjectID { get; set; }
+        public int? SortKey { get; set; }
 
         private string _Code;
         public string Code
@@ -38,19 +41,17 @@ namespace NeoTracker.Models
             get { return _Name; }
             set { SetProperty(ref _Name, value); }
         }
-
-        private DateTime? _LatestStartDate;
-        public DateTime? LatestStartDate
-        {
-            get { return _LatestStartDate; }
-            set { SetProperty(ref _LatestStartDate, value); }
-        }
-
         private DateTime? _DueDate;
         public DateTime? DueDate
         {
             get { return _DueDate; }
             set { SetProperty(ref _DueDate, value); }
+        }
+        private DateTime? _EndDate;
+        public DateTime? EndDate
+        {
+            get { return _EndDate; }
+            set { SetProperty(ref _EndDate, value); }
         }
         private StatusViewModel _Status = new StatusViewModel();
         public StatusViewModel Status
@@ -65,10 +66,16 @@ namespace NeoTracker.Models
             set
             {
                 SetProperty(ref _Operations, value);
-                CanDelete = !value.Any() && ItemID != 0;
             }
         }
-
+        public string OperationCount
+        {
+            get
+            {
+                string count = Operations != null ? string.Concat(Operations.Count(x => x.IsCompleted).ToString(), " / ", Operations.Count.ToString()) : App.BlankStr;
+                return Operations.Count().ToString();
+            }
+        }
         //For database
         public Item GetModel()
         {
@@ -78,9 +85,10 @@ namespace NeoTracker.Models
                 ProjectID = ProjectID,
                 Code = Code,
                 DueDate = DueDate,
-                LatestStartDate = LatestStartDate,
+                EndDate = EndDate,
                 SortOrder = SortOrder,
-                StatusID = Status !=null && Status.StatusID !=0 ? Status.StatusID : (int?) null,
+                SortKey = SortKey,
+                StatusID = Status.StatusID,
                 Name = Name,
                 IsActive = IsActive,
                 CreatedAt = CreatedAt,
@@ -88,50 +96,62 @@ namespace NeoTracker.Models
                 UpdatedBy = UpdatedBy
             };
         }
-        public async void LoadOperations()
+        public async Task LoadOperations()
         {
             if (ItemID != 0)
             {
                 Operations = await ds.GetOperationList(ItemID);
             }
         }
-        public async void Save()
+        public async Task Save()
         {
-            using (var context = new NeoTrackerContext())
-            {
-                var data = GetModel();
-                if (ItemID == 0)
-                {
-                    context.Items.Add(data);
-                }
-                else
-                {
-                    context.Entry(data).State = EntityState.Modified;
-                }
-                await context.SaveChangesAsync();
-            }
-            EndEdit();
-            App.vm.Project.LoadItems();
-        }
-        public async void Delete()
-        {
-            bool CanDelete = true;
-
-            var dialog = new QuestionDialog("Do you really want to delete this item (" + Name + ")?");
-            dialog.ShowDialog();
-            if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
+            try
             {
                 using (var context = new NeoTrackerContext())
                 {
-                    if (CanDelete)
+                    var data = GetModel();
+                    if (ItemID == 0)
                     {
-                        var data = GetModel();
-                        context.Entry(data).State = EntityState.Deleted;
-                        App.vm.Project.Items.Remove(this);
-                        await context.SaveChangesAsync();
-                        EndEdit();
+                        context.Items.Add(data);
+                    }
+                    else
+                    {
+                        context.Entry(data).State = EntityState.Modified;
+                    }
+                    await context.SaveChangesAsync();
+                }
+                EndEdit();
+                await App.vm.Project.LoadItems();
+            }
+            catch (Exception e)
+            {
+                App.vm.UserMsg = e.Message.ToString();
+            }
+        }
+        public async Task Delete()
+        {
+            try
+            {
+                var dialog = new QuestionDialog("Do you really want to delete this item (" + Name + ")?");
+                dialog.ShowDialog();
+                if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
+                {
+                    using (var context = new NeoTrackerContext())
+                    {
+                        if (CanDelete)
+                        {
+                            var data = GetModel();
+                            context.Entry(data).State = EntityState.Deleted;
+                            App.vm.Project.Items.Remove(this);
+                            await context.SaveChangesAsync();
+                            EndEdit();
+                        }
                     }
                 }
+            }
+            catch (Exception e)
+            {
+                App.vm.UserMsg = e.Message.ToString();
             }
         }
         //For validation
@@ -146,6 +166,14 @@ namespace NeoTracker.Models
                     if (string.IsNullOrEmpty(Name) || (Name ?? "").Length > 255)
                     {
                         result = "Cannot be empty or more than 255 characters";
+                    }
+                }
+                if (columnName == "SortOrder")
+                {
+                    Regex regex = new Regex("[^0-9]+");
+                    if (regex.IsMatch(SortOrder.ToString()))
+                    {
+                        result = "Cannot be a text value";
                     }
                 }
                 return result;

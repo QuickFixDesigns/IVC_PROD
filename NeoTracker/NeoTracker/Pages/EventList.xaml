@@ -13,10 +13,11 @@
                 <ListView x:Name="ListView" ItemsSource="{Binding Project.Events, UpdateSourceTrigger=PropertyChanged}" MouseDoubleClick="ListView_MouseDoubleClick">
                     <ListView.View>
                         <GridView x:Name="GridListView">
+                            <GridViewColumn Header="EventType" DisplayMemberBinding="{Binding EventType.Name}" />
                             <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" />
                             <GridViewColumn Header="Department" DisplayMemberBinding="{Binding Department.Name}" />
                             <GridViewColumn Header="Item" DisplayMemberBinding="{Binding Item.Name}"  />
-                            <GridViewColumn Header="EventType" DisplayMemberBinding="{Binding EventType.Name}" />
+                            <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status.Name}" />
                         </GridView>
                     </ListView.View>
                 </ListView>

@@ -57,6 +57,8 @@
                 <Label Content="IsActive"/>
                 <CheckBox IsChecked="{Binding Status.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
+                <Label Content="CreatedAt" />
+                <TextBox  IsReadOnly="True"  Text="{Binding Status.CreatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
                 <Label Content="UpdatedBy" />
                 <TextBox  IsReadOnly="True" Text="{Binding Status.UpdatedBy}"  />
                 <Label Content="UpdatedAt" />

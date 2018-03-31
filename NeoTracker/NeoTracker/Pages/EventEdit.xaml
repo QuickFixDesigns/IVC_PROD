@@ -10,7 +10,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="1"/>
-            <ColumnDefinition Width="auto" MinWidth="420" MaxWidth="420"/>
+            <ColumnDefinition Width="auto" MinWidth="200" MaxWidth="420"/>
         </Grid.ColumnDefinitions>
 
         <ScrollViewer Grid.Column="0" >

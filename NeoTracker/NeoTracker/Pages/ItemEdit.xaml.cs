@@ -35,15 +35,13 @@ namespace NeoTracker.Pages
         public ItemEdit()
         {
             InitializeComponent();
-            btn.SetButton(ApplyButton, true, "Apply");
-            //btn.SetButton(DeleteButton, true, "Delete");
-            btn.SetButton(CancelButton, true, "Cancel");
-            btn.SetButton(ClearStatus, false, "Reset");
+            btn.SetButton(ApplyButton, true, "Apply", null, null);
+            btn.SetButton(CancelButton, true, "Cancel", null, null);
         }
 
-        private void ApplyButton_Click(object sender, RoutedEventArgs e)
+        private async Task ApplyButton_Click(object sender, RoutedEventArgs e)
         {
-            vm.Save();
+            await vm.Save();
             App.nav.GoBack(this);
         }
 
@@ -70,18 +68,12 @@ namespace NeoTracker.Pages
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
             vm = App.vm.Item;
-            vm.LoadOperations();
             App.nav.SetLastUri("/Pages/ItemEdit.xaml");
             vm.BeginEdit();
         }
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
             //throw new NotImplementedException();
-        }
-
-        private void ClearStatus_Click(object sender, RoutedEventArgs e)
-        {
-            vm.Status = null;
         }
     }
 }

@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using static NeoTracker.ViewModels.MainViewModel;
 
@@ -42,60 +43,79 @@ namespace NeoTracker.Models
             get { return _EventType; }
             set { SetProperty(ref _EventType, value); }
         }
+        private StatusViewModel _Status = new StatusViewModel();
+        public StatusViewModel Status
+        {
+            get { return _Status; }
+            set { SetProperty(ref _Status, value); }
+        }
         //For database
         public Event GetModel()
         {
             return new Event()
             {
-                DepartmentID = Department!=null && Department.DepartmentID!=0 ? Department.DepartmentID : (int?)null,
+                DepartmentID = Department != null && Department.DepartmentID != 0 ? Department.DepartmentID : (int?)null,
                 Description = Description,
                 EventID = EventID,
                 EventTypeID = EventType.EventTypeID,
-                ItemID = EventItem != null && EventItem.ItemID !=0 ? EventItem.ItemID : (int?)null,
+                ItemID = EventItem != null && EventItem.ItemID != 0 ? EventItem.ItemID : (int?)null,
                 ProjectID = ProjectID,
+                StatusID = Status.StatusID,
                 IsActive = IsActive,
                 CreatedAt = CreatedAt,
                 UpdatedAt = UpdatedAt,
                 UpdatedBy = UpdatedBy
             };
         }
-        public async void Save()
+        public async Task Save()
         {
-            using (var context = new NeoTrackerContext())
-            {
-                var data = GetModel();
-                if (EventID == 0)
-                {
-                    context.Events.Add(data);
-                }
-                else
-                {
-                    context.Entry(data).State = EntityState.Modified;
-                }
-                await context.SaveChangesAsync();
-            }
-            App.vm.Project.LoadEvents();
-            EndEdit();
-        }
-        public async void Delete()
-        {
-            bool CanDelete = true;
-
-            var dialog = new QuestionDialog("Do you really want to delete this Event (" + Description + ")?");
-            dialog.ShowDialog();
-            if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
+            try
             {
                 using (var context = new NeoTrackerContext())
                 {
-                    if (CanDelete)
+                    var data = GetModel();
+                    if (EventID == 0)
                     {
-                        var data = GetModel();
-                        context.Entry(data).State = EntityState.Deleted;
-                        App.vm.Project.Events.Remove(this);
-                        await context.SaveChangesAsync();
-                        EndEdit();
+                        context.Events.Add(data);
+                    }
+                    else
+                    {
+                        context.Entry(data).State = EntityState.Modified;
+                    }
+                    await context.SaveChangesAsync();
+                }
+                await App.vm.Project.LoadEvents();
+                EndEdit();
+            }
+            catch (Exception e)
+            {
+                App.vm.UserMsg = e.Message.ToString();
+            }
+        }
+        public async Task Delete()
+        {
+            try
+            {
+                var dialog = new QuestionDialog("Do you really want to delete this Event (" + Description + ")?");
+                dialog.ShowDialog();
+                if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
+                {
+                    using (var context = new NeoTrackerContext())
+                    {
+                        if (CanDelete)
+                        {
+                            var data = GetModel();
+                            context.Entry(data).State = EntityState.Deleted;
+                            App.vm.Project.Events.Remove(this);
+                            await context.SaveChangesAsync();
+                            EndEdit();
+                        }
                     }
                 }
+            }
+            catch (Exception e)
+            {
+                App.vm.UserMsg = e.Message.ToString();
             }
         }
         //For validation

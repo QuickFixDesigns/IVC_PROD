@@ -33,7 +33,7 @@ namespace NeoTracker.Pages.Admin
         public StatusList()
         {
             InitializeComponent();
-            btn.SetButton(CreateButton, true, "Create");
+            btn.SetButton(CreateButton, true, "Create", "New status", "Create new status");
             util.AutoFitListView(GridListView);
         }
         private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)

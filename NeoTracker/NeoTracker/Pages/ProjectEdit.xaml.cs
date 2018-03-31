@@ -20,9 +20,10 @@ namespace NeoTracker.Pages
         public ProjectEdit()
         {
             InitializeComponent();
-            btn.SetButton(ApplyButton, true, "Apply");
-            btn.SetButton(DeleteButton, true, "Delete");
-            btn.SetButton(CancelButton, true, "Cancel");
+            btn.SetButton(ApplyButton, true, "Apply", null, null);
+            btn.SetButton(DeleteButton, true, "Delete", null, null);
+            btn.SetButton(CancelButton, true, "Cancel", null, null);
+
             btn.SetButton(AddEventButton, true, "Create");
         }
 
@@ -53,7 +54,7 @@ namespace NeoTracker.Pages
             //throw new NotImplementedException();
         }
 
-        public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        public void OnNavigatedToAsync(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
             App.nav.SetLastUri("/Pages/ProjectEdit.xaml");
             vm = App.vm.Project;

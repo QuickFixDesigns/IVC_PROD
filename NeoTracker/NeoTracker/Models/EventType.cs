@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NeoTracker.Models
 {
@@ -19,23 +13,10 @@ namespace NeoTracker.Models
 
         public int? SortOrder { get; set; }
         public bool NotificateDepartment { get; set; }
+        public bool IsPriceChange { get; set; }
+        public bool IsDueDateChange { get; set; }
 
+        //navigation
         public ICollection<Event> Events { get; set; }
-
-
-        public EventTypeViewModel ToViewModel()
-        {
-            return new EventTypeViewModel()
-            {
-                EventTypeID = EventTypeID,
-                Name = Name,
-                NotificateDepartment = NotificateDepartment,
-                SortOrder = SortOrder,
-                IsActive = IsActive,
-                CreatedAt = CreatedAt,
-                UpdatedAt = UpdatedAt,
-                UpdatedBy = UpdatedBy,
-            };
-        }
     }
 }

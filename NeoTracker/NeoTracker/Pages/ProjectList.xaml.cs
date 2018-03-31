@@ -36,11 +36,13 @@ namespace NeoTracker.Pages
             btn.SetButton(CreateButton, true, "Create");
             util.AutoFitListView(GridListView);
         }
-        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private async Task ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (ListView.SelectedIndex != -1)
             {
                 App.vm.Project = ((ProjectViewModel)ListView.SelectedItem);
+                await App.vm.Project.LoadEvents();
+                await App.vm.Project.LoadItems();
                 App.nav.NavigateTo("/Pages/ProjectEdit.xaml", this);
             }
         }
@@ -61,7 +63,7 @@ namespace NeoTracker.Pages
             //throw new NotImplementedException();
         }
 
-        public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        public void OnNavigatedToAsync(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
             App.nav.SetLastUri("/Pages/ProjectList.xaml");
             util.AutoFitListView(GridListView);

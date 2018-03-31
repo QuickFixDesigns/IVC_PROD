@@ -28,7 +28,9 @@ namespace NeoTracker.DAL
 
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<DepartmentUser> DepartmentUsers { get; set; }
+        public virtual DbSet<DepartmentOperation> DepartmentOperations { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
+        public virtual DbSet<ProjectType> ProjectTypes { get; set; }
         public virtual DbSet<Event> Events { get; set; }
         public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<Operation> Operations { get; set; }

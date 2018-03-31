@@ -29,8 +29,10 @@ namespace NeoTracker.Models
         public string Email { get; set; }
 
         public bool IsAdmin { get; set; }
+
         public bool EmailNotifications { get; set; }
 
+        //navigation
         public ICollection<DepartmentUser> DepartmentUsers { get; set; }
 
 
@@ -40,21 +42,6 @@ namespace NeoTracker.Models
             {
                 return string.Concat(LastName, ", ", FirstName, " (", Alias, ")");
             }
-        }
-        public UserViewModel ToViewModel()
-        {
-            return new UserViewModel()
-            {
-                UserID = UserID,
-                Alias = Alias,
-                CreatedAt = CreatedAt,
-                Email = Email,
-                EmailNotifications = EmailNotifications,
-                FirstName = FirstName,
-                LastName = LastName,
-                UpdatedAt = UpdatedAt,
-                UpdatedBy = UpdatedBy
-            };
         }
         public override bool Equals(object obj)
         {

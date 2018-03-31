@@ -33,7 +33,7 @@ namespace NeoTracker.Pages.Admin
         public EventTypeList()
         {
             InitializeComponent();
-            btn.SetButton(CreateButton, true, "Create");
+            btn.SetButton(CreateButton, true, "Create", "New EventType", "Create new Event Type");
             util.AutoFitListView(GridListView);
         }
         private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)

@@ -8,6 +8,8 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Linq;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 using static NeoTracker.ViewModels.MainViewModel;
 
@@ -32,7 +34,26 @@ namespace NeoTracker.Models
         public bool NotificateDepartment
         {
             get { return _NotificateDepartment; }
-            set { SetProperty(ref _NotificateDepartment, value); }
+            set
+            {
+                SetProperty(ref _NotificateDepartment, value);
+                if (value)
+                {
+                    App.vm.UserMsg = "Send Email";
+                }
+            }
+        }
+        private bool _IsPriceChange;
+        public bool IsPriceChange
+        {
+            get { return _IsPriceChange; }
+            set { SetProperty(ref _IsPriceChange, value); }
+        }
+        private bool _IsDueDateChange;
+        public bool IsDueDateChange
+        {
+            get { return _IsDueDateChange; }
+            set { SetProperty(ref _IsDueDateChange, value); }
         }
         //For database
         public EventType GetModel()
@@ -42,6 +63,8 @@ namespace NeoTracker.Models
                 EventTypeID = EventTypeID,
                 Name = Name,
                 NotificateDepartment = NotificateDepartment,
+                IsDueDateChange = IsDueDateChange,
+                IsPriceChange = IsPriceChange,
                 SortOrder = SortOrder,
                 IsActive = IsActive,
                 CreatedAt = CreatedAt,
@@ -49,43 +72,56 @@ namespace NeoTracker.Models
                 UpdatedBy = UpdatedBy
             };
         }
-        public async void Save()
+        public async Task Save()
         {
-            using (var context = new NeoTrackerContext())
-            {
-                var data = GetModel();
-                if (EventTypeID == 0)
-                {
-                    context.EventTypes.Add(data);
-                }
-                else
-                {
-                    context.Entry(data).State = EntityState.Modified;
-                }
-                await context.SaveChangesAsync();
-            }
-            EndEdit();
-            App.vm.LoadEventTypes();
-        }
-        public async void Delete()
-        {
-            bool CanDelete = true;
-            var dialog = new QuestionDialog("Do you really want to delete this EventType (" + Name + ")?");
-            dialog.ShowDialog();
-            if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
+            try
             {
                 using (var context = new NeoTrackerContext())
                 {
-
-                    if (CanDelete)
+                    var data = GetModel();
+                    if (EventTypeID == 0)
                     {
-                        var data = GetModel();
-                        context.Entry(data).State = EntityState.Deleted;
-                        App.vm.EventTypes.Remove(this);
-                        await context.SaveChangesAsync();
+                        context.EventTypes.Add(data);
                     }
+                    else
+                    {
+                        context.Entry(data).State = EntityState.Modified;
+                    }
+                    await context.SaveChangesAsync();
                 }
                 EndEdit();
+                await App.vm.LoadEventTypes();
+            }
+            catch (Exception e)
+            {
+                App.vm.UserMsg = e.Message.ToString();
+            }
+        }
+        public async Task Delete()
+        {
+            try
+            {
+                var dialog = new QuestionDialog("Do you really want to delete this EventType (" + Name + ")?");
+                dialog.ShowDialog();
+                if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
+                {
+                    using (var context = new NeoTrackerContext())
+                    {
+
+                        if (CanDelete)
+                        {
+                            var data = GetModel();
+                            context.Entry(data).State = EntityState.Deleted;
+                            App.vm.EventTypes.Remove(this);
+                            await context.SaveChangesAsync();
+                        }
+                    }
+                    EndEdit();
+                }
+            }
+            catch (Exception e)
+            {
+                App.vm.UserMsg = e.Message.ToString();
             }
         }
         //For validation
@@ -100,6 +136,14 @@ namespace NeoTracker.Models
                     if (string.IsNullOrEmpty(Name) || (Name ?? "").Length > 25)
                     {
                         result = "Cannot be empty or more than 25 characters";
+                    }
+                }
+                if (columnName == "SortOrder")
+                {
+                    Regex regex = new Regex("[^0-9]+");
+                    if (regex.IsMatch(SortOrder.ToString()))
+                    {
+                        result = "Cannot be a text value";
                     }
                 }
                 return result;

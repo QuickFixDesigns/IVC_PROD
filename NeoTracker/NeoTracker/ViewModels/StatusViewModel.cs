@@ -8,6 +8,8 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Linq;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 using static NeoTracker.ViewModels.MainViewModel;
 
@@ -50,8 +52,10 @@ namespace NeoTracker.Models
                 UpdatedBy = UpdatedBy
             };
         }
-        public async void Save()
+        public async Task Save()
         {
+            try
+            {
             using (var context = new NeoTrackerContext())
             {
                 var data = GetModel();
@@ -66,12 +70,17 @@ namespace NeoTracker.Models
                 await context.SaveChangesAsync();
             }
             EndEdit();
-            App.vm.LoadStatus();
+            await App.vm.LoadStatus();
+            }
+            catch (Exception e)
+            {
+                App.vm.UserMsg = e.Message.ToString();
+            }
         }
-        public async void Delete()
+        public async Task Delete()
         {
-            bool CanDelete = true;
-
+            try
+            {
             var dialog = new QuestionDialog("Do you really want to delete this Status (" + Name + ")?");
             dialog.ShowDialog();
             if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
@@ -88,6 +97,11 @@ namespace NeoTracker.Models
                 }
                 EndEdit();
             }
+            }
+            catch (Exception e)
+            {
+                App.vm.UserMsg = e.Message.ToString();
+            }
         }
         //For validation
         public string this[string columnName]
@@ -101,6 +115,14 @@ namespace NeoTracker.Models
                     if (string.IsNullOrEmpty(Name) || (Name ?? "").Length > 25)
                     {
                         result = "Cannot be empty or more than 25 characters";
+                    }
+                }
+                if (columnName == "SortOrder")
+                {
+                    Regex regex = new Regex("[^0-9]+");
+                    if (regex.IsMatch(SortOrder.ToString()))
+                    {
+                        result = "Cannot be a text value";
                     }
                 }
                 return result;

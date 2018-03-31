@@ -113,11 +113,12 @@
       <DependentUpon>IvcContext.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\BaseModel.cs" />
-    <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\DepartmentOperation.cs" />
     <Compile Include="Models\EventType.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\Operation.cs" />
     <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\ProjectType.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\DepartmentUser.cs" />
     <Compile Include="Models\Status.cs" />

@@ -31,15 +31,16 @@ namespace NeoTracker.Pages.Admin
         public UserEdit()
         {
             InitializeComponent();
-            btn.SetButton(ApplyButton, true, "Apply");
-            btn.SetButton(AddDepartmentButton, true, "Create");
-            btn.SetButton(DeleteButton, true, "Delete");
-            btn.SetButton(CancelButton, true, "Cancel");
+            btn.SetButton(ApplyButton, true, "Apply", null, null);
+            btn.SetButton(DeleteButton, true, "Delete", null, null);
+            btn.SetButton(CancelButton, true, "Cancel", null, null);
+
+            btn.SetButton(AddDepartmentButton, true, "Create", "Add deparment", "Add departments to user");
         }
 
-        private void ApplyButton_Click(object sender, RoutedEventArgs e)
+        private async Task ApplyButton_Click(object sender, RoutedEventArgs e)
         {
-            App.vm.User.Save();
+            await App.vm.User.Save();
             App.nav.GoBack(this);
         }
 
@@ -49,20 +50,20 @@ namespace NeoTracker.Pages.Admin
             App.nav.GoBack(this);
         }
 
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        private async Task DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            App.vm.User.Delete();
+            await App.vm.User.Delete();
             App.nav.GoBack(this);
         }
-        private void AddDepartmentButton_Click(object sender, RoutedEventArgs e)
+        private async Task AddDepartmentButton_Click(object sender, RoutedEventArgs e)
         {
-            vm.AddDepartments();
+            await vm.AddDepartments();
         }
-        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private async Task ListView_MouseDoubleClickAsync(object sender, MouseButtonEventArgs e)
         {
             if (ListView.SelectedIndex != -1)
             {
-                vm.RemoveDepartment(((DepartmentViewModel)ListView.SelectedItem));
+                await vm.RemoveDepartment(((DepartmentViewModel)ListView.SelectedItem));
             }
         }
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
@@ -80,7 +81,6 @@ namespace NeoTracker.Pages.Admin
             App.nav.SetLastUri("/Pages/Admin/UserEdit.xaml");
             vm = App.vm.User;
             vm.BeginEdit();
-            vm.LoadDepartments();
             util.AutoFitListView(GridListView);
         }
 

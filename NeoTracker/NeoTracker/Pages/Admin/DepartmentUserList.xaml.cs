@@ -40,7 +40,7 @@ namespace NeoTracker.Pages.Admin
             //throw new NotImplementedException();
         }
 
-        public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        public void OnNavigatedToAsync(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
             util.AutoFitListView(GridListView);
         }

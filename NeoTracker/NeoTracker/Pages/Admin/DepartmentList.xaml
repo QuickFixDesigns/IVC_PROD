@@ -44,12 +44,6 @@
                                 </GridViewColumn.Header>
                             </GridViewColumn>
 
-                            <GridViewColumn DisplayMemberBinding="{Binding IsDefault}">
-                                <GridViewColumn.Header>
-                                    <GridViewColumnHeader Tag="IsDefault">IsDefault</GridViewColumnHeader>
-                                </GridViewColumn.Header>
-                            </GridViewColumn>
-
                             <GridViewColumn DisplayMemberBinding="{Binding IsActive}">
                                 <GridViewColumn.Header>
                                     <GridViewColumnHeader Tag="IsActive">IsActive</GridViewColumnHeader>

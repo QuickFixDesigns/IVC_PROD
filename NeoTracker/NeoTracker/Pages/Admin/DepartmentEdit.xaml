@@ -6,6 +6,7 @@
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:src="clr-namespace:NeoTracker.ViewModels"
              mc:Ignorable="d" >
+    
     <Grid Style="{StaticResource ContentRoot}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -18,9 +19,14 @@
         <ScrollViewer Grid.Column="0" >
             <StackPanel HorizontalAlignment="Left" Margin="0,0,10,0">
                 <mui:ModernButton x:Name="ApplyButton" Click="ApplyButton_Click"/>
-                <mui:ModernButton x:Name="AddUserButton" Click="AddUserButton_Click" IsEnabled="{Binding Department.CanAddUsers}"/>
                 <mui:ModernButton x:Name="CancelButton" Click="CancelButton_Click" />
                 <mui:ModernButton x:Name="DeleteButton" Click="DeleteButton_Click"/>
+
+                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+
+                <mui:ModernButton x:Name="AddUserButton" Click="AddUserButton_Click" IsEnabled="{Binding Department.CanAdd}"/>
+                <mui:ModernButton x:Name="AddOperationButton" Click="AddOperationButton_Click" IsEnabled="{Binding Department.CanAdd}"/>
+                
             </StackPanel>
         </ScrollViewer>
 
@@ -64,15 +70,11 @@
 
                 <ComboBox ItemsSource="{Binding Path=Department.Users}" DisplayMemberPath="LongName" SelectedItem="{Binding Department.HeadOfDepartment, UpdateSourceTrigger=LostFocus}" />
 
-                <Label Content="Message"/>
-                <TextBox TextWrapping="Wrap" AcceptsReturn="True" Style="{StaticResource textBoxInError}" Text="{Binding Department.Msg, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Height="48" />
-
-                <Label Content="Is default"/>
-                <CheckBox IsChecked="{Binding Department.IsDefault, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
-
                 <Label Content="IsActive"/>
                 <CheckBox IsChecked="{Binding Department.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
-
+                
+                <Label Content="CreatedAt" />
+                <TextBox  IsReadOnly="True"  Text="{Binding Department.CreatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
                 <Label Content="UpdatedBy" />
                 <TextBox  IsReadOnly="True" Text="{Binding Department.UpdatedBy}"  />
                 <Label Content="UpdatedAt" />
@@ -86,6 +88,7 @@
         <mui:ModernTab Grid.Column="4" SelectedSource="Pages/Admin/DepartmentUserList.xaml">
             <mui:ModernTab.Links>
                 <mui:Link DisplayName="Users" Source="Pages/Admin/DepartmentUserList.xaml"/>
+                <mui:Link DisplayName="Operations" Source="Pages/Admin/DepartmentOperationList.xaml"/>
             </mui:ModernTab.Links>
         </mui:ModernTab>
     </Grid>
