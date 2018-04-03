@@ -51,6 +51,9 @@
                 <TextBlock Text="Project" Style="{StaticResource Heading2}" />
                 <Separator Height="10" Background="Transparent"/>
 
+                <Label Content="ProjectType"/>
+                <ComboBox ItemsSource="{Binding Path=ProjectTypes}" DisplayMemberPath="Name" SelectedItem="{Binding Project.ProjectType, UpdateSourceTrigger=LostFocus}" />
+                
                 <Label Content="Code"/>
                 <TextBox  IsReadOnly="True" IsEnabled="False" Style="{StaticResource textBoxInError}" Text="{Binding Project.Code, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
@@ -62,9 +65,6 @@
 
                 <Label Content="Name"/>
                 <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding Project.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
-
-                <Label Content="Priority"/>
-                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding Project.Priority, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Label Content="Comment"/>
                 <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding Project.Comment, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"   TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Height="50"/>

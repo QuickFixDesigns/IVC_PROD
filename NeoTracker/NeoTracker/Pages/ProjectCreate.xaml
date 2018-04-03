@@ -47,10 +47,13 @@
                 <TextBlock Text="Create new project" Style="{StaticResource Heading2}" />
                 <Separator Height="10" Background="Transparent"/>
 
+                <Label Content="ProjectType"/>
+                <ComboBox ItemsSource="{Binding Path=ProjectTypes}" DisplayMemberPath="Name" SelectedItem="{Binding Project.ProjectType, UpdateSourceTrigger=LostFocus}" />
+
                 <Label Content="Name"/>
                 <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding Project.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
 
-                <Separator Height="10" Background="Transparent"/>
+                <Separator Height="20" Visibility="Hidden"/>
 
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -62,7 +65,7 @@
                     <Label Grid.Column="0" Content="Search box"/>
                     <mui:ModernButton Grid.Column="2"  x:Name="RemoveFilterBtn" Click="RemoveFilterBtn_Click"/>
                 </Grid>
-                
+
                 <TextBox Grid.Row="1" x:Name="SearchBox" TextChanged="SearchBox_TextChanged"></TextBox>
 
                 <Separator Height="10" Background="Transparent"/>

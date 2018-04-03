@@ -20,41 +20,39 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FirstFloor.ModernUI.Windows.Navigation;
 
-namespace NeoTracker.Pages
+namespace NeoTracker.Pages.Admin
 {
     /// <summary>
     /// Interaction logic for Departments.xaml
     /// </summary>
-    public partial class ProjectList : UserControl, IContent
+    public partial class ProjectTypeList : UserControl, IContent
     {
         private Buttons btn = new Buttons();
         private Utilities util = new Utilities();
 
-        public ProjectList()
+        public ProjectTypeList()
         {
             InitializeComponent();
-            btn.SetButton(CreateButton, true, "Create", "Add project", "Add new project");
+            btn.SetButton(CreateButton, true, "Create", "New ProjectType", "Create new project Type");
             util.AutoFitListView(GridListView);
         }
-        private async void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (ListView.SelectedIndex != -1)
             {
-                App.vm.Project = ((ProjectViewModel)ListView.SelectedItem);
-                await App.vm.Project.LoadEvents();
-                await App.vm.Project.LoadItems();
-                App.nav.NavigateTo("/Pages/ProjectEdit.xaml", this);
+                App.vm.ProjectType = ((ProjectTypeViewModel)ListView.SelectedItem);
+                App.nav.NavigateTo("/Pages/Admin/ProjectTypeEdit.xaml", this);
             }
         }
 
-        private async void CreateButton_Click(object sender, RoutedEventArgs e)
+        private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
-            App.vm.Project = new ProjectViewModel()
+            App.vm.ProjectType = new ProjectTypeViewModel()
             {
-                ProjectType = App.vm.ProjectTypes.OrderBy(x=>x.SortOrder).ThenBy(x=>x.Name).FirstOrDefault()
+                IsActive = true,
             };
-            await App.vm.Project.LoadOrders();
-            App.nav.NavigateTo("/Pages/ProjectCreate.xaml", this);
+
+            App.nav.NavigateTo("/Pages/Admin/ProjectTypeEdit.xaml", this);
         }
 
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
@@ -69,7 +67,7 @@ namespace NeoTracker.Pages
 
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
-            App.nav.SetLastUri("/Pages/ProjectList.xaml");
+            App.nav.SetLastUri("/Pages/Admin/ProjectTypeList.xaml");
             util.AutoFitListView(GridListView);
         }
 

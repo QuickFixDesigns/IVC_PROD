@@ -16,9 +16,10 @@
         <mui:LinkGroup DisplayName="admin">
             <mui:LinkGroup.Links>
                 <mui:Link DisplayName="Departments" Source="/Pages/Admin/DepartmentList.xaml" />
-                <mui:Link DisplayName="Users" Source="/Pages/Admin/UserList.xaml"/>
-                <mui:Link DisplayName="Event Type" Source="/Pages/Admin/EventTypeList.xaml"/>
+                <mui:Link DisplayName="Event type" Source="/Pages/Admin/EventTypeList.xaml"/>
+                <mui:Link DisplayName="Project type" Source="/Pages/Admin/ProjectTypeList.xaml"/>
                 <mui:Link DisplayName="Status" Source="/Pages/Admin/StatusList.xaml"/>
+                <mui:Link DisplayName="Users" Source="/Pages/Admin/UserList.xaml"/>
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
         <mui:LinkGroup DisplayName="settings" GroupKey="settings">

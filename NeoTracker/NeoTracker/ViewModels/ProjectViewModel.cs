@@ -50,8 +50,8 @@ namespace NeoTracker.Models
             get { return _Comment; }
             set { SetProperty(ref _Comment, value); }
         }
-        private ProjectType _ProjectType;
-        public ProjectType ProjectType
+        private ProjectTypeViewModel _ProjectType;
+        public ProjectTypeViewModel ProjectType
         {
             get { return _ProjectType; }
             set { SetProperty(ref _ProjectType, value); }
@@ -97,7 +97,7 @@ namespace NeoTracker.Models
                 Comment = Comment,
                 Client = Client,
                 CreatedAt = CreatedAt,
-                ProjectTypeID = ProjectType !=null ? ProjectType.ProjectTypeID : (int?)null,
+                ProjectTypeID = ProjectType.ProjectTypeID,
                 PurchaseOrder = PurchaseOrder,
                 UpdatedAt = UpdatedAt, 
                 UpdatedBy = UpdatedBy,

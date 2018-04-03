@@ -34,6 +34,7 @@ namespace NeoTracker.ViewModels
             await LoadStatus();
             await LoadUsers();
             await LoadEventTypes();
+            await LoadProjectTypes();
         }
 
         public async Task Authentificate()
@@ -74,7 +75,12 @@ namespace NeoTracker.ViewModels
             EventTypes = await ds.GetEventTypeList();
             IsReady = true;
         }
-
+        public async Task LoadProjectTypes()
+        {
+            IsReady = false;
+            ProjectTypes = await ds.GetProjectTypeList();
+            IsReady = true;
+        }
         //base attributes
         private User _CurrentUSer = new User();
         public User CurrentUSer
@@ -101,8 +107,6 @@ namespace NeoTracker.ViewModels
                 }
             }
         }
-
-
         //Departments
         private List<DepartmentViewModel> _Departments = new List<DepartmentViewModel>();
         public List<DepartmentViewModel> Departments
@@ -146,6 +150,19 @@ namespace NeoTracker.ViewModels
         {
             get { return _Operation; }
             set { SetProperty(ref _Operation, value); }
+        }
+        //ProjectType
+        private List<ProjectTypeViewModel> _ProjectTypes = new List<ProjectTypeViewModel>();
+        public List<ProjectTypeViewModel> ProjectTypes
+        {
+            get { return _ProjectTypes; }
+            set { SetProperty(ref _ProjectTypes, value); }
+        }
+        private ProjectTypeViewModel _ProjectType = new ProjectTypeViewModel();
+        public ProjectTypeViewModel ProjectType
+        {
+            get { return _ProjectType; }
+            set { SetProperty(ref _ProjectType, value); }
         }
         //EventType
         private List<EventTypeViewModel> _EventTypes = new List<EventTypeViewModel>();

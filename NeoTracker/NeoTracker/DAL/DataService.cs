@@ -137,6 +137,22 @@ namespace NeoTracker.DAL
                 }).ToListAsync();
             }
         }
+        public async Task<List<ProjectTypeViewModel>> GetProjectTypeList()
+        {
+            using (var context = new NeoTrackerContext())
+            {
+                return await context.ProjectTypes.OrderBy(x => x.SortOrder).ThenBy(x => x.Name).Select(x => new ProjectTypeViewModel()
+                {
+                    ProjectTypeID = x.ProjectTypeID,
+                    Name = x.Name,
+                    SortOrder = x.SortOrder,
+                    IsActive = x.IsActive,
+                    CreatedAt = x.CreatedAt,
+                    UpdatedAt = x.UpdatedAt,
+                    UpdatedBy = x.UpdatedBy
+                }).ToListAsync();
+            }
+        }
         public async Task<List<EventTypeViewModel>> GetEventTypeList()
         {
             using (var context = new NeoTrackerContext())

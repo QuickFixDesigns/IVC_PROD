@@ -6,7 +6,7 @@
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
             IsEnabled="{Binding IsReady}"
              mc:Ignorable="d">
-    
+
     <Grid Style="{StaticResource ContentRoot}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -19,13 +19,19 @@
                 <mui:ModernButton x:Name="CreateButton" Click="CreateButton_Click"/>
             </StackPanel>
         </ScrollViewer>
-        
+
         <GridSplitter Grid.Column="1" />
         <ScrollViewer Grid.Column="2 " Margin="{StaticResource SplitRight}">
             <StackPanel>
                 <ListView x:Name="ListView" ItemsSource="{Binding Projects}" MouseDoubleClick="ListView_MouseDoubleClick">
                     <ListView.View>
                         <GridView x:Name="GridListView">
+
+                            <GridViewColumn DisplayMemberBinding="{Binding ProjectType.Name }">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="ProjectType ">ProjectType</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
 
                             <GridViewColumn DisplayMemberBinding="{Binding Code}">
                                 <GridViewColumn.Header>
@@ -51,9 +57,9 @@
                                 </GridViewColumn.Header>
                             </GridViewColumn>
 
-                            <GridViewColumn DisplayMemberBinding="{Binding Priority }">
+                            <GridViewColumn DisplayMemberBinding="{Binding IsActive }">
                                 <GridViewColumn.Header>
-                                    <GridViewColumnHeader Tag="Priority ">Priority</GridViewColumnHeader>
+                                    <GridViewColumnHeader Tag="IsActive ">IsActive</GridViewColumnHeader>
                                 </GridViewColumn.Header>
                             </GridViewColumn>
                         </GridView>

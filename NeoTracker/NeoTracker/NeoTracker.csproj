@@ -123,6 +123,12 @@
     <Compile Include="Models\DepartmentUser.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Pages\Admin\ProjectTypeEdit.xaml.cs">
+      <DependentUpon>ProjectTypeEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Admin\ProjectTypeList.xaml.cs">
+      <DependentUpon>ProjectTypeList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\OperationEdit.xaml.cs">
       <DependentUpon>OperationEdit.xaml</DependentUpon>
     </Compile>
@@ -186,6 +192,7 @@
     <Compile Include="Pages\Reports.xaml.cs">
       <DependentUpon>Reports.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ProjectTypeViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="ViewModels\OperationViewModel.cs" />
     <Compile Include="ViewModels\ItemViewModel.cs" />
@@ -207,6 +214,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\Admin\ProjectTypeEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Admin\ProjectTypeList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\OperationEdit.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

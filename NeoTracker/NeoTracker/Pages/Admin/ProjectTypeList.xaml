@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="NeoTracker.Pages.Admin.ProjectTypeList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+            IsEnabled="{Binding IsReady}"
+             mc:Ignorable="d">
+    
+    <Grid Style="{StaticResource ContentRoot}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" MinWidth="100"/>
+            <ColumnDefinition Width="1"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <ScrollViewer Margin="{StaticResource SplitLeft}">
+            <StackPanel HorizontalAlignment="Left" Margin="0,0,10,10">
+                <mui:ModernButton x:Name="CreateButton" Click="CreateButton_Click"/>
+            </StackPanel>
+        </ScrollViewer>
+        <GridSplitter Grid.Column="1" />
+        <ScrollViewer Grid.Column="2 " Margin="{StaticResource SplitRight}">
+            <StackPanel>
+                <ListView x:Name="ListView" ItemsSource="{Binding ProjectTypes}" MouseDoubleClick="ListView_MouseDoubleClick">
+                    <ListView.View>
+                        <GridView x:Name="GridListView">
+
+                            <GridViewColumn DisplayMemberBinding="{Binding Name}">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="Name">Name</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+
+                            <GridViewColumn DisplayMemberBinding="{Binding SortOrder}">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="SortOrder">SortOrder</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+
+                            <GridViewColumn DisplayMemberBinding="{Binding IsActive}">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="IsActive">IsActive</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
