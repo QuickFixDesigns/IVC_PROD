@@ -86,8 +86,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Assets\Buttons.cs" />
+    <Compile Include="Assets\IAsyncInitialization.cs" />
     <Compile Include="Assets\Navigation.cs" />
-    <Compile Include="Assets\RelayCommand.cs" />
     <Compile Include="Assets\Utilities.cs" />
     <Compile Include="DAL\Comm.cs">
       <DependentUpon>IvcContext.tt</DependentUpon>

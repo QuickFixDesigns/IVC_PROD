@@ -33,10 +33,10 @@ namespace NeoTracker.Pages
         public ProjectList()
         {
             InitializeComponent();
-            btn.SetButton(CreateButton, true, "Create");
+            btn.SetButton(CreateButton, true, "Create", "Add project", "Add new project");
             util.AutoFitListView(GridListView);
         }
-        private async Task ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private async void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (ListView.SelectedIndex != -1)
             {
@@ -47,9 +47,10 @@ namespace NeoTracker.Pages
             }
         }
 
-        private void CreateButton_Click(object sender, RoutedEventArgs e)
+        private async void CreateButton_Click(object sender, RoutedEventArgs e)
         {
             App.vm.Project = new ProjectViewModel();
+            await App.vm.Project.LoadOrders();
             App.nav.NavigateTo("/Pages/ProjectCreate.xaml", this);
         }
 
@@ -63,7 +64,7 @@ namespace NeoTracker.Pages
             //throw new NotImplementedException();
         }
 
-        public void OnNavigatedToAsync(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
             App.nav.SetLastUri("/Pages/ProjectList.xaml");
             util.AutoFitListView(GridListView);

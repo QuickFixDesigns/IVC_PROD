@@ -17,12 +17,8 @@ namespace NeoTracker.Models
     public class ProjectViewModel : ViewModelBase, IDataErrorInfo
     {
         private DataService ds = new DataService();
-        public int ProjectID { get; set; }
 
-        public bool CanCreate
-        {
-            get { return ProjectID != 0 && !string.IsNullOrEmpty(Name); }
-        }
+        public int ProjectID { get; set; }
 
         private string _Code;
         public string Code
@@ -30,23 +26,41 @@ namespace NeoTracker.Models
             get { return _Code; }
             set { SetProperty(ref _Code, value); }
         }
+        private string _PurchaseOrder;
+        public string PurchaseOrder
+        {
+            get { return _PurchaseOrder; }
+            set { SetProperty(ref _PurchaseOrder, value); }
+        }
+        private string _Client;
+        public string Client
+        {
+            get { return _Client; }
+            set { SetProperty(ref _Client, value); }
+        }
         private string _Name;
         public string Name
         {
             get { return _Name; }
             set { SetProperty(ref _Name, value); }
         }
-        private int? _Priority;
-        public int? Priority
-        {
-            get { return _Priority; }
-            set { SetProperty(ref _Priority, value); }
-        }
         private string _Comment;
         public string Comment
         {
             get { return _Comment; }
             set { SetProperty(ref _Comment, value); }
+        }
+        private ProjectType _ProjectType;
+        public ProjectType ProjectType
+        {
+            get { return _ProjectType; }
+            set { SetProperty(ref _ProjectType, value); }
+        }
+        private List<OrderViewModel> _Orders = new List<OrderViewModel>();
+        public List<OrderViewModel> Orders
+        {
+            get { return _Orders; }
+            set { SetProperty(ref _Orders, value); }
         }
         public bool CanAddItems
         {
@@ -81,7 +95,12 @@ namespace NeoTracker.Models
                 Name = Name,
                 Code = Code,
                 Comment = Comment,
-                Priority = Priority,
+                Client = Client,
+                CreatedAt = CreatedAt,
+                ProjectTypeID = ProjectType !=null ? ProjectType.ProjectTypeID : (int?)null,
+                PurchaseOrder = PurchaseOrder,
+                UpdatedAt = UpdatedAt, 
+                UpdatedBy = UpdatedBy,
                 IsActive = IsActive,
             };
         }
@@ -92,6 +111,10 @@ namespace NeoTracker.Models
                 Events = await ds.GetEventList(ProjectID);
             }
         }
+        public async Task LoadOrders()
+        {
+            Orders = await ds.GetOrderList();
+        }
         public async Task LoadItems()
         {
             if (ProjectID != 0)
@@ -99,55 +122,60 @@ namespace NeoTracker.Models
                 Items = await ds.GetItemList(ProjectID);
             }
         }
-        public async Task Create(string code)
+        public async Task Create(OrderViewModel order)
         {
             try
             {
-            Code = code;
-            IsActive = true;
-            using (var IvcContext = new IVCLIVEDBEntities())
-            using (var context = new NeoTrackerContext())
-            {
-                var project = GetModel();
-                var Operations = await context.Departments.Where(d => d.IsDefault).ToListAsync();
+                Code = order.Code;
+                PurchaseOrder = order.Po;
+                Client = order.Client;
 
-                var Items = await IvcContext.Comm2.Where(x => x.No_Com == code).Select(x => new Item()
-                {
-                    Code = x.Item,
-                    Name = x.Des,
-                    DueDate = x.Dateliv,
-                    ProjectID = ProjectID,
-                    LatestStartDate = x.DateJobProductionStart,
-                    IsActive = true,
-                    SortOrder = x.Ligneitm,
-                    SortKey = x.Clef,
-                }).ToListAsync();
+                IsActive = true;
 
-                foreach (var item in Items)
+                using (var IvcContext = new IVCLIVEDBEntities())
+                using (var context = new NeoTrackerContext())
                 {
-                    item.Operations = new List<Operation>();
-                    foreach (var o in Operations)
+                    var project = GetModel();
+                    var Operations = await context.DepartmentOperations.Where(x => x.IsActive).ToListAsync();
+                    var statusID = await context.Statuses.OrderBy(s => s.SortOrder).ThenBy(s => s.Name).Where(s => s.IsActive).Select(s => s.StatusID).FirstAsync();
+
+                    var Items = await IvcContext.Comm2.Where(x => x.No_Com == Code).Select(x => new Item()
                     {
-                        item.Operations.Add(new Operation()
-                        {
-                            OperationTime = 0,
-                            DepartmentID = o.DepartmentID,
-                            IsActive = true,
-                            Name = "From genius?",
-                            Progress = 0,
-                            SortOrder = o.SortOrder,
-                        });
-                    }
-                }
-                project.Items = Items;
-                context.Projects.Add(project);
-                await context.SaveChangesAsync();
+                        Code = x.Item,
+                        Name = x.Des,
+                        DueDate = x.Dateliv,
+                        ProjectID = ProjectID,
+                        IsActive = true,
+                        SortOrder = x.Ligneitm,
+                        StatusID = statusID,
+                        SortKey = x.Clef,
+                    }).ToListAsync();
 
-                ProjectID = project.ProjectID;
-                LoadItems();
-            }
-            EndEdit();
-            App.vm.LoadProjects();
+                    foreach (var item in Items)
+                    {
+                        item.Operations = new List<Operation>();
+                        foreach (var o in Operations)
+                        {
+                            item.Operations.Add(new Operation()
+                            {
+                                OperationTime = o.OperationTime,
+                                DepartmentID = o.DepartmentID,
+                                IsActive = true,
+                                Name = o.Name,
+                                IsCompleted = false,
+                                SortOrder = o.SortOrder,
+                            });
+                        }
+                    }
+                    project.Items = Items;
+                    context.Projects.Add(project);
+                    await context.SaveChangesAsync();
+
+                    ProjectID = project.ProjectID;
+                    await LoadItems();
+                }
+                EndEdit();
+                await App.vm.LoadProjects();
             }
             catch (Exception e)
             {
@@ -166,7 +194,7 @@ namespace NeoTracker.Models
                 await context.SaveChangesAsync();
             }
             EndEdit();
-            App.vm.LoadProjects();
+            await App.vm.LoadProjects();
             }
             catch (Exception e)
             {
@@ -203,11 +231,32 @@ namespace NeoTracker.Models
             {
                 string result = null;
 
-                if (columnName == "Name")
+                if (columnName == "Code")
                 {
-                    if (string.IsNullOrEmpty(Name) || (Name ?? "").Length > 25)
+                    if ( (Code ?? "").Length > 25)
                     {
                         result = "Cannot be empty or more than 25 characters";
+                    }
+                }
+                if (columnName == "PurchaseOrder")
+                {
+                    if ((PurchaseOrder ?? "").Length > 25)
+                    {
+                        result = "Cannot be empty or more than 25 characters";
+                    }
+                }
+                if (columnName == "Client")
+                {
+                    if ((Client ?? "").Length > 255)
+                    {
+                        result = "Cannot be empty or more than 255 characters";
+                    }
+                }
+                if (columnName == "Name")
+                {
+                    if (string.IsNullOrEmpty(Name) || (Name ?? "").Length > 100)
+                    {
+                        result = "Cannot be empty or more than 100 characters";
                     }
                 }
                 return result;

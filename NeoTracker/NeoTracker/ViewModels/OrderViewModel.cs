@@ -21,6 +21,12 @@ namespace NeoTracker.Models
             get { return _Code; }
             set { SetProperty(ref _Code, value); }
         }
+        private string _Client;
+        public string Client
+        {
+            get { return _Client; }
+            set { SetProperty(ref _Client, value); }
+        }
         private string _Po;
         public string Po
         {

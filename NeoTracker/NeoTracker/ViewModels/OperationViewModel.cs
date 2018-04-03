@@ -88,21 +88,21 @@ namespace NeoTracker.Models
         {
             try
             {
-            using (var context = new NeoTrackerContext())
-            {
-                var data = GetModel();
-                if (OperationID == 0)
+                using (var context = new NeoTrackerContext())
                 {
-                    context.Operations.Add(data);
+                    var data = GetModel();
+                    if (OperationID == 0)
+                    {
+                        context.Operations.Add(data);
+                    }
+                    else
+                    {
+                        context.Entry(data).State = EntityState.Modified;
+                    }
+                    await context.SaveChangesAsync();
                 }
-                else
-                {
-                    context.Entry(data).State = EntityState.Modified;
-                }
-                await context.SaveChangesAsync();
-            }
-            EndEdit();
-            await App.vm.Item.LoadOperations();
+                EndEdit();
+                await App.vm.Item.LoadOperations();
             }
             catch (Exception e)
             {
@@ -113,22 +113,22 @@ namespace NeoTracker.Models
         {
             try
             {
-            var dialog = new QuestionDialog("Do you really want to delete this operation (" + Name + ")?");
-            dialog.ShowDialog();
-            if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
-            {
-                using (var context = new NeoTrackerContext())
+                var dialog = new QuestionDialog("Do you really want to delete this operation (" + Name + ")?");
+                dialog.ShowDialog();
+                if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
                 {
-                    if (CanDelete)
+                    using (var context = new NeoTrackerContext())
                     {
-                        var data = GetModel();
-                        context.Entry(data).State = EntityState.Deleted;
-                        App.vm.Item.Operations.Remove(this);
-                        await context.SaveChangesAsync();
-                        EndEdit();
+                        if (CanDelete)
+                        {
+                            var data = GetModel();
+                            context.Entry(data).State = EntityState.Deleted;
+                            App.vm.Item.Operations.Remove(this);
+                            await context.SaveChangesAsync();
+                            EndEdit();
+                        }
                     }
                 }
-            }
             }
             catch (Exception e)
             {

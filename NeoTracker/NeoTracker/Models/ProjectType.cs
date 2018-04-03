@@ -15,5 +15,23 @@ namespace NeoTracker.Models
 
         //navigation
         public ICollection<Project> Projects { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || !(obj is ProjectType))
+                return false;
+
+            return ((ProjectType)obj).ProjectTypeID == this.ProjectTypeID;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }

@@ -20,7 +20,11 @@
                 <mui:ModernButton x:Name="ApplyButton" Click="ApplyButton_Click"/>
                 <mui:ModernButton x:Name="CancelButton" Click="CancelButton_Click" />
                 <mui:ModernButton x:Name="DeleteButton" Click="DeleteButton_Click" IsEnabled="{Binding CanDelete}"/>
-                <mui:ModernButton x:Name="AddEventButton" Click="AddEventButton_Click" IsEnabled="{Binding CanCreate}"/>
+
+                <Separator Height="20" Visibility="Hidden"/>
+                
+                <mui:ModernButton x:Name="AddEventButton" Click="AddEventButton_Click" IsEnabled="{Binding CanAddItems}"/>
+                
             </StackPanel>
         </ScrollViewer>
 
@@ -48,7 +52,13 @@
                 <Separator Height="10" Background="Transparent"/>
 
                 <Label Content="Code"/>
-                <TextBox  IsReadOnly="True" Style="{StaticResource textBoxInError}" Text="{Binding Project.Code, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <TextBox  IsReadOnly="True" IsEnabled="False" Style="{StaticResource textBoxInError}" Text="{Binding Project.Code, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+
+                <Label Content="Client"/>
+                <TextBox  IsReadOnly="True" IsEnabled="False"  Style="{StaticResource textBoxInError}" Text="{Binding Project.Client, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+
+                <Label Content="PurchaseOrder"/>
+                <TextBox  IsReadOnly="True" IsEnabled="False"  Style="{StaticResource textBoxInError}" Text="{Binding Project.PurchaseOrder, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Label Content="Name"/>
                 <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding Project.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
@@ -57,7 +67,7 @@
                 <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding Project.Priority, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Label Content="Comment"/>
-                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding Project.Comment, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding Project.Comment, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"   TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Height="50"/>
 
                 <Label Content="IsActive"/>
                 <CheckBox IsChecked="{Binding Project.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />

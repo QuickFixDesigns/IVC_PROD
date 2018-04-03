@@ -19,6 +19,7 @@
                 <mui:ModernButton x:Name="CreateButton" Click="CreateButton_Click"/>
             </StackPanel>
         </ScrollViewer>
+        
         <GridSplitter Grid.Column="1" />
         <ScrollViewer Grid.Column="2 " Margin="{StaticResource SplitRight}">
             <StackPanel>
@@ -29,6 +30,18 @@
                             <GridViewColumn DisplayMemberBinding="{Binding Code}">
                                 <GridViewColumn.Header>
                                     <GridViewColumnHeader Tag="Code">Code</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+
+                            <GridViewColumn DisplayMemberBinding="{Binding Client}">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="Client">Client</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+
+                            <GridViewColumn DisplayMemberBinding="{Binding PurchaseOrder}">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="PurchaseOrder">PurchaseOrder</GridViewColumnHeader>
                                 </GridViewColumn.Header>
                             </GridViewColumn>
 

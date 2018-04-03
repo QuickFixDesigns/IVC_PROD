@@ -3,6 +3,7 @@ using NeoTracker.Content;
 using NeoTracker.Models;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -24,12 +25,12 @@ namespace NeoTracker.Pages
             btn.SetButton(DeleteButton, true, "Delete", null, null);
             btn.SetButton(CancelButton, true, "Cancel", null, null);
 
-            btn.SetButton(AddEventButton, true, "Create");
+            btn.SetButton(AddEventButton, true, "Create", "Add event", "Add event to project");
         }
 
-        private void ApplyButton_Click(object sender, RoutedEventArgs e)
+        private async void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
-            vm.Save();
+            await vm.Save();
             App.nav.GoBack(this);
         }
 
@@ -39,9 +40,9 @@ namespace NeoTracker.Pages
             App.nav.GoBack(this);
         }
 
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        private async void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            vm.Delete();
+            await vm.Delete();
             App.nav.GoBack(this);
         }
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
@@ -54,12 +55,10 @@ namespace NeoTracker.Pages
             //throw new NotImplementedException();
         }
 
-        public void OnNavigatedToAsync(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
             App.nav.SetLastUri("/Pages/ProjectEdit.xaml");
             vm = App.vm.Project;
-            vm.LoadItems();
-            vm.LoadEvents();
             vm.BeginEdit();
         }
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
@@ -74,6 +73,8 @@ namespace NeoTracker.Pages
             App.vm.Event = new EventViewModel()
             {
                 ProjectID = vm.ProjectID,
+                IsActive = true,
+                Status = App.vm.Statuses.OrderBy(x => x.SortOrder).ThenBy(x => x.Name).FirstOrDefault(),
                 EventType = App.vm.EventTypes.OrderBy(x=>x.SortOrder).ThenBy(x=>x.Name).FirstOrDefault(),
             };
             App.nav.NavigateTo("/Pages/EventEdit.xaml", this);

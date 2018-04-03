@@ -30,7 +30,7 @@ namespace NeoTracker.Pages
         {
             InitializeComponent();
         }
-        private async Task ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private async void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (ListView.SelectedIndex != -1)
             {

@@ -31,12 +31,6 @@ namespace NeoTracker
         {
             InitializeComponent();
             this.DataContext = App.vm;
-            App.vm.Authentificate();
-            App.vm.LoadDepartments();
-            App.vm.LoadUsers();
-            App.vm.LoadEventTypes();
-            App.vm.LoadStatus();
-            App.vm.LoadProjects();
         }
     }
 }

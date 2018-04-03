@@ -40,7 +40,7 @@ namespace NeoTracker.Pages.Admin
             //throw new NotImplementedException();
         }
 
-        public void OnNavigatedToAsync(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
             util.AutoFitListView(GridListView);
         }
@@ -49,11 +49,11 @@ namespace NeoTracker.Pages.Admin
         {
             //throw new NotImplementedException();
         }
-        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private async void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (ListView.SelectedIndex != -1)
             {
-                App.vm.Department.RemoveUser(((User)ListView.SelectedItem));
+                await App.vm.Department.RemoveUser(((User)ListView.SelectedItem));
             }
         }
     }

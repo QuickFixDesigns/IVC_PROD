@@ -38,7 +38,7 @@ namespace NeoTracker.Pages.Admin
             btn.SetButton(AddDepartmentButton, true, "Create", "Add deparment", "Add departments to user");
         }
 
-        private async Task ApplyButton_Click(object sender, RoutedEventArgs e)
+        private async void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
             await App.vm.User.Save();
             App.nav.GoBack(this);
@@ -50,16 +50,16 @@ namespace NeoTracker.Pages.Admin
             App.nav.GoBack(this);
         }
 
-        private async Task DeleteButton_Click(object sender, RoutedEventArgs e)
+        private async void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             await App.vm.User.Delete();
             App.nav.GoBack(this);
         }
-        private async Task AddDepartmentButton_Click(object sender, RoutedEventArgs e)
+        private async void AddDepartmentButton_Click(object sender, RoutedEventArgs e)
         {
             await vm.AddDepartments();
         }
-        private async Task ListView_MouseDoubleClickAsync(object sender, MouseButtonEventArgs e)
+        private async void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (ListView.SelectedIndex != -1)
             {

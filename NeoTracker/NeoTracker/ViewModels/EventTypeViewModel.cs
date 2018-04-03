@@ -37,10 +37,6 @@ namespace NeoTracker.Models
             set
             {
                 SetProperty(ref _NotificateDepartment, value);
-                if (value)
-                {
-                    App.vm.UserMsg = "Send Email";
-                }
             }
         }
         private bool _IsPriceChange;

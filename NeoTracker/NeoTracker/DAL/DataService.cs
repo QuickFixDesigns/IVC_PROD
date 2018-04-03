@@ -23,7 +23,7 @@ namespace NeoTracker.DAL
         {
             using (var context = new NeoTrackerContext())
             {
-                return await context.Departments.Include(x => x.HeadOfDepartment).OrderBy(x => x.SortOrder).ThenBy(x=>x.Name).Select(x => new DepartmentViewModel()
+                return await context.Departments.Include(x => x.HeadOfDepartment).OrderBy(x => x.SortOrder).ThenBy(x => x.Name).Select(x => new DepartmentViewModel()
                 {
                     DepartmentID = x.DepartmentID,
                     Name = x.Name,
@@ -41,12 +41,12 @@ namespace NeoTracker.DAL
         {
             using (var context = new NeoTrackerContext())
             {
-                return await context.Projects.Include(x => x.Items).OrderBy(x=>x.Name).Select(x => new ProjectViewModel()
+                return await context.Projects.Include(x => x.Items).OrderBy(x => x.Name).Select(x => new ProjectViewModel()
                 {
                     Code = x.Code,
                     Comment = x.Comment,
                     Name = x.Name,
-                    Priority = x.Priority,
+                    //Priority = x.Priority,
                     ProjectID = x.ProjectID,
                     IsActive = x.IsActive,
                     CreatedAt = x.CreatedAt,
@@ -61,11 +61,12 @@ namespace NeoTracker.DAL
             using (var context = new NeoTrackerContext())
             using (var Genius = new IVCLIVEDBEntities())
             {
-                var projects = context.Projects.Select(x=>x.Code).ToArray();
+                var projects = context.Projects.Select(x => x.Code).ToArray();
 
-                return await Genius.Comms.Where(x => x.Datecli > DateTime.Today && !projects.Contains(x.No_Com)).OrderBy(x=>x.No_Com).Select(x => new OrderViewModel()
+                return await Genius.Comms.Where(x => x.Datecli > DateTime.Today && !projects.Contains(x.No_Com)).OrderByDescending(x => x.Datecli).ThenBy(x=>x.No_Com).Select(x => new OrderViewModel()
                 {
                     Code = x.No_Com,
+                    Client = x.Fact_A1,
                     Date = x.Datecli,
                     Po = x.No_Po,
                 }).ToListAsync();
@@ -117,7 +118,7 @@ namespace NeoTracker.DAL
                         Name = x.Item.Name,
                         //Project = x.Item.Project,
                         ItemID = x.Item.ItemID,
-                        Status = x.Item.StatusID.HasValue ? new StatusViewModel()
+                        Status = new StatusViewModel()
                         {
                             //CreatedAt = x.Item.Status.CreatedAt,
                             //IsActive = x.Item.Status.IsActive,
@@ -127,7 +128,7 @@ namespace NeoTracker.DAL
                             StatusID = x.Item.Status.StatusID,
                             //UpdatedAt = x.Item.Status.UpdatedAt,
                             //UpdatedBy = x.Item.Status.UpdatedBy,
-                        } : null,
+                        },
                     } : null,
                     IsActive = x.IsActive,
                     CreatedAt = x.CreatedAt,
@@ -140,11 +141,13 @@ namespace NeoTracker.DAL
         {
             using (var context = new NeoTrackerContext())
             {
-                return await context.EventTypes.OrderBy(x => x.SortOrder).ThenBy(x=>x.Name).Select(x => new EventTypeViewModel()
+                return await context.EventTypes.OrderBy(x => x.SortOrder).ThenBy(x => x.Name).Select(x => new EventTypeViewModel()
                 {
                     EventTypeID = x.EventTypeID,
                     Name = x.Name,
                     NotificateDepartment = x.NotificateDepartment,
+                    IsDueDateChange = x.IsDueDateChange,
+                    IsPriceChange = x.IsPriceChange,
                     SortOrder = x.SortOrder,
                     IsActive = x.IsActive,
                     CreatedAt = x.CreatedAt,
@@ -157,13 +160,13 @@ namespace NeoTracker.DAL
         {
             using (var context = new NeoTrackerContext())
             {
-                return await context.Items.Where(x=>x.ProjectID== ProjectID).Include(x => x.Project).Include(x => x.Status).OrderBy(x => x.SortOrder).ThenBy(x => x.Name).Select(x => new ItemViewModel()
+                return await context.Items.Where(x => x.ProjectID == ProjectID).Include(x => x.Project).Include(x => x.Status).OrderBy(x => x.SortOrder).ThenBy(x => x.Name).Select(x => new ItemViewModel()
                 {
                     ItemID = x.ItemID,
                     Code = x.Code,
                     DueDate = x.DueDate,
-                    LatestStartDate = x.LatestStartDate,
-                    Status = x.StatusID.HasValue ? new StatusViewModel()
+                    EndDate = x.EndDate,
+                    Status = new StatusViewModel()
                     {
                         //CreatedAt = x.Status.CreatedAt,
                         //IsActive = x.Status.IsActive,
@@ -173,7 +176,7 @@ namespace NeoTracker.DAL
                         StatusID = x.Status.StatusID,
                         //UpdatedAt = x.Status.UpdatedAt,
                         //UpdatedBy = x.Status.UpdatedBy,
-                    } : null,
+                    },
                     ProjectID = x.ProjectID,
                     Name = x.Name,
                     SortOrder = x.SortOrder,
@@ -188,14 +191,14 @@ namespace NeoTracker.DAL
         {
             using (var context = new NeoTrackerContext())
             {
-                return await context.Operations.Where(x=>x.ItemID == ItemID).Include(x => x.Department).OrderBy(x => x.SortOrder).ThenBy(x => x.Name).Select(x => new OperationViewModel()
+                return await context.Operations.Where(x => x.ItemID == ItemID).Include(x => x.Department).OrderBy(x => x.SortOrder).ThenBy(x => x.Name).Select(x => new OperationViewModel()
                 {
                     Department = x.Department,
                     EndDate = x.EndDate,
                     ItemID = x.ItemID,
                     OperationID = x.OperationID,
                     OperationTime = x.OperationTime,
-                    Progress = x.Progress,
+                    IsCompleted = x.IsCompleted,
                     StartDate = x.StartDate,
                     Name = x.Name,
                     SortOrder = x.SortOrder,
@@ -210,7 +213,7 @@ namespace NeoTracker.DAL
         {
             using (var context = new NeoTrackerContext())
             {
-                return await context.Statuses.OrderBy(x => x.SortOrder).ThenBy(x=>x.Name).Select(x => new StatusViewModel()
+                return await context.Statuses.OrderBy(x => x.SortOrder).ThenBy(x => x.Name).Select(x => new StatusViewModel()
                 {
                     StatusID = x.StatusID,
                     SortOrder = x.SortOrder,

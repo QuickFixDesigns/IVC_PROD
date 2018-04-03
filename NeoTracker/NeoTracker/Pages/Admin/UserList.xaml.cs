@@ -35,7 +35,7 @@ namespace NeoTracker.Pages.Admin
             InitializeComponent();
             btn.SetButton(CreateButton, true, "Create", "New user", "Create new user");
         }
-        private async Task ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private async void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (ListView.SelectedIndex != -1)
             {

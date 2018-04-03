@@ -40,7 +40,7 @@ namespace NeoTracker.Pages.Admin
             btn.SetButton(CancelButton, true, "Cancel", null, null);
         }
 
-        private async Task ApplyButton_Click(object sender, RoutedEventArgs e)
+        private async void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
             await vm.Save();
             App.nav.GoBack(this);
@@ -52,7 +52,7 @@ namespace NeoTracker.Pages.Admin
             App.nav.GoBack(this);
         }
 
-        private async Task DeleteButton_Click(object sender, RoutedEventArgs e)
+        private async void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             await vm.Delete();
             App.nav.GoBack(this);

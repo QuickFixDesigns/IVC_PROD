@@ -46,24 +46,22 @@
                 <Separator Height="10" Background="Transparent"/>
 
                 <Label Content="Code"/>
-                <TextBox  IsReadOnly="True" Style="{StaticResource textBoxInError}" Text="{Binding Item.Code, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <TextBox  IsReadOnly="True" IsEnabled="False"  Style="{StaticResource textBoxInError}" Text="{Binding Item.Code, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Label Content="SortOrder"/>
-                <TextBox  IsReadOnly="True" Style="{StaticResource textBoxInError}" Text="{Binding Item.SortOrder, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <TextBox  IsReadOnly="True" IsEnabled="False"  Style="{StaticResource textBoxInError}" Text="{Binding Item.SortOrder, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Label Content="Name"/>
-                <TextBox  IsReadOnly="True" Style="{StaticResource textBoxInError}" Text="{Binding Item.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <TextBox  IsReadOnly="True" IsEnabled="False"  Style="{StaticResource textBoxInError}" Text="{Binding Item.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Label Content="DueDate" />
-                <TextBox  Text="{Binding Item.DueDate,StringFormat={}{0:yyyy-MM-dd}}"  />
+                <TextBox  IsReadOnly="True" IsEnabled="False"  Text="{Binding Item.DueDate,StringFormat={}{0:yyyy-MM-dd}}"  />
 
                 <Label Content="EndDate" />
                 <TextBox  Text="{Binding Item.EndDate,StringFormat={}{0:yyyy-MM-dd}}"  />
 
-
                 <Label Content="Status"/>
                 <ComboBox ItemsSource="{Binding Path=Statuses}" DisplayMemberPath="Name" SelectedItem="{Binding Item.Status, UpdateSourceTrigger=LostFocus}"/>
-
 
                 <Label Content="IsActive"/>
                 <CheckBox IsChecked="{Binding Item.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />

@@ -40,9 +40,9 @@ namespace NeoTracker.Pages
             btn.SetButton(CancelButton, true, "Cancel", null, null);
         }
 
-        private void ApplyButton_Click(object sender, RoutedEventArgs e)
+        private async void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
-            vm.Save();
+            await vm.Save();
             App.nav.GoBack(this);
         }
 
@@ -52,9 +52,9 @@ namespace NeoTracker.Pages
             App.nav.GoBack(this);
         }
 
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        private async void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            vm.Delete();
+            await vm.Delete();
             App.nav.GoBack(this);
         }
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
@@ -67,7 +67,7 @@ namespace NeoTracker.Pages
             //throw new NotImplementedException();
         }
 
-        public void OnNavigatedToAsync(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
             App.nav.SetLastUri("/Pages/OperationEdit.xaml");
             vm = App.vm.Operation;

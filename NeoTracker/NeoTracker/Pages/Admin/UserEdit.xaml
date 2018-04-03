@@ -18,9 +18,13 @@
         <ScrollViewer Grid.Column="0" >
             <StackPanel HorizontalAlignment="Left" Margin="0,0,10,0">
                 <mui:ModernButton x:Name="ApplyButton" Click="ApplyButton_Click"/>
-                <mui:ModernButton x:Name="AddDepartmentButton" Click="AddDepartmentButton_Click" IsEnabled="{Binding User.CanAddDepartments}"/>
                 <mui:ModernButton x:Name="CancelButton" Click="CancelButton_Click" />
                 <mui:ModernButton x:Name="DeleteButton" Click="DeleteButton_Click"/>
+
+                <Separator Height="20" Visibility="Hidden"/>
+
+                <mui:ModernButton x:Name="AddDepartmentButton" Click="AddDepartmentButton_Click" IsEnabled="{Binding User.CanAddDepartments}"/>
+                
             </StackPanel>
         </ScrollViewer>
 

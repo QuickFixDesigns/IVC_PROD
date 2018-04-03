@@ -39,7 +39,7 @@ namespace NeoTracker.Pages
             btn.SetButton(CancelButton, true, "Cancel", null, null);
         }
 
-        private async Task ApplyButton_Click(object sender, RoutedEventArgs e)
+        private async void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
             await vm.Save();
             App.nav.GoBack(this);

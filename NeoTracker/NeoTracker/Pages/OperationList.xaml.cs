@@ -49,7 +49,7 @@ namespace NeoTracker.Pages
             //throw new NotImplementedException();
         }
 
-        public void OnNavigatedToAsync(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
             App.nav.SetLastUri("/Pages/ItemEdit.xaml");
             util.AutoFitListView(GridListView);

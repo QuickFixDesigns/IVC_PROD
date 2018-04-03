@@ -35,7 +35,7 @@ namespace NeoTracker.Pages.Admin
             InitializeComponent();
             btn.SetButton(CreateButton, true, "Create", "New Department", "Create new department");
         }
-        private async Task ListView_MouseDoubleClickAsync(object sender, MouseButtonEventArgs e)
+        private async void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (ListView.SelectedIndex != -1)
             {

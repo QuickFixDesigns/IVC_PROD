@@ -36,13 +36,11 @@ namespace NeoTracker.Pages
         {
             InitializeComponent();
             btn.SetButton(ApplyButton, true, "Apply", null, null);
-            btn.SetButton(DeleteButton, true, "Delete", null, null);
             btn.SetButton(CancelButton, true, "Cancel", null, null);
 
-            btn.SetButton(RemoveFilterBtn, false, "Reset");
+            btn.SetButton(RemoveFilterBtn, false, "Reset", null, null);
 
-            App.vm.LoadOrders();
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(App.vm.Orders);
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(App.vm.Project.Orders);
             view.Filter = i => UserFilter(i);
 
             ListView.ItemsSource = view;
@@ -56,17 +54,15 @@ namespace NeoTracker.Pages
             else
             {
                 var order = item as OrderViewModel;
-                return order.Code.Contains(SearchBox.Text) || order.Po.Contains(SearchBox.Text);
+                return order.Code.Contains(SearchBox.Text) || order.Po.Contains(SearchBox.Text) || order.Client.Contains(SearchBox.Text);
             }
         }
 
-
-        private void ApplyButton_Click(object sender, RoutedEventArgs e)
+        private async void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
             if (ListView.SelectedIndex != -1)
             {
-                var order = (OrderViewModel)ListView.SelectedItem;
-                vm.Create(order.Code);
+                await vm.Create((OrderViewModel)ListView.SelectedItem);
                 App.nav.NavigateTo("/Pages/ProjectEdit.xaml", this);
             }
         }
@@ -86,7 +82,7 @@ namespace NeoTracker.Pages
             //throw new NotImplementedException();
         }
 
-        public void OnNavigatedToAsync(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
             App.nav.SetLastUri("/Pages/ProjectList.xaml");
             vm = App.vm.Project;
@@ -97,17 +93,13 @@ namespace NeoTracker.Pages
             //throw new NotImplementedException();
         }
 
-        private void ApplyfilterBtn_Click(object sender, RoutedEventArgs e)
-        {
-            CollectionViewSource.GetDefaultView(ListView.ItemsSource).Refresh();
-        }
-
         private void RemoveFilterBtn_Click(object sender, RoutedEventArgs e)
         {
             SearchBox.Text = string.Empty;
             CollectionViewSource.GetDefaultView(ListView.ItemsSource).Refresh();
             ListView.SelectedIndex = -1;
         }
+
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             CollectionViewSource.GetDefaultView(ListView.ItemsSource).Refresh();

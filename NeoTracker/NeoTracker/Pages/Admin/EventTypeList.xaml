@@ -44,6 +44,18 @@
                                 </GridViewColumn.Header>
                             </GridViewColumn>
 
+                            <GridViewColumn DisplayMemberBinding="{Binding IsPriceChange}">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="IsPriceChange">IsPriceChange</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+
+                            <GridViewColumn DisplayMemberBinding="{Binding IsDueDateChange}">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="IsDueDateChange">IsDueDateChange</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+
                             <GridViewColumn DisplayMemberBinding="{Binding IsActive}">
                                 <GridViewColumn.Header>
                                     <GridViewColumnHeader Tag="IsActive">IsActive</GridViewColumnHeader>

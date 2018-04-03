@@ -22,7 +22,7 @@
                 <mui:ModernButton x:Name="CancelButton" Click="CancelButton_Click" />
                 <mui:ModernButton x:Name="DeleteButton" Click="DeleteButton_Click"/>
 
-                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                <Separator Height="20" Visibility="Hidden"/>
 
                 <mui:ModernButton x:Name="AddUserButton" Click="AddUserButton_Click" IsEnabled="{Binding Department.CanAdd}"/>
                 <mui:ModernButton x:Name="AddOperationButton" Click="AddOperationButton_Click" IsEnabled="{Binding Department.CanAdd}"/>

@@ -1,25 +1,9 @@
 ﻿using FirstFloor.ModernUI.Windows;
 using NeoTracker.Content;
 using NeoTracker.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using FirstFloor.ModernUI.Windows.Navigation;
-using NeoTracker.DAL;
-using System.Data.Entity;
-using static NeoTracker.ViewModels.MainViewModel;
-using NeoTracker.Pages.Dialogs;
 
 namespace NeoTracker.Pages.Admin
 {
@@ -42,7 +26,7 @@ namespace NeoTracker.Pages.Admin
             btn.SetButton(ClearHeadOfDepartmentCb, false, "Reset", null, null);
         }
 
-        private async Task ApplyButton_ClickAsync(object sender, RoutedEventArgs e)
+        private async void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
             await vm.Save();
             App.nav.GoBack(this);
@@ -54,13 +38,13 @@ namespace NeoTracker.Pages.Admin
             App.nav.GoBack(this);
         }
 
-        private async Task DeleteButton_ClickAsync(object sender, RoutedEventArgs e)
+        private async void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             await vm.Delete();
             App.nav.GoBack(this);
         }
 
-        private async Task AddUserButton_Click(object sender, RoutedEventArgs e)
+        private async void AddUserButton_Click(object sender, RoutedEventArgs e)
         {
             await vm.AddUsers();
         }

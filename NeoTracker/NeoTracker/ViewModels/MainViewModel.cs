@@ -1,4 +1,5 @@
 ﻿using FirstFloor.ModernUI.Windows.Controls;
+using NeoTracker.Assets;
 using NeoTracker.DAL;
 using NeoTracker.Models;
 using NeoTracker.ViewModels;
@@ -8,12 +9,32 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace NeoTracker.ViewModels
 {
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : ViewModelBase, IAsyncInitialization
     {
         private DataService ds = new DataService();
+
+
+        public MainViewModel()
+        {
+            Initialization = InitializeAsync();
+        }
+
+        //interface IAsyncInit
+        public Task Initialization { get; private set; }
+
+        public async Task InitializeAsync()
+        {
+            await Authentificate();
+            await LoadDepartments();
+            await LoadProjects();
+            await LoadStatus();
+            await LoadUsers();
+            await LoadEventTypes();
+        }
 
         public async Task Authentificate()
         {
@@ -27,12 +48,6 @@ namespace NeoTracker.ViewModels
         {
             IsReady = false;
             Departments = await ds.GetDepartmentList();
-            IsReady = true;
-        }
-        public async Task LoadOrders()
-        {
-            IsReady = false;
-            Orders = await ds.GetOrderList();
             IsReady = true;
         }
         public async Task LoadProjects()
@@ -82,18 +97,9 @@ namespace NeoTracker.ViewModels
             {
                 if (!string.IsNullOrEmpty(value))
                 {
-                    ModernDialog.ShowMessage(value, "User message", System.Windows.MessageBoxButton.OK);
+                    ModernDialog.ShowMessage(value, "User message", MessageBoxButton.OK);
                 }
             }
-        }
-
-
-        //GENIUS DB
-        private List<OrderViewModel> _Orders = new List<OrderViewModel>();
-        public List<OrderViewModel> Orders
-        {
-            get { return _Orders; }
-            set { SetProperty(ref _Orders, value); }
         }
 
 
