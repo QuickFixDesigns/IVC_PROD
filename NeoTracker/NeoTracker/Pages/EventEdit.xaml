@@ -73,9 +73,18 @@
                 </Grid>
                 <ComboBox ItemsSource="{Binding Path=Departments}" DisplayMemberPath="Name" SelectedItem="{Binding Event.Department, UpdateSourceTrigger=LostFocus}" />
 
+                <Grid>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <Label Content="Status"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <mui:ModernButton x:Name="ClearStatus" Click="ClearStatus_Click"></mui:ModernButton>
+                    </StackPanel>
+                </Grid>
+                <ComboBox ItemsSource="{Binding Path=Statuses}" DisplayMemberPath="Name" SelectedItem="{Binding Event.Status, UpdateSourceTrigger=LostFocus}" />
 
                 <Label Content="IsActive"/>
-                <CheckBox IsChecked="{Binding EventType.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <CheckBox IsChecked="{Binding Event.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Label Content="CreatedAt" />
                 <TextBox  IsReadOnly="True"  Text="{Binding Event.CreatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />

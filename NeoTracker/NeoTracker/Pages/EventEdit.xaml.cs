@@ -36,11 +36,12 @@ namespace NeoTracker.Pages
         {
             InitializeComponent();
             btn.SetButton(ApplyButton, true, "Apply", null, null);
-            btn.SetButton(DeleteButton, true, "Delete", null, null);
+            btn.SetButton(DeleteButton, true, "Delete", null, "Delete event");
             btn.SetButton(CancelButton, true, "Cancel", null, null);
 
             btn.SetButton(ClearDepartment, false, "Reset", null, null);
             btn.SetButton(ClearItem, false, "Reset", null, null);
+            btn.SetButton(ClearStatus, false, "Reset", null, null);
         }
 
         private async void ApplyButton_Click(object sender, RoutedEventArgs e)
@@ -72,6 +73,7 @@ namespace NeoTracker.Pages
 
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
+            App.nav.SetLastUri("/Pages/EventEdit.xaml");
             vm = App.vm.Event;
             vm.BeginEdit();
         }
@@ -87,6 +89,11 @@ namespace NeoTracker.Pages
         private void ClearItem_Click(object sender, RoutedEventArgs e)
         {
             vm.EventItem = null ;
+        }
+
+        private void ClearStatus_Click(object sender, RoutedEventArgs e)
+        {
+            vm.Status = null;
         }
     }
 }

@@ -32,19 +32,19 @@ namespace NeoTracker.Content
                     break;
                 case "Cancel":
                     btn.IconData = Geometry.Parse("F1 M 26.9166,22.1667L 37.9999,33.25L 49.0832,22.1668L 53.8332,26.9168L 42.7499,38L 53.8332,49.0834L 49.0833,53.8334L 37.9999,42.75L 26.9166,53.8334L 22.1666,49.0833L 33.25,38L 22.1667,26.9167L 26.9166,22.1667 Z ");
-                    btn.Content = string.IsNullOrEmpty(content) ? "Apply" : content;
-                    btn.ToolTip = string.IsNullOrEmpty(content) ? "Apply changes" : tooltip;
+                    btn.Content = string.IsNullOrEmpty(content) ? "Cancel" : content;
+                    btn.ToolTip = string.IsNullOrEmpty(content) ? "Cancel changes" : tooltip;
                     break;
 
                 case "Create":
                     btn.IconData = Geometry.Parse("F1 M 17,21L 25,21L 25,29L 17,29L 17,21 Z M 17,32L 25,32L 25,40L 17,40L 17,32 Z M 29,21L 55,21L 55,29L 29,29L 29,21 Z M 17,43L 25,43L 25,51L 17,51L 17,43 Z M 29,32L 55,32L 55,40L 29,40L 29,32 Z M 29,43L 55,43L 55,51L 29,51L 29,43 Z M 53,62L 50,62L 50,56L 53,56L 53,62 Z M 61.9215,57.4761L 59.8002,59.5974L 55.5576,55.3548L 57.6789,53.2335L 61.9215,57.4761 Z M 65.0313,47.9688L 65.0313,50.9687L 59.0313,50.9687L 59.0313,47.9688L 65.0313,47.9688 Z M 43.4926,58.8904L 41.3713,56.769L 45.614,52.5264L 47.7353,54.6477L 43.4926,58.8904 Z M 60.6792,39.1972L 62.7631,41.3552L 58.4471,45.5232L 56.3631,43.3652L 60.6792,39.1972 Z ");
-                    btn.Content = string.IsNullOrEmpty(content) ? "Apply" : content;
-                    btn.ToolTip = string.IsNullOrEmpty(content) ? "Apply changes" : tooltip;
+                    btn.Content = string.IsNullOrEmpty(content) ? "not set" : content;
+                    btn.ToolTip = string.IsNullOrEmpty(content) ? "not set" : tooltip;
                     break;
                 case "Delete":
                     btn.IconData = Geometry.Parse("F1 M 25.3333,23.75L 50.6667,23.75C 51.5411,23.75 51.8541,27.3125 51.8541,27.3125L 24.1458,27.3125C 24.1458,27.3125 24.4589,23.75 25.3333,23.75 Z M 35.625,19.7917L 40.375,19.7917C 40.8122,19.7917 41.9583,20.9378 41.9583,21.375C 41.9583,21.8122 40.8122,22.9584 40.375,22.9584L 35.625,22.9584C 35.1878,22.9584 34.0416,21.8122 34.0416,21.375C 34.0416,20.9378 35.1878,19.7917 35.625,19.7917 Z M 27.7083,28.5L 48.2916,28.5C 49.1661,28.5 49.875,29.2089 49.875,30.0834L 48.2916,53.8334C 48.2916,54.7078 47.5828,55.4167 46.7083,55.4167L 29.2917,55.4167C 28.4172,55.4167 27.7083,54.7078 27.7083,53.8334L 26.125,30.0834C 26.125,29.2089 26.8339,28.5 27.7083,28.5 Z M 30.0833,31.6667L 30.4792,52.25L 33.25,52.25L 32.8542,31.6667L 30.0833,31.6667 Z M 36.4167,31.6667L 36.4167,52.25L 39.5833,52.25L 39.5833,31.6667L 36.4167,31.6667 Z M 43.1458,31.6667L 42.75,52.25L 45.5208,52.25L 45.9167,31.6667L 43.1458,31.6667 Z ");
-                    btn.Content = string.IsNullOrEmpty(content) ? "Apply" : content;
-                    btn.ToolTip = string.IsNullOrEmpty(content) ? "Apply changes" : tooltip;
+                    btn.Content = string.IsNullOrEmpty(content) ? "Delete" : content;
+                    btn.ToolTip = string.IsNullOrEmpty(content) ? "not set" : tooltip;
                     break;
 
 

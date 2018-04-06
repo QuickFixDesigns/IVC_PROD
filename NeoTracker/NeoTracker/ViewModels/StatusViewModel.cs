@@ -132,5 +132,22 @@ namespace NeoTracker.Models
         {
             get { return this[null]; }
         }
+        public override bool Equals(object obj)
+        {
+            if (obj == null || !(obj is StatusViewModel))
+                return false;
+
+            return ((StatusViewModel)obj).StatusID == this.StatusID;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }

@@ -17,5 +17,23 @@ namespace NeoTracker.Models
         //navigation
         public ICollection<Item> Items { get; set; }
         public ICollection<Event> Events { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || !(obj is Status))
+                return false;
+
+            return ((Status)obj).StatusID == this.StatusID;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }

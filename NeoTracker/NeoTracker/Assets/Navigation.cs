@@ -15,17 +15,22 @@ namespace NeoTracker.Assets
 
     public class Navigation
     {
-        private List<string> LastUri = new List<string>();
+        private List<string> historic = new List<string>();
 
         public void GoBack(FrameworkElement source)
         {
-            LastUri.RemoveAt(LastUri.Count - 1);
-            NavigateTo(LastUri.Last(), source);
-
+            if (historic.Count > 1)
+            {
+                historic.RemoveAt(historic.Count - 1);
+            }
+            NavigateTo(historic.Last(), source);
         }
         public void SetLastUri(string uri)
         {
-            LastUri.Add(uri);
+            if(historic.Count == 0 || historic.Last() != uri)
+            {
+                historic.Add(uri);
+            }
         }
         public void NavigateTo(string uri, FrameworkElement source)
         {
