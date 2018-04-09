@@ -108,17 +108,23 @@ namespace NeoTracker.ViewModels
             }
         }
         //Departments
-        private List<DepartmentViewModel> _Departments = new List<DepartmentViewModel>();
+        private List<DepartmentViewModel> _Departments;
         public List<DepartmentViewModel> Departments
         {
             get { return _Departments; }
             set { SetProperty(ref _Departments, value); }
         }
-        private DepartmentViewModel _Department = new DepartmentViewModel();
+        private DepartmentViewModel _Department;
         public DepartmentViewModel Department
         {
             get { return _Department; }
             set { SetProperty(ref _Department, value); }
+        }
+        private DepartmentOperationViewModel _DepartmentOperation;
+        public DepartmentOperationViewModel DepartmentOperation
+        {
+            get { return _DepartmentOperation; }
+            set { SetProperty(ref _DepartmentOperation, value); }
         }
         //Projects
         private List<ProjectViewModel> _Projects = new List<ProjectViewModel>();

@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="NeoTracker.Pages.DepartmentOperationEdit"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:src="clr-namespace:NeoTracker.ViewModels"
+             mc:Ignorable="d" >
+    <Grid Style="{StaticResource ContentRoot}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="1"/>
+            <ColumnDefinition Width="auto" MinWidth="200" MaxWidth="420"/>
+        </Grid.ColumnDefinitions>
+
+        <ScrollViewer Grid.Column="0" >
+            <StackPanel HorizontalAlignment="Left" Margin="0,0,10,0">
+                <mui:ModernButton x:Name="ApplyButton" Click="ApplyButton_Click"/>
+                <mui:ModernButton x:Name="CancelButton" Click="CancelButton_Click" />
+                <mui:ModernButton x:Name="DeleteButton" Click="DeleteButton_Click"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <GridSplitter Grid.Column="1" />
+
+        <ScrollViewer Grid.Column="2">
+            <StackPanel Name="panel" Margin="10,0,10,0" MaxWidth="400">
+
+                <StackPanel.BindingGroup>
+                    <BindingGroup Name="bindingGroup"/>
+                </StackPanel.BindingGroup>
+
+                <StackPanel.Resources>
+                    <src:MainViewModel x:Key="DepartmentOperationViewModel"/>
+                    <Style x:Key="textBoxInError" TargetType="TextBox">
+                        <Style.Triggers>
+                            <Trigger Property="Validation.HasError" Value="true">
+                                <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Resources>
+
+                <TextBlock Text="Operation" Style="{StaticResource Heading2}" />
+                <Separator Height="10" Background="Transparent"/>
+
+                <Label Content="SortOrder" />
+                <TextBox Text="{Binding DepartmentOperation.SortOrder, UpdateSourceTrigger=PropertyChanged}"  />
+
+                <Label Content="Name" />
+                <TextBox Text="{Binding DepartmentOperation.Name, UpdateSourceTrigger=PropertyChanged}"  />
+
+                <Label Content="OperationTime" />
+                <TextBox Text="{Binding DepartmentOperation.OperationTime, UpdateSourceTrigger=PropertyChanged}"  />
+
+                <Label Content="IsActive"/>
+                <CheckBox IsChecked="{Binding DepartmentOperation.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+
+                <Label Content="CreatedAt" />
+                <TextBox  IsReadOnly="True"  Text="{Binding DepartmentOperation.CreatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
+                <Label Content="UpdatedBy" />
+                <TextBox  IsReadOnly="True" Text="{Binding DepartmentOperation.UpdatedBy}"  />
+                <Label Content="UpdatedAt" />
+                <TextBox  IsReadOnly="True"  Text="{Binding DepartmentOperation.UpdatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

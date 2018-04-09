@@ -22,11 +22,11 @@ namespace NeoTracker.Pages.Admin
     /// <summary>
     /// Interaction logic for ItemList.xaml
     /// </summary>
-    public partial class DepartmentUserList : UserControl, IContent
+    public partial class DepartmentOperationList : UserControl, IContent
     {
         private Utilities util = new Utilities();
 
-        public DepartmentUserList()
+        public DepartmentOperationList()
         {
             InitializeComponent();
         }
@@ -49,11 +49,12 @@ namespace NeoTracker.Pages.Admin
         {
             //throw new NotImplementedException();
         }
-        private async void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (ListView.SelectedIndex != -1)
             {
-                //await App.vm.Department.RemoveUser(((User)ListView.SelectedItem));
+                App.vm.DepartmentOperation = ((DepartmentOperationViewModel)ListView.SelectedItem);
+                App.nav.NavigateTo("/Pages/Admin/DepartmentOperationEdit.xaml", this);
             }
         }
     }

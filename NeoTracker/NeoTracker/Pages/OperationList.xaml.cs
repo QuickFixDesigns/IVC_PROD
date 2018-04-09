@@ -58,5 +58,16 @@ namespace NeoTracker.Pages
         {
             //throw new NotImplementedException();
         }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            var x = App.vm.Operation;
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            var x = sender as CheckBox;
+            var y = x.IsChecked;
+        }
     }
 }

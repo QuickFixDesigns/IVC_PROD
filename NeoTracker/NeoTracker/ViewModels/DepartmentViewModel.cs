@@ -53,8 +53,8 @@ namespace NeoTracker.Models
                 CanDelete = !value.Any() && !DepartmentOperations.Any() && DepartmentID != 0;
             }
         }
-        private List<DepartmentOperation> _DepartmentOperations = new List<DepartmentOperation>();
-        public List<DepartmentOperation> DepartmentOperations
+        private List<DepartmentOperationViewModel> _DepartmentOperations = new List<DepartmentOperationViewModel>();
+        public List<DepartmentOperationViewModel> DepartmentOperations
         {
             get { return _DepartmentOperations; }
             set
@@ -94,7 +94,18 @@ namespace NeoTracker.Models
             {
                 using (var context = new NeoTrackerContext())
                 {
-                    DepartmentOperations = await context.DepartmentOperations.Where(x => x.DepartmentID == DepartmentID).OrderBy(x => x.SortOrder).ThenBy(x => x.Name).ToListAsync();
+                    DepartmentOperations = await context.DepartmentOperations.Where(x => x.DepartmentID == DepartmentID).OrderBy(x => x.SortOrder).ThenBy(x => x.Name).Select(x => new DepartmentOperationViewModel()
+                    {
+                        CreatedAt = x.CreatedAt,
+                        DepartmentID = x.DepartmentID,
+                        DepartmentOperationID = x.DepartmentOperationID,
+                        IsActive = x.IsActive,
+                        Name = x.Name,
+                        OperationTime = x.OperationTime,
+                        SortOrder = x.SortOrder,
+                        UpdatedAt = x.UpdatedAt,
+                        UpdatedBy = x.UpdatedBy,
+                    }).ToListAsync();
                 }
             }
         }

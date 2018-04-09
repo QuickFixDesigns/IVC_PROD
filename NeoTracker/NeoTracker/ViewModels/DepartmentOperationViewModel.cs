@@ -15,20 +15,11 @@ using static NeoTracker.ViewModels.MainViewModel;
 
 namespace NeoTracker.Models
 {
-    public class ItemViewModel : ViewModelBase, IDataErrorInfo
+    public class DepartmentOperationViewModel : ViewModelBase, IDataErrorInfo
     {
-        private DataService ds = new DataService();
+        public int DepartmentOperationID { get; set; }
+        public int DepartmentID { get; set; }
 
-        public int ItemID { get; set; }
-        public int ProjectID { get; set; }
-        public int? SortKey { get; set; }
-
-        private string _Code;
-        public string Code
-        {
-            get { return _Code; }
-            set { SetProperty(ref _Code, value); }
-        }
         private int? _SortOrder;
         public int? SortOrder
         {
@@ -41,67 +32,27 @@ namespace NeoTracker.Models
             get { return _Name; }
             set { SetProperty(ref _Name, value); }
         }
-        private DateTime? _DueDate;
-        public DateTime? DueDate
+        private decimal _OperationTime;
+        public decimal OperationTime
         {
-            get { return _DueDate; }
-            set { SetProperty(ref _DueDate, value); }
-        }
-        private DateTime? _EndDate;
-        public DateTime? EndDate
-        {
-            get { return _EndDate; }
-            set { SetProperty(ref _EndDate, value); }
-        }
-        private StatusViewModel _Status = new StatusViewModel();
-        public StatusViewModel Status
-        {
-            get { return _Status; }
-            set { SetProperty(ref _Status, value); }
-        }
-        private List<OperationViewModel> _Operations;
-        public List<OperationViewModel> Operations
-        {
-            get { return _Operations; }
-            set
-            {
-                SetProperty(ref _Operations, value);
-            }
-        }
-        public string OperationCount
-        {
-            get
-            {
-                string count = Operations != null ? string.Concat(Operations.Count(x => x.IsCompleted).ToString(), " / ", Operations.Count.ToString()) : App.BlankStr;
-                return count;
-            }
+            get { return _OperationTime; }
+            set { SetProperty(ref _OperationTime, value); }
         }
         //For database
-        public Item GetModel()
+        public DepartmentOperation GetModel()
         {
-            return new Item()
+            return new DepartmentOperation()
             {
-                ItemID = ItemID,
-                ProjectID = ProjectID,
-                Code = Code,
-                DueDate = DueDate,
-                EndDate = EndDate,
+                DepartmentOperationID = DepartmentOperationID,
+                DepartmentID = DepartmentID,
                 SortOrder = SortOrder,
-                SortKey = SortKey,
-                StatusID = Status.StatusID,
                 Name = Name,
+                OperationTime = OperationTime,
                 IsActive = IsActive,
                 CreatedAt = CreatedAt,
                 UpdatedAt = UpdatedAt,
                 UpdatedBy = UpdatedBy
             };
-        }
-        public async Task LoadOperations()
-        {
-            if (ItemID != 0)
-            {
-                Operations = await ds.GetOperationList(ItemID);
-            }
         }
         public async Task Save()
         {
@@ -110,9 +61,9 @@ namespace NeoTracker.Models
                 using (var context = new NeoTrackerContext())
                 {
                     var data = GetModel();
-                    if (ItemID == 0)
+                    if (DepartmentOperationID == 0)
                     {
-                        context.Items.Add(data);
+                        context.DepartmentOperations.Add(data);
                     }
                     else
                     {
@@ -121,7 +72,7 @@ namespace NeoTracker.Models
                     await context.SaveChangesAsync();
                 }
                 EndEdit();
-                await App.vm.Project.LoadItems();
+                await App.vm.Department.LoadOperations();
             }
             catch (Exception e)
             {
@@ -132,7 +83,7 @@ namespace NeoTracker.Models
         {
             try
             {
-                var dialog = new QuestionDialog("Do you really want to delete this item (" + Name + ")?");
+                var dialog = new QuestionDialog("Do you really want to delete this operation (" + Name + ")?");
                 dialog.ShowDialog();
                 if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
                 {
@@ -142,7 +93,7 @@ namespace NeoTracker.Models
                         {
                             var data = GetModel();
                             context.Entry(data).State = EntityState.Deleted;
-                            App.vm.Project.Items.Remove(this);
+                            App.vm.Department.DepartmentOperations.Remove(this);
                             await context.SaveChangesAsync();
                             EndEdit();
                         }
@@ -163,15 +114,23 @@ namespace NeoTracker.Models
 
                 if (columnName == "Name")
                 {
-                    if (string.IsNullOrEmpty(Name) || (Name ?? "").Length > 255)
+                    if (string.IsNullOrEmpty(Name) || (Name ?? "").Length > 100)
                     {
-                        result = "Cannot be empty or more than 255 characters";
+                        result = "Cannot be empty or more than 100 characters";
                     }
                 }
                 if (columnName == "SortOrder")
                 {
                     Regex regex = new Regex("[^0-9]+");
                     if (regex.IsMatch(SortOrder.ToString()))
+                    {
+                        result = "Cannot be a text value";
+                    }
+                }
+                if (columnName == "OperationTime")
+                {
+                    Regex regex = new Regex("[^0-9]+");
+                    if (regex.IsMatch(OperationTime.ToString()))
                     {
                         result = "Cannot be a text value";
                     }
@@ -183,12 +142,14 @@ namespace NeoTracker.Models
         {
             get { return this[null]; }
         }
+
+
         public override bool Equals(object obj)
         {
-            if (obj == null || !(obj is ItemViewModel))
+            if (obj == null || !(obj is DepartmentOperationViewModel))
                 return false;
 
-            return ((ItemViewModel)obj).ItemID == this.ItemID;
+            return ((DepartmentOperationViewModel)obj).DepartmentOperationID == DepartmentOperationID;
         }
 
         public override string ToString()

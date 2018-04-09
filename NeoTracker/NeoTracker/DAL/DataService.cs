@@ -46,13 +46,14 @@ namespace NeoTracker.DAL
                     Code = x.Code,
                     Comment = x.Comment,
                     Name = x.Name,
-                    //Priority = x.Priority,
+                    Client = x.Client,
+                    PurchaseOrder = x.PurchaseOrder,
                     ProjectID = x.ProjectID,
                     ProjectType = x.ProjectTypeID.HasValue ? new ProjectTypeViewModel()
                     {
                         ProjectTypeID = x.ProjectType.ProjectTypeID,
                         Name = x.ProjectType.Name,
-                    }: null,
+                    } : null,
                     IsActive = x.IsActive,
                     CreatedAt = x.CreatedAt,
                     UpdatedAt = x.UpdatedAt,
@@ -68,7 +69,7 @@ namespace NeoTracker.DAL
             {
                 var projects = context.Projects.Select(x => x.Code).ToArray();
 
-                return await Genius.Comms.Where(x => x.Datecli > DateTime.Today && !projects.Contains(x.No_Com)).OrderByDescending(x => x.Datecli).ThenBy(x=>x.No_Com).Select(x => new OrderViewModel()
+                return await Genius.Comms.Where(x => x.Datecli > DateTime.Today && !projects.Contains(x.No_Com)).OrderByDescending(x => x.Datecli).ThenBy(x => x.No_Com).Select(x => new OrderViewModel()
                 {
                     Code = x.No_Com,
                     Client = x.Fact_A1,

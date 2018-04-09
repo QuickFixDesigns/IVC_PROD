@@ -175,6 +175,7 @@ namespace NeoTracker.Models
                     await LoadItems();
                 }
                 EndEdit();
+                Orders.Clear();
                 await App.vm.LoadProjects();
             }
             catch (Exception e)
