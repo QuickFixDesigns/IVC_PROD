@@ -19,11 +19,10 @@
                             <GridViewColumn Header="StartDate" DisplayMemberBinding="{Binding StartDate,StringFormat={}{0:yyyy-MM-dd}}"  />
                             <GridViewColumn Header="EndDate" DisplayMemberBinding="{Binding EndDate,StringFormat={}{0:yyyy-MM-dd}}" />
                             <GridViewColumn Header="OperationTime" DisplayMemberBinding="{Binding OperationTime}" />
-                            <GridViewColumn Header="IsCompleted" DisplayMemberBinding="{Binding IsCompleted}" />
-                            <GridViewColumn>
+                            <GridViewColumn Header="IsCompleted">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <CheckBox IsChecked="{Binding IsCompleted, UpdateSourceTrigger=PropertyChanged}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+                                        <CheckBox Command="{Binding ClickCommand}" IsChecked="{Binding IsCompleted, UpdateSourceTrigger=PropertyChanged}" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>

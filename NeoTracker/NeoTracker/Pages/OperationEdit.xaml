@@ -62,8 +62,8 @@
                 <Label Content="OperationTime" />
                 <TextBox Text="{Binding Operation.OperationTime, UpdateSourceTrigger=PropertyChanged}"  />
 
-                <Label Content="Progress" />
-                <TextBox Text="{Binding Operation.Progress, UpdateSourceTrigger=PropertyChanged}"  />
+                <Label Content="IsCompleted"/>
+                <CheckBox IsChecked="{Binding Operation.IsCompleted, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Label Content="IsActive"/>
                 <CheckBox IsChecked="{Binding Operation.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />

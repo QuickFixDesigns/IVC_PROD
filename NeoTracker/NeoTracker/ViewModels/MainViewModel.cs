@@ -40,7 +40,7 @@ namespace NeoTracker.ViewModels
         public async Task Authentificate()
         {
             IsReady = false;
-            CurrentUSer = await ds.GetUser("karrick_Mercier@hotmail.com");
+            CurrentUser = await ds.GetUser("karrick_Mercier@hotmail.com");
             IsReady = true;
         }
 
@@ -82,17 +82,17 @@ namespace NeoTracker.ViewModels
             IsReady = true;
         }
         //base attributes
-        private User _CurrentUSer = new User();
-        public User CurrentUSer
+        private UserViewModel _CurrentUser = new UserViewModel();
+        public UserViewModel CurrentUser
         {
-            get { return _CurrentUSer; }
-            set { SetProperty(ref _CurrentUSer, value); }
+            get { return _CurrentUser; }
+            set { SetProperty(ref _CurrentUser, value); }
         }
         private bool _IsReady = false;
         public bool IsReady
         {
             get { return _IsReady; }
-            set { SetProperty(ref _IsReady, value && CurrentUSer != null); }
+            set { SetProperty(ref _IsReady, value && CurrentUser != null); }
         }
 
         private string _UserMsg = string.Empty;

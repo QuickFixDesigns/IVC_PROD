@@ -1,4 +1,5 @@
 ﻿using FirstFloor.ModernUI.Windows.Controls;
+using NeoTracker.Assets;
 using NeoTracker.DAL;
 using NeoTracker.Pages.Dialogs;
 using NeoTracker.ViewModels;
@@ -11,6 +12,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using static NeoTracker.ViewModels.MainViewModel;
 
 namespace NeoTracker.Models
@@ -58,6 +60,16 @@ namespace NeoTracker.Models
             get { return _IsCompleted; }
             set { SetProperty(ref _IsCompleted, value); }
         }
+
+        private ICommand _clickCommand;
+        public ICommand ClickCommand
+        {
+            get
+            {
+                return _clickCommand ?? (_clickCommand = new CommandHandler(async () => await Save(), true));
+            }
+        }
+
         private Department _Department = new Department();
         public Department Department
         {

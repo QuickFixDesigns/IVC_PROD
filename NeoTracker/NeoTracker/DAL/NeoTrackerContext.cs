@@ -69,7 +69,7 @@ namespace NeoTracker.DAL
         }
         protected string GetCurrentUserID()
         {
-            return App.vm.CurrentUSer.Email;
+            return App.vm.CurrentUser.Email;
         }
     }
 }

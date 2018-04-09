@@ -12,11 +12,35 @@ namespace NeoTracker.DAL
 {
     public class DataService
     {
-        public async Task<User> GetUser(string Email)
+        public async Task<UserViewModel> GetUser(string Email)
         {
             using (var context = new NeoTrackerContext())
             {
-                return await context.Users.FirstOrDefaultAsync(x => x.Email == Email);
+                return await context.Users.Include(x => x.DepartmentUsers).Include(x => x.DepartmentUsers.Select(d=>d.Department)).Where(x => x.Email == Email).Select(x => new UserViewModel()
+                {
+                    Alias = x.Alias,
+                    CreatedAt = x.CreatedAt,
+                    Email = Email,
+                    Departments = x.DepartmentUsers.Select(d => new DepartmentViewModel()
+                    {
+                        DepartmentID = d.DepartmentID,
+                        CreatedAt = d.Department.CreatedAt,
+                        HeadOfDepartment = d.Department.HeadOfDepartment,
+                        IsActive = d.Department.IsActive,
+                        Name = d.Department.Name,
+                        SortOrder = d.Department.SortOrder,
+                        UpdatedAt = d.Department.UpdatedAt,
+                        UpdatedBy = d.Department.UpdatedBy,
+                    }).ToList(),
+                    EmailNotifications = x.EmailNotifications,
+                    FirstName = x.FirstName,
+                    IsActive = x.IsActive,
+                    IsAdmin = x.IsAdmin,
+                    LastName = x.LastName,
+                    UpdatedAt = x.UpdatedAt,
+                    UpdatedBy = x.UpdatedBy,
+                    UserID = x.UserID
+                }).FirstOrDefaultAsync();
             }
         }
         public async Task<List<DepartmentViewModel>> GetDepartmentList()
@@ -59,6 +83,18 @@ namespace NeoTracker.DAL
                     UpdatedAt = x.UpdatedAt,
                     UpdatedBy = x.UpdatedBy,
                 }).ToListAsync();
+            }
+        }
+
+        public async Task<string> GetOperationCount(int itemID)
+        {
+            //string count = Operations != null ? string.Concat(Operations.Count(x => x.IsCompleted).ToString(), " / ", Operations.Count.ToString()) : App.BlankStr;
+            using (var context = new NeoTrackerContext())
+            {
+                int completed = await context.Operations.CountAsync(x => x.ItemID == itemID && x.IsCompleted);
+                int total = await context.Operations.CountAsync(x => x.ItemID == itemID);
+
+                return total != 0 ? string.Concat(completed.ToString(), " / ", total.ToString()) : App.BlankStr;
             }
         }
 
@@ -193,7 +229,7 @@ namespace NeoTracker.DAL
         {
             using (var context = new NeoTrackerContext())
             {
-                return await context.Items.Where(x => !ProjectID.HasValue || x.ProjectID == ProjectID.Value).Include(x => x.Project).Include(x => x.Status).OrderBy(x => x.SortOrder).ThenBy(x => x.Name).Select(x => new ItemViewModel()
+                return await context.Items.Where(x => !ProjectID.HasValue || x.ProjectID == ProjectID.Value).Include(x => x.Project).Include(x => x.Operations).Include(x => x.Status).OrderBy(x => x.SortOrder).ThenBy(x => x.Name).Select(x => new ItemViewModel()
                 {
                     ItemID = x.ItemID,
                     Code = x.Code,
@@ -212,6 +248,10 @@ namespace NeoTracker.DAL
                     },
                     ProjectID = x.ProjectID,
                     Name = x.Name,
+                    Operations = x.Operations.Select(o => new OperationViewModel()
+                    {
+                        IsCompleted = o.IsCompleted
+                    }).ToList(),
                     SortOrder = x.SortOrder,
                     IsActive = x.IsActive,
                     CreatedAt = x.CreatedAt,

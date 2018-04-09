@@ -71,7 +71,7 @@
                         <mui:ModernButton x:Name="ClearDepartment" Click="ClearDepartment_Click"></mui:ModernButton>
                     </StackPanel>
                 </Grid>
-                <ComboBox ItemsSource="{Binding Path=Departments}" DisplayMemberPath="Name" SelectedItem="{Binding Event.Department, UpdateSourceTrigger=LostFocus}" />
+                <ComboBox ItemsSource="{Binding Path=CurrentUser.Departments}" DisplayMemberPath="Name" SelectedItem="{Binding Event.Department, UpdateSourceTrigger=LostFocus}" />
 
                 <Grid>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">

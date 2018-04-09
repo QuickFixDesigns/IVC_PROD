@@ -86,6 +86,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Assets\Buttons.cs" />
+    <Compile Include="Assets\CommandHandler.cs" />
     <Compile Include="Assets\IAsyncInitialization.cs" />
     <Compile Include="Assets\Navigation.cs" />
     <Compile Include="Assets\Utilities.cs" />
