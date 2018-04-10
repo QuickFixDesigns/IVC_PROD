@@ -58,13 +58,14 @@ namespace NeoTracker.DAL
             foreach (var entity in entities)
             {
                 var now = DateTime.Now; // current datetime
-
+                string user = GetCurrentUserID();
                 if (entity.State == EntityState.Added)
                 {
                     ((EntityBase)entity.Entity).CreatedAt = now;
+                    ((EntityBase)entity.Entity).CreatedBy = user;
                 }
                 ((EntityBase)entity.Entity).UpdatedAt = now;
-                ((EntityBase)entity.Entity).UpdatedBy = GetCurrentUserID();
+                ((EntityBase)entity.Entity).UpdatedBy = user;
             }
         }
         protected string GetCurrentUserID()

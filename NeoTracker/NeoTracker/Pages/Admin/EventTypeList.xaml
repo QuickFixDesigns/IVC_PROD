@@ -38,9 +38,9 @@
                                 </GridViewColumn.Header>
                             </GridViewColumn>
 
-                            <GridViewColumn DisplayMemberBinding="{Binding NotificateDepartment}">
+                            <GridViewColumn DisplayMemberBinding="{Binding Notificate}">
                                 <GridViewColumn.Header>
-                                    <GridViewColumnHeader Tag="NotificateDepartment">NotificateDepartment</GridViewColumnHeader>
+                                    <GridViewColumnHeader Tag="Notificate">Notificate</GridViewColumnHeader>
                                 </GridViewColumn.Header>
                             </GridViewColumn>
 

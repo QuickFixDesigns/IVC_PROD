@@ -102,14 +102,14 @@ namespace NeoTracker.Models
                 {
                     using (var context = new NeoTrackerContext())
                     {
-                        if (CanDelete)
-                        {
+                        //if (CanDelete)
+                        //{
                             var data = GetModel();
                             context.Entry(data).State = EntityState.Deleted;
                             App.vm.Project.Events.Remove(this);
                             await context.SaveChangesAsync();
                             EndEdit();
-                        }
+                        //}
                     }
                 }
             }

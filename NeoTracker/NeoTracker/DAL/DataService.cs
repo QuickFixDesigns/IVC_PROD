@@ -140,7 +140,7 @@ namespace NeoTracker.DAL
                     {
                         EventTypeID = x.EventTypeID,
                         Name = x.EventType.Name,
-                        //NotificateDepartment = x.EventType.NotificateDepartment,
+                        //Notificate = x.EventType.Notificate,
                         //SortOrder = x.EventType.SortOrder,
                         //IsActive = x.EventType.IsActive,
                         //CreatedAt = x.EventType.CreatedAt,
@@ -214,7 +214,7 @@ namespace NeoTracker.DAL
                 {
                     EventTypeID = x.EventTypeID,
                     Name = x.Name,
-                    NotificateDepartment = x.NotificateDepartment,
+                    Notificate = x.Notificate,
                     IsDueDateChange = x.IsDueDateChange,
                     IsPriceChange = x.IsPriceChange,
                     SortOrder = x.SortOrder,

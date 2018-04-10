@@ -24,6 +24,12 @@ namespace NeoTracker.ViewModels
             get { return _UpdatedAt; }
             set { SetProperty(ref _UpdatedAt, value); }
         }
+        private string _CreatedBy;
+        public string CreatedBy
+        {
+            get { return _CreatedBy; }
+            set { SetProperty(ref _CreatedBy, value); }
+        }
         private string _UpdatedBy;
         public string UpdatedBy
         {

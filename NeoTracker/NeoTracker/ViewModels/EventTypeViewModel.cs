@@ -30,13 +30,13 @@ namespace NeoTracker.Models
             get { return _SortOrder; }
             set { SetProperty(ref _SortOrder, value); }
         }
-        private bool _NotificateDepartment;
-        public bool NotificateDepartment
+        private bool _Notificate;
+        public bool Notificate
         {
-            get { return _NotificateDepartment; }
+            get { return _Notificate; }
             set
             {
-                SetProperty(ref _NotificateDepartment, value);
+                SetProperty(ref _Notificate, value);
             }
         }
         private bool _IsPriceChange;
@@ -58,7 +58,7 @@ namespace NeoTracker.Models
             {
                 EventTypeID = EventTypeID,
                 Name = Name,
-                NotificateDepartment = NotificateDepartment,
+                Notificate = Notificate,
                 IsDueDateChange = IsDueDateChange,
                 IsPriceChange = IsPriceChange,
                 SortOrder = SortOrder,

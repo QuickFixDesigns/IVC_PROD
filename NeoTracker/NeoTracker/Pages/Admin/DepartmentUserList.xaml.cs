@@ -53,7 +53,7 @@ namespace NeoTracker.Pages.Admin
         {
             if (ListView.SelectedIndex != -1)
             {
-                //await App.vm.Department.RemoveUser(((User)ListView.SelectedItem));
+                await App.vm.Department.RemoveUser(((User)ListView.SelectedItem));
             }
         }
     }

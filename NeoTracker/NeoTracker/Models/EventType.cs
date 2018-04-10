@@ -12,7 +12,7 @@ namespace NeoTracker.Models
         public string Name { get; set; }
 
         public int? SortOrder { get; set; }
-        public bool NotificateDepartment { get; set; }
+        public bool Notificate { get; set; }
         public bool IsPriceChange { get; set; }
         public bool IsDueDateChange { get; set; }
 

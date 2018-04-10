@@ -51,8 +51,8 @@
                 <Label Content="SortOrder"/>
                 <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding EventType.SortOrder, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
-                <Label Content="NotificateDepartment"/>
-                <CheckBox IsChecked="{Binding EventType.NotificateDepartment, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <Label Content="Notificate"/>
+                <CheckBox IsChecked="{Binding EventType.Notificate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Label Content="IsPriceChange"/>
                 <CheckBox IsChecked="{Binding EventType.IsPriceChange, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
