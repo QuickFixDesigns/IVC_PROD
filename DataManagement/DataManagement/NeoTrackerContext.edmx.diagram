@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2665d622d14d44d7b830782c66a3e00a" Name="Diagram1">
+        <EntityTypeShape EntityType="NeoTrackerDbModel.Department" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NeoTrackerDbModel.DepartmentOperation" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NeoTrackerDbModel.DepartmentUser" Width="1.5" PointX="8.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NeoTrackerDbModel.Event" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NeoTrackerDbModel.EventType" Width="1.5" PointX="3" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NeoTrackerDbModel.Item" Width="1.5" PointX="3" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NeoTrackerDbModel.Operation" Width="1.5" PointX="5.25" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="NeoTrackerDbModel.Project" Width="1.5" PointX="0.75" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NeoTrackerDbModel.ProjectType" Width="1.5" PointX="1.5" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NeoTrackerDbModel.Status" Width="1.5" PointX="0.75" PointY="28.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NeoTrackerDbModel.User" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <AssociationConnector Association="NeoTrackerDbModel.FK_dbo_Department_dbo_User_HeadOfDepartmentID" ManuallyRouted="false" />
+        <AssociationConnector Association="NeoTrackerDbModel.FK_dbo_DepartmentOperation_dbo_Department_DepartmentID" ManuallyRouted="false" />
+        <AssociationConnector Association="NeoTrackerDbModel.FK_dbo_DepartmentUser_dbo_Department_DepartmentID" ManuallyRouted="false" />
+        <AssociationConnector Association="NeoTrackerDbModel.FK_dbo_Event_dbo_Department_DepartmentID" ManuallyRouted="false" />
+        <AssociationConnector Association="NeoTrackerDbModel.FK_dbo_Operation_dbo_Department_DepartmentID" ManuallyRouted="false" />
+        <AssociationConnector Association="NeoTrackerDbModel.FK_dbo_DepartmentUser_dbo_User_UserID" ManuallyRouted="false" />
+        <AssociationConnector Association="NeoTrackerDbModel.FK_dbo_Event_dbo_EventType_EventTypeID" ManuallyRouted="false" />
+        <AssociationConnector Association="NeoTrackerDbModel.FK_dbo_Event_dbo_Item_ItemID" ManuallyRouted="false" />
+        <AssociationConnector Association="NeoTrackerDbModel.FK_dbo_Event_dbo_Project_ProjectID" ManuallyRouted="false" />
+        <AssociationConnector Association="NeoTrackerDbModel.FK_dbo_Event_dbo_Status_StatusID" ManuallyRouted="false" />
+        <AssociationConnector Association="NeoTrackerDbModel.FK_dbo_Item_dbo_Project_ProjectID" ManuallyRouted="false" />
+        <AssociationConnector Association="NeoTrackerDbModel.FK_dbo_Item_dbo_Status_StatusID" ManuallyRouted="false" />
+        <AssociationConnector Association="NeoTrackerDbModel.FK_dbo_Operation_dbo_Item_ItemID" ManuallyRouted="false" />
+        <AssociationConnector Association="NeoTrackerDbModel.FK_dbo_Project_dbo_ProjectType_ProjectTypeID" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

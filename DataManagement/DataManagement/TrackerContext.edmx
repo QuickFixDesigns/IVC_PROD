@@ -1,0 +1,476 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Ice_Project_TrackerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="PT_Department">
+          <Key>
+            <PropertyRef Name="Department_Key" />
+          </Key>
+          <Property Name="Department_Key" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Department_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Dept_Order" Type="int" />
+        </EntityType>
+        <EntityType Name="PT_Master">
+          <Key>
+            <PropertyRef Name="Project_Tracker_Number" />
+          </Key>
+          <Property Name="Project_Tracker_Number" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Project_Name" Type="nvarchar" MaxLength="75" Nullable="false" />
+          <Property Name="Start_Date" Type="bigint" Nullable="false" />
+          <Property Name="End_Date" Type="bigint" Nullable="false" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Open_Or_Closed" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Emergency_Hold_Status" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Emergency_Hold_Notes" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="PT_Master_hist">
+          <Key>
+            <PropertyRef Name="Date_Entered" />
+            <PropertyRef Name="Time_Entered" />
+          </Key>
+          <Property Name="Project_Tracker_Number" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Project_Name" Type="nvarchar" MaxLength="75" Nullable="false" />
+          <Property Name="Start_Date" Type="bigint" Nullable="false" />
+          <Property Name="End_Date" Type="bigint" Nullable="false" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Open_Or_Closed" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Date_Entered" Type="bigint" Nullable="false" />
+          <Property Name="Time_Entered" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PT_Master_Sales_Orders">
+          <Key>
+            <PropertyRef Name="MSO_Key" />
+          </Key>
+          <Property Name="MSO_Key" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Project_Tracker_Number" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Sales_Order_Number" Type="varchar" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PT_Master_Sales_Orders_hist">
+          <Key>
+            <PropertyRef Name="MSO_Key" />
+          </Key>
+          <Property Name="MSO_Key" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Project_Tracker_Number" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Sales_Order_Number" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Date_Entered" Type="bigint" Nullable="false" />
+          <Property Name="Time_Entered" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PT_Project_Department">
+          <Key>
+            <PropertyRef Name="Project_Tracker_Number" />
+            <PropertyRef Name="Department_Key" />
+          </Key>
+          <Property Name="Project_Tracker_Number" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Department_Key" Type="int" Nullable="false" />
+          <Property Name="User_Responsible" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PT_Project_Line_Department">
+          <Key>
+            <PropertyRef Name="Project_Tracker_Number" />
+            <PropertyRef Name="Sales_Order_Line_Number" />
+            <PropertyRef Name="Department_Key" />
+          </Key>
+          <Property Name="Project_Tracker_Number" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Sales_Order_Line_Number" Type="smallint" Nullable="false" />
+          <Property Name="Department_Key" Type="int" Nullable="false" />
+          <Property Name="User_Responsible" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PT_Project_SalesOrder_Part">
+          <Key>
+            <PropertyRef Name="Project_Key" />
+            <PropertyRef Name="Sales_Order_Key" />
+            <PropertyRef Name="Sales_Order_Line_Number" />
+            <PropertyRef Name="Department_Key" />
+          </Key>
+          <Property Name="Project_Key" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Sales_Order_Key" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="Sales_Order_Line_Number" Type="smallint" Nullable="false" />
+          <Property Name="Department_Key" Type="smallint" Nullable="false" />
+          <Property Name="Part" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Start_Date" Type="bigint" Nullable="false" />
+          <Property Name="End_Date" Type="bigint" Nullable="false" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="500" />
+          <Property Name="Completed_Yes_No" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="Plan_Hrs" Type="numeric" Precision="9" Scale="2" Nullable="false" />
+          <Property Name="Actual_Hrs" Type="numeric" Precision="9" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PT_Project_SalesOrder_Part_hist">
+          <Key>
+            <PropertyRef Name="PSOP_Key" />
+          </Key>
+          <Property Name="PSOP_Key" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Project_Key" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Sales_Order_Key" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="Sales_Order_Line_Number" Type="smallint" Nullable="false" />
+          <Property Name="Department_Key" Type="smallint" Nullable="false" />
+          <Property Name="Part" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Start_Date" Type="bigint" Nullable="false" />
+          <Property Name="End_Date" Type="bigint" Nullable="false" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="500" />
+          <Property Name="Completed_Yes_No" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Date_Entered" Type="bigint" Nullable="false" />
+          <Property Name="Time_Entered" Type="bigint" Nullable="false" />
+          <Property Name="Plan_Hrs" Type="numeric" Precision="9" Scale="2" Nullable="false" />
+          <Property Name="Actual_Hrs" Type="numeric" Precision="9" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PT_User">
+          <Key>
+            <PropertyRef Name="PT_User" />
+          </Key>
+          <Property Name="PT_User" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="First_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Last_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email_Address" Type="nvarchar" MaxLength="60" />
+          <Property Name="Text_Phone_Number" Type="bigint" />
+          <Property Name="Receive_Via_Email" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="Receive_Via_Text" Type="nvarchar" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PT_User_Department">
+          <Key>
+            <PropertyRef Name="PT_User" />
+            <PropertyRef Name="Department_Key" />
+          </Key>
+          <Property Name="PT_User" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Department_Key" Type="int" Nullable="false" />
+          <Property Name="Head_Yes_No" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="Ice_Project_TrackerModelStoreContainer">
+          <EntitySet Name="PT_Department" EntityType="Self.PT_Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PT_Master" EntityType="Self.PT_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PT_Master_hist" EntityType="Self.PT_Master_hist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PT_Master_Sales_Orders" EntityType="Self.PT_Master_Sales_Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PT_Master_Sales_Orders_hist" EntityType="Self.PT_Master_Sales_Orders_hist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PT_Project_Department" EntityType="Self.PT_Project_Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PT_Project_Line_Department" EntityType="Self.PT_Project_Line_Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PT_Project_SalesOrder_Part" EntityType="Self.PT_Project_SalesOrder_Part" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PT_Project_SalesOrder_Part_hist" EntityType="Self.PT_Project_SalesOrder_Part_hist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PT_User" EntityType="Self.PT_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PT_User_Department" EntityType="Self.PT_User_Department" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Ice_Project_TrackerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="PT_Department">
+          <Key>
+            <PropertyRef Name="Department_Key" />
+          </Key>
+          <Property Name="Department_Key" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Department_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Dept_Order" Type="Int32" />
+        </EntityType>
+        <EntityType Name="PT_Master">
+          <Key>
+            <PropertyRef Name="Project_Tracker_Number" />
+          </Key>
+          <Property Name="Project_Tracker_Number" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Project_Name" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Start_Date" Type="Int64" Nullable="false" />
+          <Property Name="End_Date" Type="Int64" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Open_Or_Closed" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Emergency_Hold_Status" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Emergency_Hold_Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PT_Master_hist">
+          <Key>
+            <PropertyRef Name="Date_Entered" />
+            <PropertyRef Name="Time_Entered" />
+          </Key>
+          <Property Name="Project_Tracker_Number" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Project_Name" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Start_Date" Type="Int64" Nullable="false" />
+          <Property Name="End_Date" Type="Int64" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Open_Or_Closed" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date_Entered" Type="Int64" Nullable="false" />
+          <Property Name="Time_Entered" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PT_Master_Sales_Orders">
+          <Key>
+            <PropertyRef Name="MSO_Key" />
+          </Key>
+          <Property Name="MSO_Key" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Project_Tracker_Number" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sales_Order_Number" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PT_Master_Sales_Orders_hist">
+          <Key>
+            <PropertyRef Name="MSO_Key" />
+          </Key>
+          <Property Name="MSO_Key" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Project_Tracker_Number" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sales_Order_Number" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date_Entered" Type="Int64" Nullable="false" />
+          <Property Name="Time_Entered" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PT_Project_Department">
+          <Key>
+            <PropertyRef Name="Project_Tracker_Number" />
+            <PropertyRef Name="Department_Key" />
+          </Key>
+          <Property Name="Project_Tracker_Number" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Department_Key" Type="Int32" Nullable="false" />
+          <Property Name="User_Responsible" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PT_Project_Line_Department">
+          <Key>
+            <PropertyRef Name="Project_Tracker_Number" />
+            <PropertyRef Name="Sales_Order_Line_Number" />
+            <PropertyRef Name="Department_Key" />
+          </Key>
+          <Property Name="Project_Tracker_Number" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sales_Order_Line_Number" Type="Int16" Nullable="false" />
+          <Property Name="Department_Key" Type="Int32" Nullable="false" />
+          <Property Name="User_Responsible" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PT_Project_SalesOrder_Part">
+          <Key>
+            <PropertyRef Name="Project_Key" />
+            <PropertyRef Name="Sales_Order_Key" />
+            <PropertyRef Name="Sales_Order_Line_Number" />
+            <PropertyRef Name="Department_Key" />
+          </Key>
+          <Property Name="Project_Key" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sales_Order_Key" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sales_Order_Line_Number" Type="Int16" Nullable="false" />
+          <Property Name="Department_Key" Type="Int16" Nullable="false" />
+          <Property Name="Part" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Start_Date" Type="Int64" Nullable="false" />
+          <Property Name="End_Date" Type="Int64" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Completed_Yes_No" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Plan_Hrs" Type="Decimal" Precision="9" Scale="2" Nullable="false" />
+          <Property Name="Actual_Hrs" Type="Decimal" Precision="9" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PT_Project_SalesOrder_Part_hist">
+          <Key>
+            <PropertyRef Name="PSOP_Key" />
+          </Key>
+          <Property Name="PSOP_Key" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Project_Key" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sales_Order_Key" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sales_Order_Line_Number" Type="Int16" Nullable="false" />
+          <Property Name="Department_Key" Type="Int16" Nullable="false" />
+          <Property Name="Part" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Start_Date" Type="Int64" Nullable="false" />
+          <Property Name="End_Date" Type="Int64" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Completed_Yes_No" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date_Entered" Type="Int64" Nullable="false" />
+          <Property Name="Time_Entered" Type="Int64" Nullable="false" />
+          <Property Name="Plan_Hrs" Type="Decimal" Precision="9" Scale="2" Nullable="false" />
+          <Property Name="Actual_Hrs" Type="Decimal" Precision="9" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PT_User">
+          <Key>
+            <PropertyRef Name="PT_User1" />
+          </Key>
+          <Property Name="PT_User1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email_Address" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Text_Phone_Number" Type="Int64" />
+          <Property Name="Receive_Via_Email" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Receive_Via_Text" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PT_User_Department">
+          <Key>
+            <PropertyRef Name="PT_User" />
+            <PropertyRef Name="Department_Key" />
+          </Key>
+          <Property Name="PT_User" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Department_Key" Type="Int32" Nullable="false" />
+          <Property Name="Head_Yes_No" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="Ice_Project_TrackerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="PT_Department" EntityType="Self.PT_Department" />
+          <EntitySet Name="PT_Master" EntityType="Self.PT_Master" />
+          <EntitySet Name="PT_Master_hist" EntityType="Self.PT_Master_hist" />
+          <EntitySet Name="PT_Master_Sales_Orders" EntityType="Self.PT_Master_Sales_Orders" />
+          <EntitySet Name="PT_Master_Sales_Orders_hist" EntityType="Self.PT_Master_Sales_Orders_hist" />
+          <EntitySet Name="PT_Project_Department" EntityType="Self.PT_Project_Department" />
+          <EntitySet Name="PT_Project_Line_Department" EntityType="Self.PT_Project_Line_Department" />
+          <EntitySet Name="PT_Project_SalesOrder_Part" EntityType="Self.PT_Project_SalesOrder_Part" />
+          <EntitySet Name="PT_Project_SalesOrder_Part_hist" EntityType="Self.PT_Project_SalesOrder_Part_hist" />
+          <EntitySet Name="PT_User" EntityType="Self.PT_User" />
+          <EntitySet Name="PT_User_Department" EntityType="Self.PT_User_Department" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Ice_Project_TrackerModelStoreContainer" CdmEntityContainer="Ice_Project_TrackerEntities">
+          <EntitySetMapping Name="PT_Department">
+            <EntityTypeMapping TypeName="Ice_Project_TrackerModel.PT_Department">
+              <MappingFragment StoreEntitySet="PT_Department">
+                <ScalarProperty Name="Department_Key" ColumnName="Department_Key" />
+                <ScalarProperty Name="Department_Name" ColumnName="Department_Name" />
+                <ScalarProperty Name="Dept_Order" ColumnName="Dept_Order" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PT_Master">
+            <EntityTypeMapping TypeName="Ice_Project_TrackerModel.PT_Master">
+              <MappingFragment StoreEntitySet="PT_Master">
+                <ScalarProperty Name="Project_Tracker_Number" ColumnName="Project_Tracker_Number" />
+                <ScalarProperty Name="Project_Name" ColumnName="Project_Name" />
+                <ScalarProperty Name="Start_Date" ColumnName="Start_Date" />
+                <ScalarProperty Name="End_Date" ColumnName="End_Date" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Open_Or_Closed" ColumnName="Open_Or_Closed" />
+                <ScalarProperty Name="Emergency_Hold_Status" ColumnName="Emergency_Hold_Status" />
+                <ScalarProperty Name="Emergency_Hold_Notes" ColumnName="Emergency_Hold_Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PT_Master_hist">
+            <EntityTypeMapping TypeName="Ice_Project_TrackerModel.PT_Master_hist">
+              <MappingFragment StoreEntitySet="PT_Master_hist">
+                <ScalarProperty Name="Project_Tracker_Number" ColumnName="Project_Tracker_Number" />
+                <ScalarProperty Name="Project_Name" ColumnName="Project_Name" />
+                <ScalarProperty Name="Start_Date" ColumnName="Start_Date" />
+                <ScalarProperty Name="End_Date" ColumnName="End_Date" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Open_Or_Closed" ColumnName="Open_Or_Closed" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Date_Entered" ColumnName="Date_Entered" />
+                <ScalarProperty Name="Time_Entered" ColumnName="Time_Entered" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PT_Master_Sales_Orders">
+            <EntityTypeMapping TypeName="Ice_Project_TrackerModel.PT_Master_Sales_Orders">
+              <MappingFragment StoreEntitySet="PT_Master_Sales_Orders">
+                <ScalarProperty Name="MSO_Key" ColumnName="MSO_Key" />
+                <ScalarProperty Name="Project_Tracker_Number" ColumnName="Project_Tracker_Number" />
+                <ScalarProperty Name="Sales_Order_Number" ColumnName="Sales_Order_Number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PT_Master_Sales_Orders_hist">
+            <EntityTypeMapping TypeName="Ice_Project_TrackerModel.PT_Master_Sales_Orders_hist">
+              <MappingFragment StoreEntitySet="PT_Master_Sales_Orders_hist">
+                <ScalarProperty Name="MSO_Key" ColumnName="MSO_Key" />
+                <ScalarProperty Name="Project_Tracker_Number" ColumnName="Project_Tracker_Number" />
+                <ScalarProperty Name="Sales_Order_Number" ColumnName="Sales_Order_Number" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Date_Entered" ColumnName="Date_Entered" />
+                <ScalarProperty Name="Time_Entered" ColumnName="Time_Entered" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PT_Project_Department">
+            <EntityTypeMapping TypeName="Ice_Project_TrackerModel.PT_Project_Department">
+              <MappingFragment StoreEntitySet="PT_Project_Department">
+                <ScalarProperty Name="Project_Tracker_Number" ColumnName="Project_Tracker_Number" />
+                <ScalarProperty Name="Department_Key" ColumnName="Department_Key" />
+                <ScalarProperty Name="User_Responsible" ColumnName="User_Responsible" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PT_Project_Line_Department">
+            <EntityTypeMapping TypeName="Ice_Project_TrackerModel.PT_Project_Line_Department">
+              <MappingFragment StoreEntitySet="PT_Project_Line_Department">
+                <ScalarProperty Name="Project_Tracker_Number" ColumnName="Project_Tracker_Number" />
+                <ScalarProperty Name="Sales_Order_Line_Number" ColumnName="Sales_Order_Line_Number" />
+                <ScalarProperty Name="Department_Key" ColumnName="Department_Key" />
+                <ScalarProperty Name="User_Responsible" ColumnName="User_Responsible" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PT_Project_SalesOrder_Part">
+            <EntityTypeMapping TypeName="Ice_Project_TrackerModel.PT_Project_SalesOrder_Part">
+              <MappingFragment StoreEntitySet="PT_Project_SalesOrder_Part">
+                <ScalarProperty Name="Project_Key" ColumnName="Project_Key" />
+                <ScalarProperty Name="Sales_Order_Key" ColumnName="Sales_Order_Key" />
+                <ScalarProperty Name="Sales_Order_Line_Number" ColumnName="Sales_Order_Line_Number" />
+                <ScalarProperty Name="Department_Key" ColumnName="Department_Key" />
+                <ScalarProperty Name="Part" ColumnName="Part" />
+                <ScalarProperty Name="Start_Date" ColumnName="Start_Date" />
+                <ScalarProperty Name="End_Date" ColumnName="End_Date" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Completed_Yes_No" ColumnName="Completed_Yes_No" />
+                <ScalarProperty Name="Plan_Hrs" ColumnName="Plan_Hrs" />
+                <ScalarProperty Name="Actual_Hrs" ColumnName="Actual_Hrs" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PT_Project_SalesOrder_Part_hist">
+            <EntityTypeMapping TypeName="Ice_Project_TrackerModel.PT_Project_SalesOrder_Part_hist">
+              <MappingFragment StoreEntitySet="PT_Project_SalesOrder_Part_hist">
+                <ScalarProperty Name="PSOP_Key" ColumnName="PSOP_Key" />
+                <ScalarProperty Name="Project_Key" ColumnName="Project_Key" />
+                <ScalarProperty Name="Sales_Order_Key" ColumnName="Sales_Order_Key" />
+                <ScalarProperty Name="Sales_Order_Line_Number" ColumnName="Sales_Order_Line_Number" />
+                <ScalarProperty Name="Department_Key" ColumnName="Department_Key" />
+                <ScalarProperty Name="Part" ColumnName="Part" />
+                <ScalarProperty Name="Start_Date" ColumnName="Start_Date" />
+                <ScalarProperty Name="End_Date" ColumnName="End_Date" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Completed_Yes_No" ColumnName="Completed_Yes_No" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Date_Entered" ColumnName="Date_Entered" />
+                <ScalarProperty Name="Time_Entered" ColumnName="Time_Entered" />
+                <ScalarProperty Name="Plan_Hrs" ColumnName="Plan_Hrs" />
+                <ScalarProperty Name="Actual_Hrs" ColumnName="Actual_Hrs" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PT_User">
+            <EntityTypeMapping TypeName="Ice_Project_TrackerModel.PT_User">
+              <MappingFragment StoreEntitySet="PT_User">
+                <ScalarProperty Name="PT_User1" ColumnName="PT_User" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Email_Address" ColumnName="Email_Address" />
+                <ScalarProperty Name="Text_Phone_Number" ColumnName="Text_Phone_Number" />
+                <ScalarProperty Name="Receive_Via_Email" ColumnName="Receive_Via_Email" />
+                <ScalarProperty Name="Receive_Via_Text" ColumnName="Receive_Via_Text" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PT_User_Department">
+            <EntityTypeMapping TypeName="Ice_Project_TrackerModel.PT_User_Department">
+              <MappingFragment StoreEntitySet="PT_User_Department">
+                <ScalarProperty Name="PT_User" ColumnName="PT_User" />
+                <ScalarProperty Name="Department_Key" ColumnName="Department_Key" />
+                <ScalarProperty Name="Head_Yes_No" ColumnName="Head_Yes_No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
