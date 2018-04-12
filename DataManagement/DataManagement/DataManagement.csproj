@@ -66,6 +66,8 @@
     <Compile Include="EventType.cs">
       <DependentUpon>NeoTrackerContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="InitProjectAndItem.cs" />
+    <Compile Include="InitDepartmentAndUser.cs" />
     <Compile Include="Item.cs">
       <DependentUpon>NeoTrackerContext.tt</DependentUpon>
     </Compile>
