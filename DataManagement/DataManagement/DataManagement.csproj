@@ -51,6 +51,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Comm.cs">
+      <DependentUpon>GeniusContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Comm2.cs">
+      <DependentUpon>GeniusContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Department.cs">
       <DependentUpon>NeoTrackerContext.tt</DependentUpon>
     </Compile>
@@ -66,6 +72,22 @@
     <Compile Include="EventType.cs">
       <DependentUpon>NeoTrackerContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="GeniusContext.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GeniusContext.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeniusContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GeniusContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeniusContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GeniusContext.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance.cs" />
     <Compile Include="InitProjectAndItem.cs" />
     <Compile Include="InitDepartmentAndUser.cs" />
     <Compile Include="Item.cs">
@@ -162,6 +184,13 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>NeoTrackerContext.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EntityDeploy Include="GeniusContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>GeniusContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="GeniusContext.edmx.diagram">
+      <DependentUpon>GeniusContext.edmx</DependentUpon>
+    </None>
     <None Include="NeoTrackerContext.edmx.diagram">
       <DependentUpon>NeoTrackerContext.edmx</DependentUpon>
     </None>
@@ -171,6 +200,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="GeniusContext.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GeniusContext.edmx</DependentUpon>
+      <LastGenOutput>GeniusContext.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="GeniusContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GeniusContext.edmx</DependentUpon>
+      <LastGenOutput>GeniusContext.cs</LastGenOutput>
+    </Content>
     <Content Include="NeoTrackerContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>NeoTrackerContext.edmx</DependentUpon>

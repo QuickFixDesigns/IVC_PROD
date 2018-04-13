@@ -1,0 +1,611 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="IVCLIVEDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Comm">
+          <Key>
+            <PropertyRef Name="No_Com" />
+          </Key>
+          <Property Name="No_Com" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="No_Po" Type="varchar" MaxLength="25" />
+          <Property Name="Soumission" Type="varchar" MaxLength="15" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Fact_A1" Type="varchar" MaxLength="8" />
+          <Property Name="Fact_A2" Type="varchar" MaxLength="64" />
+          <Property Name="Fact_A3" Type="varchar" MaxLength="60" />
+          <Property Name="Fact_A4" Type="varchar" MaxLength="35" />
+          <Property Name="Fact_A5" Type="varchar" MaxLength="35" />
+          <Property Name="Exp_A1" Type="varchar" MaxLength="8" />
+          <Property Name="Exp_A2" Type="varchar" MaxLength="64" />
+          <Property Name="Exp_A3" Type="varchar" MaxLength="60" />
+          <Property Name="Exp_A4" Type="varchar" MaxLength="35" />
+          <Property Name="Exp_A5" Type="varchar" MaxLength="35" />
+          <Property Name="Compte" Type="varchar" MaxLength="1" />
+          <Property Name="Exp_Mod" Type="varchar" MaxLength="15" />
+          <Property Name="Exp_Tra" Type="varchar" MaxLength="15" />
+          <Property Name="Exp_Fab" Type="varchar" MaxLength="30" />
+          <Property Name="Contact" Type="varchar" MaxLength="60" />
+          <Property Name="Term" Type="varchar" MaxLength="6" />
+          <Property Name="Vendeur" Type="varchar" MaxLength="6" />
+          <Property Name="Territoire" Type="varchar" MaxLength="6" />
+          <Property Name="Devise" Type="varchar" MaxLength="6" />
+          <Property Name="Dev_Fact" Type="decimal" Precision="12" Scale="6" Nullable="false" />
+          <Property Name="Taxes_Dflt" Type="varchar" MaxLength="6" />
+          <Property Name="Taxes" Type="decimal" Precision="15" Scale="4" />
+          <Property Name="Total" Type="decimal" Precision="15" Scale="4" />
+          <Property Name="Montant" Type="decimal" Precision="15" Scale="4" />
+          <Property Name="No_Usager" Type="varchar" MaxLength="8" />
+          <Property Name="Note_Entet" Type="varchar" MaxLength="5000" />
+          <Property Name="Imprime" Type="varchar" MaxLength="1" />
+          <Property Name="Dateliv" Type="datetime" />
+          <Property Name="Clef" Type="float" />
+          <Property Name="Datecli" Type="datetime" />
+          <Property Name="Exp_A6" Type="varchar" MaxLength="25" />
+          <Property Name="Esc_Reel" Type="float" />
+          <Property Name="No_Rev" Type="varchar" MaxLength="3" />
+          <Property Name="Explose" Type="varchar" MaxLength="12" />
+          <Property Name="Revente" Type="varchar" MaxLength="12" />
+          <Property Name="Daterev" Type="datetime" />
+          <Property Name="Psetupi" Type="varchar" MaxLength="1" />
+          <Property Name="Location" Type="varchar" MaxLength="8" />
+          <Property Name="Dateref" Type="datetime" />
+          <Property Name="Refsup1" Type="varchar" MaxLength="30" />
+          <Property Name="Refsup2" Type="varchar" MaxLength="30" />
+          <Property Name="Faxcontact" Type="varchar" MaxLength="25" />
+          <Property Name="Telcontact" Type="varchar" MaxLength="25" />
+          <Property Name="Fact_A6" Type="varchar" MaxLength="25" />
+          <Property Name="Interloc" Type="varchar" MaxLength="1" />
+          <Property Name="Route" Type="varchar" MaxLength="15" />
+          <Property Name="Status" Type="varchar" MaxLength="10" />
+          <Property Name="Poidscom" Type="decimal" Precision="13" Scale="3" />
+          <Property Name="Statut" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="RMA" Type="bit" Nullable="false" />
+          <Property Name="COH_BillToCustomerLink" Type="varchar" MaxLength="8" StoreGeneratedPattern="Computed" />
+          <Property Name="COH_Link" Type="varchar" MaxLength="8" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="COH_ShipToCustomerLink" Type="varchar" MaxLength="8" StoreGeneratedPattern="Computed" />
+          <Property Name="COH_CarrierLink" Type="varchar" MaxLength="15" StoreGeneratedPattern="Computed" />
+          <Property Name="COH_PaymentTermLink" Type="varchar" MaxLength="6" StoreGeneratedPattern="Computed" />
+          <Property Name="COH_SalesmanLink" Type="varchar" MaxLength="6" StoreGeneratedPattern="Computed" />
+          <Property Name="COH_TerritoryLink" Type="varchar" MaxLength="6" StoreGeneratedPattern="Computed" />
+          <Property Name="COH_CurrencyLink" Type="varchar" MaxLength="6" StoreGeneratedPattern="Computed" />
+          <Property Name="COH_TaxGroupLink" Type="varchar" MaxLength="6" StoreGeneratedPattern="Computed" />
+          <Property Name="COH_WarehouseLink" Type="varchar" MaxLength="8" StoreGeneratedPattern="Computed" />
+          <Property Name="COH_RoadLink" Type="varchar" MaxLength="15" StoreGeneratedPattern="Computed" />
+          <Property Name="COH_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="COH_LastUpdate" Type="datetime" />
+          <Property Name="COH_LastUser" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="COH_Active" Type="bit" Nullable="false" />
+          <Property Name="COH_ShipToCountryCode" Type="varchar" MaxLength="15" />
+          <Property Name="COH_BillToAddress2" Type="varchar" MaxLength="60" />
+          <Property Name="COH_BillToProvinceCode" Type="varchar" MaxLength="15" />
+          <Property Name="COH_BillToCountryCode" Type="varchar" MaxLength="15" />
+          <Property Name="COH_ShipToAddress2" Type="varchar" MaxLength="60" />
+          <Property Name="COH_ShipToProvinceCode" Type="varchar" MaxLength="15" />
+          <Property Name="COH_ShipToCountryLink" Type="varchar" MaxLength="15" StoreGeneratedPattern="Computed" />
+          <Property Name="COH_BillToProvinceLink" Type="varchar" MaxLength="15" StoreGeneratedPattern="Computed" />
+          <Property Name="COH_BillToCountryLink" Type="varchar" MaxLength="15" StoreGeneratedPattern="Computed" />
+          <Property Name="COH_ShipToProvinceLink" Type="varchar" MaxLength="15" StoreGeneratedPattern="Computed" />
+          <Property Name="COH_StatusSystemLink" Type="int" />
+          <Property Name="COH_StatusUserLink" Type="int" />
+          <Property Name="Stimestamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="COH_ShippingModeLink" Type="varchar" MaxLength="15" StoreGeneratedPattern="Computed" />
+          <Property Name="DateJobProductionStart" Type="datetime" />
+          <Property Name="COH_FullSearch" Type="varchar" MaxLength="552" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="RefLotSerialId" Type="int" />
+          <Property Name="ProjectId" Type="int" />
+          <Property Name="IsManualRevisionDate" Type="bit" Nullable="false" />
+          <Property Name="AdvancedBillingDistributionMode" Type="int" />
+          <Property Name="TypeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Comm2">
+          <Key>
+            <PropertyRef Name="Clef" />
+          </Key>
+          <Property Name="No_Com" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="Ligneitm" Type="smallint" />
+          <Property Name="Ligneopt" Type="smallint" />
+          <Property Name="Famille" Type="varchar" MaxLength="6" />
+          <Property Name="Item" Type="varchar" MaxLength="25" />
+          <Property Name="Des" Type="varchar" MaxLength="250" />
+          <Property Name="Des2" Type="varchar" MaxLength="250" />
+          <Property Name="Des3" Type="varchar" MaxLength="250" />
+          <Property Name="Des4" Type="varchar" MaxLength="250" />
+          <Property Name="Qte_Com" Type="decimal" Precision="13" Scale="3" />
+          <Property Name="Qte_Exp" Type="decimal" Precision="13" Scale="3" />
+          <Property Name="Qte_Fac" Type="decimal" Precision="13" Scale="3" />
+          <Property Name="Qte_Bo" Type="decimal" Precision="13" Scale="3" />
+          <Property Name="Complet" Type="varchar" MaxLength="1" />
+          <Property Name="Code_Gl" Type="varchar" MaxLength="21" />
+          <Property Name="Prixbase" Type="decimal" Precision="15" Scale="4" />
+          <Property Name="Escompte" Type="decimal" Precision="27" Scale="10" />
+          <Property Name="Prix" Type="decimal" Precision="15" Scale="4" />
+          <Property Name="Remise" Type="decimal" Precision="15" Scale="4" />
+          <Property Name="Montant" Type="decimal" Precision="15" Scale="4" />
+          <Property Name="Taxes_Cod" Type="varchar" MaxLength="6" />
+          <Property Name="Devise" Type="varchar" MaxLength="6" />
+          <Property Name="Job" Type="varchar" MaxLength="12" />
+          <Property Name="Export" Type="varchar" MaxLength="1" />
+          <Property Name="Dateliv" Type="datetime" />
+          <Property Name="Datepro" Type="datetime" />
+          <Property Name="No_Rev" Type="varchar" MaxLength="4" />
+          <Property Name="Note" Type="varchar" MaxLength="3000" />
+          <Property Name="Qte_Pro" Type="decimal" Precision="13" Scale="3" />
+          <Property Name="Typejob" Type="varchar" MaxLength="1" />
+          <Property Name="No_Lot" Type="varchar" MaxLength="12" />
+          <Property Name="Division" Type="varchar" MaxLength="6" />
+          <Property Name="Psetup" Type="decimal" Precision="15" Scale="4" />
+          <Property Name="Psetupi" Type="varchar" MaxLength="1" />
+          <Property Name="Clef" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Reserve" Type="varchar" MaxLength="1" />
+          <Property Name="Location" Type="varchar" MaxLength="8" />
+          <Property Name="Clef_Parent" Type="int" />
+          <Property Name="Code_Ope" Type="varchar" MaxLength="6" />
+          <Property Name="Listeparents" Type="varchar" MaxLength="255" />
+          <Property Name="Codecli" Type="varchar" MaxLength="25" />
+          <Property Name="Unite" Type="varchar" MaxLength="4" />
+          <Property Name="Provenanceprix" Type="varchar" MaxLength="1" />
+          <Property Name="Conversiondos_Clef" Type="float" />
+          <Property Name="Stimestamp" Type="timestamp" StoreGeneratedPattern="Computed" />
+          <Property Name="Lot_Inv" Type="varchar" MaxLength="12" />
+          <Property Name="PrixCore" Type="decimal" Precision="15" Scale="4" />
+          <Property Name="Statut" Type="tinyint" Nullable="false" />
+          <Property Name="DateClient" Type="datetime" />
+          <Property Name="Niveau" Type="tinyint" />
+          <Property Name="Bom_Code_Id" Type="int" />
+          <Property Name="OptionManuelle" Type="bit" Nullable="false" />
+          <Property Name="FacteurMultiplicatif" Type="int" Nullable="false" />
+          <Property Name="ContientOptions" Type="bit" Nullable="false" />
+          <Property Name="Clef_ItemMaitre" Type="int" />
+          <Property Name="Qte_Pick" Type="decimal" Precision="13" Scale="3" Nullable="false" />
+          <Property Name="COD_CustomerOrderHeaderLink" Type="varchar" MaxLength="8" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="COD_ItemLink" Type="varchar" MaxLength="25" StoreGeneratedPattern="Computed" />
+          <Property Name="COD_JobLink" Type="varchar" MaxLength="12" StoreGeneratedPattern="Computed" />
+          <Property Name="COD_UnitLink" Type="varchar" MaxLength="4" StoreGeneratedPattern="Computed" />
+          <Property Name="COD_InventoryBatchLink" Type="varchar" MaxLength="12" StoreGeneratedPattern="Computed" />
+          <Property Name="COD_GLAccountLink" Type="varchar" MaxLength="21" StoreGeneratedPattern="Computed" />
+          <Property Name="COD_CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="COD_LastUpdate" Type="datetime" />
+          <Property Name="COD_LastUser" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="COD_NetQuantityOrdered" Type="decimal" Precision="13" Scale="3" />
+          <Property Name="JobPlanningStrategy" Type="smallint" />
+          <Property Name="DateJobProductionStart" Type="datetime" />
+          <Property Name="COD_FullSearch" Type="varchar" MaxLength="4110" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="PricingMode" Type="int" Nullable="false" />
+          <Property Name="NonConformityId" Type="int" />
+          <Property Name="DistributionMode" Type="int" Nullable="false" />
+          <Property Name="Dev_Fact" Type="decimal" Precision="12" Scale="6" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="ConfirmationDate" Type="datetime" />
+          <Property Name="EstimateDocumentID" Type="int" />
+        </EntityType>
+        <Association Name="FK_Comm2_No_Com">
+          <End Role="Comm" Type="Self.Comm" Multiplicity="1" />
+          <End Role="Comm2" Type="Self.Comm2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comm">
+              <PropertyRef Name="No_Com" />
+            </Principal>
+            <Dependent Role="Comm2">
+              <PropertyRef Name="No_Com" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="IVCLIVEDBModelStoreContainer">
+          <EntitySet Name="Comm" EntityType="Self.Comm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comm2" EntityType="Self.Comm2" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Comm2_No_Com" Association="Self.FK_Comm2_No_Com">
+            <End Role="Comm" EntitySet="Comm" />
+            <End Role="Comm2" EntitySet="Comm2" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="IVCLIVEDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Comm">
+          <Key>
+            <PropertyRef Name="No_Com" />
+          </Key>
+          <Property Name="No_Com" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="No_Po" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Soumission" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Fact_A1" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="Fact_A2" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Fact_A3" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Fact_A4" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="Fact_A5" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="Exp_A1" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="Exp_A2" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Exp_A3" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Exp_A4" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="Exp_A5" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="Compte" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Exp_Mod" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Exp_Tra" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Exp_Fab" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Contact" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Term" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Vendeur" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Territoire" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Devise" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Dev_Fact" Type="Decimal" Precision="12" Scale="6" Nullable="false" />
+          <Property Name="Taxes_Dflt" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Taxes" Type="Decimal" Precision="15" Scale="4" />
+          <Property Name="Total" Type="Decimal" Precision="15" Scale="4" />
+          <Property Name="Montant" Type="Decimal" Precision="15" Scale="4" />
+          <Property Name="No_Usager" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="Note_Entet" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="Imprime" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Dateliv" Type="DateTime" Precision="3" />
+          <Property Name="Clef" Type="Double" />
+          <Property Name="Datecli" Type="DateTime" Precision="3" />
+          <Property Name="Exp_A6" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Esc_Reel" Type="Double" />
+          <Property Name="No_Rev" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Explose" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Revente" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Daterev" Type="DateTime" Precision="3" />
+          <Property Name="Psetupi" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Location" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="Dateref" Type="DateTime" Precision="3" />
+          <Property Name="Refsup1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Refsup2" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Faxcontact" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Telcontact" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Fact_A6" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Interloc" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Route" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Poidscom" Type="Decimal" Precision="13" Scale="3" />
+          <Property Name="Statut" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RMA" Type="Boolean" Nullable="false" />
+          <Property Name="COH_BillToCustomerLink" Type="String" MaxLength="8" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="COH_Link" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="COH_ShipToCustomerLink" Type="String" MaxLength="8" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="COH_CarrierLink" Type="String" MaxLength="15" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="COH_PaymentTermLink" Type="String" MaxLength="6" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="COH_SalesmanLink" Type="String" MaxLength="6" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="COH_TerritoryLink" Type="String" MaxLength="6" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="COH_CurrencyLink" Type="String" MaxLength="6" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="COH_TaxGroupLink" Type="String" MaxLength="6" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="COH_WarehouseLink" Type="String" MaxLength="8" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="COH_RoadLink" Type="String" MaxLength="15" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="COH_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="COH_LastUpdate" Type="DateTime" Precision="3" />
+          <Property Name="COH_LastUser" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="COH_Active" Type="Boolean" Nullable="false" />
+          <Property Name="COH_ShipToCountryCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="COH_BillToAddress2" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="COH_BillToProvinceCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="COH_BillToCountryCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="COH_ShipToAddress2" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="COH_ShipToProvinceCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="COH_ShipToCountryLink" Type="String" MaxLength="15" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="COH_BillToProvinceLink" Type="String" MaxLength="15" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="COH_BillToCountryLink" Type="String" MaxLength="15" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="COH_ShipToProvinceLink" Type="String" MaxLength="15" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="COH_StatusSystemLink" Type="Int32" />
+          <Property Name="COH_StatusUserLink" Type="Int32" />
+          <Property Name="Stimestamp" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="COH_ShippingModeLink" Type="String" MaxLength="15" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="DateJobProductionStart" Type="DateTime" Precision="3" />
+          <Property Name="COH_FullSearch" Type="String" MaxLength="552" FixedLength="false" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="RefLotSerialId" Type="Int32" />
+          <Property Name="ProjectId" Type="Int32" />
+          <Property Name="IsManualRevisionDate" Type="Boolean" Nullable="false" />
+          <Property Name="AdvancedBillingDistributionMode" Type="Int32" />
+          <Property Name="TypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Comm2" Relationship="Self.FK_Comm2_No_Com" FromRole="Comm" ToRole="Comm2" />
+        </EntityType>
+        <EntityType Name="Comm2">
+          <Key>
+            <PropertyRef Name="Clef" />
+          </Key>
+          <Property Name="No_Com" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ligneitm" Type="Int16" />
+          <Property Name="Ligneopt" Type="Int16" />
+          <Property Name="Famille" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Item" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Des" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Des2" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Des3" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Des4" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Qte_Com" Type="Decimal" Precision="13" Scale="3" />
+          <Property Name="Qte_Exp" Type="Decimal" Precision="13" Scale="3" />
+          <Property Name="Qte_Fac" Type="Decimal" Precision="13" Scale="3" />
+          <Property Name="Qte_Bo" Type="Decimal" Precision="13" Scale="3" />
+          <Property Name="Complet" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Code_Gl" Type="String" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Name="Prixbase" Type="Decimal" Precision="15" Scale="4" />
+          <Property Name="Escompte" Type="Decimal" Precision="27" Scale="10" />
+          <Property Name="Prix" Type="Decimal" Precision="15" Scale="4" />
+          <Property Name="Remise" Type="Decimal" Precision="15" Scale="4" />
+          <Property Name="Montant" Type="Decimal" Precision="15" Scale="4" />
+          <Property Name="Taxes_Cod" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Devise" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Job" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Export" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Dateliv" Type="DateTime" Precision="3" />
+          <Property Name="Datepro" Type="DateTime" Precision="3" />
+          <Property Name="No_Rev" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Note" Type="String" MaxLength="3000" FixedLength="false" Unicode="false" />
+          <Property Name="Qte_Pro" Type="Decimal" Precision="13" Scale="3" />
+          <Property Name="Typejob" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="No_Lot" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Division" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Psetup" Type="Decimal" Precision="15" Scale="4" />
+          <Property Name="Psetupi" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Clef" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Reserve" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Location" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="Clef_Parent" Type="Int32" />
+          <Property Name="Code_Ope" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Listeparents" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Codecli" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Unite" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Provenanceprix" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Conversiondos_Clef" Type="Double" />
+          <Property Name="Stimestamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Lot_Inv" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="PrixCore" Type="Decimal" Precision="15" Scale="4" />
+          <Property Name="Statut" Type="Byte" Nullable="false" />
+          <Property Name="DateClient" Type="DateTime" Precision="3" />
+          <Property Name="Niveau" Type="Byte" />
+          <Property Name="Bom_Code_Id" Type="Int32" />
+          <Property Name="OptionManuelle" Type="Boolean" Nullable="false" />
+          <Property Name="FacteurMultiplicatif" Type="Int32" Nullable="false" />
+          <Property Name="ContientOptions" Type="Boolean" Nullable="false" />
+          <Property Name="Clef_ItemMaitre" Type="Int32" />
+          <Property Name="Qte_Pick" Type="Decimal" Precision="13" Scale="3" Nullable="false" />
+          <Property Name="COD_CustomerOrderHeaderLink" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="COD_ItemLink" Type="String" MaxLength="25" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="COD_JobLink" Type="String" MaxLength="12" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="COD_UnitLink" Type="String" MaxLength="4" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="COD_InventoryBatchLink" Type="String" MaxLength="12" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="COD_GLAccountLink" Type="String" MaxLength="21" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="COD_CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="COD_LastUpdate" Type="DateTime" Precision="3" />
+          <Property Name="COD_LastUser" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="COD_NetQuantityOrdered" Type="Decimal" Precision="13" Scale="3" />
+          <Property Name="JobPlanningStrategy" Type="Int16" />
+          <Property Name="DateJobProductionStart" Type="DateTime" Precision="3" />
+          <Property Name="COD_FullSearch" Type="String" MaxLength="4110" FixedLength="false" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="PricingMode" Type="Int32" Nullable="false" />
+          <Property Name="NonConformityId" Type="Int32" />
+          <Property Name="DistributionMode" Type="Int32" Nullable="false" />
+          <Property Name="Dev_Fact" Type="Decimal" Precision="12" Scale="6" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="ConfirmationDate" Type="DateTime" Precision="3" />
+          <Property Name="EstimateDocumentID" Type="Int32" />
+          <NavigationProperty Name="Comm" Relationship="Self.FK_Comm2_No_Com" FromRole="Comm2" ToRole="Comm" />
+        </EntityType>
+        <Association Name="FK_Comm2_No_Com">
+          <End Role="Comm" Type="Self.Comm" Multiplicity="1" />
+          <End Role="Comm2" Type="Self.Comm2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comm">
+              <PropertyRef Name="No_Com" />
+            </Principal>
+            <Dependent Role="Comm2">
+              <PropertyRef Name="No_Com" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="IVCLIVEDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Comms" EntityType="Self.Comm" />
+          <EntitySet Name="Comm2" EntityType="Self.Comm2" />
+          <AssociationSet Name="FK_Comm2_No_Com" Association="Self.FK_Comm2_No_Com">
+            <End Role="Comm" EntitySet="Comms" />
+            <End Role="Comm2" EntitySet="Comm2" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="IVCLIVEDBModelStoreContainer" CdmEntityContainer="IVCLIVEDBEntities">
+          <EntitySetMapping Name="Comms">
+            <EntityTypeMapping TypeName="IVCLIVEDBModel.Comm">
+              <MappingFragment StoreEntitySet="Comm">
+                <ScalarProperty Name="No_Com" ColumnName="No_Com" />
+                <ScalarProperty Name="No_Po" ColumnName="No_Po" />
+                <ScalarProperty Name="Soumission" ColumnName="Soumission" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Fact_A1" ColumnName="Fact_A1" />
+                <ScalarProperty Name="Fact_A2" ColumnName="Fact_A2" />
+                <ScalarProperty Name="Fact_A3" ColumnName="Fact_A3" />
+                <ScalarProperty Name="Fact_A4" ColumnName="Fact_A4" />
+                <ScalarProperty Name="Fact_A5" ColumnName="Fact_A5" />
+                <ScalarProperty Name="Exp_A1" ColumnName="Exp_A1" />
+                <ScalarProperty Name="Exp_A2" ColumnName="Exp_A2" />
+                <ScalarProperty Name="Exp_A3" ColumnName="Exp_A3" />
+                <ScalarProperty Name="Exp_A4" ColumnName="Exp_A4" />
+                <ScalarProperty Name="Exp_A5" ColumnName="Exp_A5" />
+                <ScalarProperty Name="Compte" ColumnName="Compte" />
+                <ScalarProperty Name="Exp_Mod" ColumnName="Exp_Mod" />
+                <ScalarProperty Name="Exp_Tra" ColumnName="Exp_Tra" />
+                <ScalarProperty Name="Exp_Fab" ColumnName="Exp_Fab" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Term" ColumnName="Term" />
+                <ScalarProperty Name="Vendeur" ColumnName="Vendeur" />
+                <ScalarProperty Name="Territoire" ColumnName="Territoire" />
+                <ScalarProperty Name="Devise" ColumnName="Devise" />
+                <ScalarProperty Name="Dev_Fact" ColumnName="Dev_Fact" />
+                <ScalarProperty Name="Taxes_Dflt" ColumnName="Taxes_Dflt" />
+                <ScalarProperty Name="Taxes" ColumnName="Taxes" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Montant" ColumnName="Montant" />
+                <ScalarProperty Name="No_Usager" ColumnName="No_Usager" />
+                <ScalarProperty Name="Note_Entet" ColumnName="Note_Entet" />
+                <ScalarProperty Name="Imprime" ColumnName="Imprime" />
+                <ScalarProperty Name="Dateliv" ColumnName="Dateliv" />
+                <ScalarProperty Name="Clef" ColumnName="Clef" />
+                <ScalarProperty Name="Datecli" ColumnName="Datecli" />
+                <ScalarProperty Name="Exp_A6" ColumnName="Exp_A6" />
+                <ScalarProperty Name="Esc_Reel" ColumnName="Esc_Reel" />
+                <ScalarProperty Name="No_Rev" ColumnName="No_Rev" />
+                <ScalarProperty Name="Explose" ColumnName="Explose" />
+                <ScalarProperty Name="Revente" ColumnName="Revente" />
+                <ScalarProperty Name="Daterev" ColumnName="Daterev" />
+                <ScalarProperty Name="Psetupi" ColumnName="Psetupi" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Dateref" ColumnName="Dateref" />
+                <ScalarProperty Name="Refsup1" ColumnName="Refsup1" />
+                <ScalarProperty Name="Refsup2" ColumnName="Refsup2" />
+                <ScalarProperty Name="Faxcontact" ColumnName="Faxcontact" />
+                <ScalarProperty Name="Telcontact" ColumnName="Telcontact" />
+                <ScalarProperty Name="Fact_A6" ColumnName="Fact_A6" />
+                <ScalarProperty Name="Interloc" ColumnName="Interloc" />
+                <ScalarProperty Name="Route" ColumnName="Route" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Poidscom" ColumnName="Poidscom" />
+                <ScalarProperty Name="Statut" ColumnName="Statut" />
+                <ScalarProperty Name="RMA" ColumnName="RMA" />
+                <ScalarProperty Name="COH_BillToCustomerLink" ColumnName="COH_BillToCustomerLink" />
+                <ScalarProperty Name="COH_Link" ColumnName="COH_Link" />
+                <ScalarProperty Name="COH_ShipToCustomerLink" ColumnName="COH_ShipToCustomerLink" />
+                <ScalarProperty Name="COH_CarrierLink" ColumnName="COH_CarrierLink" />
+                <ScalarProperty Name="COH_PaymentTermLink" ColumnName="COH_PaymentTermLink" />
+                <ScalarProperty Name="COH_SalesmanLink" ColumnName="COH_SalesmanLink" />
+                <ScalarProperty Name="COH_TerritoryLink" ColumnName="COH_TerritoryLink" />
+                <ScalarProperty Name="COH_CurrencyLink" ColumnName="COH_CurrencyLink" />
+                <ScalarProperty Name="COH_TaxGroupLink" ColumnName="COH_TaxGroupLink" />
+                <ScalarProperty Name="COH_WarehouseLink" ColumnName="COH_WarehouseLink" />
+                <ScalarProperty Name="COH_RoadLink" ColumnName="COH_RoadLink" />
+                <ScalarProperty Name="COH_Id" ColumnName="COH_Id" />
+                <ScalarProperty Name="COH_LastUpdate" ColumnName="COH_LastUpdate" />
+                <ScalarProperty Name="COH_LastUser" ColumnName="COH_LastUser" />
+                <ScalarProperty Name="COH_Active" ColumnName="COH_Active" />
+                <ScalarProperty Name="COH_ShipToCountryCode" ColumnName="COH_ShipToCountryCode" />
+                <ScalarProperty Name="COH_BillToAddress2" ColumnName="COH_BillToAddress2" />
+                <ScalarProperty Name="COH_BillToProvinceCode" ColumnName="COH_BillToProvinceCode" />
+                <ScalarProperty Name="COH_BillToCountryCode" ColumnName="COH_BillToCountryCode" />
+                <ScalarProperty Name="COH_ShipToAddress2" ColumnName="COH_ShipToAddress2" />
+                <ScalarProperty Name="COH_ShipToProvinceCode" ColumnName="COH_ShipToProvinceCode" />
+                <ScalarProperty Name="COH_ShipToCountryLink" ColumnName="COH_ShipToCountryLink" />
+                <ScalarProperty Name="COH_BillToProvinceLink" ColumnName="COH_BillToProvinceLink" />
+                <ScalarProperty Name="COH_BillToCountryLink" ColumnName="COH_BillToCountryLink" />
+                <ScalarProperty Name="COH_ShipToProvinceLink" ColumnName="COH_ShipToProvinceLink" />
+                <ScalarProperty Name="COH_StatusSystemLink" ColumnName="COH_StatusSystemLink" />
+                <ScalarProperty Name="COH_StatusUserLink" ColumnName="COH_StatusUserLink" />
+                <ScalarProperty Name="Stimestamp" ColumnName="Stimestamp" />
+                <ScalarProperty Name="COH_ShippingModeLink" ColumnName="COH_ShippingModeLink" />
+                <ScalarProperty Name="DateJobProductionStart" ColumnName="DateJobProductionStart" />
+                <ScalarProperty Name="COH_FullSearch" ColumnName="COH_FullSearch" />
+                <ScalarProperty Name="RefLotSerialId" ColumnName="RefLotSerialId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="IsManualRevisionDate" ColumnName="IsManualRevisionDate" />
+                <ScalarProperty Name="AdvancedBillingDistributionMode" ColumnName="AdvancedBillingDistributionMode" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comm2">
+            <EntityTypeMapping TypeName="IVCLIVEDBModel.Comm2">
+              <MappingFragment StoreEntitySet="Comm2">
+                <ScalarProperty Name="No_Com" ColumnName="No_Com" />
+                <ScalarProperty Name="Ligneitm" ColumnName="Ligneitm" />
+                <ScalarProperty Name="Ligneopt" ColumnName="Ligneopt" />
+                <ScalarProperty Name="Famille" ColumnName="Famille" />
+                <ScalarProperty Name="Item" ColumnName="Item" />
+                <ScalarProperty Name="Des" ColumnName="Des" />
+                <ScalarProperty Name="Des2" ColumnName="Des2" />
+                <ScalarProperty Name="Des3" ColumnName="Des3" />
+                <ScalarProperty Name="Des4" ColumnName="Des4" />
+                <ScalarProperty Name="Qte_Com" ColumnName="Qte_Com" />
+                <ScalarProperty Name="Qte_Exp" ColumnName="Qte_Exp" />
+                <ScalarProperty Name="Qte_Fac" ColumnName="Qte_Fac" />
+                <ScalarProperty Name="Qte_Bo" ColumnName="Qte_Bo" />
+                <ScalarProperty Name="Complet" ColumnName="Complet" />
+                <ScalarProperty Name="Code_Gl" ColumnName="Code_Gl" />
+                <ScalarProperty Name="Prixbase" ColumnName="Prixbase" />
+                <ScalarProperty Name="Escompte" ColumnName="Escompte" />
+                <ScalarProperty Name="Prix" ColumnName="Prix" />
+                <ScalarProperty Name="Remise" ColumnName="Remise" />
+                <ScalarProperty Name="Montant" ColumnName="Montant" />
+                <ScalarProperty Name="Taxes_Cod" ColumnName="Taxes_Cod" />
+                <ScalarProperty Name="Devise" ColumnName="Devise" />
+                <ScalarProperty Name="Job" ColumnName="Job" />
+                <ScalarProperty Name="Export" ColumnName="Export" />
+                <ScalarProperty Name="Dateliv" ColumnName="Dateliv" />
+                <ScalarProperty Name="Datepro" ColumnName="Datepro" />
+                <ScalarProperty Name="No_Rev" ColumnName="No_Rev" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Qte_Pro" ColumnName="Qte_Pro" />
+                <ScalarProperty Name="Typejob" ColumnName="Typejob" />
+                <ScalarProperty Name="No_Lot" ColumnName="No_Lot" />
+                <ScalarProperty Name="Division" ColumnName="Division" />
+                <ScalarProperty Name="Psetup" ColumnName="Psetup" />
+                <ScalarProperty Name="Psetupi" ColumnName="Psetupi" />
+                <ScalarProperty Name="Clef" ColumnName="Clef" />
+                <ScalarProperty Name="Reserve" ColumnName="Reserve" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Clef_Parent" ColumnName="Clef_Parent" />
+                <ScalarProperty Name="Code_Ope" ColumnName="Code_Ope" />
+                <ScalarProperty Name="Listeparents" ColumnName="Listeparents" />
+                <ScalarProperty Name="Codecli" ColumnName="Codecli" />
+                <ScalarProperty Name="Unite" ColumnName="Unite" />
+                <ScalarProperty Name="Provenanceprix" ColumnName="Provenanceprix" />
+                <ScalarProperty Name="Conversiondos_Clef" ColumnName="Conversiondos_Clef" />
+                <ScalarProperty Name="Stimestamp" ColumnName="Stimestamp" />
+                <ScalarProperty Name="Lot_Inv" ColumnName="Lot_Inv" />
+                <ScalarProperty Name="PrixCore" ColumnName="PrixCore" />
+                <ScalarProperty Name="Statut" ColumnName="Statut" />
+                <ScalarProperty Name="DateClient" ColumnName="DateClient" />
+                <ScalarProperty Name="Niveau" ColumnName="Niveau" />
+                <ScalarProperty Name="Bom_Code_Id" ColumnName="Bom_Code_Id" />
+                <ScalarProperty Name="OptionManuelle" ColumnName="OptionManuelle" />
+                <ScalarProperty Name="FacteurMultiplicatif" ColumnName="FacteurMultiplicatif" />
+                <ScalarProperty Name="ContientOptions" ColumnName="ContientOptions" />
+                <ScalarProperty Name="Clef_ItemMaitre" ColumnName="Clef_ItemMaitre" />
+                <ScalarProperty Name="Qte_Pick" ColumnName="Qte_Pick" />
+                <ScalarProperty Name="COD_CustomerOrderHeaderLink" ColumnName="COD_CustomerOrderHeaderLink" />
+                <ScalarProperty Name="COD_ItemLink" ColumnName="COD_ItemLink" />
+                <ScalarProperty Name="COD_JobLink" ColumnName="COD_JobLink" />
+                <ScalarProperty Name="COD_UnitLink" ColumnName="COD_UnitLink" />
+                <ScalarProperty Name="COD_InventoryBatchLink" ColumnName="COD_InventoryBatchLink" />
+                <ScalarProperty Name="COD_GLAccountLink" ColumnName="COD_GLAccountLink" />
+                <ScalarProperty Name="COD_CreateDate" ColumnName="COD_CreateDate" />
+                <ScalarProperty Name="COD_LastUpdate" ColumnName="COD_LastUpdate" />
+                <ScalarProperty Name="COD_LastUser" ColumnName="COD_LastUser" />
+                <ScalarProperty Name="COD_NetQuantityOrdered" ColumnName="COD_NetQuantityOrdered" />
+                <ScalarProperty Name="JobPlanningStrategy" ColumnName="JobPlanningStrategy" />
+                <ScalarProperty Name="DateJobProductionStart" ColumnName="DateJobProductionStart" />
+                <ScalarProperty Name="COD_FullSearch" ColumnName="COD_FullSearch" />
+                <ScalarProperty Name="PricingMode" ColumnName="PricingMode" />
+                <ScalarProperty Name="NonConformityId" ColumnName="NonConformityId" />
+                <ScalarProperty Name="DistributionMode" ColumnName="DistributionMode" />
+                <ScalarProperty Name="Dev_Fact" ColumnName="Dev_Fact" />
+                <ScalarProperty Name="ConfirmationDate" ColumnName="ConfirmationDate" />
+                <ScalarProperty Name="EstimateDocumentID" ColumnName="EstimateDocumentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

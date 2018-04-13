@@ -11,6 +11,8 @@ namespace DataManagement
 
         static void Main(string[] args)
         {
+            Maintenance.ResetDb();
+            //InitProjectAndItem.LoadStatus();
             InitProjectAndItem.LoadProjects();
         }
     }
