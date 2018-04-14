@@ -53,6 +53,7 @@ namespace NeoTracker.DAL
                     Name = x.Name,
                     SortOrder = x.SortOrder,
                     IsActive = x.IsActive,
+                    CanManageProject =x.CanManageProject,
                     HeadOfDepartment = x.HeadOfDepartment,
                     CreatedAt = x.CreatedAt,
                     UpdatedAt = x.UpdatedAt,

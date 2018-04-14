@@ -16,6 +16,8 @@
             <ColumnDefinition Width="1"/>
             <ColumnDefinition Width="auto" MinWidth="200" MaxWidth="420"/>
             <ColumnDefinition Width="1"/>
+            <ColumnDefinition Width="auto" MinWidth="200" MaxWidth="420"/>
+            <ColumnDefinition Width="1"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
@@ -49,6 +51,18 @@
 
                 <Label Content="PurchaseOrder"/>
                 <TextBox  IsReadOnly="True" IsEnabled="False"  Text="{Binding Project.PurchaseOrder}" />
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <ScrollViewer Grid.Row="0" Grid.Column="4">
+            <StackPanel Margin="10,0,10,0">
+
+                <TextBlock Text="" Style="{StaticResource Heading2}" />
+                <Separator Height="10" Background="Transparent"/>
+                
+                <Label Content="CreatedBy" />
+                <TextBox  IsReadOnly="True" Text="{Binding Project.CreatedBy}"  />
                 <Label Content="CreatedAt" />
                 <TextBox  IsReadOnly="True" Text="{Binding Project.CreatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
                 <Label Content="UpdatedBy" />
@@ -57,7 +71,7 @@
                 <TextBox  IsReadOnly="True"  Text="{Binding Project.UpdatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
             </StackPanel>
         </ScrollViewer>
-        <ScrollViewer Grid.Row="0" Grid.Column="4">
+        <ScrollViewer Grid.Row="0" Grid.Column="6">
             <StackPanel Name="panel" Margin="10,0,10,0">
 
                 <StackPanel.BindingGroup>
@@ -93,7 +107,7 @@
             </StackPanel>
         </ScrollViewer>
 
-        <mui:ModernTab x:Name="tab" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" SelectedSource="Pages/ItemList.xaml">
+        <mui:ModernTab x:Name="tab" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="6" SelectedSource="Pages/ItemList.xaml">
             <mui:ModernTab.Links>
                 <mui:Link DisplayName="Items" Source="Pages/ItemList.xaml"/>
                 <mui:Link DisplayName="Events" Source="Pages/EventList.xaml"/>

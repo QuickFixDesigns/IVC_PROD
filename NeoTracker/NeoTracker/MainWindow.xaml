@@ -4,7 +4,9 @@
         xmlns:mui="http://firstfloorsoftware.com/ModernUI"
         Title="Neo Tracker" IsTitleVisible="True"          
         WindowStartupLocation="CenterScreen" WindowState="Maximized"
-        ContentSource="/Pages/ProjectList.xaml">
+        ContentSource="/Pages/ProjectList.xaml"
+        IsEnabled="{Binding IsReady}"
+        Style="{StaticResource MyModernWindow}">
 
     <mui:ModernWindow.MenuLinkGroups>
         <mui:LinkGroup DisplayName="Home">
@@ -13,7 +15,7 @@
                 <mui:Link DisplayName="Reports" Source="/Pages/Reports.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
-        <mui:LinkGroup DisplayName="admin">
+        <mui:LinkGroup DisplayName="admin" GroupKey="admin">
             <mui:LinkGroup.Links>
                 <mui:Link DisplayName="Departments" Source="/Pages/Admin/DepartmentList.xaml" />
                 <mui:Link DisplayName="Event type" Source="/Pages/Admin/EventTypeList.xaml"/>
@@ -28,9 +30,9 @@
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
     </mui:ModernWindow.MenuLinkGroups>
-    
+
     <mui:ModernWindow.TitleLinks>
-        <mui:Link DisplayName="settings" Source="/Pages/SettingsPage.xaml" />
+        <mui:Link DisplayName="settings" Source="/Pages/SettingsPage.xaml"/>
         <mui:Link DisplayName="help" Source="https://github.com/firstfloorsoftware/mui" />
     </mui:ModernWindow.TitleLinks>
 </mui:ModernWindow>

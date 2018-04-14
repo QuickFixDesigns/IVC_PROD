@@ -43,6 +43,15 @@ namespace NeoTracker.Models
         {
             get { return DepartmentID != 0; }
         }
+        private bool _CanManageProject;
+        public bool CanManageProject
+        {
+            get { return _CanManageProject; }
+            set
+            {
+                SetProperty(ref _CanManageProject, value);
+            }
+        }
         private List<User> _Users = new List<User>();
         public List<User> Users
         {
@@ -71,6 +80,7 @@ namespace NeoTracker.Models
                 DepartmentID = DepartmentID,
                 Name = Name,
                 SortOrder = SortOrder,
+                CanManageProject = CanManageProject,
                 HeadOfDepartmentID = HeadOfDepartment != null && HeadOfDepartment.UserID != 0 ? HeadOfDepartment.UserID : (int?)null,
                 IsActive = IsActive,
                 CreatedAt = CreatedAt,

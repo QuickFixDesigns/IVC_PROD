@@ -30,7 +30,7 @@ namespace NeoTracker
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = App.vm;
+            DataContext = App.vm;
         }
     }
 }

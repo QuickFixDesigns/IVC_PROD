@@ -70,6 +70,9 @@
 
                 <ComboBox ItemsSource="{Binding Path=Department.Users}" DisplayMemberPath="LongName" SelectedItem="{Binding Department.HeadOfDepartment, UpdateSourceTrigger=LostFocus}" />
 
+                <Label Content="CanManageProject"/>
+                <CheckBox IsChecked="{Binding Department.CanManageProject, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                
                 <Label Content="IsActive"/>
                 <CheckBox IsChecked="{Binding Department.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                 

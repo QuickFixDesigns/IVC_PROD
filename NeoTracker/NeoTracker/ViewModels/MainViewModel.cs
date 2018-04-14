@@ -28,20 +28,28 @@ namespace NeoTracker.ViewModels
 
         public async Task InitializeAsync()
         {
-            await Authentificate();
-            await LoadDepartments();
-            await LoadProjects();
-            await LoadStatus();
-            await LoadUsers();
-            await LoadEventTypes();
-            await LoadProjectTypes();
+            if (await Authentificate())
+            {
+                await LoadDepartments();
+                await LoadProjects();
+                await LoadStatus();
+                await LoadUsers();
+                await LoadEventTypes();
+                await LoadProjectTypes();
+            }
+            else
+            {
+                CurrentUser = new UserViewModel()
+                {
+                    Email = "Not authentificated"
+                };
+            }
         }
 
-        public async Task Authentificate()
+        public async Task<bool> Authentificate()
         {
-            IsReady = false;
-            CurrentUser = await ds.GetUser("karrick_Mercier@hotmail.com");
-            IsReady = true;
+            CurrentUser = await ds.GetUser("adellaneve@ivcweb.com");
+            return CurrentUser != null;
         }
 
         //Load collections
@@ -93,6 +101,10 @@ namespace NeoTracker.ViewModels
         {
             get { return _IsReady; }
             set { SetProperty(ref _IsReady, value && CurrentUser != null); }
+        }
+        public bool IsPending
+        {
+            get { return !_IsReady; }
         }
 
         private string _UserMsg = string.Empty;

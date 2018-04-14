@@ -24,6 +24,8 @@ namespace NeoTracker.Models
         [ForeignKey("HeadOfDepartmentID")]
         public User HeadOfDepartment { get; set; }
 
+        public bool CanManageProject { get; set; }
+
         //navigation
         public ICollection<DepartmentUser> DepartmentUsers { get; set; }
         public ICollection<DepartmentOperation> DepartmentOperations { get; set; }
