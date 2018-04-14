@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace NeoTracker.ViewModels
 {
@@ -28,6 +29,8 @@ namespace NeoTracker.ViewModels
 
         public async Task InitializeAsync()
         {
+            IsReady = false;
+
             if (await Authentificate())
             {
                 await LoadDepartments();
@@ -37,15 +40,8 @@ namespace NeoTracker.ViewModels
                 await LoadEventTypes();
                 await LoadProjectTypes();
             }
-            else
-            {
-                CurrentUser = new UserViewModel()
-                {
-                    Email = "Not authentificated"
-                };
-            }
+            IsReady = true;
         }
-
         public async Task<bool> Authentificate()
         {
             CurrentUser = await ds.GetUser("adellaneve@ivcweb.com");
@@ -55,42 +51,48 @@ namespace NeoTracker.ViewModels
         //Load collections
         public async Task LoadDepartments()
         {
-            IsReady = false;
             Departments = await ds.GetDepartmentList();
-            IsReady = true;
         }
         public async Task LoadProjects()
         {
-            IsReady = false;
             Projects = await ds.GetProjectList();
-            IsReady = true;
         }
         public async Task LoadStatus()
         {
-            IsReady = false;
             Statuses = await ds.GetStatusList();
-            IsReady = true;
         }
         public async Task LoadUsers()
         {
-            IsReady = false;
             Users = await ds.GetUserList();
-            IsReady = true;
         }
         public async Task LoadEventTypes()
         {
-            IsReady = false;
             EventTypes = await ds.GetEventTypeList();
-            IsReady = true;
         }
         public async Task LoadProjectTypes()
         {
-            IsReady = false;
             ProjectTypes = await ds.GetProjectTypeList();
-            IsReady = true;
         }
+        //Commands
+        private ICommand _LoginCommand;
+        public ICommand LoginCommand
+        {
+            get
+            {
+                return _LoginCommand ?? (_LoginCommand = new CommandHandler(async () => await InitializeAsync(), true));
+            }
+        }
+        private ICommand _AdminCommand;
+        public ICommand AdminCommand
+        {
+            get
+            {
+                return _AdminCommand ?? (_AdminCommand = new CommandHandler(null, true));
+            }
+        }
+
         //base attributes
-        private UserViewModel _CurrentUser = new UserViewModel();
+        private UserViewModel _CurrentUser;
         public UserViewModel CurrentUser
         {
             get { return _CurrentUser; }
@@ -100,11 +102,11 @@ namespace NeoTracker.ViewModels
         public bool IsReady
         {
             get { return _IsReady; }
-            set { SetProperty(ref _IsReady, value && CurrentUser != null); }
+            set { SetProperty(ref _IsReady, value); }
         }
         public bool IsPending
         {
-            get { return !_IsReady; }
+            get { return !IsReady; }
         }
 
         private string _UserMsg = string.Empty;
@@ -139,83 +141,83 @@ namespace NeoTracker.ViewModels
             set { SetProperty(ref _DepartmentOperation, value); }
         }
         //Projects
-        private List<ProjectViewModel> _Projects = new List<ProjectViewModel>();
+        private List<ProjectViewModel> _Projects;
         public List<ProjectViewModel> Projects
         {
             get { return _Projects; }
             set { SetProperty(ref _Projects, value); }
         }
-        private ProjectViewModel _Project = new ProjectViewModel();
+        private ProjectViewModel _Project;
         public ProjectViewModel Project
         {
             get { return _Project; }
             set { SetProperty(ref _Project, value); }
         }
-        private EventViewModel _Event = new EventViewModel();
+        private EventViewModel _Event;
         public EventViewModel Event
         {
             get { return _Event; }
             set { SetProperty(ref _Event, value); }
         }
-        private ItemViewModel _Item = new ItemViewModel();
+        private ItemViewModel _Item;
         public ItemViewModel Item
         {
             get { return _Item; }
             set { SetProperty(ref _Item, value); }
         }
-        private OperationViewModel _Operation = new OperationViewModel();
+        private OperationViewModel _Operation;
         public OperationViewModel Operation
         {
             get { return _Operation; }
             set { SetProperty(ref _Operation, value); }
         }
         //ProjectType
-        private List<ProjectTypeViewModel> _ProjectTypes = new List<ProjectTypeViewModel>();
+        private List<ProjectTypeViewModel> _ProjectTypes;
         public List<ProjectTypeViewModel> ProjectTypes
         {
             get { return _ProjectTypes; }
             set { SetProperty(ref _ProjectTypes, value); }
         }
-        private ProjectTypeViewModel _ProjectType = new ProjectTypeViewModel();
+        private ProjectTypeViewModel _ProjectType;
         public ProjectTypeViewModel ProjectType
         {
             get { return _ProjectType; }
             set { SetProperty(ref _ProjectType, value); }
         }
         //EventType
-        private List<EventTypeViewModel> _EventTypes = new List<EventTypeViewModel>();
+        private List<EventTypeViewModel> _EventTypes;
         public List<EventTypeViewModel> EventTypes
         {
             get { return _EventTypes; }
             set { SetProperty(ref _EventTypes, value); }
         }
-        private EventTypeViewModel _EventType = new EventTypeViewModel();
+        private EventTypeViewModel _EventType;
         public EventTypeViewModel EventType
         {
             get { return _EventType; }
             set { SetProperty(ref _EventType, value); }
         }
         //Status
-        private List<StatusViewModel> _Statuses = new List<StatusViewModel>();
+        private List<StatusViewModel> _Statuses;
         public List<StatusViewModel> Statuses
         {
             get { return _Statuses; }
             set { SetProperty(ref _Statuses, value); }
         }
-        private StatusViewModel _Status = new StatusViewModel();
+        private StatusViewModel _Status;
         public StatusViewModel Status
         {
             get { return _Status; }
             set { SetProperty(ref _Status, value); }
         }
         //users
-        private List<UserViewModel> _Users = new List<UserViewModel>();
+        private List<UserViewModel> _Users;
         public List<UserViewModel> Users
         {
             get { return _Users; }
             set { SetProperty(ref _Users, value); }
         }
-        private UserViewModel _User = new UserViewModel();
+        private UserViewModel _User;
         public UserViewModel User
         {
             get { return _User; }
@@ -223,7 +225,7 @@ namespace NeoTracker.ViewModels
         }
 
         //for dropdowns and selection dialog
-        private List<SelectItem> _SelectItemList = new List<SelectItem>();
+        private List<SelectItem> _SelectItemList;
         public List<SelectItem> SelectItemList
         {
             get { return _SelectItemList; }

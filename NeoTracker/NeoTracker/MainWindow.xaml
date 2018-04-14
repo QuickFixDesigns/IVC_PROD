@@ -5,7 +5,6 @@
         Title="Neo Tracker" IsTitleVisible="True"          
         WindowStartupLocation="CenterScreen" WindowState="Maximized"
         ContentSource="/Pages/ProjectList.xaml"
-        IsEnabled="{Binding IsReady}"
         Style="{StaticResource MyModernWindow}">
 
     <mui:ModernWindow.MenuLinkGroups>
@@ -17,6 +16,7 @@
         </mui:LinkGroup>
         <mui:LinkGroup DisplayName="admin" GroupKey="admin">
             <mui:LinkGroup.Links>
+                <mui:Link DisplayName="Back to projects" Source="/Pages/ProjectList.xaml" />
                 <mui:Link DisplayName="Departments" Source="/Pages/Admin/DepartmentList.xaml" />
                 <mui:Link DisplayName="Event type" Source="/Pages/Admin/EventTypeList.xaml"/>
                 <mui:Link DisplayName="Project type" Source="/Pages/Admin/ProjectTypeList.xaml"/>
