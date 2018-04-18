@@ -21,8 +21,8 @@ namespace NeoTracker
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            //Database.SetInitializer(new Initializer());
-            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<NeoTrackerContext, Configuration>());
+            Database.SetInitializer(new Initializer());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<NeoTrackerContext, Configuration>());
         }
     }
 }
