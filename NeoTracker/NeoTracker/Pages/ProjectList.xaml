@@ -16,7 +16,17 @@
 
         <ScrollViewer Margin="{StaticResource SplitLeft}">
             <StackPanel HorizontalAlignment="Left" Margin="0,0,10,10">
+
+                <Label Content="SearchBox"/>
+                <TextBox x:Name="SearchBox" TextChanged="SearchBox_TextChanged"/>
+                
+                <Label Content="ProjectType"/>
+                <ComboBox ItemsSource="{Binding Path=ProjectTypes}" DisplayMemberPath="Name" SelectionChanged="ComboBox_SelectionChanged"/>
+
+                <Separator Height="20" Visibility="Hidden"/>
+                
                 <mui:ModernButton x:Name="CreateButton" Click="CreateButton_Click"/>
+
             </StackPanel>
         </ScrollViewer>
 

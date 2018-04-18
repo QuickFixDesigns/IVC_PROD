@@ -77,5 +77,15 @@ namespace NeoTracker.Pages
         {
             //throw new NotImplementedException();
         }
+
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
