@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataManagement.InitNeoTracker;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,13 +7,16 @@ using System.Threading.Tasks;
 
 namespace DataManagement
 {
-    public class InitDepartmentAndUser
+    public class Admin
     {
-        public static void Load()
+        public static void LoadDataBase()
         {
             LoadDepartments();
             LoadUsers();
             LoadUserDepartments();
+            LoadProjectType();
+            LoadStatus();
+            LoadEventTypes();
         }
 
         public static void LoadDepartments()
@@ -26,7 +30,7 @@ namespace DataManagement
 
                     foreach (var i in list)
                     {
-                        Neo.Departments.Add(new Department()
+                        Department d = new Department()
                         {
                             Name = i.Department_Name,
                             SortOrder = i.Dept_Order,
@@ -35,7 +39,12 @@ namespace DataManagement
                             CreatedBy = "SYS",
                             IsActive = true,
                             UpdatedBy = "SYS"
-                        });
+                        };
+                        if (i.Department_Name.Equals("Production"))
+                        {
+                            d.DepartmentOperations = GetLists.GetDepartmentOperations();
+                        }
+                        Neo.Departments.Add(d);
                     }
                     Neo.SaveChanges();
                 }
@@ -115,6 +124,54 @@ namespace DataManagement
                             });
                         }
                     }
+                    Neo.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+        public static void LoadStatus()
+        {
+            try
+            {
+                using (var Neo = new NeoTrackerDbEntities())
+                {
+                    var list = GetLists.GetStatus();
+                    Neo.Status.AddRange(list);
+                    Neo.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+        public static void LoadProjectType()
+        {
+            try
+            {
+                using (var Neo = new NeoTrackerDbEntities())
+                {
+                    var list = GetLists.GetProjectTypes();
+                    Neo.ProjectTypes.AddRange(list);
+                    Neo.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+        public static void LoadEventTypes()
+        {
+            try
+            {
+                using (var Neo = new NeoTrackerDbEntities())
+                {
+                    var list = GetLists.GetEventTypes();
+                    Neo.EventTypes.AddRange(list);
                     Neo.SaveChanges();
                 }
             }

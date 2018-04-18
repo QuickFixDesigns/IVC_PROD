@@ -87,9 +87,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GeniusContext.edmx</DependentUpon>
     </Compile>
+    <Compile Include="InitNeoTracker\GetLists.cs" />
     <Compile Include="Maintenance.cs" />
-    <Compile Include="InitProjectAndItem.cs" />
-    <Compile Include="InitDepartmentAndUser.cs" />
+    <Compile Include="InitNeoTracker\Project.cs" />
+    <Compile Include="InitNeoTracker\Admin.cs" />
     <Compile Include="Item.cs">
       <DependentUpon>NeoTrackerContext.tt</DependentUpon>
     </Compile>

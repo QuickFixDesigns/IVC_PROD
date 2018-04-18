@@ -14,9 +14,19 @@ namespace DataManagement
             {
                 using (var Neo = new NeoTrackerDbEntities())
                 {
+                    //project
+                    Neo.Database.ExecuteSqlCommand(" DELETE  FROM Event ");
                     Neo.Database.ExecuteSqlCommand(" DELETE  FROM Operation ");
                     Neo.Database.ExecuteSqlCommand(" DELETE  FROM Item ");
                     Neo.Database.ExecuteSqlCommand(" DELETE  FROM Project ");
+
+                    //admin
+                    Neo.Database.ExecuteSqlCommand(" DELETE  FROM DepartmentUSer ");
+                    Neo.Database.ExecuteSqlCommand(" DELETE  FROM User ");
+                    Neo.Database.ExecuteSqlCommand(" DELETE  FROM Department ");
+                    Neo.Database.ExecuteSqlCommand(" DELETE  FROM EventType ");
+                    Neo.Database.ExecuteSqlCommand(" DELETE  FROM Status ");
+
                     Neo.SaveChanges();
                 }
             }

@@ -7,88 +7,9 @@ using System.Threading.Tasks;
 
 namespace DataManagement
 {
-    public class InitProjectAndItem
+    public static class Projects
     {
-        public static void LoadStatus()
-        {
-            try
-            {
-                using (var Neo = new NeoTrackerDbEntities())
-                {
-                    var list = new List<Status>()
-                    {
-                        new Status()
-                        {
-                            Name = "Created",
-                            IsDeleted = false,
-                            IsActive = true,
-                            SortOrder =1,
-                            CreatedBy = "sys",
-                            CreatedAt = DateTime.Now,
-                            UpdatedAt = DateTime.Now,
-                            UpdatedBy = "sys",
-                        },
-                        new Status()
-                        {
-                            Name = "Completed",
-                            IsDeleted = false,
-                            IsActive = true,
-                            SortOrder =1,
-                            CreatedBy = "sys",
-                            CreatedAt = DateTime.Now,
-                            UpdatedAt = DateTime.Now,
-                            UpdatedBy = "sys",
-                        },
-                    };
-                    Neo.Status.AddRange(list);
-                    Neo.SaveChanges();
-                }
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
-        }
-        public static void LoadProjectType()
-        {
-            try
-            {
-                using (var Neo = new NeoTrackerDbEntities())
-                {
-                    var list = new List<ProjectType>()
-                    {
-                        new ProjectType()
-                        {
-                            Name = "Open",
-                            IsActive = true,
-                            SortOrder =1,
-                            CreatedBy = "sys",
-                            CreatedAt = DateTime.Now,
-                            UpdatedAt = DateTime.Now,
-                            UpdatedBy = "sys",
-                        },
-                        new ProjectType()
-                        {
-                            Name = "Closed",
-                            IsActive = true,
-                            SortOrder =2,
-                            CreatedBy = "sys",
-                            CreatedAt = DateTime.Now,
-                            UpdatedAt = DateTime.Now,
-                            UpdatedBy = "sys",
-                        }
-                    };
-                    Neo.ProjectTypes.AddRange(list);
-                    Neo.SaveChanges();
-                }
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
-        }
-
-        public static void LoadProjects()
+        public static void LoadDataBase()
         {
             try
             {
