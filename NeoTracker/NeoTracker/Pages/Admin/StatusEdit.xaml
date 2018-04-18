@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"               
              xmlns:src="clr-namespace:NeoTracker.ViewModels"
              mc:Ignorable="d" >
     <Grid Style="{StaticResource ContentRoot}">
@@ -49,7 +50,7 @@
                 <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding Status.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Label Content="SortOrder"/>
-                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding Status.SortOrder, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <xctk:IntegerUpDown Value="{Binding Status.SortOrder, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
 
                 <Label Content="IsDeleted"/>
                 <CheckBox IsChecked="{Binding Status.IsDeleted, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />

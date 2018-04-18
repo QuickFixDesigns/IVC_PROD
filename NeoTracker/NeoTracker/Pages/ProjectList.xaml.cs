@@ -34,7 +34,25 @@ namespace NeoTracker.Pages
         {
             InitializeComponent();
             btn.SetButton(CreateButton, true, "Create", "Add project", "Add new project");
-            util.AutoFitListView(GridListView);
+            btn.SetButton(ClearProjectTypeFilter, false, "Reset", null, null);
+
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(App.vm.Projects);
+            view.Filter = i => ProjectFilter(i);
+
+            ListView.ItemsSource = view;
+        }
+        private bool ProjectFilter(object item)
+        {
+            if (string.IsNullOrEmpty(SearchBox.Text) && ProjecTypeFilter.SelectedIndex == -1)
+            {
+                return true;
+            }
+            else
+            {
+                var project = item as ProjectViewModel;
+                return ((project.Code ?? "").Contains(SearchBox.Text) || project.Name.Contains(SearchBox.Text) || (project.PurchaseOrder ?? "").Contains(SearchBox.Text) || (project.Client ?? "").Contains(SearchBox.Text)) 
+                    && (ProjecTypeFilter.SelectedIndex == -1 || ProjecTypeFilter.Text == project.ProjectType.Name);
+            }
         }
         private async void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -80,12 +98,18 @@ namespace NeoTracker.Pages
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            CollectionViewSource.GetDefaultView(ListView.ItemsSource).Refresh();
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ProjecTypeFilter_LostFocus(object sender, RoutedEventArgs e)
         {
+            CollectionViewSource.GetDefaultView(ListView.ItemsSource).Refresh();
+        }
 
+        private void ClearProjectTypeFilter_Click(object sender, RoutedEventArgs e)
+        {
+            ProjecTypeFilter.SelectedIndex=-1;
+            CollectionViewSource.GetDefaultView(ListView.ItemsSource).Refresh();
         }
     }
 }

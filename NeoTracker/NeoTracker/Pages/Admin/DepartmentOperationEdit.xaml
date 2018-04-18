@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"   
              xmlns:src="clr-namespace:NeoTracker.ViewModels"
              mc:Ignorable="d" >
     <Grid Style="{StaticResource ContentRoot}">
@@ -45,13 +46,13 @@
                 <Separator Height="10" Background="Transparent"/>
 
                 <Label Content="SortOrder" />
-                <TextBox Text="{Binding DepartmentOperation.SortOrder, UpdateSourceTrigger=PropertyChanged}"  />
+                <xctk:IntegerUpDown Value="{Binding DepartmentOperation.SortOrder, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <Label Content="Name" />
-                <TextBox Text="{Binding DepartmentOperation.Name, UpdateSourceTrigger=PropertyChanged}"  />
+                <TextBox Text="{Binding DepartmentOperation.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"  />
 
                 <Label Content="OperationTime" />
-                <TextBox Text="{Binding DepartmentOperation.OperationTime, UpdateSourceTrigger=PropertyChanged}"  />
+                <xctk:DecimalUpDown DefaultValue ="0" Value="{Binding DepartmentOperation.OperationTime, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <Label Content="IsActive"/>
                 <CheckBox IsChecked="{Binding DepartmentOperation.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />

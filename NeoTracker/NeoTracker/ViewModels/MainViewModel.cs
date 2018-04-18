@@ -40,6 +40,7 @@ namespace NeoTracker.ViewModels
                 await LoadEventTypes();
                 await LoadProjectTypes();
             }
+            System.Threading.Thread.Sleep(5000);
             IsReady = true;
         }
         public async Task<bool> Authentificate()
@@ -102,11 +103,17 @@ namespace NeoTracker.ViewModels
         public bool IsReady
         {
             get { return _IsReady; }
-            set { SetProperty(ref _IsReady, value); }
+            set
+            {
+                IsPending = !value;
+                SetProperty(ref _IsReady, value);
+            }
         }
+        private bool _IsPending;
         public bool IsPending
         {
-            get { return !IsReady; }
+            get { return _IsPending; }
+            set { SetProperty(ref _IsPending, value); }
         }
 
         private string _UserMsg = string.Empty;

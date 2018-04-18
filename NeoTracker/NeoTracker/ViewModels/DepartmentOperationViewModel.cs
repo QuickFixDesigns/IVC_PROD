@@ -119,22 +119,6 @@ namespace NeoTracker.Models
                         result = "Cannot be empty or more than 100 characters";
                     }
                 }
-                if (columnName == "SortOrder")
-                {
-                    Regex regex = new Regex("[^0-9]+");
-                    if (regex.IsMatch(SortOrder.ToString()))
-                    {
-                        result = "Cannot be a text value";
-                    }
-                }
-                if (columnName == "OperationTime")
-                {
-                    Regex regex = new Regex("[^0-9]+");
-                    if (regex.IsMatch(OperationTime.ToString()))
-                    {
-                        result = "Cannot be a text value";
-                    }
-                }
                 return result;
             }
         }

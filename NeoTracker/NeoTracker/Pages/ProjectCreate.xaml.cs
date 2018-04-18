@@ -47,7 +47,7 @@ namespace NeoTracker.Pages
         }
         private bool UserFilter(object item)
         {
-            if (String.IsNullOrEmpty(SearchBox.Text))
+            if (string.IsNullOrEmpty(SearchBox.Text))
             {
                 return true;
             }

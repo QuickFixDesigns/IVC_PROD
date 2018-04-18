@@ -4,9 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"             
              xmlns:src="clr-namespace:NeoTracker.ViewModels"
              mc:Ignorable="d" >
     
+
     <Grid Style="{StaticResource ContentRoot}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -26,7 +28,7 @@
 
                 <mui:ModernButton x:Name="AddUserButton" Click="AddUserButton_Click" IsEnabled="{Binding Department.CanAdd}"/>
                 <mui:ModernButton x:Name="AddOperationButton" Click="AddOperationButton_Click" IsEnabled="{Binding Department.CanAdd}"/>
-                
+
             </StackPanel>
         </ScrollViewer>
 
@@ -57,7 +59,7 @@
                 <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding Department.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Label Content="SortOrder"/>
-                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding Department.SortOrder, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <xctk:IntegerUpDown Value="{Binding Department.SortOrder, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
 
                 <Grid>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
@@ -72,10 +74,10 @@
 
                 <Label Content="CanManageProject"/>
                 <CheckBox IsChecked="{Binding Department.CanManageProject, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
-                
+
                 <Label Content="IsActive"/>
                 <CheckBox IsChecked="{Binding Department.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
-                
+
                 <Label Content="CreatedAt" />
                 <TextBox  IsReadOnly="True"  Text="{Binding Department.CreatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
                 <Label Content="UpdatedBy" />

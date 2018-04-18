@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"               
              xmlns:src="clr-namespace:NeoTracker.ViewModels"
              mc:Ignorable="d" >
     <Grid Style="{StaticResource ContentRoot}">
@@ -54,13 +55,13 @@
                 <TextBox Text="{Binding Operation.Name, UpdateSourceTrigger=PropertyChanged}"  />
 
                 <Label Content="StartDate" />
-                <TextBox Text="{Binding Operation.StartDate, UpdateSourceTrigger=PropertyChanged,StringFormat={}{0:yyyy-MM-dd}}"  />
+                <xctk:DateTimePicker Value="{Binding Operation.StartDate, UpdateSourceTrigger=PropertyChanged}" Format="ShortDate"/>
 
                 <Label Content="EndDate" />
-                <TextBox Text="{Binding Operation.EndDate, UpdateSourceTrigger=PropertyChanged,StringFormat={}{0:yyyy-MM-dd}}"  />
+                <xctk:DateTimePicker Value="{Binding Operation.EndDate, UpdateSourceTrigger=PropertyChanged}" Format="ShortDate"/>
 
                 <Label Content="OperationTime" />
-                <TextBox Text="{Binding Operation.OperationTime, UpdateSourceTrigger=PropertyChanged}"  />
+                <xctk:DecimalUpDown DefaultValue ="0" Value="{Binding Operation.OperationTime, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
 
                 <Label Content="IsCompleted"/>
                 <CheckBox IsChecked="{Binding Operation.IsCompleted, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />

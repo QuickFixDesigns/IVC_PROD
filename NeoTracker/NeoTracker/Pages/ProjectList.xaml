@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
             IsEnabled="{Binding IsReady}"
              mc:Ignorable="d">
 
@@ -19,12 +20,21 @@
 
                 <Label Content="SearchBox"/>
                 <TextBox x:Name="SearchBox" TextChanged="SearchBox_TextChanged"/>
-                
-                <Label Content="ProjectType"/>
-                <ComboBox ItemsSource="{Binding Path=ProjectTypes}" DisplayMemberPath="Name" SelectionChanged="ComboBox_SelectionChanged"/>
+
+
+                <Grid>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <Label Content="ProjectType"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <mui:ModernButton x:Name="ClearProjectTypeFilter" Click="ClearProjectTypeFilter_Click"></mui:ModernButton>
+                    </StackPanel>
+                </Grid>
+
+                <ComboBox x:Name="ProjecTypeFilter" ItemsSource="{Binding Path=ProjectTypes}" DisplayMemberPath="Name" SelectedValue="Id" LostFocus="ProjecTypeFilter_LostFocus"/>
 
                 <Separator Height="20" Visibility="Hidden"/>
-                
+
                 <mui:ModernButton x:Name="CreateButton" Click="CreateButton_Click"/>
 
             </StackPanel>
