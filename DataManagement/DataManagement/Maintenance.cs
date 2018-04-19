@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataManagement.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -11,7 +12,7 @@ namespace DataManagement
     {
         public static void ResetDb()
         {
-            Console.WriteLine(MethodBase.GetCurrentMethod().DeclaringType.Name);
+            Console.WriteLine("Maintenance.ResetDb");
             try
             {
                 using (var Neo = new NeoTrackerDbEntities())
@@ -34,7 +35,7 @@ namespace DataManagement
             }
             catch (Exception e)
             {
-                throw;
+                Console.WriteLine(e.Message.ToString());
             }
         }
     }

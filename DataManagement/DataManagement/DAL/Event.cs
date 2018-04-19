@@ -7,24 +7,30 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DataManagement
+namespace DataManagement.DAL
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class DepartmentOperation
+    public partial class Event
     {
-        public int DepartmentOperationID { get; set; }
-        public Nullable<int> SortOrder { get; set; }
-        public string Name { get; set; }
-        public decimal OperationTime { get; set; }
-        public int DepartmentID { get; set; }
+        public int EventID { get; set; }
+        public int ProjectID { get; set; }
+        public Nullable<int> ItemID { get; set; }
+        public Nullable<int> DepartmentID { get; set; }
+        public int EventTypeID { get; set; }
+        public int StatusID { get; set; }
+        public string Description { get; set; }
         public System.DateTime CreatedAt { get; set; }
         public System.DateTime UpdatedAt { get; set; }
+        public string CreatedBy { get; set; }
         public string UpdatedBy { get; set; }
         public bool IsActive { get; set; }
-        public string CreatedBy { get; set; }
     
         public virtual Department Department { get; set; }
+        public virtual EventType EventType { get; set; }
+        public virtual Item Item { get; set; }
+        public virtual Project Project { get; set; }
+        public virtual Status Status { get; set; }
     }
 }

@@ -7,29 +7,29 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DataManagement
+namespace DataManagement.DAL
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class ProjectType
+    public partial class Operation
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ProjectType()
-        {
-            this.Projects = new HashSet<Project>();
-        }
-    
-        public int ProjectTypeID { get; set; }
+        public int OperationID { get; set; }
+        public int ItemID { get; set; }
         public Nullable<int> SortOrder { get; set; }
+        public Nullable<int> DepartmentID { get; set; }
         public string Name { get; set; }
+        public Nullable<System.DateTime> StartDate { get; set; }
+        public Nullable<System.DateTime> EndDate { get; set; }
+        public decimal OperationTime { get; set; }
+        public bool IsCompleted { get; set; }
         public System.DateTime CreatedAt { get; set; }
         public System.DateTime UpdatedAt { get; set; }
+        public string CreatedBy { get; set; }
         public string UpdatedBy { get; set; }
         public bool IsActive { get; set; }
-        public string CreatedBy { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Project> Projects { get; set; }
+        public virtual Department Department { get; set; }
+        public virtual Item Item { get; set; }
     }
 }

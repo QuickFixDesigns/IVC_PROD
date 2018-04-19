@@ -57,19 +57,52 @@
     <Compile Include="Comm2.cs">
       <DependentUpon>GeniusContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Department.cs">
+    <Compile Include="DAL\Department.cs">
       <DependentUpon>NeoTrackerContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="DepartmentOperation.cs">
+    <Compile Include="DAL\DepartmentOperation.cs">
       <DependentUpon>NeoTrackerContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="DepartmentUser.cs">
+    <Compile Include="DAL\DepartmentUser.cs">
       <DependentUpon>NeoTrackerContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Event.cs">
+    <Compile Include="DAL\Event.cs">
       <DependentUpon>NeoTrackerContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="EventType.cs">
+    <Compile Include="DAL\EventType.cs">
+      <DependentUpon>NeoTrackerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Item.cs">
+      <DependentUpon>NeoTrackerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\NeoTrackerContext.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NeoTrackerContext.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\NeoTrackerContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NeoTrackerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\NeoTrackerContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NeoTrackerContext.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Operation.cs">
+      <DependentUpon>NeoTrackerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Project.cs">
+      <DependentUpon>NeoTrackerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\ProjectType.cs">
+      <DependentUpon>NeoTrackerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Status.cs">
+      <DependentUpon>NeoTrackerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\User.cs">
       <DependentUpon>NeoTrackerContext.tt</DependentUpon>
     </Compile>
     <Compile Include="GeniusContext.Context.cs">
@@ -91,34 +124,7 @@
     <Compile Include="Maintenance.cs" />
     <Compile Include="InitNeoTracker\Project.cs" />
     <Compile Include="InitNeoTracker\Admin.cs" />
-    <Compile Include="Item.cs">
-      <DependentUpon>NeoTrackerContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="NeoTrackerContext.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NeoTrackerContext.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="NeoTrackerContext.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NeoTrackerContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="NeoTrackerContext.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NeoTrackerContext.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Operation.cs">
-      <DependentUpon>NeoTrackerContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
-    <Compile Include="Project.cs">
-      <DependentUpon>NeoTrackerContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ProjectType.cs">
-      <DependentUpon>NeoTrackerContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PT_Department.cs">
       <DependentUpon>TrackerContext.tt</DependentUpon>
@@ -153,9 +159,6 @@
     <Compile Include="PT_User_Department.cs">
       <DependentUpon>TrackerContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Status.cs">
-      <DependentUpon>NeoTrackerContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="TrackerContext.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -171,9 +174,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TrackerContext.edmx</DependentUpon>
     </Compile>
-    <Compile Include="User.cs">
-      <DependentUpon>NeoTrackerContext.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -181,19 +181,19 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>TrackerContext.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <EntityDeploy Include="NeoTrackerContext.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>NeoTrackerContext.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <EntityDeploy Include="GeniusContext.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>GeniusContext.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EntityDeploy Include="DAL\NeoTrackerContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>NeoTrackerContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DAL\NeoTrackerContext.edmx.diagram">
+      <DependentUpon>NeoTrackerContext.edmx</DependentUpon>
+    </None>
     <None Include="GeniusContext.edmx.diagram">
       <DependentUpon>GeniusContext.edmx</DependentUpon>
-    </None>
-    <None Include="NeoTrackerContext.edmx.diagram">
-      <DependentUpon>NeoTrackerContext.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="TrackerContext.edmx.diagram">
@@ -201,6 +201,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DAL\NeoTrackerContext.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>NeoTrackerContext.edmx</DependentUpon>
+      <LastGenOutput>NeoTrackerContext.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DAL\NeoTrackerContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>NeoTrackerContext.edmx</DependentUpon>
+      <LastGenOutput>NeoTrackerContext.cs</LastGenOutput>
+    </Content>
     <Content Include="GeniusContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>GeniusContext.edmx</DependentUpon>
@@ -210,16 +220,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>GeniusContext.edmx</DependentUpon>
       <LastGenOutput>GeniusContext.cs</LastGenOutput>
-    </Content>
-    <Content Include="NeoTrackerContext.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>NeoTrackerContext.edmx</DependentUpon>
-      <LastGenOutput>NeoTrackerContext.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="NeoTrackerContext.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>NeoTrackerContext.edmx</DependentUpon>
-      <LastGenOutput>NeoTrackerContext.cs</LastGenOutput>
     </Content>
     <Content Include="TrackerContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -235,5 +235,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -18,7 +18,6 @@ namespace NeoTracker.ViewModels
     {
         private DataService ds = new DataService();
 
-
         public MainViewModel()
         {
             Initialization = InitializeAsync();
@@ -44,7 +43,7 @@ namespace NeoTracker.ViewModels
         }
         public async Task<bool> Authentificate()
         {
-            CurrentUser = await ds.GetUser("Karrick_Mercier@hotmail.com");
+            CurrentUser = await ds.GetUser("adellaneve@ivcweb.com");
             return CurrentUser != null;
         }
 

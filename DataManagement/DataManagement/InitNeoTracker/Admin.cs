@@ -1,4 +1,5 @@
-﻿using DataManagement.InitNeoTracker;
+﻿using DataManagement.DAL;
+using DataManagement.InitNeoTracker;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,6 @@ namespace DataManagement
     {
         public static void LoadDataBase()
         {
-            Console.WriteLine(MethodBase.GetCurrentMethod().DeclaringType.Name);
             LoadDepartments();
             LoadUsers();
             LoadUserDepartments();
@@ -24,6 +24,7 @@ namespace DataManagement
 
         public static void LoadDepartments()
         {
+            Console.WriteLine("Admin.LoadDepartments");
             try
             {
                 using (var Neo = new NeoTrackerDbEntities())
@@ -41,7 +42,8 @@ namespace DataManagement
                             UpdatedAt = DateTime.Now,
                             CreatedBy = "SYS",
                             IsActive = true,
-                            UpdatedBy = "SYS"
+                            UpdatedBy = "SYS",
+                            DepartmentOperations = new List<DepartmentOperation>(),
                         };
                         if (i.Department_Name.Equals("Production"))
                         {
@@ -54,12 +56,13 @@ namespace DataManagement
             }
             catch (Exception e)
             {
-                throw;
+                Console.WriteLine(e.Message.ToString());
             }
         }
 
         public static void LoadUsers()
         {
+            Console.WriteLine("Admin.LoadUsers");
             try
             {
                 using (var Neo = new NeoTrackerDbEntities())
@@ -89,12 +92,13 @@ namespace DataManagement
             }
             catch (Exception e)
             {
-                throw;
+                Console.WriteLine(e.Message.ToString());
             }
         }
 
         public static void LoadUserDepartments()
         {
+            Console.WriteLine("Admin.LoadUserDepartments");
             try
             {
                 using (var Neo = new NeoTrackerDbEntities())
@@ -132,11 +136,12 @@ namespace DataManagement
             }
             catch (Exception e)
             {
-                throw;
+                Console.WriteLine(e.Message.ToString());
             }
         }
         public static void LoadStatus()
         {
+            Console.WriteLine("Admin.LoadStatus");
             try
             {
                 using (var Neo = new NeoTrackerDbEntities())
@@ -148,11 +153,12 @@ namespace DataManagement
             }
             catch (Exception e)
             {
-                throw;
+                Console.WriteLine(e.Message.ToString());
             }
         }
         public static void LoadProjectType()
         {
+            Console.WriteLine("Admin.LoadProjectType");
             try
             {
                 using (var Neo = new NeoTrackerDbEntities())
@@ -164,11 +170,12 @@ namespace DataManagement
             }
             catch (Exception e)
             {
-                throw;
+                Console.WriteLine(e.Message.ToString());
             }
         }
         public static void LoadEventTypes()
         {
+            Console.WriteLine("Admin.LoadEventTypes");
             try
             {
                 using (var Neo = new NeoTrackerDbEntities())
@@ -180,7 +187,7 @@ namespace DataManagement
             }
             catch (Exception e)
             {
-                throw;
+                Console.WriteLine(e.Message.ToString());
             }
         }
     }

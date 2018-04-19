@@ -7,23 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DataManagement
+namespace DataManagement.DAL
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class DepartmentUser
+    public partial class DepartmentOperation
     {
-        public int DepartmentUserID { get; set; }
+        public int DepartmentOperationID { get; set; }
+        public Nullable<int> SortOrder { get; set; }
+        public string Name { get; set; }
+        public decimal OperationTime { get; set; }
         public int DepartmentID { get; set; }
-        public int UserID { get; set; }
         public System.DateTime CreatedAt { get; set; }
         public System.DateTime UpdatedAt { get; set; }
+        public string CreatedBy { get; set; }
         public string UpdatedBy { get; set; }
         public bool IsActive { get; set; }
-        public string CreatedBy { get; set; }
     
         public virtual Department Department { get; set; }
-        public virtual User User { get; set; }
     }
 }

@@ -13,11 +13,12 @@
           <Property Name="Name" Type="nvarchar" MaxLength="25" Nullable="false" />
           <Property Name="SortOrder" Type="int" />
           <Property Name="HeadOfDepartmentID" Type="int" />
+          <Property Name="CanManageProject" Type="bit" Nullable="false" />
           <Property Name="CreatedAt" Type="datetime" Nullable="false" />
           <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="320" />
           <Property Name="UpdatedBy" Type="nvarchar" MaxLength="320" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="320" />
         </EntityType>
         <EntityType Name="DepartmentOperation">
           <Key>
@@ -30,9 +31,9 @@
           <Property Name="DepartmentID" Type="int" Nullable="false" />
           <Property Name="CreatedAt" Type="datetime" Nullable="false" />
           <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="320" />
           <Property Name="UpdatedBy" Type="nvarchar" MaxLength="320" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="320" />
         </EntityType>
         <EntityType Name="DepartmentUser">
           <Key>
@@ -43,9 +44,9 @@
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="CreatedAt" Type="datetime" Nullable="false" />
           <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="320" />
           <Property Name="UpdatedBy" Type="nvarchar" MaxLength="320" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="320" />
         </EntityType>
         <EntityType Name="Event">
           <Key>
@@ -60,9 +61,9 @@
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
           <Property Name="CreatedAt" Type="datetime" Nullable="false" />
           <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="320" />
           <Property Name="UpdatedBy" Type="nvarchar" MaxLength="320" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="320" />
         </EntityType>
         <EntityType Name="EventType">
           <Key>
@@ -71,14 +72,14 @@
           <Property Name="EventTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="25" Nullable="false" />
           <Property Name="SortOrder" Type="int" />
+          <Property Name="Notificate" Type="bit" Nullable="false" />
           <Property Name="IsPriceChange" Type="bit" Nullable="false" />
           <Property Name="IsDueDateChange" Type="bit" Nullable="false" />
           <Property Name="CreatedAt" Type="datetime" Nullable="false" />
           <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="320" />
           <Property Name="UpdatedBy" Type="nvarchar" MaxLength="320" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="320" />
-          <Property Name="Notificate" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Item">
           <Key>
@@ -95,9 +96,9 @@
           <Property Name="EndDate" Type="datetime" />
           <Property Name="CreatedAt" Type="datetime" Nullable="false" />
           <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="320" />
           <Property Name="UpdatedBy" Type="nvarchar" MaxLength="320" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="320" />
         </EntityType>
         <EntityType Name="Operation">
           <Key>
@@ -114,9 +115,9 @@
           <Property Name="IsCompleted" Type="bit" Nullable="false" />
           <Property Name="CreatedAt" Type="datetime" Nullable="false" />
           <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="320" />
           <Property Name="UpdatedBy" Type="nvarchar" MaxLength="320" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="320" />
         </EntityType>
         <EntityType Name="Project">
           <Key>
@@ -131,9 +132,9 @@
           <Property Name="ProjectTypeID" Type="int" />
           <Property Name="CreatedAt" Type="datetime" Nullable="false" />
           <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="320" />
           <Property Name="UpdatedBy" Type="nvarchar" MaxLength="320" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="320" />
         </EntityType>
         <EntityType Name="ProjectType">
           <Key>
@@ -144,9 +145,9 @@
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="CreatedAt" Type="datetime" Nullable="false" />
           <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="320" />
           <Property Name="UpdatedBy" Type="nvarchar" MaxLength="320" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="320" />
         </EntityType>
         <EntityType Name="Status">
           <Key>
@@ -158,9 +159,9 @@
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
           <Property Name="CreatedAt" Type="datetime" Nullable="false" />
           <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="320" />
           <Property Name="UpdatedBy" Type="nvarchar" MaxLength="320" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="320" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -175,9 +176,9 @@
           <Property Name="EmailNotifications" Type="bit" Nullable="false" />
           <Property Name="CreatedAt" Type="datetime" Nullable="false" />
           <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="320" />
           <Property Name="UpdatedBy" Type="nvarchar" MaxLength="320" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="320" />
         </EntityType>
         <Association Name="FK_dbo_Department_dbo_User_HeadOfDepartmentID">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
@@ -429,11 +430,12 @@
           <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SortOrder" Type="Int32" />
           <Property Name="HeadOfDepartmentID" Type="Int32" />
+          <Property Name="CanManageProject" Type="Boolean" Nullable="false" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <Property Name="UpdatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="User" Relationship="Self.FK_dbo_Department_dbo_User_HeadOfDepartmentID" FromRole="Department" ToRole="User" />
           <NavigationProperty Name="DepartmentOperations" Relationship="Self.FK_dbo_DepartmentOperation_dbo_Department_DepartmentID" FromRole="Department" ToRole="DepartmentOperation" />
           <NavigationProperty Name="DepartmentUsers" Relationship="Self.FK_dbo_DepartmentUser_dbo_Department_DepartmentID" FromRole="Department" ToRole="DepartmentUser" />
@@ -451,9 +453,9 @@
           <Property Name="DepartmentID" Type="Int32" Nullable="false" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <Property Name="UpdatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Department" Relationship="Self.FK_dbo_DepartmentOperation_dbo_Department_DepartmentID" FromRole="DepartmentOperation" ToRole="Department" />
         </EntityType>
         <EntityType Name="DepartmentUser">
@@ -465,9 +467,9 @@
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <Property Name="UpdatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Department" Relationship="Self.FK_dbo_DepartmentUser_dbo_Department_DepartmentID" FromRole="DepartmentUser" ToRole="Department" />
           <NavigationProperty Name="User" Relationship="Self.FK_dbo_DepartmentUser_dbo_User_UserID" FromRole="DepartmentUser" ToRole="User" />
         </EntityType>
@@ -484,9 +486,9 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <Property Name="UpdatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Department" Relationship="Self.FK_dbo_Event_dbo_Department_DepartmentID" FromRole="Event" ToRole="Department" />
           <NavigationProperty Name="EventType" Relationship="Self.FK_dbo_Event_dbo_EventType_EventTypeID" FromRole="Event" ToRole="EventType" />
           <NavigationProperty Name="Item" Relationship="Self.FK_dbo_Event_dbo_Item_ItemID" FromRole="Event" ToRole="Item" />
@@ -500,14 +502,14 @@
           <Property Name="EventTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SortOrder" Type="Int32" />
+          <Property Name="Notificate" Type="Boolean" Nullable="false" />
           <Property Name="IsPriceChange" Type="Boolean" Nullable="false" />
           <Property Name="IsDueDateChange" Type="Boolean" Nullable="false" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <Property Name="UpdatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
-          <Property Name="Notificate" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Events" Relationship="Self.FK_dbo_Event_dbo_EventType_EventTypeID" FromRole="EventType" ToRole="Event" />
         </EntityType>
         <EntityType Name="Item">
@@ -525,9 +527,9 @@
           <Property Name="EndDate" Type="DateTime" Precision="3" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <Property Name="UpdatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Events" Relationship="Self.FK_dbo_Event_dbo_Item_ItemID" FromRole="Item" ToRole="Event" />
           <NavigationProperty Name="Project" Relationship="Self.FK_dbo_Item_dbo_Project_ProjectID" FromRole="Item" ToRole="Project" />
           <NavigationProperty Name="Status" Relationship="Self.FK_dbo_Item_dbo_Status_StatusID" FromRole="Item" ToRole="Status" />
@@ -548,9 +550,9 @@
           <Property Name="IsCompleted" Type="Boolean" Nullable="false" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <Property Name="UpdatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Department" Relationship="Self.FK_dbo_Operation_dbo_Department_DepartmentID" FromRole="Operation" ToRole="Department" />
           <NavigationProperty Name="Item" Relationship="Self.FK_dbo_Operation_dbo_Item_ItemID" FromRole="Operation" ToRole="Item" />
         </EntityType>
@@ -567,9 +569,9 @@
           <Property Name="ProjectTypeID" Type="Int32" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <Property Name="UpdatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Events" Relationship="Self.FK_dbo_Event_dbo_Project_ProjectID" FromRole="Project" ToRole="Event" />
           <NavigationProperty Name="Items" Relationship="Self.FK_dbo_Item_dbo_Project_ProjectID" FromRole="Project" ToRole="Item" />
           <NavigationProperty Name="ProjectType" Relationship="Self.FK_dbo_Project_dbo_ProjectType_ProjectTypeID" FromRole="Project" ToRole="ProjectType" />
@@ -583,9 +585,9 @@
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <Property Name="UpdatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Projects" Relationship="Self.FK_dbo_Project_dbo_ProjectType_ProjectTypeID" FromRole="ProjectType" ToRole="Project" />
         </EntityType>
         <EntityType Name="Status">
@@ -598,9 +600,9 @@
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <Property Name="UpdatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Events" Relationship="Self.FK_dbo_Event_dbo_Status_StatusID" FromRole="Status" ToRole="Event" />
           <NavigationProperty Name="Items" Relationship="Self.FK_dbo_Item_dbo_Status_StatusID" FromRole="Status" ToRole="Item" />
         </EntityType>
@@ -617,9 +619,9 @@
           <Property Name="EmailNotifications" Type="Boolean" Nullable="false" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <Property Name="UpdatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Departments" Relationship="Self.FK_dbo_Department_dbo_User_HeadOfDepartmentID" FromRole="User" ToRole="Department" />
           <NavigationProperty Name="DepartmentUsers" Relationship="Self.FK_dbo_DepartmentUser_dbo_User_UserID" FromRole="User" ToRole="DepartmentUser" />
         </EntityType>
@@ -873,11 +875,12 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
                 <ScalarProperty Name="HeadOfDepartmentID" ColumnName="HeadOfDepartmentID" />
+                <ScalarProperty Name="CanManageProject" ColumnName="CanManageProject" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -891,9 +894,9 @@
                 <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -905,9 +908,9 @@
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -923,9 +926,9 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -935,14 +938,14 @@
                 <ScalarProperty Name="EventTypeID" ColumnName="EventTypeID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="Notificate" ColumnName="Notificate" />
                 <ScalarProperty Name="IsPriceChange" ColumnName="IsPriceChange" />
                 <ScalarProperty Name="IsDueDateChange" ColumnName="IsDueDateChange" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Notificate" ColumnName="Notificate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -960,9 +963,9 @@
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -980,9 +983,9 @@
                 <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -998,9 +1001,9 @@
                 <ScalarProperty Name="ProjectTypeID" ColumnName="ProjectTypeID" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1012,9 +1015,9 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1027,9 +1030,9 @@
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1045,9 +1048,9 @@
                 <ScalarProperty Name="EmailNotifications" ColumnName="EmailNotifications" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

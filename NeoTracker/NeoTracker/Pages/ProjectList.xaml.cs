@@ -37,7 +37,10 @@ namespace NeoTracker.Pages
             btn.SetButton(ClearProjectTypeFilter, false, "Reset", null, null);
 
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(App.vm.Projects);
-            view.Filter = i => ProjectFilter(i);
+            if (view != null)
+            {
+                view.Filter = i => ProjectFilter(i);
+            }
 
             ListView.ItemsSource = view;
         }

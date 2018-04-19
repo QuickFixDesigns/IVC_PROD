@@ -7,32 +7,40 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DataManagement
+namespace DataManagement.DAL
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class EventType
+    public partial class Item
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public EventType()
+        public Item()
         {
             this.Events = new HashSet<Event>();
+            this.Operations = new HashSet<Operation>();
         }
     
-        public int EventTypeID { get; set; }
-        public string Name { get; set; }
+        public int ItemID { get; set; }
+        public int ProjectID { get; set; }
+        public string Code { get; set; }
+        public Nullable<int> SortKey { get; set; }
         public Nullable<int> SortOrder { get; set; }
-        public bool IsPriceChange { get; set; }
-        public bool IsDueDateChange { get; set; }
+        public int StatusID { get; set; }
+        public string Name { get; set; }
+        public Nullable<System.DateTime> DueDate { get; set; }
+        public Nullable<System.DateTime> EndDate { get; set; }
         public System.DateTime CreatedAt { get; set; }
         public System.DateTime UpdatedAt { get; set; }
+        public string CreatedBy { get; set; }
         public string UpdatedBy { get; set; }
         public bool IsActive { get; set; }
-        public string CreatedBy { get; set; }
-        public bool Notificate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Event> Events { get; set; }
+        public virtual Project Project { get; set; }
+        public virtual Status Status { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Operation> Operations { get; set; }
     }
 }

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DataManagement
+namespace DataManagement.DAL
 {
     using System;
     using System.Data.Entity;

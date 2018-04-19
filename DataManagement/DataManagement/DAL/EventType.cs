@@ -7,36 +7,32 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DataManagement
+namespace DataManagement.DAL
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class EventType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
+        public EventType()
         {
-            this.Departments = new HashSet<Department>();
-            this.DepartmentUsers = new HashSet<DepartmentUser>();
+            this.Events = new HashSet<Event>();
         }
     
-        public int UserID { get; set; }
-        public string Alias { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public bool IsAdmin { get; set; }
-        public bool EmailNotifications { get; set; }
+        public int EventTypeID { get; set; }
+        public string Name { get; set; }
+        public Nullable<int> SortOrder { get; set; }
+        public bool Notificate { get; set; }
+        public bool IsPriceChange { get; set; }
+        public bool IsDueDateChange { get; set; }
         public System.DateTime CreatedAt { get; set; }
         public System.DateTime UpdatedAt { get; set; }
+        public string CreatedBy { get; set; }
         public string UpdatedBy { get; set; }
         public bool IsActive { get; set; }
-        public string CreatedBy { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Department> Departments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DepartmentUser> DepartmentUsers { get; set; }
+        public virtual ICollection<Event> Events { get; set; }
     }
 }
