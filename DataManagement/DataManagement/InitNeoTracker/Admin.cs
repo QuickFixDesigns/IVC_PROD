@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,12 +12,14 @@ namespace DataManagement
     {
         public static void LoadDataBase()
         {
+            Console.WriteLine(MethodBase.GetCurrentMethod().DeclaringType.Name);
             LoadDepartments();
             LoadUsers();
             LoadUserDepartments();
             LoadProjectType();
             LoadStatus();
             LoadEventTypes();
+            System.Threading.Thread.Sleep(5000);
         }
 
         public static void LoadDepartments()

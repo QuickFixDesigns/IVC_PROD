@@ -9,7 +9,6 @@
     <Grid Style="{StaticResource ContentRoot}">
         <ScrollViewer>
             <StackPanel>
-                <Label>Department list</Label>
                 <mui:ModernButton x:Name="DepartmentList" Click="DepartmentList_Click"/>
             </StackPanel>
         </ScrollViewer>

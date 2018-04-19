@@ -31,7 +31,7 @@ namespace NeoTracker.Pages
         public Reports()
         {  
             InitializeComponent();
-            //buttons.SetButton(DepartmentList, true, "Excel");
+            buttons.SetButton(DepartmentList, true, "Excel", "Department list", "Export department list to excel");
         }
         private async void DepartmentList_Click(object sender, RoutedEventArgs e)
         {

@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DataManagement
 {
-    public class Maintenance
+    public static class Maintenance
     {
         public static void ResetDb()
         {
+            Console.WriteLine(MethodBase.GetCurrentMethod().DeclaringType.Name);
             try
             {
                 using (var Neo = new NeoTrackerDbEntities())
@@ -22,7 +24,7 @@ namespace DataManagement
 
                     //admin
                     Neo.Database.ExecuteSqlCommand(" DELETE  FROM DepartmentUSer ");
-                    Neo.Database.ExecuteSqlCommand(" DELETE  FROM User ");
+                    Neo.Database.ExecuteSqlCommand(" DELETE  FROM [User] ");
                     Neo.Database.ExecuteSqlCommand(" DELETE  FROM Department ");
                     Neo.Database.ExecuteSqlCommand(" DELETE  FROM EventType ");
                     Neo.Database.ExecuteSqlCommand(" DELETE  FROM Status ");

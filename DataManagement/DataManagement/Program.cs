@@ -13,7 +13,7 @@ namespace DataManagement
         {
             Maintenance.ResetDb();
             Admin.LoadDataBase();
-            Projects.LoadDataBase();
+            //Projects.LoadDataBase();
         }
     }
 }

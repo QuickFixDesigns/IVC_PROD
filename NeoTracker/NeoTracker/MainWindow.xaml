@@ -8,15 +8,15 @@
         Style="{StaticResource MyModernWindow}">
 
     <mui:ModernWindow.MenuLinkGroups>
-        <mui:LinkGroup DisplayName="Home">
+        <mui:LinkGroup DisplayName="Project">
             <mui:LinkGroup.Links>
-                <mui:Link DisplayName="Projects" Source="/Pages/ProjectList.xaml" />
+                <mui:Link DisplayName="Search" Source="/Pages/ProjectList.xaml" />
                 <mui:Link DisplayName="Reports" Source="/Pages/Reports.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
         <mui:LinkGroup DisplayName="admin" GroupKey="admin">
             <mui:LinkGroup.Links>
-                <mui:Link DisplayName="Back to projects" Source="/Pages/ProjectList.xaml" />
+                <mui:Link DisplayName="Back to project" Source="/Pages/ProjectList.xaml" />
                 <mui:Link DisplayName="Departments" Source="/Pages/Admin/DepartmentList.xaml" />
                 <mui:Link DisplayName="Event type" Source="/Pages/Admin/EventTypeList.xaml"/>
                 <mui:Link DisplayName="Project type" Source="/Pages/Admin/ProjectTypeList.xaml"/>

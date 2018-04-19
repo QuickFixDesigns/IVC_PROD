@@ -40,7 +40,6 @@ namespace NeoTracker.ViewModels
                 await LoadEventTypes();
                 await LoadProjectTypes();
             }
-            System.Threading.Thread.Sleep(5000);
             IsReady = true;
         }
         public async Task<bool> Authentificate()
