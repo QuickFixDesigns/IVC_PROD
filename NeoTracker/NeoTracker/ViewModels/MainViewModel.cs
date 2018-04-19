@@ -43,7 +43,7 @@ namespace NeoTracker.ViewModels
         }
         public async Task<bool> Authentificate()
         {
-            CurrentUser = await ds.GetUser("adellaneve@ivcweb.com");
+            CurrentUser = await ds.GetUser("karrick_mercier@hotmail.com");
             return CurrentUser != null;
         }
 

@@ -87,6 +87,20 @@ namespace DataManagement
                             UpdatedBy = "SYS"
                         });
                     }
+                    Neo.Users.Add(new User()
+                    {
+                        Alias = "kmercier",
+                        Email = "karrick_mercier@hotmail.com",
+                        EmailNotifications = true,
+                        IsAdmin = true,
+                        FirstName = "Karrick",
+                        LastName = "Mercier",
+                        CreatedAt = DateTime.Now,
+                        UpdatedAt = DateTime.Now,
+                        CreatedBy = "SYS",
+                        IsActive = true,
+                        UpdatedBy = "SYS"
+                    });
                     Neo.SaveChanges();
                 }
             }

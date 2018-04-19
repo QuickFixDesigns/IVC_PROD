@@ -25,10 +25,12 @@ namespace DataManagement
 
                     //admin
                     Neo.Database.ExecuteSqlCommand(" DELETE  FROM DepartmentUSer ");
+                    Neo.Database.ExecuteSqlCommand(" DELETE  FROM DepartmentOperation ");
                     Neo.Database.ExecuteSqlCommand(" DELETE  FROM [User] ");
                     Neo.Database.ExecuteSqlCommand(" DELETE  FROM Department ");
                     Neo.Database.ExecuteSqlCommand(" DELETE  FROM EventType ");
                     Neo.Database.ExecuteSqlCommand(" DELETE  FROM Status ");
+                    Neo.Database.ExecuteSqlCommand(" DELETE  FROM ProjectType ");
 
                     Neo.SaveChanges();
                 }

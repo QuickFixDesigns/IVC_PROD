@@ -12,6 +12,7 @@ namespace DataManagement
     {
         public static void LoadDataBase()
         {
+            Console.WriteLine("Projects.LoadDataBase");
             try
             {
                 using (var Neo = new NeoTrackerDbEntities())
@@ -41,7 +42,7 @@ namespace DataManagement
             }
             catch (Exception e)
             {
-                throw;
+                Console.WriteLine(e.Message.ToString());
             }
         }
         public static void GetProjectItems(Project Project)
@@ -75,7 +76,7 @@ namespace DataManagement
             }
             catch (Exception e)
             {
-                throw;
+                Console.WriteLine(e.Message.ToString());
             }
         }
         public static void GetItemOperations(Item item, string Order)
@@ -112,7 +113,7 @@ namespace DataManagement
             }
             catch (Exception e)
             {
-                throw;
+                Console.WriteLine(e.Message.ToString());
             }
         }
     }
