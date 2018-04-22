@@ -1,6 +1,7 @@
 ﻿using FirstFloor.ModernUI.Windows;
 using NeoTracker.Content;
 using NeoTracker.Models;
+using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,7 +14,6 @@ namespace NeoTracker.Pages.Admin
     public partial class DepartmentEdit : UserControl, IContent
     {
         private Buttons btn = new Buttons();
-        private DepartmentViewModel vm = new DepartmentViewModel();
 
         public DepartmentEdit()
         {
@@ -30,38 +30,41 @@ namespace NeoTracker.Pages.Admin
 
         private async void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
-            await vm.Save();
+            await App.vm.Department.Save();
+            App.vm.Department = null;
             App.nav.GoBack(this);
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            vm.CancelEdit();
+            App.vm.Department.CancelEdit();
+            App.vm.Department = null;
             App.nav.GoBack(this);
         }
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            await vm.Delete();
+            await App.vm.Department.Delete();
+            App.vm.Department = null;
             App.nav.GoBack(this);
         }
 
         private async void AddUserButton_Click(object sender, RoutedEventArgs e)
         {
-            await vm.AddUsers();
+            await App.vm.Department.AddUsers();
         }
         private void AddOperationButton_Click(object sender, RoutedEventArgs e)
         {
             App.vm.DepartmentOperation = new DepartmentOperationViewModel()
             {
-                DepartmentID = vm.DepartmentID,
+                DepartmentID = App.vm.Department.DepartmentID,
                 IsActive = true,
             };
             App.nav.NavigateTo("/Pages/Admin/DepartmentOperationEdit.xaml", this);
         }
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {
-            //throw new NotImplementedException();
+
         }
 
         public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
@@ -71,8 +74,7 @@ namespace NeoTracker.Pages.Admin
 
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
-            vm = App.vm.Department;
-            vm.BeginEdit();
+            App.vm.Department.BeginEdit();
             App.nav.SetLastUri("/Pages/Admin/DepartmentEdit.xaml");
 
         }
@@ -82,7 +84,7 @@ namespace NeoTracker.Pages.Admin
 
         private void ClearHeadOfDepartmentCb_Click(object sender, RoutedEventArgs e)
         {
-            vm.HeadOfDepartment = null;
+            App.vm.Department.HeadOfDepartment = null;
         }
     }
 }

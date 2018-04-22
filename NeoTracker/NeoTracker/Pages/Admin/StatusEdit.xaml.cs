@@ -30,7 +30,6 @@ namespace NeoTracker.Pages.Admin
     {
         private Buttons btn = new Buttons();
         private Utilities util = new Utilities();
-        private StatusViewModel vm;
 
         public StatusEdit()
         {
@@ -42,19 +41,22 @@ namespace NeoTracker.Pages.Admin
 
         private async void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
-            await vm.Save();
+            await App.vm.Status.Save();
+            App.vm.Status = null;
             App.nav.GoBack(this);
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            vm.CancelEdit();
+            App.vm.Status.CancelEdit();
+            App.vm.Status = null;
             App.nav.GoBack(this);
         }
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            await vm.Delete();
+            await App.vm.Status.Delete();
+            App.vm.Status = null;
             App.nav.GoBack(this);
         }
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
@@ -70,8 +72,7 @@ namespace NeoTracker.Pages.Admin
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
             App.nav.SetLastUri("/Pages/Admin/StatusEdit.xaml");
-            vm = App.vm.Status;
-            vm.BeginEdit();
+            App.vm.Status.BeginEdit();
         }
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {

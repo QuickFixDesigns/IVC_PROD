@@ -8,11 +8,20 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Style="{StaticResource ContentRoot}">
-        <ScrollViewer Grid.Column="4">
-            <StackPanel Margin="10,0,10,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
+        <ScrollViewer Grid.Column="0">
+            <StackPanel Margin="10,0,10,0">
                 <mui:ModernButton x:Name="ApplyButton" Click="ApplyButton_Click" />
                 <mui:ModernButton x:Name="SelectAllButton" Click="SelectAllButton_Click"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <ScrollViewer Grid.Column="4">
+            <StackPanel Margin="10,0,10,0">
 
                 <ListView x:Name="ListView" ItemsSource="{Binding Item.Operations, UpdateSourceTrigger=PropertyChanged}" MouseDoubleClick="ListView_MouseDoubleClick">
                     <ListView.View>

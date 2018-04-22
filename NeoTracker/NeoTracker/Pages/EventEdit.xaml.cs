@@ -30,7 +30,6 @@ namespace NeoTracker.Pages
     {
         private Buttons btn = new Buttons();
         private Utilities util = new Utilities();
-        private EventViewModel vm;
 
         public EventEdit()
         {
@@ -46,19 +45,22 @@ namespace NeoTracker.Pages
 
         private async void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
-            await vm.Save();
+            await App.vm.Event.Save();
+            App.vm.Event = null;
             App.nav.GoBack(this);
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            vm.CancelEdit();
+            App.vm.Event.CancelEdit();
+            App.vm.Event = null;
             App.nav.GoBack(this);
         }
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            await vm.Delete();
+            await App.vm.Event.Delete();
+            App.vm.Event = null;
             App.nav.GoBack(this);
         }
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
@@ -74,25 +76,24 @@ namespace NeoTracker.Pages
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
             App.nav.SetLastUri("/Pages/EventEdit.xaml");
-            vm = App.vm.Event;
-            vm.BeginEdit();
+            App.vm.Event.BeginEdit();
         }
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
         }
         private void ClearDepartment_Click(object sender, RoutedEventArgs e)
         {
-            vm.Department = null;
+            App.vm.Event.Department = null;
         }
 
         private void ClearItem_Click(object sender, RoutedEventArgs e)
         {
-            vm.EventItem = null ;
+            App.vm.Event.EventItem = null ;
         }
 
         private void ClearStatus_Click(object sender, RoutedEventArgs e)
         {
-            vm.Status = null;
+            App.vm.Event.Status = null;
         }
     }
 }

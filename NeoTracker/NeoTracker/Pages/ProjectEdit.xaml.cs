@@ -16,7 +16,6 @@ namespace NeoTracker.Pages
     {
         private Buttons btn = new Buttons();
         private Utilities util = new Utilities();
-        private ProjectViewModel vm;
 
         public ProjectEdit()
         {
@@ -30,19 +29,22 @@ namespace NeoTracker.Pages
 
         private async void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
-            await vm.Save();
+            await App.vm.Project.Save();
+            App.vm.Project = null;
             App.nav.GoBack(this);
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            vm.CancelEdit();
+            App.vm.Project.CancelEdit();
+            App.vm.Project = null;
             App.nav.GoBack(this);
         }
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            await vm.Delete();
+            await App.vm.Project.Delete();
+            App.vm.Project = null;
             App.nav.GoBack(this);
         }
         private void AddEventButton_Click(object sender, RoutedEventArgs e)
@@ -51,30 +53,25 @@ namespace NeoTracker.Pages
 
             App.vm.Event = new EventViewModel()
             {
-                ProjectID = vm.ProjectID,
+                ProjectID = App.vm.Project.ProjectID,
                 IsActive = true,
                 Status = App.vm.Statuses.OrderBy(x => x.SortOrder).ThenBy(x => x.Name).FirstOrDefault(),
                 EventType = App.vm.EventTypes.OrderBy(x => x.SortOrder).ThenBy(x => x.Name).FirstOrDefault(),
             };
             App.nav.NavigateTo("/Pages/EventEdit.xaml", this);
         }
-
-
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {
             //throw new NotImplementedException();
         }
-
         public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
             //throw new NotImplementedException();
         }
-
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
             App.nav.SetLastUri("/Pages/ProjectEdit.xaml");
-            vm = App.vm.Project;
-            vm.BeginEdit();
+            App.vm.Project.BeginEdit();
         }
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {

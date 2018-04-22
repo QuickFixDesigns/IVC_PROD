@@ -30,7 +30,6 @@ namespace NeoTracker.Pages
     {
         private Buttons btn = new Buttons();
         private Utilities util = new Utilities();
-        private DepartmentOperationViewModel vm;
 
         public DepartmentOperationEdit()
         {
@@ -42,19 +41,22 @@ namespace NeoTracker.Pages
 
         private async void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
-            await vm.Save();
+            await App.vm.DepartmentOperation.Save();
+            App.vm.DepartmentOperation = null;
             App.nav.GoBack(this);
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            vm.CancelEdit();
+            App.vm.DepartmentOperation.CancelEdit();
+            App.vm.DepartmentOperation = null;
             App.nav.GoBack(this);
         }
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            await vm.Delete();
+            await App.vm.DepartmentOperation.Delete();
+            App.vm.DepartmentOperation = null;
             App.nav.GoBack(this);
         }
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
@@ -69,8 +71,7 @@ namespace NeoTracker.Pages
 
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
-            vm = App.vm.DepartmentOperation;
-            vm.BeginEdit();
+            App.vm.DepartmentOperation.BeginEdit();
             App.nav.SetLastUri("/Pages/Admin/DepartmentOperationEdit.xaml");
         }
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)

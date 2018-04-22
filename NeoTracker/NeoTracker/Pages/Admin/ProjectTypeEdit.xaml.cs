@@ -30,7 +30,6 @@ namespace NeoTracker.Pages.Admin
     {
         private Buttons btn = new Buttons();
         private Utilities util = new Utilities();
-        private ProjectTypeViewModel vm;
 
         public ProjectTypeEdit()
         {
@@ -42,19 +41,22 @@ namespace NeoTracker.Pages.Admin
 
         private async void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
-            await vm.Save();
+            await App.vm.ProjectType.Save();
+            App.vm.ProjectType = null;
             App.nav.GoBack(this);
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            vm.CancelEdit();
+            App.vm.ProjectType.CancelEdit();
+            App.vm.ProjectType = null;
             App.nav.GoBack(this);
         }
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            await vm.Delete();
+            await App.vm.ProjectType.Delete();
+            App.vm.ProjectType = null;
             App.nav.GoBack(this);
         }
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
@@ -69,8 +71,7 @@ namespace NeoTracker.Pages.Admin
 
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
-            vm = App.vm.ProjectType;
-            vm.BeginEdit();
+            App.vm.ProjectType.BeginEdit();
             App.nav.SetLastUri("/Pages/Admin/ProjectTypeEdit.xaml");
         }
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)

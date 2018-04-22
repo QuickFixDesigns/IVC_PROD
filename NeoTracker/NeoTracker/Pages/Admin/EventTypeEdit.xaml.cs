@@ -30,7 +30,6 @@ namespace NeoTracker.Pages.Admin
     {
         private Buttons btn = new Buttons();
         private Utilities util = new Utilities();
-        private EventTypeViewModel vm;
 
         public EventTypeEdit()
         {
@@ -42,19 +41,22 @@ namespace NeoTracker.Pages.Admin
 
         private async void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
-            await vm.Save();
+            await App.vm.EventType.Save();
+            App.vm.EventType = null;
             App.nav.GoBack(this);
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            vm.CancelEdit();
+            App.vm.EventType.CancelEdit();
+            App.vm.EventType = null;
             App.nav.GoBack(this);
         }
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            await vm.Delete();
+            await App.vm.EventType.Delete();
+            App.vm.EventType = null;
             App.nav.GoBack(this);
         }
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
@@ -69,8 +71,7 @@ namespace NeoTracker.Pages.Admin
 
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
-            vm = App.vm.EventType;
-            vm.BeginEdit();
+            App.vm.EventType.BeginEdit();
             App.nav.SetLastUri("/Pages/Admin/EventTypeEdit.xaml");
         }
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)

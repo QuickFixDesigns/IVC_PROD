@@ -30,7 +30,6 @@ namespace NeoTracker.Pages
     {
         private Buttons btn = new Buttons();
         private Utilities util = new Utilities();
-        private ProjectViewModel vm;
 
         public ProjectCreate()
         {
@@ -61,13 +60,14 @@ namespace NeoTracker.Pages
         {
             if (ListView.SelectedIndex != -1)
             {
-                await vm.Create((OrderViewModel)ListView.SelectedItem);
+                await App.vm.Project.Create((OrderViewModel)ListView.SelectedItem);
                 App.nav.NavigateTo("/Pages/ProjectEdit.xaml", this);
             }
         }
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            vm.CancelEdit();
+            App.vm.Project.CancelEdit();
+            App.vm.Project = null;
             App.nav.GoBack(this);
         }
         private void RemoveFilterBtn_Click(object sender, RoutedEventArgs e)
@@ -80,8 +80,6 @@ namespace NeoTracker.Pages
         {
             CollectionViewSource.GetDefaultView(ListView.ItemsSource).Refresh();
         }
-
-
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {
             //throw new NotImplementedException();
@@ -95,8 +93,7 @@ namespace NeoTracker.Pages
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
             App.nav.SetLastUri("/Pages/ProjectList.xaml");
-            vm = App.vm.Project;
-            vm.BeginEdit();
+            App.vm.Project.BeginEdit();
         }
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {

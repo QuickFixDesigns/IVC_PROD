@@ -30,7 +30,6 @@ namespace NeoTracker.Pages
     {
         private Buttons btn = new Buttons();
         private Utilities util = new Utilities();
-        private ItemViewModel vm;
 
         public ItemEdit()
         {
@@ -41,13 +40,15 @@ namespace NeoTracker.Pages
 
         private async void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
-            await vm.Save();
+            await App.vm.Item.Save();
+            App.vm.Item = null;
             App.nav.GoBack(this);
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            vm.CancelEdit();
+            App.vm.Item.CancelEdit();
+            App.vm.Item = null;
             App.nav.GoBack(this);
         }
         //private void DeleteButton_Click(object sender, RoutedEventArgs e)
@@ -68,8 +69,7 @@ namespace NeoTracker.Pages
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
             App.nav.SetLastUri("/Pages/ItemEdit.xaml");
-            vm = App.vm.Item;
-            vm.BeginEdit();
+            App.vm.Item.BeginEdit();
         }
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
