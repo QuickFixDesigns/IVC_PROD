@@ -12,6 +12,8 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="1"/>
             <ColumnDefinition Width="auto" MinWidth="420" MaxWidth="420"/>
+            <ColumnDefinition Width="1"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <ScrollViewer Grid.Column="0" >
@@ -55,10 +57,10 @@
                 <TextBox Text="{Binding Operation.Name, UpdateSourceTrigger=PropertyChanged}"  />
 
                 <Label Content="StartDate" />
-                <xctk:DateTimePicker Value="{Binding Operation.StartDate, UpdateSourceTrigger=PropertyChanged}" Format="ShortDate"/>
+                <xctk:DateTimePicker Value="{Binding Operation.StartDate, UpdateSourceTrigger=PropertyChanged}" Format="Custom" FormatString="yyyy-MM-dd"/>
 
                 <Label Content="EndDate" />
-                <xctk:DateTimePicker Value="{Binding Operation.EndDate, UpdateSourceTrigger=PropertyChanged}" Format="ShortDate"/>
+                <xctk:DateTimePicker Value="{Binding Operation.EndDate, UpdateSourceTrigger=PropertyChanged}" Format="Custom" FormatString="yyyy-MM-dd"/>
 
                 <Label Content="OperationTime" />
                 <xctk:DecimalUpDown DefaultValue ="0" Value="{Binding Operation.OperationTime, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
@@ -77,5 +79,48 @@
                 <TextBox  IsReadOnly="True"  Text="{Binding Operation.UpdatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
             </StackPanel>
         </ScrollViewer>
+
+        <GridSplitter Grid.Column="3" />
+        <ScrollViewer Grid.Column="4 " Margin="{StaticResource SplitRight}">
+            <StackPanel>
+                <ListView x:Name="ListView" ItemsSource="{Binding Operation.History}">
+                    <ListView.View>
+                        <GridView x:Name="GridListView">
+
+                            <GridViewColumn DisplayMemberBinding="{Binding PropertyName}">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="Alias">PropertyName</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+
+                            <GridViewColumn DisplayMemberBinding="{Binding OldValue}">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="OldValue">OldValue</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+
+                            <GridViewColumn DisplayMemberBinding="{Binding NewValue}">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="NewValue">NewValue</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+
+                            <GridViewColumn DisplayMemberBinding="{Binding UpdatedAt,StringFormat={}{0:yyyy-MM-dd}}">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="UpdatedAt">UpdatedAt</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+
+                            <GridViewColumn DisplayMemberBinding="{Binding UpdatedBy}">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="UpdatedBy">UpdatedBy</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+        </ScrollViewer>
+        
     </Grid>
 </UserControl>

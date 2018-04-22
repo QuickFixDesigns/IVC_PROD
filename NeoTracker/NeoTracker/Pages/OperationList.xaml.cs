@@ -85,7 +85,6 @@ namespace NeoTracker.Pages
                 ListView.UnselectAll();
                 SelectAll = true;
             }
-
         }
     }
 }

@@ -75,10 +75,35 @@ namespace NeoTracker.DAL
                     var primaryKey = GetPrimaryKeyValue(change);
                     var DatabaseValues = change.GetDatabaseValues();
 
-                    foreach (var prop in change.OriginalValues.PropertyNames.Where(x=>!x.Equals("UpdatedBy") && !x.Equals("UpdatedAt") && !x.Equals("CreatedBy") && !x.Equals("CreatedAt")))
+                    foreach (var prop in change.OriginalValues.PropertyNames.Where(x => !x.Equals("UpdatedBy") && !x.Equals("UpdatedAt") && !x.Equals("CreatedBy") && !x.Equals("CreatedAt")))
                     {
-                        var originalValue = DatabaseValues.GetValue<object>(prop) != null ? DatabaseValues.GetValue<object>(prop).ToString() : string.Empty;
-                        var currentValue = change.CurrentValues[prop] != null ? change.CurrentValues[prop].ToString() : string.Empty;
+                        if (prop == "OperationTime")
+                        {
+                            var x = DatabaseValues.GetValue<object>(prop).GetType();
+                        }
+
+                        string originalValue = string.Empty;
+                        string currentValue = string.Empty;
+
+                        switch (Type.GetTypeCode(DatabaseValues.GetValue<object>(prop).GetType()))
+                        {
+                            case TypeCode.Byte:
+                            case TypeCode.SByte:
+                            case TypeCode.UInt16:
+                            case TypeCode.UInt32:
+                            case TypeCode.UInt64:
+                            case TypeCode.Int16:
+                            case TypeCode.Int32:
+                            case TypeCode.Int64:
+                            case TypeCode.Decimal:
+                                originalValue = DatabaseValues.GetValue<object>(prop) != null ? string.Format("{0:0.00}", DatabaseValues.GetValue<object>(prop)) : string.Empty;
+                                currentValue = change.CurrentValues[prop] != null ? string.Format("{0:0.00}", change.CurrentValues[prop]) : string.Empty;
+                                break;
+                            case TypeCode.Double:
+                            case TypeCode.Single:
+                            default:
+                                break;
+                        }
 
                         if (originalValue != currentValue) //Only create a log if the value changes
                         {

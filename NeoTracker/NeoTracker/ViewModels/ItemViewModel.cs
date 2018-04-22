@@ -17,8 +17,6 @@ namespace NeoTracker.Models
 {
     public class ItemViewModel : ViewModelBase, IDataErrorInfo
     {
-        private DataService ds = new DataService();
-
         public int ItemID { get; set; }
         public int ProjectID { get; set; }
         public int? SortKey { get; set; }
@@ -99,9 +97,27 @@ namespace NeoTracker.Models
         }
         public async Task LoadOperations()
         {
-            if (ItemID != 0)
+            using (var context = new NeoTrackerContext())
             {
-                Operations = await ds.GetOperationList(ItemID);
+                if (ItemID != 0)
+                {
+                    Operations = await context.Operations.Where(x => x.ItemID == ItemID).Include(x => x.Department).OrderBy(x => x.Department.SortOrder).ThenBy(x => x.SortOrder).ThenBy(x => x.Name).Select(x => new OperationViewModel()
+                    {
+                        Department = x.Department,
+                        EndDate = x.EndDate,
+                        ItemID = x.ItemID,
+                        OperationID = x.OperationID,
+                        OperationTime = x.OperationTime,
+                        IsCompleted = x.IsCompleted,
+                        StartDate = x.StartDate,
+                        Name = x.Name,
+                        SortOrder = x.SortOrder,
+                        IsActive = x.IsActive,
+                        CreatedAt = x.CreatedAt,
+                        UpdatedAt = x.UpdatedAt,
+                        UpdatedBy = x.UpdatedBy
+                    }).ToListAsync();
+                }
             }
         }
         public async Task Save()
@@ -156,7 +172,7 @@ namespace NeoTracker.Models
             }
         }
 
-        public async Task MassUpdateOperations(DateTime? StartDate, DateTime? EndDate,  bool? Completed)
+        public async Task MassUpdateOperations(DateTime? StartDate, DateTime? EndDate, bool? Completed)
         {
             if (ItemID != 0 && Operations.Any())
             {

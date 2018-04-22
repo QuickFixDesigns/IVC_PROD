@@ -19,6 +19,17 @@ namespace NeoTracker.Models
 {
     public class OperationViewModel : ViewModelBase, IDataErrorInfo
     {
+        private DataService ds = new DataService();
+
+        private ICommand _clickCommand;
+        public ICommand ClickCommand
+        {
+            get
+            {
+                return _clickCommand ?? (_clickCommand = new CommandHandler(async () => await Save(), true));
+            }
+        }
+
         public int OperationID { get; set; }
         public int ItemID { get; set; }
 
@@ -61,21 +72,20 @@ namespace NeoTracker.Models
             set { SetProperty(ref _IsCompleted, value); }
         }
 
-        private ICommand _clickCommand;
-        public ICommand ClickCommand
-        {
-            get
-            {
-                return _clickCommand ?? (_clickCommand = new CommandHandler(async () => await Save(), true));
-            }
-        }
-
         private Department _Department = new Department();
         public Department Department
         {
             get { return _Department; }
             set { SetProperty(ref _Department, value); }
         }
+
+        private List<ChangeLog> _History = new List<ChangeLog>();
+        public List<ChangeLog> History
+        {
+            get { return _History; }
+            set { SetProperty(ref _History, value); }
+        }
+
         //For database
         public Operation GetModel()
         {
@@ -95,6 +105,10 @@ namespace NeoTracker.Models
                 UpdatedAt = UpdatedAt,
                 UpdatedBy = UpdatedBy
             };
+        }
+        public async Task LoadHistory()
+        {
+            History = await ds.GetHistory("Operation", OperationID);
         }
         public async Task Save()
         {
