@@ -265,7 +265,7 @@ namespace NeoTracker.DAL
         {
             using (var context = new NeoTrackerContext())
             {
-                return await context.Operations.Where(x => x.ItemID == ItemID).Include(x => x.Department).OrderBy(x => x.SortOrder).ThenBy(x => x.Name).Select(x => new OperationViewModel()
+                return await context.Operations.Where(x => x.ItemID == ItemID).Include(x => x.Department).OrderBy(x => x.Department.SortOrder).ThenBy(x=>x.SortOrder).ThenBy(x => x.Name).Select(x => new OperationViewModel()
                 {
                     Department = x.Department,
                     EndDate = x.EndDate,

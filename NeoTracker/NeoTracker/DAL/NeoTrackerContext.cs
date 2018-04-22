@@ -3,6 +3,7 @@ namespace NeoTracker.DAL
     using Models;
     using System;
     using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
     using System.Data.Entity.ModelConfiguration.Conventions;
     using System.Linq;
     using System.Threading.Tasks;
@@ -26,6 +27,7 @@ namespace NeoTracker.DAL
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }
 
+        public virtual DbSet<ChangeLog> ChangeLogs { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<DepartmentUser> DepartmentUsers { get; set; }
         public virtual DbSet<DepartmentOperation> DepartmentOperations { get; set; }
@@ -52,25 +54,59 @@ namespace NeoTracker.DAL
 
         private void AddTimestamps()
         {
-            var entities = ChangeTracker.Entries()
-                .Where(x => x.Entity is EntityBase && (x.State == EntityState.Added || x.State == EntityState.Modified));
+            var modifiedEntities = ChangeTracker.Entries()
+                .Where(x => x.Entity is EntityBase && (x.State == EntityState.Added || x.State == EntityState.Modified)).ToList();
 
-            foreach (var entity in entities)
+            foreach (var change in modifiedEntities)
             {
                 var now = DateTime.Now; // current datetime
                 string user = GetCurrentUserID();
-                if (entity.State == EntityState.Added)
+
+                if (change.State == EntityState.Added)
                 {
-                    ((EntityBase)entity.Entity).CreatedAt = now;
-                    ((EntityBase)entity.Entity).CreatedBy = user;
+                    ((EntityBase)change.Entity).CreatedAt = now;
+                    ((EntityBase)change.Entity).CreatedBy = user;
+                    ((EntityBase)change.Entity).UpdatedAt = now;
+                    ((EntityBase)change.Entity).UpdatedBy = user;
                 }
-                ((EntityBase)entity.Entity).UpdatedAt = now;
-                ((EntityBase)entity.Entity).UpdatedBy = user;
+                else
+                {
+                    var entityName = change.Entity.GetType().Name;
+                    var primaryKey = GetPrimaryKeyValue(change);
+                    var DatabaseValues = change.GetDatabaseValues();
+
+                    foreach (var prop in change.OriginalValues.PropertyNames.Where(x=>!x.Equals("UpdatedBy") && !x.Equals("UpdatedAt") && !x.Equals("CreatedBy") && !x.Equals("CreatedAt")))
+                    {
+                        var originalValue = DatabaseValues.GetValue<object>(prop) != null ? DatabaseValues.GetValue<object>(prop).ToString() : string.Empty;
+                        var currentValue = change.CurrentValues[prop] != null ? change.CurrentValues[prop].ToString() : string.Empty;
+
+                        if (originalValue != currentValue) //Only create a log if the value changes
+                        {
+                            ChangeLogs.Add(new ChangeLog()
+                            {
+                                EntityName = entityName,
+                                NewValue = currentValue,
+                                OldValue = originalValue,
+                                PrimaryKeyValue = int.Parse(primaryKey.ToString()),
+                                UpdatedAt = now,
+                                UpdatedBy = user,
+                                PropertyName = prop,
+                            });
+                        }
+                    }
+                    ((EntityBase)change.Entity).UpdatedAt = now;
+                    ((EntityBase)change.Entity).UpdatedBy = user;
+                }
             }
         }
         protected string GetCurrentUserID()
         {
             return App.vm.CurrentUser.Email;
+        }
+        object GetPrimaryKeyValue(DbEntityEntry entry)
+        {
+            var objectStateEntry = ((IObjectContextAdapter)this).ObjectContext.ObjectStateManager.GetObjectStateEntry(entry.Entity);
+            return objectStateEntry.EntityKey.EntityKeyValues[0].Value;
         }
     }
 }
