@@ -45,6 +45,21 @@ namespace NeoTracker.Pages
             await vm.Delete();
             App.nav.GoBack(this);
         }
+        private void AddEventButton_Click(object sender, RoutedEventArgs e)
+        {
+            tab.SelectedSource = new Uri("Pages/EventList.xaml", UriKind.Relative);
+
+            App.vm.Event = new EventViewModel()
+            {
+                ProjectID = vm.ProjectID,
+                IsActive = true,
+                Status = App.vm.Statuses.OrderBy(x => x.SortOrder).ThenBy(x => x.Name).FirstOrDefault(),
+                EventType = App.vm.EventTypes.OrderBy(x => x.SortOrder).ThenBy(x => x.Name).FirstOrDefault(),
+            };
+            App.nav.NavigateTo("/Pages/EventEdit.xaml", this);
+        }
+
+
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {
             //throw new NotImplementedException();
@@ -63,21 +78,6 @@ namespace NeoTracker.Pages
         }
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
-            //throw new NotImplementedException();
-        }
-
-        private void AddEventButton_Click(object sender, RoutedEventArgs e)
-        {
-            tab.SelectedSource = new Uri("Pages/EventList.xaml", UriKind.Relative);
-
-            App.vm.Event = new EventViewModel()
-            {
-                ProjectID = vm.ProjectID,
-                IsActive = true,
-                Status = App.vm.Statuses.OrderBy(x => x.SortOrder).ThenBy(x => x.Name).FirstOrDefault(),
-                EventType = App.vm.EventTypes.OrderBy(x=>x.SortOrder).ThenBy(x=>x.Name).FirstOrDefault(),
-            };
-            App.nav.NavigateTo("/Pages/EventEdit.xaml", this);
         }
     }
 }

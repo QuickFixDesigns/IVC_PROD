@@ -75,7 +75,6 @@ namespace NeoTracker.Pages
         }
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
-            //throw new NotImplementedException();
         }
     }
 }

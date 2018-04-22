@@ -79,7 +79,6 @@ namespace NeoTracker.Pages
         }
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
-            //throw new NotImplementedException();
         }
         private void ClearDepartment_Click(object sender, RoutedEventArgs e)
         {

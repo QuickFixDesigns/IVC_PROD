@@ -75,7 +75,6 @@ namespace NeoTracker.Pages.Admin
         }
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
-            App.vm.Status = null;
         }
     }
 }

@@ -76,6 +76,7 @@ namespace NeoTracker.Models
                 return count;
             }
         }
+
         //For database
         public Item GetModel()
         {
@@ -154,6 +155,37 @@ namespace NeoTracker.Models
                 App.vm.UserMsg = e.Message.ToString();
             }
         }
+
+        public async Task MassUpdateOperations(DateTime? StartDate, DateTime? EndDate,  bool? Completed)
+        {
+            if (ItemID != 0 && Operations.Any())
+            {
+                var ops = Operations.Select(x => x.GetModel()).ToList();
+                using (var context = new NeoTrackerContext())
+                {
+                    foreach (var o in ops)
+                    {
+                        if (EndDate.HasValue)
+                        {
+                            o.EndDate = EndDate.Value;
+                        }
+
+                        if (Completed.HasValue && Completed.Value)
+                        {
+                            o.IsCompleted = true;
+                        }
+                        if (StartDate.HasValue)
+                        {
+                            o.StartDate = StartDate.Value;
+                        }
+                        context.Entry(o).State = EntityState.Modified;
+                    }
+                    await context.SaveChangesAsync();
+                    await LoadOperations();
+                }
+            }
+        }
+
         //For validation
         public string this[string columnName]
         {

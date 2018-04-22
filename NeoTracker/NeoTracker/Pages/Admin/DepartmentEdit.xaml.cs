@@ -78,7 +78,6 @@ namespace NeoTracker.Pages.Admin
         }
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
-            //App.vm.Department = null;
         }
 
         private void ClearHeadOfDepartmentCb_Click(object sender, RoutedEventArgs e)

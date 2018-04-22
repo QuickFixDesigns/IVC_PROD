@@ -57,7 +57,6 @@ namespace NeoTracker.Pages
                 return order.Code.Contains(SearchBox.Text) || order.Po.Contains(SearchBox.Text) || order.Client.Contains(SearchBox.Text);
             }
         }
-
         private async void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
             if (ListView.SelectedIndex != -1)
@@ -66,12 +65,23 @@ namespace NeoTracker.Pages
                 App.nav.NavigateTo("/Pages/ProjectEdit.xaml", this);
             }
         }
-
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             vm.CancelEdit();
             App.nav.GoBack(this);
         }
+        private void RemoveFilterBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SearchBox.Text = string.Empty;
+            CollectionViewSource.GetDefaultView(ListView.ItemsSource).Refresh();
+            ListView.SelectedIndex = -1;
+        }
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(ListView.ItemsSource).Refresh();
+        }
+
+
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {
             //throw new NotImplementedException();
@@ -90,19 +100,6 @@ namespace NeoTracker.Pages
         }
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
-            //throw new NotImplementedException();
-        }
-
-        private void RemoveFilterBtn_Click(object sender, RoutedEventArgs e)
-        {
-            SearchBox.Text = string.Empty;
-            CollectionViewSource.GetDefaultView(ListView.ItemsSource).Refresh();
-            ListView.SelectedIndex = -1;
-        }
-
-        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            CollectionViewSource.GetDefaultView(ListView.ItemsSource).Refresh();
         }
     }
 }
