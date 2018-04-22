@@ -19,10 +19,8 @@ namespace NeoTracker.Models
 
         public int PrimaryKeyValue { get; set; }
 
-        [StringLength(255)]
         public string OldValue { get; set; }
 
-        [StringLength(255)]
         public string NewValue { get; set; }
 
         public DateTime UpdatedAt { get; set; }
