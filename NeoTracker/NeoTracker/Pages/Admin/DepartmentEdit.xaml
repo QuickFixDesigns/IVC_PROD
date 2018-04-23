@@ -78,10 +78,12 @@
                 <Label Content="IsActive"/>
                 <CheckBox IsChecked="{Binding Department.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
+                <Label Content="CreatedBy" />
+                <TextBox  IsReadOnly="True" IsEnabled="False" Text="{Binding Department.CreatedBy}"  />
                 <Label Content="CreatedAt" />
-                <TextBox  IsReadOnly="True"  Text="{Binding Department.CreatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
+                <TextBox  IsReadOnly="True"  IsEnabled="False" Text="{Binding Department.CreatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
                 <Label Content="UpdatedBy" />
-                <TextBox  IsReadOnly="True" Text="{Binding Department.UpdatedBy}"  />
+                <TextBox  IsReadOnly="True" IsEnabled="False" Text="{Binding Department.UpdatedBy}"  />
                 <Label Content="UpdatedAt" />
                 <TextBox  IsReadOnly="True"  Text="{Binding Department.UpdatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
 

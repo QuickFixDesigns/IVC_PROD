@@ -77,30 +77,44 @@ namespace NeoTracker.DAL
 
                     foreach (var prop in change.OriginalValues.PropertyNames.Where(x => !x.Equals("UpdatedBy") && !x.Equals("UpdatedAt") && !x.Equals("CreatedBy") && !x.Equals("CreatedAt")))
                     {
-                        //if (prop == "OperationTime")
-                        //{
-                        //    var x = DatabaseValues.GetValue<object>(prop).GetType();
-                        //}
+                        if (prop == "ItemID")
+                        {
+                            //var x = DatabaseValues.GetValue<object>(prop).GetType();
+                        }
 
                         string originalValue = string.Empty;
                         string currentValue = string.Empty;
 
-                        switch (Type.GetTypeCode(DatabaseValues.GetValue<object>(prop).GetType()))
+                        if (DatabaseValues.GetValue<object>(prop) != null)
                         {
-                            case TypeCode.DateTime:
-                                originalValue = DatabaseValues.GetValue<object>(prop) != null ? string.Format("{0:yyyy-MM-dd}", DatabaseValues.GetValue<object>(prop)) : string.Empty;
-                                currentValue = change.CurrentValues[prop] != null ? string.Format("{0:yyyy-MM-dd}", change.CurrentValues[prop]) : string.Empty;
-                                break;
-                            case TypeCode.Decimal:
-                                originalValue = DatabaseValues.GetValue<object>(prop) != null ? string.Format("{0:0.00}", DatabaseValues.GetValue<object>(prop)) : string.Empty;
-                                currentValue = change.CurrentValues[prop] != null ? string.Format("{0:0.00}", change.CurrentValues[prop]) : string.Empty;
-                                break;
-                            default:
-                                originalValue = DatabaseValues.GetValue<object>(prop) != null ? DatabaseValues.GetValue<object>(prop).ToString() : string.Empty;
-                                currentValue = change.CurrentValues[prop] != null ? change.CurrentValues[prop].ToString() : string.Empty;
-                                break;
+                            switch (Type.GetTypeCode(DatabaseValues.GetValue<object>(prop).GetType()))
+                            {
+                                case TypeCode.DateTime:
+                                    originalValue = string.Format("{0:yyyy-MM-dd}", DatabaseValues.GetValue<object>(prop));
+                                    break;
+                                case TypeCode.Decimal:
+                                    originalValue = string.Format("{0:0.00}", DatabaseValues.GetValue<object>(prop));
+                                    break;
+                                default:
+                                    originalValue = DatabaseValues.GetValue<object>(prop).ToString();
+                                    break;
+                            }
                         }
-
+                        if(change.CurrentValues[prop] != null)
+                        {
+                            switch (Type.GetTypeCode(change.CurrentValues[prop].GetType()))
+                            {
+                                case TypeCode.DateTime:                                  
+                                    currentValue = string.Format("{0:yyyy-MM-dd}", change.CurrentValues[prop]);
+                                    break;
+                                case TypeCode.Decimal:                             
+                                    currentValue = string.Format("{0:0.00}", change.CurrentValues[prop]);
+                                    break;
+                                default:
+                                    currentValue = change.CurrentValues[prop].ToString();
+                                    break;
+                            }
+                        }
                         if (originalValue != currentValue) //Only create a log if the value changes
                         {
                             ChangeLogs.Add(new ChangeLog()

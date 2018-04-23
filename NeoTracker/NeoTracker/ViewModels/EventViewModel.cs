@@ -62,6 +62,7 @@ namespace NeoTracker.Models
                 ProjectID = ProjectID,
                 StatusID = Status.StatusID,
                 IsActive = IsActive,
+                CreatedBy = CreatedBy,
                 CreatedAt = CreatedAt,
                 UpdatedAt = UpdatedAt,
                 UpdatedBy = UpdatedBy

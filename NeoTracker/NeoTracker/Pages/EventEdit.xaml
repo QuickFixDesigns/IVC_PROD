@@ -7,11 +7,13 @@
              xmlns:src="clr-namespace:NeoTracker.ViewModels"
              mc:Ignorable="d" >
     <Grid Style="{StaticResource ContentRoot}">
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="1"/>
-            <ColumnDefinition Width="auto" MinWidth="200" MaxWidth="420"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+
 
         <ScrollViewer Grid.Column="0" >
             <StackPanel HorizontalAlignment="Left" Margin="0,0,10,0">
@@ -21,10 +23,10 @@
             </StackPanel>
         </ScrollViewer>
 
-        <GridSplitter Grid.Column="1" />
+        <GridSplitter Grid.Column="1"/>
 
         <ScrollViewer Grid.Column="2">
-            <StackPanel Name="panel" Margin="10,0,10,0" MaxWidth="400">
+            <StackPanel Name="panel">
 
                 <StackPanel.BindingGroup>
                     <BindingGroup Name="bindingGroup"/>
@@ -41,57 +43,74 @@
                     </Style>
                 </StackPanel.Resources>
 
-                <TextBlock Text="Event" Style="{StaticResource Heading2}" />
-                <Separator Height="10" Background="Transparent"/>
-
-                <Label Content="EventType"/>
-                <ComboBox ItemsSource="{Binding Path=EventTypes}" DisplayMemberPath="Name" SelectedItem="{Binding Event.EventType, UpdateSourceTrigger=LostFocus}" />
-
-
-                <Label Content="Description"/>
-                <TextBox Height="100" TextWrapping="Wrap" AcceptsReturn="True" Style="{StaticResource textBoxInError}" 
-                         HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
-                         Text="{Binding Event.Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" MaxWidth="400"/>
-
                 <Grid>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                        <Label Content="Item"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Margin="10,0,10,0">
+
+                        <TextBlock Text="Event" Style="{StaticResource Heading2}" />
+                        <Separator Height="10" Background="Transparent"/>
+
+                        <Label Content="EventType"/>
+                        <ComboBox ItemsSource="{Binding Path=EventTypes}" DisplayMemberPath="Name" SelectedItem="{Binding Event.EventType, UpdateSourceTrigger=LostFocus}" />
+
+                        <Separator Height="5" Visibility="Hidden"/>
+
                         <mui:ModernButton x:Name="ClearItem" Click="ClearItem_Click"></mui:ModernButton>
-                    </StackPanel>
-                </Grid>
-                <ComboBox ItemsSource="{Binding Path=Project.Items}" DisplayMemberPath="Name" SelectedItem="{Binding Event.EventItem, UpdateSourceTrigger=LostFocus}"/>
+                        <ComboBox ItemsSource="{Binding Path=Project.Items}" DisplayMemberPath="Name" SelectedItem="{Binding Event.EventItem, UpdateSourceTrigger=LostFocus}"/>
 
-                <Grid>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                        <Label Content="Department"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <mui:ModernButton x:Name="ClearDepartment" Click="ClearDepartment_Click"></mui:ModernButton>
-                    </StackPanel>
-                </Grid>
-                <ComboBox ItemsSource="{Binding Path=CurrentUser.Departments}" DisplayMemberPath="Name" SelectedItem="{Binding Event.Department, UpdateSourceTrigger=LostFocus}" />
+                        <ComboBox ItemsSource="{Binding Path=CurrentUser.Departments}" DisplayMemberPath="Name" SelectedItem="{Binding Event.Department, UpdateSourceTrigger=LostFocus}" />
 
-                <Grid>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                        <Label Content="Status"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <mui:ModernButton x:Name="ClearStatus" Click="ClearStatus_Click"></mui:ModernButton>
+                        <ComboBox ItemsSource="{Binding Path=Statuses}" DisplayMemberPath="Name" SelectedItem="{Binding Event.Status, UpdateSourceTrigger=LostFocus}" />
+
+                        <Separator Height="5" Visibility="Hidden"/>
+
+                        <Label Content="IsActive"/>
+                        <CheckBox IsChecked="{Binding Event.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+
+                        <Label Content="CreatedBy" />
+                        <TextBox  IsReadOnly="True" Text="{Binding Event.CreatedBy}"  />
+                        <Label Content="CreatedAt" />
+                        <TextBox  IsReadOnly="True"  Text="{Binding Event.CreatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
+                        <Label Content="UpdatedBy" />
+                        <TextBox  IsReadOnly="True" Text="{Binding Event.UpdatedBy}"  />
+                        <Label Content="UpdatedAt" />
+                        <TextBox  IsReadOnly="True"  Text="{Binding Event.UpdatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
                     </StackPanel>
+
+                    <Grid Grid.Column="2" Margin="10,0,10,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <ScrollViewer Grid.Row="0" Margin="0,0,0,60" VerticalAlignment="Stretch">
+                            <StackPanel >
+                                <TextBlock Text=" " Style="{StaticResource Heading2}" />
+                                <Separator Height="10" Background="Transparent"/>
+                                <Label Content="Description"/>
+                                <TextBox TextWrapping="Wrap" AcceptsReturn="True" Style="{StaticResource textBoxInError}" 
+                         HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
+                                         Height="150"
+                         Text="{Binding Event.Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+                            </StackPanel>
+                        </ScrollViewer>
+
+
+                        <mui:ModernTab SelectedSource="Pages/ChangeLog.xaml" Grid.Row="1">
+                            <mui:ModernTab.Links>
+                                <mui:Link DisplayName="ChangeLog" Source="Pages/ChangeLog.xaml"/>
+                            </mui:ModernTab.Links>
+                        </mui:ModernTab>
+
+                    </Grid>
+
                 </Grid>
-                <ComboBox ItemsSource="{Binding Path=Statuses}" DisplayMemberPath="Name" SelectedItem="{Binding Event.Status, UpdateSourceTrigger=LostFocus}" />
-
-                <Label Content="IsActive"/>
-                <CheckBox IsChecked="{Binding Event.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
-
-                <Label Content="CreatedAt" />
-                <TextBox  IsReadOnly="True"  Text="{Binding Event.CreatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
-                <Label Content="UpdatedBy" />
-                <TextBox  IsReadOnly="True" Text="{Binding Event.UpdatedBy}"  />
-                <Label Content="UpdatedAt" />
-                <TextBox  IsReadOnly="True"  Text="{Binding Event.UpdatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
             </StackPanel>
         </ScrollViewer>
     </Grid>

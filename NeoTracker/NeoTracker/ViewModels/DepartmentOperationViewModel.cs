@@ -49,6 +49,7 @@ namespace NeoTracker.Models
                 Name = Name,
                 OperationTime = OperationTime,
                 IsActive = IsActive,
+                CreatedBy = CreatedBy,
                 CreatedAt = CreatedAt,
                 UpdatedAt = UpdatedAt,
                 UpdatedBy = UpdatedBy

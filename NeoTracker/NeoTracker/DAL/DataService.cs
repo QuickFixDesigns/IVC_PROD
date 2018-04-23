@@ -12,14 +12,6 @@ namespace NeoTracker.DAL
 {
     public class DataService
     {
-
-        public async Task<List<ChangeLog>> GetHistory(string entityName, int pk)
-        {
-            using (var context = new NeoTrackerContext())
-            {
-                return await context.ChangeLogs.Where(x=>x.EntityName == entityName && x.PrimaryKeyValue ==pk).OrderByDescending(x=>x.UpdatedAt).ToListAsync();
-            }
-        }
         public async Task<UserViewModel> GetUser(string Email)
         {
             using (var context = new NeoTrackerContext())
@@ -45,6 +37,7 @@ namespace NeoTracker.DAL
                     IsActive = x.IsActive,
                     IsAdmin = x.IsAdmin,
                     LastName = x.LastName,
+                    CreatedBy = x.CreatedBy,
                     UpdatedAt = x.UpdatedAt,
                     UpdatedBy = x.UpdatedBy,
                     UserID = x.UserID
@@ -63,6 +56,7 @@ namespace NeoTracker.DAL
                     IsActive = x.IsActive,
                     CanManageProject =x.CanManageProject,
                     HeadOfDepartment = x.HeadOfDepartment,
+                    CreatedBy = x.CreatedBy,
                     CreatedAt = x.CreatedAt,
                     UpdatedAt = x.UpdatedAt,
                     UpdatedBy = x.UpdatedBy
@@ -88,6 +82,7 @@ namespace NeoTracker.DAL
                         Name = x.ProjectType.Name,
                     } : null,
                     IsActive = x.IsActive,
+                    CreatedBy = x.CreatedBy,
                     CreatedAt = x.CreatedAt,
                     UpdatedAt = x.UpdatedAt,
                     UpdatedBy = x.UpdatedBy,
@@ -104,6 +99,7 @@ namespace NeoTracker.DAL
                     Name = x.Name,
                     SortOrder = x.SortOrder,
                     IsActive = x.IsActive,
+                    CreatedBy = x.CreatedBy,
                     CreatedAt = x.CreatedAt,
                     UpdatedAt = x.UpdatedAt,
                     UpdatedBy = x.UpdatedBy
@@ -123,6 +119,7 @@ namespace NeoTracker.DAL
                     IsPriceChange = x.IsPriceChange,
                     SortOrder = x.SortOrder,
                     IsActive = x.IsActive,
+                    CreatedBy = x.CreatedBy,
                     CreatedAt = x.CreatedAt,
                     UpdatedAt = x.UpdatedAt,
                     UpdatedBy = x.UpdatedBy
@@ -140,6 +137,7 @@ namespace NeoTracker.DAL
                     Name = x.Name,
                     IsDeleted = x.IsDeleted,
                     IsActive = x.IsActive,
+                    CreatedBy = x.CreatedBy,
                     CreatedAt = x.CreatedAt,
                     UpdatedAt = x.UpdatedAt,
                     UpdatedBy = x.UpdatedBy
@@ -159,6 +157,7 @@ namespace NeoTracker.DAL
                     EmailNotifications = x.EmailNotifications,
                     FirstName = x.FirstName,
                     LastName = x.LastName,
+                    CreatedBy = x.CreatedBy,
                     CreatedAt = x.CreatedAt,
                     UpdatedAt = x.UpdatedAt,
                     UpdatedBy = x.UpdatedBy

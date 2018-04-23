@@ -63,6 +63,7 @@ namespace NeoTracker.Models
                 IsPriceChange = IsPriceChange,
                 SortOrder = SortOrder,
                 IsActive = IsActive,
+                CreatedBy = CreatedBy,
                 CreatedAt = CreatedAt,
                 UpdatedAt = UpdatedAt,
                 UpdatedBy = UpdatedBy

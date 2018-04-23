@@ -83,6 +83,7 @@ namespace NeoTracker.Models
                 CanManageProject = CanManageProject,
                 HeadOfDepartmentID = HeadOfDepartment != null && HeadOfDepartment.UserID != 0 ? HeadOfDepartment.UserID : (int?)null,
                 IsActive = IsActive,
+                CreatedBy = CreatedBy,
                 CreatedAt = CreatedAt,
                 UpdatedAt = UpdatedAt,
                 UpdatedBy = UpdatedBy

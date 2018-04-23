@@ -21,7 +21,7 @@ namespace NeoTracker.Content
                 btn.IconHeight = 25;
             }
 
-            btn.Padding = new Thickness() { Top = 5, Bottom = 5 };
+            btn.Margin = new Thickness() { Top = 5, Bottom = 5 };
 
             switch (icon)
             {
@@ -75,8 +75,11 @@ namespace NeoTracker.Content
                 case "NoPicture":
                     btn.IconData = Geometry.Parse("F1 M 19,19L 27,19L 27,24L 19,24L 19,19 Z M 30,19L 38,19L 38,24L 30,24L 30,19 Z M 41,19L 49,19L 49,24L 41,24L 41,19 Z M 52,19L 57,19L 57,27L 52,27L 52,19 Z M 52,30L 57,30L 57,38L 52,38L 52,30 Z M 52,41L 57,41L 57,49L 52,49L 52,41 Z M 27,52L 35,52L 35,57L 27,57L 27,52 Z M 38,52L 46,52L 46,57L 38,57L 38,52 Z M 49,52L 57,52L 57,57L 49,57L 49,52 Z M 19,27L 24,27L 24,35L 19,35L 19,27 Z M 19,38L 24,38L 24,46L 19,46L 19,38 Z M 19,49L 24,49L 24,57L 19,57L 19,49 Z ");
                     break;
+
                 case "Reset":
                     btn.IconData = Geometry.Parse("F1 M 26.9166,22.1667L 37.9999,33.25L 49.0832,22.1668L 53.8332,26.9168L 42.7499,38L 53.8332,49.0834L 49.0833,53.8334L 37.9999,42.75L 26.9166,53.8334L 22.1666,49.0833L 33.25,38L 22.1667,26.9167L 26.9166,22.1667 Z ");
+                    btn.Content = string.IsNullOrEmpty(content) ? string.Empty : content;
+                    btn.ToolTip = string.IsNullOrEmpty(content) ? string.Empty : tooltip;
                     break;
                     
                 case "First":

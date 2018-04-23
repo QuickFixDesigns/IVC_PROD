@@ -90,6 +90,7 @@ namespace NeoTracker.Models
                 StatusID = Status.StatusID,
                 Name = Name,
                 IsActive = IsActive,
+                CreatedBy = CreatedBy,
                 CreatedAt = CreatedAt,
                 UpdatedAt = UpdatedAt,
                 UpdatedBy = UpdatedBy
@@ -113,6 +114,7 @@ namespace NeoTracker.Models
                         Name = x.Name,
                         SortOrder = x.SortOrder,
                         IsActive = x.IsActive,
+                        CreatedBy = x.CreatedBy,
                         CreatedAt = x.CreatedAt,
                         UpdatedAt = x.UpdatedAt,
                         UpdatedBy = x.UpdatedBy

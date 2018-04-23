@@ -47,6 +47,7 @@ namespace NeoTracker.Models
                 IsDeleted = IsDeleted,
                 SortOrder = SortOrder,
                 IsActive = IsActive,
+                CreatedBy = CreatedBy,
                 CreatedAt = CreatedAt,
                 UpdatedAt = UpdatedAt,
                 UpdatedBy = UpdatedBy

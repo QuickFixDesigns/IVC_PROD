@@ -164,6 +164,9 @@
     <Compile Include="Pages\OperationEdit.xaml.cs">
       <DependentUpon>OperationEdit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ChangeLog.xaml.cs">
+      <DependentUpon>ChangeLog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\OperationList.xaml.cs">
       <DependentUpon>OperationList.xaml</DependentUpon>
     </Compile>
@@ -264,6 +267,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\OperationEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ChangeLog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

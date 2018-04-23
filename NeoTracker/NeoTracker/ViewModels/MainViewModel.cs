@@ -72,6 +72,38 @@ namespace NeoTracker.ViewModels
         {
             ProjectTypes = await ds.GetProjectTypeList();
         }
+        public async Task LoadChangeLog(string entityName, int pk)
+        {
+            using (var context = new NeoTrackerContext())
+            {
+                var logs = await context.ChangeLogs.Where(x => x.EntityName == entityName && x.PrimaryKeyValue == pk).OrderByDescending(x => x.UpdatedAt).ToListAsync();
+                foreach (var log in logs.Where(x=>x.PropertyName.Contains("ID")))
+                {
+                    switch (log.PropertyName)
+                    {
+                        case "StatusID":
+                            log.NewValue = !string.IsNullOrEmpty(log.NewValue) ? context.Statuses.Find(int.Parse(log.NewValue)).Name : string.Empty;
+                            log.OldValue = !string.IsNullOrEmpty(log.OldValue) ? context.Statuses.Find(int.Parse(log.OldValue)).Name : string.Empty;
+                            break;
+                        case "ItemID":
+                            log.NewValue = !string.IsNullOrEmpty(log.NewValue) ? context.Items.Find(int.Parse(log.NewValue)).Name : string.Empty;
+                            log.OldValue = !string.IsNullOrEmpty(log.OldValue) ? context.Items.Find(int.Parse(log.OldValue)).Name : string.Empty;
+                            break;
+                        case "DepartmentID":
+                            log.NewValue = !string.IsNullOrEmpty(log.NewValue) ? context.Departments.Find(int.Parse(log.NewValue)).Name : string.Empty;
+                            log.OldValue = !string.IsNullOrEmpty(log.OldValue) ? context.Departments.Find(int.Parse(log.OldValue)).Name : string.Empty;
+                            break;
+                        case "EventTypeID":
+                            log.NewValue = !string.IsNullOrEmpty(log.NewValue) ? context.EventTypes.Find(int.Parse(log.NewValue)).Name : string.Empty;
+                            log.OldValue = !string.IsNullOrEmpty(log.OldValue) ? context.EventTypes.Find(int.Parse(log.OldValue)).Name : string.Empty;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                ChangeLog = logs;
+            }
+        }
         //Commands
         private ICommand _LoginCommand;
         public ICommand LoginCommand
@@ -125,6 +157,12 @@ namespace NeoTracker.ViewModels
                     ModernDialog.ShowMessage(value, "User message", MessageBoxButton.OK);
                 }
             }
+        }
+        private List<ChangeLog> _ChangeLog = new List<ChangeLog>();
+        public List<ChangeLog> ChangeLog
+        {
+            get { return _ChangeLog; }
+            set { SetProperty(ref _ChangeLog, value); }
         }
         //Departments
         private List<DepartmentViewModel> _Departments;

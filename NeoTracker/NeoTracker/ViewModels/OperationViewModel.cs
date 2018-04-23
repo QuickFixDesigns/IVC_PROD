@@ -79,13 +79,6 @@ namespace NeoTracker.Models
             set { SetProperty(ref _Department, value); }
         }
 
-        private List<ChangeLog> _History = new List<ChangeLog>();
-        public List<ChangeLog> History
-        {
-            get { return _History; }
-            set { SetProperty(ref _History, value); }
-        }
-
         //For database
         public Operation GetModel()
         {
@@ -101,14 +94,11 @@ namespace NeoTracker.Models
                 OperationID = OperationID,
                 StartDate = StartDate,
                 IsActive = IsActive,
+                CreatedBy = CreatedBy,
                 CreatedAt = CreatedAt,
                 UpdatedAt = UpdatedAt,
                 UpdatedBy = UpdatedBy
             };
-        }
-        public async Task LoadHistory()
-        {
-            History = await ds.GetHistory("Operation", OperationID);
         }
         public async Task Save()
         {

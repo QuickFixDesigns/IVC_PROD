@@ -38,9 +38,9 @@ namespace NeoTracker.Pages
             btn.SetButton(DeleteButton, true, "Delete", null, "Delete event");
             btn.SetButton(CancelButton, true, "Cancel", null, null);
 
-            btn.SetButton(ClearDepartment, false, "Reset", null, null);
-            btn.SetButton(ClearItem, false, "Reset", null, null);
-            btn.SetButton(ClearStatus, false, "Reset", null, null);
+            btn.SetButton(ClearDepartment, false, "Reset", "Department", null);
+            btn.SetButton(ClearItem, false, "Reset", "Item", null);
+            btn.SetButton(ClearStatus, false, "Reset", "Status", null);
         }
 
         private async void ApplyButton_Click(object sender, RoutedEventArgs e)

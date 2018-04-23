@@ -85,6 +85,7 @@ namespace NeoTracker.Models
                 EmailNotifications = EmailNotifications,
                 FirstName = FirstName,
                 LastName = LastName,
+                CreatedBy = CreatedBy,
                 CreatedAt = CreatedAt,
                 UpdatedAt = UpdatedAt,
                 UpdatedBy = UpdatedBy

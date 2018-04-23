@@ -73,7 +73,7 @@ namespace NeoTracker.Pages
         {
             App.nav.SetLastUri("/Pages/OperationEdit.xaml");
             App.vm.Operation.BeginEdit();
-            await App.vm.Operation.LoadHistory();
+            await App.vm.LoadChangeLog("Operation", App.vm.Operation.OperationID);
             util.AutoFitListView(GridListView);
         }
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)

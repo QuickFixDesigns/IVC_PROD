@@ -99,6 +99,7 @@ namespace NeoTracker.Models
                 CreatedAt = CreatedAt,
                 ProjectTypeID = ProjectType.ProjectTypeID,
                 PurchaseOrder = PurchaseOrder,
+                CreatedBy = CreatedBy,
                 UpdatedAt = UpdatedAt,
                 UpdatedBy = UpdatedBy,
                 IsActive = IsActive,
@@ -176,6 +177,7 @@ namespace NeoTracker.Models
                             //UpdatedBy = x.Item.Status.UpdatedBy,
                         },
                         IsActive = x.IsActive,
+                        CreatedBy = x.CreatedBy,
                         CreatedAt = x.CreatedAt,
                         UpdatedAt = x.UpdatedAt,
                         UpdatedBy = x.UpdatedBy
