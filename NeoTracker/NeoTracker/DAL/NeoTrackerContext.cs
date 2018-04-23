@@ -77,31 +77,27 @@ namespace NeoTracker.DAL
 
                     foreach (var prop in change.OriginalValues.PropertyNames.Where(x => !x.Equals("UpdatedBy") && !x.Equals("UpdatedAt") && !x.Equals("CreatedBy") && !x.Equals("CreatedAt")))
                     {
-                        if (prop == "OperationTime")
-                        {
-                            var x = DatabaseValues.GetValue<object>(prop).GetType();
-                        }
+                        //if (prop == "OperationTime")
+                        //{
+                        //    var x = DatabaseValues.GetValue<object>(prop).GetType();
+                        //}
 
                         string originalValue = string.Empty;
                         string currentValue = string.Empty;
 
                         switch (Type.GetTypeCode(DatabaseValues.GetValue<object>(prop).GetType()))
                         {
-                            case TypeCode.Byte:
-                            case TypeCode.SByte:
-                            case TypeCode.UInt16:
-                            case TypeCode.UInt32:
-                            case TypeCode.UInt64:
-                            case TypeCode.Int16:
-                            case TypeCode.Int32:
-                            case TypeCode.Int64:
+                            case TypeCode.DateTime:
+                                originalValue = DatabaseValues.GetValue<object>(prop) != null ? string.Format("{0:yyyy-MM-dd}", DatabaseValues.GetValue<object>(prop)) : string.Empty;
+                                currentValue = change.CurrentValues[prop] != null ? string.Format("{0:yyyy-MM-dd}", change.CurrentValues[prop]) : string.Empty;
+                                break;
                             case TypeCode.Decimal:
                                 originalValue = DatabaseValues.GetValue<object>(prop) != null ? string.Format("{0:0.00}", DatabaseValues.GetValue<object>(prop)) : string.Empty;
                                 currentValue = change.CurrentValues[prop] != null ? string.Format("{0:0.00}", change.CurrentValues[prop]) : string.Empty;
                                 break;
-                            case TypeCode.Double:
-                            case TypeCode.Single:
                             default:
+                                originalValue = DatabaseValues.GetValue<object>(prop) != null ? DatabaseValues.GetValue<object>(prop).ToString() : string.Empty;
+                                currentValue = change.CurrentValues[prop] != null ? change.CurrentValues[prop].ToString() : string.Empty;
                                 break;
                         }
 
