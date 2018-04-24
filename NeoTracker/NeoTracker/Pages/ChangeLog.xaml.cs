@@ -23,15 +23,35 @@ namespace NeoTracker.Pages
     /// <summary>
     /// Interaction logic for ItemList.xaml
     /// </summary>
-    public partial class ChangeLog : UserControl
+    public partial class ChangeLog : UserControl, IContent
     {
         private Utilities util = new Utilities();
         private Buttons btn = new Buttons();
-        private bool SelectAll = true;
 
         public ChangeLog()
         {
             InitializeComponent();
+        }
+
+        public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        {
+            //throw new NotImplementedException();
+            App.vm.ChangeLog.Clear();
+        }
+
+        public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
+        {
+            //throw new NotImplementedException();
         }
     }
 }

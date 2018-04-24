@@ -14,10 +14,8 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="1"/>
-            <ColumnDefinition Width="300"/>
-            <ColumnDefinition Width="1"/>
+            <ColumnDefinition Width="350"/>
             <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="1"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
@@ -55,7 +53,7 @@
             </StackPanel>
         </ScrollViewer>
 
-        <ScrollViewer Grid.Row="0" Grid.Column="4">
+        <ScrollViewer Grid.Row="0" Grid.Column="3">
             <StackPanel Margin="10,0,10,0">
 
                 <TextBlock Text="" Style="{StaticResource Heading2}" />
@@ -71,7 +69,8 @@
                 <TextBox  IsReadOnly="True"  Text="{Binding Project.UpdatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
             </StackPanel>
         </ScrollViewer>
-        <ScrollViewer Grid.Row="0" Grid.Column="6">
+        
+        <ScrollViewer Grid.Row="0" Grid.Column="4">
             <StackPanel Name="panel" Margin="10,0,10,0">
 
                 <StackPanel.BindingGroup>
