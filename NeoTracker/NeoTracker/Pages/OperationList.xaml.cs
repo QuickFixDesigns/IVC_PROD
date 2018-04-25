@@ -65,7 +65,14 @@ namespace NeoTracker.Pages
 
         private async void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
-            await App.vm.Item.MassUpdateOperations(SetStartDate.Value, SetEndDate.Value, SetCompleted.IsChecked);
+            var ops = new List<Operation>();
+
+            foreach(var o in ListView.SelectedItems)
+            {
+                var vm = o as OperationViewModel;
+                ops.Add(vm.GetModel());
+            }
+            await App.vm.Item.MassUpdateOperations(ops, SetStartDate.Value, SetEndDate.Value, SetCompleted.IsChecked);
             ListView.Items.Refresh();
 
             SetStartDate.Value = null;

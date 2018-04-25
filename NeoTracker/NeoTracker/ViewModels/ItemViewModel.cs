@@ -174,11 +174,10 @@ namespace NeoTracker.Models
             }
         }
 
-        public async Task MassUpdateOperations(DateTime? StartDate, DateTime? EndDate, bool? Completed)
+        public async Task MassUpdateOperations(List<Operation> ops, DateTime? StartDate, DateTime? EndDate, bool? Completed)
         {
             if (ItemID != 0 && Operations.Any())
             {
-                var ops = Operations.Select(x => x.GetModel()).ToList();
                 using (var context = new NeoTrackerContext())
                 {
                     foreach (var o in ops)
