@@ -73,8 +73,10 @@
                 </Grid>
 
                 <Label Content="Name"/>
-                <TextBox  IsReadOnly="True" IsEnabled="False"  Style="{StaticResource textBoxInError}" Text="{Binding Item.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <TextBox  IsReadOnly="True" IsEnabled="False"  Style="{StaticResource textBoxInError}" Text="{Binding Item.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
 
+                <Separator Height="20" Background="Transparent"/>
+                
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition />
@@ -104,6 +106,8 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
 
+                    <Separator Height="10" Background="Transparent"/>
+                    
                     <Label Content="Qte_Com" Grid.Row="0" Grid.Column="0"/>
                     <TextBox  IsReadOnly="True" Grid.Row="1" Grid.Column="0" IsEnabled="False"  Style="{StaticResource textBoxInError}" Text="{Binding Item.Qte_Com}"  />
 
@@ -113,9 +117,13 @@
                     <TextBox IsReadOnly="True" IsEnabled="False" Grid.Row="1" Grid.Column="2" Style="{StaticResource textBoxInError}" Text="{Binding Item.Qte_Exp}"/>
                 </Grid>
 
+                <Separator Height="20" Background="Transparent"/>
+                
                 <Label Content="Status"/>
                 <ComboBox ItemsSource="{Binding Path=Statuses}" DisplayMemberPath="Name" SelectedItem="{Binding Item.Status, UpdateSourceTrigger=LostFocus}"/>
 
+                <Separator Height="10" Background="Transparent"/>
+                
                 <Label Content="IsActive"/>
                 <CheckBox IsChecked="{Binding Item.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 

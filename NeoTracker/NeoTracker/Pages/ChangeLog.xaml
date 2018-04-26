@@ -16,19 +16,19 @@
 
                             <GridViewColumn DisplayMemberBinding="{Binding PropertyName}">
                                 <GridViewColumn.Header>
-                                    <GridViewColumnHeader Tag="Alias">PropertyName</GridViewColumnHeader>
+                                    <GridViewColumnHeader Tag="PropertyName">Change</GridViewColumnHeader>
                                 </GridViewColumn.Header>
                             </GridViewColumn>
 
                             <GridViewColumn DisplayMemberBinding="{Binding OldValue}">
                                 <GridViewColumn.Header>
-                                    <GridViewColumnHeader Tag="OldValue">OldValue</GridViewColumnHeader>
+                                    <GridViewColumnHeader Tag="OldValue">Old</GridViewColumnHeader>
                                 </GridViewColumn.Header>
                             </GridViewColumn>
 
                             <GridViewColumn DisplayMemberBinding="{Binding NewValue}">
                                 <GridViewColumn.Header>
-                                    <GridViewColumnHeader Tag="NewValue">NewValue</GridViewColumnHeader>
+                                    <GridViewColumnHeader Tag="NewValue">New</GridViewColumnHeader>
                                 </GridViewColumn.Header>
                             </GridViewColumn>
 

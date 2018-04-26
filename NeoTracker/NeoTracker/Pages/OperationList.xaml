@@ -76,14 +76,6 @@
                                 </GridViewColumn.Header>
                             </GridViewColumn>
 
-                            <!--<GridViewColumn Header="IsCompleted">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox Command="{Binding ClickCommand}" IsChecked="{Binding IsCompleted, UpdateSourceTrigger=PropertyChanged}" />
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>-->
-
                             <GridViewColumn  >
                                 <GridViewColumn.Header>
                                     <StackPanel>

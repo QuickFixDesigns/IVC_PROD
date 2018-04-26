@@ -47,36 +47,88 @@
                 <TextBlock Text="Operation" Style="{StaticResource Heading2}" />
                 <Separator Height="10" Background="Transparent"/>
 
-                <Label Content="SortOrder" />
-                <TextBox Text="{Binding Operation.SortOrder, UpdateSourceTrigger=PropertyChanged}"  />
-
                 <Label Content="Department" />
-                <TextBox  IsReadOnly="True"  Text="{Binding Operation.Department.Name}"  />
+                <TextBox  IsReadOnly="True" IsEnabled="False"  Text="{Binding Operation.Department.Name}"  />
+                
+                <Label Content="SortOrder" />
+                <xctk:LongUpDown Text="{Binding Operation.SortOrder, UpdateSourceTrigger=PropertyChanged}"  />
 
+                <Separator Height="20" Background="Transparent"/>
+                
                 <Label Content="Name" />
                 <TextBox Text="{Binding Operation.Name, UpdateSourceTrigger=PropertyChanged}"  />
 
-                <Label Content="StartDate" />
-                <xctk:DateTimePicker Value="{Binding Operation.StartDate, UpdateSourceTrigger=PropertyChanged}" Format="Custom" FormatString="yyyy-MM-dd"/>
+                <Separator Height="20" Background="Transparent"/>
+                
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
 
-                <Label Content="EndDate" />
-                <xctk:DateTimePicker Value="{Binding Operation.EndDate, UpdateSourceTrigger=PropertyChanged}" Format="Custom" FormatString="yyyy-MM-dd"/>
+                    <Label Content="StartDate" Grid.Row="0" Grid.Column="0"/>
+                    <TextBox  Grid.Row="1" Grid.Column="0"  Text="{Binding Operation.StartDate,StringFormat={}{0:yyyy-MM-dd}}"  />
 
-                <Label Content="OperationTime" />
-                <xctk:DecimalUpDown DefaultValue ="0" Value="{Binding Operation.OperationTime, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+                    <Label Content="EndDate" Grid.Row="0" Grid.Column="2"/>
+                    <xctk:DateTimePicker Grid.Row="1" Grid.Column="2" Value="{Binding Operation.EndDate, UpdateSourceTrigger=PropertyChanged}" Format="ShortDate"/>
+                </Grid>
 
-                <Label Content="IsCompleted"/>
-                <CheckBox IsChecked="{Binding Operation.IsCompleted, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
 
+                    <Label Content="OperationTime" Grid.Row="0" Grid.Column="0"/>
+                    <xctk:DecimalUpDown  Grid.Row="1" Grid.Column="0"   DefaultValue ="0" Value="{Binding Operation.OperationTime, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"  />
+
+                    <Label Content="EndDate" Grid.Row="0" Grid.Column="2"/>
+                    <CheckBox Grid.Row="1" Grid.Column="2" IsChecked="{Binding Operation.IsCompleted, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+                </Grid>
+
+                <Separator Height="10" Background="Transparent"/>
+                
                 <Label Content="IsActive"/>
                 <CheckBox IsChecked="{Binding Operation.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
-                <Label Content="CreatedAt" />
-                <TextBox  IsReadOnly="True"  Text="{Binding Operation.CreatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
-                <Label Content="UpdatedBy" />
-                <TextBox  IsReadOnly="True" Text="{Binding Operation.UpdatedBy}"  />
-                <Label Content="UpdatedAt" />
-                <TextBox  IsReadOnly="True"  Text="{Binding Operation.UpdatedAt,StringFormat={}{0:yyyy-MM-dd}}"  />
+                <Separator Height="40" Background="Transparent"/>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <Label Content="CreatedAt" Grid.Row="0" />
+                    <TextBox  IsReadOnly="True" IsEnabled="False"  Text="{Binding Operation.CreatedAt,StringFormat={}{0:yyyy-MM-dd}}"  Grid.Row="1"/>
+
+                    <Label Content="CreatedBy" Grid.Row="0" Grid.Column="2"/>
+                    <TextBox  IsReadOnly="True" IsEnabled="False"  Text="{Binding Operation.CreatedBy}"  Grid.Row="1" Grid.Column="2"/>
+
+                    <Label Content="UpdatedAt" Grid.Row="2" Grid.Column="0"/>
+                    <TextBox  IsReadOnly="True"  IsEnabled="False"  Text="{Binding Operation.UpdatedAt,StringFormat={}{0:yyyy-MM-dd}}"  Grid.Row="3" Grid.Column="0"/>
+
+                    <Label Content="UpdatedBy" Grid.Row="2" Grid.Column="2"/>
+                    <TextBox  IsReadOnly="True" IsEnabled="False"  Text="{Binding Operation.UpdatedBy}"  Grid.Row="3" Grid.Column="2"/>
+                </Grid>
             </StackPanel>
         </ScrollViewer>
 
