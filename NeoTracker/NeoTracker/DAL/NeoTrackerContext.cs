@@ -120,7 +120,7 @@ namespace NeoTracker.DAL
                             ChangeLogs.Add(new ChangeLog()
                             {
                                 EntityName = entityName,
-                                NewValue = currentValue,
+                                //NewValue = currentValue,
                                 OldValue = originalValue,
                                 PrimaryKeyValue = int.Parse(primaryKey.ToString()),
                                 UpdatedAt = now,

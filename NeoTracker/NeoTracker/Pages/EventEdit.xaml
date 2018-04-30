@@ -49,6 +49,11 @@
                 <TextBlock Text="Event" Style="{StaticResource Heading2}" />
                 <Separator Height="10" Background="Transparent"/>
 
+                <Label Content="Description"/>
+                <TextBox Text="{Binding Event.Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+
+                <Separator Height="10" Background="Transparent"/>
+
                 <Label Content="EventType"/>
                 <ComboBox ItemsSource="{Binding Path=EventTypes}" DisplayMemberPath="Name" SelectedItem="{Binding Event.EventType, UpdateSourceTrigger=LostFocus}" />
 
@@ -62,11 +67,6 @@
 
                 <mui:ModernButton x:Name="ClearStatus" Click="ClearStatus_Click"></mui:ModernButton>
                 <ComboBox ItemsSource="{Binding Path=Statuses}" DisplayMemberPath="Name" SelectedItem="{Binding Event.Status, UpdateSourceTrigger=LostFocus}" />
-
-                <Separator Height="20" Background="Transparent"/>
-                
-                <Label Content="Description"/>
-                <TextBox MinHeight="70" Text="{Binding Event.Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
 
                 <Separator Height="10" Background="Transparent"/>
                 

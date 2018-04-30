@@ -57,13 +57,11 @@ namespace NeoTracker.Pages
                     && (ProjecTypeFilter.SelectedIndex == -1 || ProjecTypeFilter.Text == project.ProjectType.Name);
             }
         }
-        private async void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (ListView.SelectedIndex != -1)
             {
                 App.vm.Project = ((ProjectViewModel)ListView.SelectedItem);
-                await App.vm.Project.LoadEvents();
-                await App.vm.Project.LoadItems();
                 App.nav.NavigateTo("/Pages/ProjectEdit.xaml", this);
             }
         }

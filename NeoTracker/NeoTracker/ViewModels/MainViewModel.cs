@@ -82,20 +82,24 @@ namespace NeoTracker.ViewModels
                     switch (log.PropertyName)
                     {
                         case "StatusID":
-                            log.NewValue = !string.IsNullOrEmpty(log.NewValue) ? context.Statuses.Find(int.Parse(log.NewValue)).Name : string.Empty;
+                            //log.NewValue = !string.IsNullOrEmpty(log.NewValue) ? context.Statuses.Find(int.Parse(log.NewValue)).Name : string.Empty;
                             log.OldValue = !string.IsNullOrEmpty(log.OldValue) ? context.Statuses.Find(int.Parse(log.OldValue)).Name : string.Empty;
                             break;
                         case "ItemID":
-                            log.NewValue = !string.IsNullOrEmpty(log.NewValue) ? context.Items.Find(int.Parse(log.NewValue)).Name : string.Empty;
+                            //log.NewValue = !string.IsNullOrEmpty(log.NewValue) ? context.Items.Find(int.Parse(log.NewValue)).Name : string.Empty;
                             log.OldValue = !string.IsNullOrEmpty(log.OldValue) ? context.Items.Find(int.Parse(log.OldValue)).Name : string.Empty;
                             break;
                         case "DepartmentID":
-                            log.NewValue = !string.IsNullOrEmpty(log.NewValue) ? context.Departments.Find(int.Parse(log.NewValue)).Name : string.Empty;
+                            //log.NewValue = !string.IsNullOrEmpty(log.NewValue) ? context.Departments.Find(int.Parse(log.NewValue)).Name : string.Empty;
                             log.OldValue = !string.IsNullOrEmpty(log.OldValue) ? context.Departments.Find(int.Parse(log.OldValue)).Name : string.Empty;
                             break;
                         case "EventTypeID":
-                            log.NewValue = !string.IsNullOrEmpty(log.NewValue) ? context.EventTypes.Find(int.Parse(log.NewValue)).Name : string.Empty;
+                            //log.NewValue = !string.IsNullOrEmpty(log.NewValue) ? context.EventTypes.Find(int.Parse(log.NewValue)).Name : string.Empty;
                             log.OldValue = !string.IsNullOrEmpty(log.OldValue) ? context.EventTypes.Find(int.Parse(log.OldValue)).Name : string.Empty;
+                            break;
+                        case "ProjectTypeID":
+                            //log.NewValue = !string.IsNullOrEmpty(log.NewValue) ? context.ProjectTypes.Find(int.Parse(log.NewValue)).Name : string.Empty;
+                            log.OldValue = !string.IsNullOrEmpty(log.OldValue) ? context.ProjectTypes.Find(int.Parse(log.OldValue)).Name : string.Empty;
                             break;
                         default:
                             break;

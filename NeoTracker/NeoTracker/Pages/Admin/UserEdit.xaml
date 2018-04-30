@@ -52,16 +52,16 @@
                 <Separator Height="10" Background="Transparent"/>
 
                 <Label Content="Alias"/>
-                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding User.Alias, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <TextBox Text="{Binding User.Alias, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                 
                 <Label Content="First name"/>
-                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding User.FirstName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <TextBox Text="{Binding User.FirstName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Label Content="Last name"/>
-                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding User.LastName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <TextBox Text="{Binding User.LastName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Label Content="Email"/>
-                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding User.Email, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <TextBox  Text="{Binding User.Email, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Label Content="IsAdmin"/>
                 <CheckBox  IsChecked="{Binding User.IsAdmin, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />

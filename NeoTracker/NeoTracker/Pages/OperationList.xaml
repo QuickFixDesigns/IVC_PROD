@@ -2,88 +2,54 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"              
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"             
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"   
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Style="{StaticResource ContentRoot}">
-        <!--<Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>-->
 
         <ScrollViewer>
             <StackPanel Margin="10,0,10,0">
 
-                <mui:ModernButton x:Name="ApplyButton" Click="ApplyButton_Click" />
-                <mui:ModernButton x:Name="SelectAllButton" Click="SelectAllButton_Click"/>
+                <mui:ModernButton x:Name="MassChangeOperationsDialog" Click="MassChangeOperationsDialog_Click" HorizontalAlignment="Left"/>
+                
+                <Grid Width="{Binding ActualWidth, ElementName=ListView}" Margin="0,0,0,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{Binding ActualWidth, ElementName=SortOrder}"/>
+                        <ColumnDefinition Width="{Binding ActualWidth, ElementName=Department}"/>
+                        <ColumnDefinition Width="{Binding ActualWidth, ElementName=Name}"/>
+                        <ColumnDefinition Width="{Binding ActualWidth, ElementName=StartDate}"/>
+                        <ColumnDefinition Width="{Binding ActualWidth, ElementName=EndDate}"/>
+                        <ColumnDefinition Width="{Binding ActualWidth, ElementName=OperationTime}"/>
+                        <ColumnDefinition Width="{Binding ActualWidth, ElementName=IsCompleted}"/>
+                    </Grid.ColumnDefinitions>
+
+                    <xctk:CheckComboBox  x:Name="_combo"
+                                         Width="{Binding ActualWidth, ElementName=Department}"
+                                         Grid.Column="1"
+                                         DisplayMemberPath="Name"
+                                         ValueMemberPath="DepartmentID"
+                                         ItemsSource="{Binding Path=Departments}" />
+
+                    <CheckBox Grid.Column="6" Click="SelectAllButton_Click"/>
+                </Grid>
+
+
+
 
                 <ListView x:Name="ListView" ItemsSource="{Binding Item.Operations, UpdateSourceTrigger=PropertyChanged}" MouseDoubleClick="ListView_MouseDoubleClick">
                     <ListView.View>
                         <GridView x:Name="GridListView">
-                            <GridViewColumn DisplayMemberBinding="{Binding SortOrder}">
-                                <GridViewColumn.Header>
-                                    <StackPanel>
-                                        <TextBlock Text="" Margin="0,0,0,20"></TextBlock>
-                                        <TextBlock Text="SortOrder"></TextBlock>
-                                    </StackPanel>
-                                </GridViewColumn.Header>
-                            </GridViewColumn>
 
-                            <GridViewColumn DisplayMemberBinding="{Binding Department.Name}">
-                                <GridViewColumn.Header>
-                                    <StackPanel>
-                                        <TextBlock Text="" Margin="0,0,0,20"></TextBlock>
-                                        <TextBlock Text="Department"></TextBlock>
-                                    </StackPanel>
-                                </GridViewColumn.Header>
-                            </GridViewColumn>
+                            <GridViewColumn Header="SortOrder" DisplayMemberBinding="{Binding SortOrder}" x:Name="SortOrder"/>
+                            <GridViewColumn Header="Department" DisplayMemberBinding="{Binding Department.Name}" x:Name="Department"/>
+                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" x:Name="Name"/>
+                            <GridViewColumn Header="StartDate" DisplayMemberBinding="{Binding StartDate,StringFormat={}{0:yyyy-MM-dd}}" x:Name="StartDate"/>
+                            <GridViewColumn Header="EndDate" DisplayMemberBinding="{Binding EndDate,StringFormat={}{0:yyyy-MM-dd}}" x:Name="EndDate"/>
+                            <GridViewColumn Header="OperationTime" DisplayMemberBinding="{Binding OperationTime}" x:Name="OperationTime"/>
 
-                            <GridViewColumn DisplayMemberBinding="{Binding Name}">
-                                <GridViewColumn.Header>
-                                    <StackPanel>
-                                        <TextBlock Text="" Margin="0,0,0,20"></TextBlock>
-                                        <TextBlock Text="Name"></TextBlock>
-                                    </StackPanel>
-                                </GridViewColumn.Header>
-                            </GridViewColumn>
-
-                            <GridViewColumn DisplayMemberBinding="{Binding StartDate,StringFormat={}{0:yyyy-MM-dd}}" >
-                                <GridViewColumn.Header>
-                                    <StackPanel>
-                                        <xctk:DateTimePicker MinWidth="120" x:Name="SetStartDate" Format="Custom" FormatString="yyyy-MM-dd" Margin="0,0,0,20"/>
-                                        <TextBlock Text="StartDate"></TextBlock>
-                                    </StackPanel>
-                                </GridViewColumn.Header>
-                            </GridViewColumn>
-
-                            <GridViewColumn DisplayMemberBinding="{Binding EndDate,StringFormat={}{0:yyyy-MM-dd}}">
-                                <GridViewColumn.Header>
-                                    <StackPanel>
-                                        <xctk:DateTimePicker MinWidth="120" x:Name="SetEndDate" Format="Custom" FormatString="yyyy-MM-dd" Margin="0,0,0,20"/>
-                                        <TextBlock Text="EndDate"></TextBlock>
-                                    </StackPanel>
-                                </GridViewColumn.Header>
-                            </GridViewColumn>
-
-                            <GridViewColumn  DisplayMemberBinding="{Binding OperationTime}" >
-                                <GridViewColumn.Header>
-                                    <StackPanel>
-                                        <TextBlock Text="" Margin="0,0,0,20"></TextBlock>
-                                        <TextBlock Text="OperationTime"></TextBlock>
-                                    </StackPanel>
-                                </GridViewColumn.Header>
-                            </GridViewColumn>
-
-                            <GridViewColumn  >
-                                <GridViewColumn.Header>
-                                    <StackPanel>
-                                        <CheckBox x:Name="SetCompleted" Margin="0,0,0,20"/>
-                                        <TextBlock Text="IsCompleted"></TextBlock>
-                                    </StackPanel>
-                                </GridViewColumn.Header>
-
+                            <GridViewColumn Header="IsCompleted" x:Name="IsCompleted">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <CheckBox Command="{Binding ClickCommand}" IsChecked="{Binding IsCompleted, UpdateSourceTrigger=PropertyChanged}" />

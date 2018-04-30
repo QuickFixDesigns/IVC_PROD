@@ -51,7 +51,7 @@
                 <ComboBox ItemsSource="{Binding Path=ProjectTypes}" DisplayMemberPath="Name" SelectedItem="{Binding Project.ProjectType, UpdateSourceTrigger=LostFocus}" />
 
                 <Label Content="Name"/>
-                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding Project.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" />
+                <TextBox  Text="{Binding Project.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Separator Height="20" Visibility="Hidden"/>
 

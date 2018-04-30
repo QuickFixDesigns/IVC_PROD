@@ -30,12 +30,11 @@ namespace NeoTracker.Pages
         {
             InitializeComponent();
         }
-        private async void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (ListView.SelectedIndex != -1)
             {
                 App.vm.Item = ((ItemViewModel)ListView.SelectedItem);
-                await App.vm.Item.LoadOperations();
                 App.nav.NavigateTo("/Pages/ItemEdit.xaml", this);
             }
         }

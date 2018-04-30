@@ -11,7 +11,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="1"/>
-            <ColumnDefinition Width="auto" MinWidth="420" MaxWidth="420"/>
+            <ColumnDefinition Width="420"/>
             <ColumnDefinition Width="1"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
@@ -27,7 +27,7 @@
         <GridSplitter Grid.Column="1" />
 
         <ScrollViewer Grid.Column="2">
-            <StackPanel Name="panel" Margin="10,0,10,0" MaxWidth="400">
+            <StackPanel Name="panel" Margin="10,0,10,0">
 
                 <StackPanel.BindingGroup>
                     <BindingGroup Name="bindingGroup"/>
@@ -49,17 +49,17 @@
 
                 <Label Content="Department" />
                 <TextBox  IsReadOnly="True" IsEnabled="False"  Text="{Binding Operation.Department.Name}"  />
-                
+
                 <Label Content="SortOrder" />
                 <xctk:LongUpDown Text="{Binding Operation.SortOrder, UpdateSourceTrigger=PropertyChanged}"  />
 
                 <Separator Height="20" Background="Transparent"/>
-                
+
                 <Label Content="Name" />
                 <TextBox Text="{Binding Operation.Name, UpdateSourceTrigger=PropertyChanged}"  />
 
                 <Separator Height="20" Background="Transparent"/>
-                
+
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition />
@@ -97,7 +97,7 @@
                 </Grid>
 
                 <Separator Height="10" Background="Transparent"/>
-                
+
                 <Label Content="IsActive"/>
                 <CheckBox IsChecked="{Binding Operation.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
@@ -132,47 +132,13 @@
             </StackPanel>
         </ScrollViewer>
 
-        <GridSplitter Grid.Column="3" />
-        <ScrollViewer Grid.Column="4 " Margin="{StaticResource SplitRight}">
-            <StackPanel>
-                <ListView x:Name="ListView" ItemsSource="{Binding Operation.History}">
-                    <ListView.View>
-                        <GridView x:Name="GridListView">
+        <GridSplitter Grid.Column="3"/>
 
-                            <GridViewColumn DisplayMemberBinding="{Binding PropertyName}">
-                                <GridViewColumn.Header>
-                                    <GridViewColumnHeader Tag="Alias">PropertyName</GridViewColumnHeader>
-                                </GridViewColumn.Header>
-                            </GridViewColumn>
-
-                            <GridViewColumn DisplayMemberBinding="{Binding OldValue}">
-                                <GridViewColumn.Header>
-                                    <GridViewColumnHeader Tag="OldValue">OldValue</GridViewColumnHeader>
-                                </GridViewColumn.Header>
-                            </GridViewColumn>
-
-                            <GridViewColumn DisplayMemberBinding="{Binding NewValue}">
-                                <GridViewColumn.Header>
-                                    <GridViewColumnHeader Tag="NewValue">NewValue</GridViewColumnHeader>
-                                </GridViewColumn.Header>
-                            </GridViewColumn>
-
-                            <GridViewColumn DisplayMemberBinding="{Binding UpdatedAt,StringFormat={}{0:yyyy-MM-dd}}">
-                                <GridViewColumn.Header>
-                                    <GridViewColumnHeader Tag="UpdatedAt">UpdatedAt</GridViewColumnHeader>
-                                </GridViewColumn.Header>
-                            </GridViewColumn>
-
-                            <GridViewColumn DisplayMemberBinding="{Binding UpdatedBy}">
-                                <GridViewColumn.Header>
-                                    <GridViewColumnHeader Tag="UpdatedBy">UpdatedBy</GridViewColumnHeader>
-                                </GridViewColumn.Header>
-                            </GridViewColumn>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </StackPanel>
-        </ScrollViewer>
+        <mui:ModernTab x:Name="tab" Grid.Column="4" SelectedSource="Pages/ChangeLog.xaml">
+            <mui:ModernTab.Links>
+                <mui:Link DisplayName="ChangeLog" Source="Pages/ChangeLog.xaml"/>
+            </mui:ModernTab.Links>
+        </mui:ModernTab>
         
     </Grid>
 </UserControl>

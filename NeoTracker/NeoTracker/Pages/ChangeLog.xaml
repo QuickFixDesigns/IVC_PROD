@@ -26,11 +26,11 @@
                                 </GridViewColumn.Header>
                             </GridViewColumn>
 
-                            <GridViewColumn DisplayMemberBinding="{Binding NewValue}">
+                            <!--<GridViewColumn DisplayMemberBinding="{Binding NewValue}">
                                 <GridViewColumn.Header>
                                     <GridViewColumnHeader Tag="NewValue">New</GridViewColumnHeader>
                                 </GridViewColumn.Header>
-                            </GridViewColumn>
+                            </GridViewColumn>-->
 
                             <GridViewColumn DisplayMemberBinding="{Binding UpdatedAt,StringFormat={}{0:yyyy-MM-dd}}">
                                 <GridViewColumn.Header>

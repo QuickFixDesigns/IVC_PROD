@@ -62,16 +62,20 @@ namespace NeoTracker.Pages
         }
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
         public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
             //throw new NotImplementedException();
         }
-        public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        public async void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
             App.nav.SetLastUri("/Pages/ProjectEdit.xaml");
             App.vm.Project.BeginEdit();
+
+            await App.vm.Project.LoadEvents();
+            await App.vm.Project.LoadItems();
+            await App.vm.LoadChangeLog("Project", App.vm.Project.ProjectID);
         }
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {

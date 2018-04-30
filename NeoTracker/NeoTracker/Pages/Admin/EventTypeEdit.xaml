@@ -47,7 +47,7 @@
                 <Separator Height="10" Background="Transparent"/>
 
                 <Label Content="Name"/>
-                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding EventType.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <TextBox Text="{Binding EventType.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Label Content="SortOrder"/>
                 <xctk:IntegerUpDown Value="{Binding EventType.SortOrder, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>                

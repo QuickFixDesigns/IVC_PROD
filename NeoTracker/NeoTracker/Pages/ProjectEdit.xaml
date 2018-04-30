@@ -57,7 +57,7 @@
                 <ComboBox ItemsSource="{Binding Path=ProjectTypes}" DisplayMemberPath="Name" SelectedItem="{Binding Project.ProjectType, UpdateSourceTrigger=LostFocus}" />
 
                 <Label Content="Name"/>
-                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding Project.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+                <TextBox Text="{Binding Project.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
 
                 <Separator Height="20" Background="Transparent"/>
 
@@ -73,7 +73,7 @@
                 <Separator Height="20" Background="Transparent"/>
 
                 <Label Content="Comment"/>
-                <TextBox  Style="{StaticResource textBoxInError}" Text="{Binding Project.Comment, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"  MinHeight="50"/>
+                <TextBox Text="{Binding Project.Comment, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
 
                 <Separator Height="10" Background="Transparent"/>
                 

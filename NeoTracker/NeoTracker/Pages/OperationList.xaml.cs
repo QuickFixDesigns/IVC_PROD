@@ -3,6 +3,7 @@ using FirstFloor.ModernUI.Windows.Controls;
 using FirstFloor.ModernUI.Windows.Navigation;
 using NeoTracker.Content;
 using NeoTracker.Models;
+using NeoTracker.Pages.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,8 +33,8 @@ namespace NeoTracker.Pages
         public OperationList()
         {
             InitializeComponent();
-            btn.SetButton(ApplyButton, true, "Apply", null, null);
-            btn.SetButton(SelectAllButton, true, "SelectAll", null, null);
+
+            btn.SetButton(MassChangeOperationsDialog, true, "MassChange", "Mass changes", "Open dialog to set changes to all selected operations");
         }
         private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -62,24 +63,6 @@ namespace NeoTracker.Pages
         {
             //throw new NotImplementedException();
         }
-
-        private async void ApplyButton_Click(object sender, RoutedEventArgs e)
-        {
-            var ops = new List<Operation>();
-
-            foreach(var o in ListView.SelectedItems)
-            {
-                var vm = o as OperationViewModel;
-                ops.Add(vm.GetModel());
-            }
-            await App.vm.Item.MassUpdateOperations(ops, SetStartDate.Value, SetEndDate.Value, SetCompleted.IsChecked);
-            ListView.Items.Refresh();
-
-            SetStartDate.Value = null;
-            SetEndDate.Value = null;
-            SetCompleted.IsChecked = false;
-        }
-
         private void SelectAllButton_Click(object sender, RoutedEventArgs e)
         {
             if (SelectAll)
@@ -91,6 +74,25 @@ namespace NeoTracker.Pages
             {
                 ListView.UnselectAll();
                 SelectAll = true;
+            }
+        }
+
+        private async void MassChangeOperationsDialog_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new MassChangeOperations();
+            dialog.ShowDialog();
+            if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
+            {
+                var ops = new List<Operation>();
+
+                foreach (var o in ListView.SelectedItems)
+                {
+                    var vm = o as OperationViewModel;
+                    ops.Add(vm.GetModel());
+                }
+                await App.vm.Item.MassUpdateOperations(ops, dialog.SetStartDate.Value, dialog.SetEndDate.Value, dialog.SetCompleted.IsChecked);
+                ListView.Items.Refresh();
+
             }
         }
     }

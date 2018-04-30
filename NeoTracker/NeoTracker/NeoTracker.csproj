@@ -161,6 +161,9 @@
     <Compile Include="Pages\Admin\ProjectTypeList.xaml.cs">
       <DependentUpon>ProjectTypeList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Dialogs\MassChangeOperations.xaml.cs">
+      <DependentUpon>MassChangeOperations.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\OperationEdit.xaml.cs">
       <DependentUpon>OperationEdit.xaml</DependentUpon>
     </Compile>
@@ -263,6 +266,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\Admin\ProjectTypeList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Dialogs\MassChangeOperations.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

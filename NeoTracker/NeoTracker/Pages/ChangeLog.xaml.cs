@@ -41,12 +41,11 @@ namespace NeoTracker.Pages
         public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
             //throw new NotImplementedException();
-            App.vm.ChangeLog.Clear();
         }
 
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
-            //throw new NotImplementedException();
+            util.AutoFitListView(GridListView);
         }
 
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)

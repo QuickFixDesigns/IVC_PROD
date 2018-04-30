@@ -73,10 +73,12 @@ namespace NeoTracker.Pages
             //throw new NotImplementedException();
         }
 
-        public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        public async void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
             App.nav.SetLastUri("/Pages/EventEdit.xaml");
             App.vm.Event.BeginEdit();
+
+            await App.vm.LoadChangeLog("Event", App.vm.Event.EventID);
         }
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {

@@ -10,19 +10,11 @@
         <ScrollViewer Grid.Column="4">
             <StackPanel Margin="10,0,10,0">
 
-                <ListView x:Name="ListView" ItemsSource="{Binding Project.Events, UpdateSourceTrigger=PropertyChanged}" MouseDoubleClick="ListView_MouseDoubleClick">
+                <ListView x:Name="ListView" ItemsSource="{Binding Project.Events, UpdateSourceTrigger=PropertyChanged}" MouseDoubleClick="ListView_MouseDoubleClick" >
                     <ListView.View>
                         <GridView x:Name="GridListView">
                             <GridViewColumn Header="EventType" DisplayMemberBinding="{Binding EventType.Name}" />
-
-                            <GridViewColumn Header="Description" >
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock  Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" MaxWidth="400" />
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-
+                            <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" />
                             <GridViewColumn Header="Department" DisplayMemberBinding="{Binding Department.Name}" />
                             <GridViewColumn Header="Item" DisplayMemberBinding="{Binding EventItem.Name}"  />
                             <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status.Name}" />

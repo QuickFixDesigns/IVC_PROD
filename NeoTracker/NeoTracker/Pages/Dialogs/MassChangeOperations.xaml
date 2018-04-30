@@ -1,0 +1,28 @@
+﻿<mui:ModernDialog x:Class="NeoTracker.Pages.Dialogs.MassChangeOperations"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                  xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+                  xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"                   
+                  mc:Ignorable="d" >
+
+    <!-- Note: ModernDialog buttons are defined in the constructor of the code behind class -->
+
+    <StackPanel Margin="10,10,10,10">
+
+        <Label Content="StartDate"/>
+        <xctk:DateTimePicker  x:Name="SetStartDate" Format="Custom" FormatString="yyyy-MM-dd" />
+
+        <Separator Height="10" Background="Transparent"/>
+        
+        <Label Content="EndDate"/>
+        <xctk:DateTimePicker  x:Name="SetEndDate" Format="Custom" FormatString="yyyy-MM-dd" />
+
+        <Separator Height="10" Background="Transparent"/>
+        
+        <Label Content="Completed"/>
+        <CheckBox x:Name="SetCompleted" />
+    </StackPanel>
+
+</mui:ModernDialog>
