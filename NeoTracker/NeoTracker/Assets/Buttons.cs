@@ -48,7 +48,8 @@ namespace NeoTracker.Content
                     break;
                 case "SelectAll":
                     btn.IconData = Geometry.Parse("F1 M 32.2209,33.4875L 39.1875,40.0582L 52.9627,24.5415L 56.2877,27.4707L 39.5834,47.5L 28.8959,36.8125L 32.2209,33.4875 Z M 22,25L 50,25L 45.5,30L 27,30L 27,49L 46,49L 46,42.5L 51,36.5L 51,54L 22,54L 22,25 Z  ");
-                    btn.ToolTip = "Select/unselect all";
+                    btn.Content = string.IsNullOrEmpty(content) ? string.Empty : content;
+                    btn.ToolTip = string.IsNullOrEmpty(content) ? string.Empty : tooltip;
                     break;
 
                 case "Reset":
@@ -62,7 +63,6 @@ namespace NeoTracker.Content
                     btn.IconData = Geometry.Parse("F1 M 53.2929,21.2929L 54.7071,22.7071C 56.4645,24.4645 56.4645,27.3137 54.7071,29.0711L 52.2323,31.5459L 44.4541,23.7677L 46.9289,21.2929C 48.6863,19.5355 51.5355,19.5355 53.2929,21.2929 Z M 31.7262,52.052L 23.948,44.2738L 43.0399,25.182L 50.818,32.9601L 31.7262,52.052 Z M 23.2409,47.1023L 28.8977,52.7591L 21.0463,54.9537L 23.2409,47.1023 Z  ");
                     btn.Content = string.IsNullOrEmpty(content) ? string.Empty : content;
                     btn.ToolTip = string.IsNullOrEmpty(content) ? string.Empty : tooltip;
-                    btn.Margin = new Thickness() { Top = 5, Bottom = 0 };
                     break;
 
 

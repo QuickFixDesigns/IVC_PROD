@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NeoTracker.ViewModels
 {
-    public class SelectItem : ViewModelBase
+    public class DropdownItem : ViewModelBase
     {
         private int _Value;
         public int Value

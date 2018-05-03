@@ -6,50 +6,50 @@
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"   
              mc:Ignorable="d" 
+             Loaded="UserControl_Loaded"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Style="{StaticResource ContentRoot}">
 
         <ScrollViewer>
-            <StackPanel Margin="10,0,10,0">
+            <StackPanel >
 
-                <mui:ModernButton x:Name="MassChangeOperationsDialog" Click="MassChangeOperationsDialog_Click" HorizontalAlignment="Left"/>
-                
                 <Grid Width="{Binding ActualWidth, ElementName=ListView}" Margin="0,0,0,20">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="{Binding ActualWidth, ElementName=SortOrder}"/>
-                        <ColumnDefinition Width="{Binding ActualWidth, ElementName=Department}"/>
-                        <ColumnDefinition Width="{Binding ActualWidth, ElementName=Name}"/>
-                        <ColumnDefinition Width="{Binding ActualWidth, ElementName=StartDate}"/>
-                        <ColumnDefinition Width="{Binding ActualWidth, ElementName=EndDate}"/>
-                        <ColumnDefinition Width="{Binding ActualWidth, ElementName=OperationTime}"/>
-                        <ColumnDefinition Width="{Binding ActualWidth, ElementName=IsCompleted}"/>
+                        <ColumnDefinition Width="Auto" MinWidth="140"/>
+                        <ColumnDefinition Width="*" MinWidth="50"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <xctk:CheckComboBox  x:Name="_combo"
-                                         Width="{Binding ActualWidth, ElementName=Department}"
-                                         Grid.Column="1"
-                                         DisplayMemberPath="Name"
-                                         ValueMemberPath="DepartmentID"
-                                         ItemsSource="{Binding Path=Departments}" />
 
-                    <CheckBox Grid.Column="6" Click="SelectAllButton_Click"/>
+                    <StackPanel Grid.Column="0" >
+                        <mui:ModernButton x:Name="ClearFilter" Click="ClearFilter_Click"/>
+                        <ComboBox Name="cbDeparmtneFilter"  TextSearch.TextPath="Name" SelectionChanged="cbDeparmtneFilter_SelectionChanged" ItemsSource="{Binding SelectItemList}"  AllowDrop="False" IsEditable="True" IsManipulationEnabled="False" IsReadOnly="True" >
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <CheckBox Margin="5,5,5,5" IsChecked="{Binding IsSelected}" Content="{Binding Text}" HorizontalContentAlignment="Stretch" Click="CheckBox_Click"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <mui:ModernButton x:Name="SelectAllButton" Click="SelectAllButton_Click" Grid.Column="2" />
+
+                    <mui:ModernButton x:Name="MassChangeOperationsDialog" Click="MassChangeOperationsDialog_Click" HorizontalAlignment="Right" Grid.Column="3" />
                 </Grid>
 
-
-
-
-                <ListView x:Name="ListView" ItemsSource="{Binding Item.Operations, UpdateSourceTrigger=PropertyChanged}" MouseDoubleClick="ListView_MouseDoubleClick">
+                <ListView x:Name="ListView" ItemsSource="{Binding}" MouseDoubleClick="ListView_MouseDoubleClick">
                     <ListView.View>
                         <GridView x:Name="GridListView">
 
-                            <GridViewColumn Header="SortOrder" DisplayMemberBinding="{Binding SortOrder}" x:Name="SortOrder"/>
+                            <!--<GridViewColumn Header="No" DisplayMemberBinding="{Binding SortOrder}" x:Name="SortOrder" Width="30"/>-->
                             <GridViewColumn Header="Department" DisplayMemberBinding="{Binding Department.Name}" x:Name="Department"/>
                             <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" x:Name="Name"/>
-                            <GridViewColumn Header="StartDate" DisplayMemberBinding="{Binding StartDate,StringFormat={}{0:yyyy-MM-dd}}" x:Name="StartDate"/>
-                            <GridViewColumn Header="EndDate" DisplayMemberBinding="{Binding EndDate,StringFormat={}{0:yyyy-MM-dd}}" x:Name="EndDate"/>
-                            <GridViewColumn Header="OperationTime" DisplayMemberBinding="{Binding OperationTime}" x:Name="OperationTime"/>
+                            <GridViewColumn Header="Start" DisplayMemberBinding="{Binding StartDate,StringFormat={}{0:yyyy-MM-dd}}" x:Name="StartDate"/>
+                            <GridViewColumn Header="End" DisplayMemberBinding="{Binding EndDate,StringFormat={}{0:yyyy-MM-dd}}" x:Name="EndDate"/>
+                            <GridViewColumn Header="Time" DisplayMemberBinding="{Binding OperationTime}" x:Name="OperationTime"/>
 
-                            <GridViewColumn Header="IsCompleted" x:Name="IsCompleted">
+                            <GridViewColumn Header="Done" x:Name="IsCompleted">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <CheckBox Command="{Binding ClickCommand}" IsChecked="{Binding IsCompleted, UpdateSourceTrigger=PropertyChanged}" />

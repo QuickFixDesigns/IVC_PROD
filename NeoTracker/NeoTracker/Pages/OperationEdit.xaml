@@ -47,16 +47,16 @@
                 <TextBlock Text="Operation" Style="{StaticResource Heading2}" />
                 <Separator Height="10" Background="Transparent"/>
 
+                <Label Content="No" />
+                <xctk:LongUpDown Text="{Binding Operation.SortOrder, UpdateSourceTrigger=PropertyChanged}"  />
+                
                 <Label Content="Department" />
                 <TextBox  IsReadOnly="True" IsEnabled="False"  Text="{Binding Operation.Department.Name}"  />
-
-                <Label Content="SortOrder" />
-                <xctk:LongUpDown Text="{Binding Operation.SortOrder, UpdateSourceTrigger=PropertyChanged}"  />
 
                 <Separator Height="20" Background="Transparent"/>
 
                 <Label Content="Name" />
-                <TextBox Text="{Binding Operation.Name, UpdateSourceTrigger=PropertyChanged}"  />
+                <TextBox Style="{StaticResource textBoxInError}" Text="{Binding Operation.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"  />
 
                 <Separator Height="20" Background="Transparent"/>
 
@@ -71,10 +71,10 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
 
-                    <Label Content="StartDate" Grid.Row="0" Grid.Column="0"/>
+                    <Label Content="Start" Grid.Row="0" Grid.Column="0"/>
                     <TextBox  Grid.Row="1" Grid.Column="0"  Text="{Binding Operation.StartDate,StringFormat={}{0:yyyy-MM-dd}}"  />
 
-                    <Label Content="EndDate" Grid.Row="0" Grid.Column="2"/>
+                    <Label Content="End" Grid.Row="0" Grid.Column="2"/>
                     <xctk:DateTimePicker Grid.Row="1" Grid.Column="2" Value="{Binding Operation.EndDate, UpdateSourceTrigger=PropertyChanged}" Format="ShortDate"/>
                 </Grid>
 
@@ -89,10 +89,10 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
 
-                    <Label Content="OperationTime" Grid.Row="0" Grid.Column="0"/>
+                    <Label Content="Time" Grid.Row="0" Grid.Column="0"/>
                     <xctk:DecimalUpDown  Grid.Row="1" Grid.Column="0"   DefaultValue ="0" Value="{Binding Operation.OperationTime, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"  />
 
-                    <Label Content="EndDate" Grid.Row="0" Grid.Column="2"/>
+                    <Label Content="Done" Grid.Row="0" Grid.Column="2"/>
                     <CheckBox Grid.Row="1" Grid.Column="2" IsChecked="{Binding Operation.IsCompleted, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
                 </Grid>
 

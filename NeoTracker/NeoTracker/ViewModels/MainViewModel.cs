@@ -272,8 +272,8 @@ namespace NeoTracker.ViewModels
         }
 
         //for dropdowns and selection dialog
-        private List<SelectItem> _SelectItemList;
-        public List<SelectItem> SelectItemList
+        private List<DropdownItem> _SelectItemList;
+        public List<DropdownItem> SelectItemList
         {
             get { return _SelectItemList; }
             set { SetProperty(ref _SelectItemList, value); }

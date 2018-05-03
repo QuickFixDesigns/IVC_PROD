@@ -119,6 +119,18 @@ namespace NeoTracker.Models
                         UpdatedAt = x.UpdatedAt,
                         UpdatedBy = x.UpdatedBy
                     }).ToListAsync();
+
+                    App.vm.SelectItemList = Operations.Select(x => x.Department).Distinct().Select(x => new DropdownItem()
+                    {
+                        Value = x.DepartmentID,
+                        IsSelected = false,
+                        Text = x.Name
+                    }).ToList();
+
+                    //App.vm.SelectItemList.Insert(0,new DropdownItem()
+                    //{
+                    //    Text = "Filter"
+                    //});
                 }
             }
         }
@@ -186,7 +198,6 @@ namespace NeoTracker.Models
                         {
                             o.EndDate = EndDate.Value;
                         }
-
                         if (Completed.HasValue && Completed.Value)
                         {
                             o.IsCompleted = true;
@@ -198,7 +209,6 @@ namespace NeoTracker.Models
                         context.Entry(o).State = EntityState.Modified;
                     }
                     await context.SaveChangesAsync();
-                    await LoadOperations();
                 }
             }
         }

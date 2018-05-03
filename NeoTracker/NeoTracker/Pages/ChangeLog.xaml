@@ -22,7 +22,7 @@
 
                             <GridViewColumn DisplayMemberBinding="{Binding OldValue}">
                                 <GridViewColumn.Header>
-                                    <GridViewColumnHeader Tag="OldValue">Old</GridViewColumnHeader>
+                                    <GridViewColumnHeader Tag="OldValue">Value</GridViewColumnHeader>
                                 </GridViewColumn.Header>
                             </GridViewColumn>
 

@@ -135,14 +135,15 @@ namespace NeoTracker.Models
                 {
                     using (var context = new NeoTrackerContext())
                     {
-                        if (CanDelete)
-                        {
-                            var data = GetModel();
-                            context.Entry(data).State = EntityState.Deleted;
-                            App.vm.Item.Operations.Remove(this);
-                            await context.SaveChangesAsync();
-                            EndEdit();
-                        }
+                        var data = GetModel();
+                        context.Entry(data).State = EntityState.Deleted;
+                        App.vm.Item.Operations.Remove(this);
+
+                        var changeLogs = App.vm.ChangeLog.Where(x => x.EntityName == "Operation" && x.PrimaryKeyValue == data.OperationID).ToList();
+                        changeLogs.ForEach(x => context.Entry(x).State = EntityState.Deleted);
+
+                        await context.SaveChangesAsync();
+                        EndEdit();
                     }
                 }
             }

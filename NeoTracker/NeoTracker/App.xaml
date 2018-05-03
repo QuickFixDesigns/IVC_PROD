@@ -6,7 +6,7 @@
     <Application.Resources>
 
         <ResourceDictionary>
-
+     
             <Style TargetType="ListViewItem">
                 <Setter Property="BorderBrush" Value="LightGray" />
                 <Setter Property="BorderThickness" Value="0,0,0,.5"/>

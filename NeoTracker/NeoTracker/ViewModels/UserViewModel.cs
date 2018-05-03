@@ -171,7 +171,7 @@ namespace NeoTracker.Models
             {
                 using (var context = new NeoTrackerContext())
                 {
-                    var list = context.Departments.Where(x => !context.DepartmentUsers.Any(y => y.UserID == UserID && y.DepartmentID == x.DepartmentID)).ToList().Select(x => new SelectItem()
+                    var list = context.Departments.Where(x => !context.DepartmentUsers.Any(y => y.UserID == UserID && y.DepartmentID == x.DepartmentID)).ToList().Select(x => new DropdownItem()
                     {
                         Value = x.DepartmentID,
                         Text = x.Name

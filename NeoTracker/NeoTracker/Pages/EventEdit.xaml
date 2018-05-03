@@ -44,13 +44,11 @@
                     </Style>
                 </StackPanel.Resources>
 
-
-
                 <TextBlock Text="Event" Style="{StaticResource Heading2}" />
                 <Separator Height="10" Background="Transparent"/>
 
                 <Label Content="Description"/>
-                <TextBox Text="{Binding Event.Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+                <TextBox Style="{StaticResource textBoxInError}" Text="{Binding Event.Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
 
                 <Separator Height="10" Background="Transparent"/>
 

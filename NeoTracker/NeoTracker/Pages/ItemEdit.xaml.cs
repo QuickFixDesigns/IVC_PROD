@@ -71,7 +71,7 @@ namespace NeoTracker.Pages
             App.nav.SetLastUri("/Pages/ItemEdit.xaml");
             App.vm.Item.BeginEdit();
 
-            await App.vm.Item.LoadOperations();
+            //await App.vm.Item.LoadOperations();
             await App.vm.LoadChangeLog("Item", App.vm.Item.ItemID);
         }
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)

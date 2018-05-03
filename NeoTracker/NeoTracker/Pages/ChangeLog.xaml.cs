@@ -26,7 +26,6 @@ namespace NeoTracker.Pages
     public partial class ChangeLog : UserControl, IContent
     {
         private Utilities util = new Utilities();
-        private Buttons btn = new Buttons();
 
         public ChangeLog()
         {

@@ -24,17 +24,27 @@ namespace NeoTracker.Pages
     /// <summary>
     /// Interaction logic for ItemList.xaml
     /// </summary>
-    public partial class OperationList : UserControl, IContent
+    public partial class OperationList : UserControl
     {
         private Utilities util = new Utilities();
         private Buttons btn = new Buttons();
         private bool SelectAll = true;
+        private string EmptyCbText = "No selection";
 
         public OperationList()
         {
             InitializeComponent();
+            btn.SetButton(MassChangeOperationsDialog, true, "MassChange", "Edit operations", "Open dialog to set changes to all selected operations");
+            btn.SetButton(ClearFilter, false, "Reset", "Filter", null);
+            btn.SetButton(SelectAllButton, true, "SelectAll", "All/None", "Select / Unselect all operations");
 
-            btn.SetButton(MassChangeOperationsDialog, true, "MassChange", "Mass changes", "Open dialog to set changes to all selected operations");
+            MassChangeOperationsDialog.Margin = new Thickness() { Left = 10, Right = 10 };
+            SelectAllButton.Margin = new Thickness() { Left = 10, Right = 10 };
+            ClearFilter.Margin = new Thickness() { Bottom=5 };
+        }
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            RefreshListView();
         }
         private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -44,25 +54,41 @@ namespace NeoTracker.Pages
                 App.nav.NavigateTo("/Pages/OperationEdit.xaml", this);
             }
         }
-        public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
+        private void CheckBox_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            CollectionViewSource.GetDefaultView(ListView.ItemsSource).Refresh();
+        }
+        private async void RefreshListView()
+        {
+            if (App.vm.Item != null && App.vm.Item.Operations != null)
+            {
+                await App.vm.Item.LoadOperations();
+                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(App.vm.Item.Operations);
+                if (view != null)
+                {
+                    view.Filter = i => Filter(i);
+                }
+                ListView.ItemsSource = view;
+                util.AutoFitListView(GridListView);
+            }
+        }
+        private bool Filter(object item)
+        {
+            var selection = App.vm.SelectItemList.Where(x => x.IsSelected).Select(x => x.Value);
+            OperationViewModel op = item as OperationViewModel;
+
+            if (!selection.Any())
+            {
+                cbDeparmtneFilter.Text = EmptyCbText;
+                return true;
+            }
+            else
+            {
+                cbDeparmtneFilter.Text = string.Concat(App.vm.SelectItemList.Count(x => x.IsSelected).ToString(), " of ", App.vm.SelectItemList.Count());
+                return selection.Contains(op.Department.DepartmentID) || op.Department == null;
+            }
         }
 
-        public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
-
-        public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
-        {
-            util.AutoFitListView(GridListView);
-        }
-
-        public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
         private void SelectAllButton_Click(object sender, RoutedEventArgs e)
         {
             if (SelectAll)
@@ -76,7 +102,6 @@ namespace NeoTracker.Pages
                 SelectAll = true;
             }
         }
-
         private async void MassChangeOperationsDialog_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new MassChangeOperations();
@@ -91,9 +116,20 @@ namespace NeoTracker.Pages
                     ops.Add(vm.GetModel());
                 }
                 await App.vm.Item.MassUpdateOperations(ops, dialog.SetStartDate.Value, dialog.SetEndDate.Value, dialog.SetCompleted.IsChecked);
-                ListView.Items.Refresh();
-
+                RefreshListView();
             }
+        }
+
+        private void ClearFilter_Click(object sender, RoutedEventArgs e)
+        {
+            App.vm.SelectItemList.ForEach(x => x.IsSelected = false);
+            cbDeparmtneFilter.Text = EmptyCbText;
+            RefreshListView();
+        }
+
+        private void cbDeparmtneFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RefreshListView();
         }
     }
 }
