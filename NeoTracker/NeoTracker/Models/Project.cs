@@ -13,7 +13,7 @@ namespace NeoTracker.Models
         [StringLength(25, ErrorMessage = "Cannot be longer than 25 characters.")]
         public string PurchaseOrder { get; set; }
 
-        [StringLength(255, ErrorMessage = "Cannot be longer than 25 characters.")]
+        [StringLength(255, ErrorMessage = "Cannot be longer than 255 characters.")]
         public string Client { get; set; }
 
         [Required]

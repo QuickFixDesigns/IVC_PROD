@@ -16,8 +16,6 @@ namespace NeoTracker.Models
 {
     public class ProjectViewModel : ViewModelBase, IDataErrorInfo
     {
-        private DataService ds = new DataService();
-
         public int ProjectID { get; set; }
 
         private string _Code;
@@ -116,16 +114,8 @@ namespace NeoTracker.Models
                         EventID = x.EventID,
                         Department = x.DepartmentID.HasValue ? new DepartmentViewModel()
                         {
-                            //CreatedAt = x.Department.CreatedAt,
                             DepartmentID = x.Department.DepartmentID,
-                            //HeadOfDepartment = x.Department.HeadOfDepartment,
-                            //IsActive = x.Department.IsActive,
-                            //IsDefault = x.Department.IsDefault,
-                            //Msg = x.Department.Msg,
                             Name = x.Department.Name,
-                            //SortOrder = x.Department.SortOrder,
-                            //UpdatedAt = x.Department.UpdatedAt,
-                            //UpdatedBy = x.Department.UpdatedBy,
                         } : null,
                         Description = x.Description,
                         ProjectID = x.ProjectID,
@@ -133,48 +123,22 @@ namespace NeoTracker.Models
                         {
                             EventTypeID = x.EventTypeID,
                             Name = x.EventType.Name,
-                            //Notificate = x.EventType.Notificate,
-                            //SortOrder = x.EventType.SortOrder,
-                            //IsActive = x.EventType.IsActive,
-                            //CreatedAt = x.EventType.CreatedAt,
-                            //UpdatedAt = x.EventType.UpdatedAt,
-                            //UpdatedBy = x.EventType.UpdatedBy,
                         },
                         EventItem = x.ItemID.HasValue ? new ItemViewModel()
                         {
-                            //IsActive = x.Item.IsActive,
                             Code = x.Item.Code,
-                            //CreatedAt = x.Item.CreatedAt,
-                            //UpdatedBy = x.Item.UpdatedBy,
-                            //UpdatedAt = x.Item.UpdatedAt,
-                            //SortOrder = x.Item.SortOrder,
-                            //DueDate = x.Item.DueDate,
-                            //LatestStartDate = x.Item.LatestStartDate,
                             Name = x.Item.Name,
-                            //Project = x.Item.Project,
                             ItemID = x.Item.ItemID,
                             Status = new StatusViewModel()
                             {
-                                //CreatedAt = x.Item.Status.CreatedAt,
-                                //IsActive = x.Item.Status.IsActive,
-                                //IsDeleted = x.Item.Status.IsDeleted,
                                 Name = x.Item.Status.Name,
-                                //SortOrder = x.Item.Status.SortOrder,
                                 StatusID = x.Item.Status.StatusID,
-                                //UpdatedAt = x.Item.Status.UpdatedAt,
-                                //UpdatedBy = x.Item.Status.UpdatedBy,
                             },
                         } : null,
                         Status = new StatusViewModel()
                         {
-                            //CreatedAt = x.Item.Status.CreatedAt,
-                            //IsActive = x.Item.Status.IsActive,
-                            //IsDeleted = x.Item.Status.IsDeleted,
                             Name = x.Status.Name,
-                            //SortOrder = x.Item.Status.SortOrder,
                             StatusID = x.Status.StatusID,
-                            //UpdatedAt = x.Item.Status.UpdatedAt,
-                            //UpdatedBy = x.Item.Status.UpdatedBy,
                         },
                         IsActive = x.IsActive,
                         CreatedBy = x.CreatedBy,
@@ -215,14 +179,8 @@ namespace NeoTracker.Models
                         EndDate = x.EndDate,
                         Status = new StatusViewModel()
                         {
-                            //CreatedAt = x.Status.CreatedAt,
-                            //IsActive = x.Status.IsActive,
-                            //IsDeleted = x.Status.IsDeleted,
                             Name = x.Status.Name,
-                            //SortOrder = x.Status.SortOrder,
                             StatusID = x.Status.StatusID,
-                            //UpdatedAt = x.Status.UpdatedAt,
-                            //UpdatedBy = x.Status.UpdatedBy,
                         },
                         ProjectID = x.ProjectID,
                         Name = x.Name,

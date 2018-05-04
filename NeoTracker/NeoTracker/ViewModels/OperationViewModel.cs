@@ -19,8 +19,6 @@ namespace NeoTracker.Models
 {
     public class OperationViewModel : ViewModelBase, IDataErrorInfo
     {
-        private DataService ds = new DataService();
-
         private ICommand _clickCommand;
         public ICommand ClickCommand
         {

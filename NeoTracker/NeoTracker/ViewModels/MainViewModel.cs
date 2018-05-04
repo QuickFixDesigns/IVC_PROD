@@ -16,8 +16,6 @@ namespace NeoTracker.ViewModels
 {
     public class MainViewModel : ViewModelBase, IAsyncInitialization
     {
-        private DataService ds = new DataService();
-
         public MainViewModel()
         {
             Initialization = InitializeAsync();
@@ -43,34 +41,34 @@ namespace NeoTracker.ViewModels
         }
         public async Task<bool> Authentificate()
         {
-            CurrentUser = await ds.GetUser("karrick_mercier@hotmail.com");
+            CurrentUser = await DataService.GetUser("karrick_mercier@hotmail.com");
             return CurrentUser != null;
         }
 
         //Load collections
         public async Task LoadDepartments()
         {
-            Departments = await ds.GetDepartmentList();
+            Departments = await DataService.GetDepartmentList();
         }
         public async Task LoadProjects()
         {
-            Projects = await ds.GetProjectList();
+            Projects = await DataService.GetProjectList();
         }
         public async Task LoadStatus()
         {
-            Statuses = await ds.GetStatusList();
+            Statuses = await DataService.GetStatusList();
         }
         public async Task LoadUsers()
         {
-            Users = await ds.GetUserList();
+            Users = await DataService.GetUserList();
         }
         public async Task LoadEventTypes()
         {
-            EventTypes = await ds.GetEventTypeList();
+            EventTypes = await DataService.GetEventTypeList();
         }
         public async Task LoadProjectTypes()
         {
-            ProjectTypes = await ds.GetProjectTypeList();
+            ProjectTypes = await DataService.GetProjectTypeList();
         }
         public async Task LoadChangeLog(string entityName, int pk)
         {
@@ -88,6 +86,9 @@ namespace NeoTracker.ViewModels
                         case "ItemID":
                             //log.NewValue = !string.IsNullOrEmpty(log.NewValue) ? context.Items.Find(int.Parse(log.NewValue)).Name : string.Empty;
                             log.OldValue = !string.IsNullOrEmpty(log.OldValue) ? context.Items.Find(int.Parse(log.OldValue)).Name : string.Empty;
+                            break;
+                        case "UserID":
+                            log.OldValue = !string.IsNullOrEmpty(log.OldValue) ? context.Users.Find(int.Parse(log.OldValue)).LongName : string.Empty;
                             break;
                         case "DepartmentID":
                             //log.NewValue = !string.IsNullOrEmpty(log.NewValue) ? context.Departments.Find(int.Parse(log.NewValue)).Name : string.Empty;

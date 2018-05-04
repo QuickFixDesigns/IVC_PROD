@@ -35,14 +35,6 @@ namespace NeoTracker.Pages
             InitializeComponent();
             btn.SetButton(CreateButton, true, "Create", "Add project", "Add new project");
             btn.SetButton(ClearProjectTypeFilter, false, "Reset", null, null);
-
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(App.vm.Projects);
-            if (view != null)
-            {
-                view.Filter = i => ProjectFilter(i);
-            }
-
-            ListView.ItemsSource = view;
         }
         private bool ProjectFilter(object item)
         {
@@ -111,6 +103,20 @@ namespace NeoTracker.Pages
         {
             ProjecTypeFilter.SelectedIndex=-1;
             CollectionViewSource.GetDefaultView(ListView.ItemsSource).Refresh();
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (App.vm.Projects != null)
+            {
+                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(App.vm.Projects);
+                if (view != null)
+                {
+                    view.Filter = i => ProjectFilter(i);
+                }
+
+                ListView.ItemsSource = view;
+            }
         }
     }
 }

@@ -23,7 +23,7 @@ namespace NeoTracker.Pages
     /// <summary>
     /// Interaction logic for ItemList.xaml
     /// </summary>
-    public partial class ChangeLog : UserControl, IContent
+    public partial class ChangeLog : UserControl
     {
         private Utilities util = new Utilities();
 
@@ -32,24 +32,9 @@ namespace NeoTracker.Pages
             InitializeComponent();
         }
 
-        public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
-
-        public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
-
-        public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             util.AutoFitListView(GridListView);
-        }
-
-        public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
-        {
-            //throw new NotImplementedException();
         }
     }
 }

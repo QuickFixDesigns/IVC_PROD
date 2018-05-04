@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace NeoTracker.DAL
 {
-    public class DataService
+    public static class DataService
     {
-        public async Task<UserViewModel> GetUser(string Email)
+        public static async Task<UserViewModel> GetUser(string Email)
         {
             using (var context = new NeoTrackerContext())
             {
@@ -44,7 +44,7 @@ namespace NeoTracker.DAL
                 }).FirstOrDefaultAsync();
             }
         }
-        public async Task<List<DepartmentViewModel>> GetDepartmentList()
+        public static async Task<List<DepartmentViewModel>> GetDepartmentList()
         {
             using (var context = new NeoTrackerContext())
             {
@@ -64,32 +64,39 @@ namespace NeoTracker.DAL
             }
         }
 
-        public async Task<List<ProjectViewModel>> GetProjectList()
+        public static async Task<List<ProjectViewModel>> GetProjectList()
         {
+            using (var genius = new IVCLIVEDBEntities())
             using (var context = new NeoTrackerContext())
             {
-                return await context.Projects.Include(x => x.ProjectType).Include(x => x.Items).OrderBy(x => x.Name).Select(x => new ProjectViewModel()
-                {
-                    Code = x.Code,
-                    Comment = x.Comment,
-                    Name = x.Name,
-                    Client = x.Client,
-                    PurchaseOrder = x.PurchaseOrder,
-                    ProjectID = x.ProjectID,
-                    ProjectType = x.ProjectTypeID.HasValue ? new ProjectTypeViewModel()
-                    {
-                        ProjectTypeID = x.ProjectType.ProjectTypeID,
-                        Name = x.ProjectType.Name,
-                    } : null,
-                    IsActive = x.IsActive,
-                    CreatedBy = x.CreatedBy,
-                    CreatedAt = x.CreatedAt,
-                    UpdatedAt = x.UpdatedAt,
-                    UpdatedBy = x.UpdatedBy,
-                }).ToListAsync();
+                var projects = await context.Projects.Include(x => x.ProjectType).Include(x => x.Items).OrderBy(x => x.Name).ToListAsync();
+
+                var data = (from x in projects
+                            join comm in genius.Comms on x.Code equals comm.No_Com
+                        select new ProjectViewModel()
+                        {
+                            Code = x.Code,
+                            Comment = x.Comment,
+                            Name = x.Name,
+                            Client = comm.Fact_A1,
+                            PurchaseOrder = comm.No_Po,
+                            ProjectID = x.ProjectID,
+                            ProjectType = x.ProjectTypeID.HasValue ? new ProjectTypeViewModel()
+                            {
+                                ProjectTypeID = x.ProjectType.ProjectTypeID,
+                                Name = x.ProjectType.Name,
+                            } : null,
+                            IsActive = x.IsActive,
+                            CreatedBy = x.CreatedBy,
+                            CreatedAt = x.CreatedAt,
+                            UpdatedAt = x.UpdatedAt,
+                            UpdatedBy = x.UpdatedBy,
+                        }).ToList();
+
+                return data;
             }
         }
-        public async Task<List<ProjectTypeViewModel>> GetProjectTypeList()
+        public static async Task<List<ProjectTypeViewModel>> GetProjectTypeList()
         {
             using (var context = new NeoTrackerContext())
             {
@@ -106,7 +113,7 @@ namespace NeoTracker.DAL
                 }).ToListAsync();
             }
         }
-        public async Task<List<EventTypeViewModel>> GetEventTypeList()
+        public static async Task<List<EventTypeViewModel>> GetEventTypeList()
         {
             using (var context = new NeoTrackerContext())
             {
@@ -126,7 +133,7 @@ namespace NeoTracker.DAL
                 }).ToListAsync();
             }
         }
-        public async Task<List<StatusViewModel>> GetStatusList()
+        public static async Task<List<StatusViewModel>> GetStatusList()
         {
             using (var context = new NeoTrackerContext())
             {
@@ -144,7 +151,7 @@ namespace NeoTracker.DAL
                 }).ToListAsync();
             }
         }
-        public async Task<List<UserViewModel>> GetUserList()
+        public static async Task<List<UserViewModel>> GetUserList()
         {
             using (var context = new NeoTrackerContext())
             {

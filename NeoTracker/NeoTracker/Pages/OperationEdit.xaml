@@ -79,6 +79,10 @@
                     <xctk:DateTimePicker Grid.Row="1" Grid.Column="2" Value="{Binding Operation.EndDate, UpdateSourceTrigger=PropertyChanged}" Format="ShortDate"/>
                 </Grid>
 
+
+                <Label Content="Time" />
+                <xctk:DecimalUpDown  DefaultValue ="0" Value="{Binding Operation.OperationTime, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"  />
+
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition />
@@ -90,17 +94,16 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
 
-                    <Label Content="Time" Grid.Row="0" Grid.Column="0"/>
-                    <xctk:DecimalUpDown  Grid.Row="1" Grid.Column="0"   DefaultValue ="0" Value="{Binding Operation.OperationTime, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"  />
-
+                    <Label Content="IsActive" Grid.Row="0" Grid.Column="0"/>
+                    <CheckBox Grid.Row="1" Grid.Column="0" IsChecked="{Binding Operation.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                    
                     <Label Content="Done" Grid.Row="0" Grid.Column="2"/>
                     <CheckBox Grid.Row="1" Grid.Column="2" IsChecked="{Binding Operation.IsCompleted, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
                 </Grid>
 
                 <Separator Height="10" Background="Transparent"/>
 
-                <Label Content="IsActive"/>
-                <CheckBox IsChecked="{Binding Operation.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+
 
                 <Separator Height="10" Background="Transparent"/>
                 

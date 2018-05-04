@@ -39,6 +39,10 @@ namespace NeoTracker.Models
             get { return _Name; }
             set { SetProperty(ref _Name, value); }
         }
+        public string LongName
+        {
+            get { return string.Concat(Name, " (", Code, ")"); }
+        }
         private DateTime? _DueDate;
         public DateTime? DueDate
         {

@@ -62,11 +62,19 @@ namespace NeoTracker.Pages
         }
         private async void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            App.nav.SetLastUri("/Pages/OperationEdit.xaml");
-            App.vm.Operation.BeginEdit();
+            if (App.vm.Operation != null)
+            {
+                App.nav.SetLastUri("/Pages/OperationEdit.xaml");
+                App.vm.Operation.BeginEdit();
 
-            await App.vm.LoadChangeLog("Operation", App.vm.Operation.OperationID);
-            UserCb.ItemsSource = data;
+                await App.vm.LoadChangeLog("Operation", App.vm.Operation.OperationID);
+
+                using (var context = new NeoTrackerContext())
+                {
+                    var data = await context.DepartmentUsers.Where(x => x.DepartmentID == App.vm.Operation.Department.DepartmentID).Include(x => x.User).Select(x => x.User).ToListAsync();
+                    UserCb.ItemsSource = data;
+                }
+            }
         }
 
         private void ClearUser_Click(object sender, RoutedEventArgs e)

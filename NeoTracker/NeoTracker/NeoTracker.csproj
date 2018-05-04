@@ -141,6 +141,7 @@
     <Compile Include="Models\DepartmentOperation.cs" />
     <Compile Include="Models\EventType.cs" />
     <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\ReportLink.cs" />
     <Compile Include="Models\Operation.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\ChangeLog.cs" />

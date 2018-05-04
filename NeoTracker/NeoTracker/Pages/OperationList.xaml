@@ -48,7 +48,7 @@
                             <GridViewColumn Header="Start" DisplayMemberBinding="{Binding StartDate,StringFormat={}{0:yyyy-MM-dd}}" x:Name="StartDate"/>
                             <GridViewColumn Header="End" DisplayMemberBinding="{Binding EndDate,StringFormat={}{0:yyyy-MM-dd}}" x:Name="EndDate"/>
                             <GridViewColumn Header="Time" DisplayMemberBinding="{Binding OperationTime}" x:Name="OperationTime"/>
-                            <GridViewColumn Header="User" DisplayMemberBinding="{Binding User.Name}"/>
+                            <GridViewColumn Header="User" DisplayMemberBinding="{Binding User.LongName}"/>
                             
                             <GridViewColumn Header="Done" x:Name="IsCompleted">
                                 <GridViewColumn.CellTemplate>
