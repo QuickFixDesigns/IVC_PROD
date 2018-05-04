@@ -26,7 +26,7 @@ namespace NeoTracker.Pages
     /// <summary>
     /// Interaction logic for DepartmentEdit.xaml
     /// </summary>
-    public partial class OperationEdit : UserControl, IContent
+    public partial class OperationEdit : UserControl
     {
         private Buttons btn = new Buttons();
         private Utilities util = new Utilities();
@@ -37,6 +37,7 @@ namespace NeoTracker.Pages
             btn.SetButton(ApplyButton, true, "Apply", null, null);
             btn.SetButton(DeleteButton, true, "Delete", null, null);
             btn.SetButton(CancelButton, true, "Cancel", null, null);
+            btn.SetButton(ClearUser, false, "Reset", "User", null);
         }
 
         private async void ApplyButton_Click(object sender, RoutedEventArgs e)
@@ -59,25 +60,18 @@ namespace NeoTracker.Pages
             App.vm.Operation = null;
             App.nav.GoBack(this);
         }
-        public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
-
-        public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
-
-        public async void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        private async void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             App.nav.SetLastUri("/Pages/OperationEdit.xaml");
             App.vm.Operation.BeginEdit();
 
             await App.vm.LoadChangeLog("Operation", App.vm.Operation.OperationID);
+            UserCb.ItemsSource = data;
         }
-        public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
+
+        private void ClearUser_Click(object sender, RoutedEventArgs e)
         {
+
         }
     }
 }

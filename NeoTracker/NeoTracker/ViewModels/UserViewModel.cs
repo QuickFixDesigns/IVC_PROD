@@ -59,7 +59,7 @@ namespace NeoTracker.Models
         {
             get
             {
-                return string.Concat(LastName, ", ", FirstName, " (", Alias, ")");
+                return string.Concat(FirstName, " ", LastName, " (", Alias, ")");
             }
         }
         public bool CanAddDepartments

@@ -102,9 +102,10 @@ namespace NeoTracker.Models
             {
                 if (ItemID != 0)
                 {
-                    Operations = await context.Operations.Where(x => x.ItemID == ItemID).Include(x => x.Department).OrderBy(x => x.Department.SortOrder).ThenBy(x => x.SortOrder).ThenBy(x => x.Name).Select(x => new OperationViewModel()
+                    Operations = await context.Operations.Where(x => x.ItemID == ItemID).Include(x => x.Department).Include(x => x.User).OrderBy(x => x.Department.SortOrder).ThenBy(x => x.SortOrder).ThenBy(x => x.Name).Select(x => new OperationViewModel()
                     {
                         Department = x.Department,
+                        User = x.User,
                         EndDate = x.EndDate,
                         ItemID = x.ItemID,
                         OperationID = x.OperationID,
@@ -126,11 +127,6 @@ namespace NeoTracker.Models
                         IsSelected = false,
                         Text = x.Name
                     }).ToList();
-
-                    //App.vm.SelectItemList.Insert(0,new DropdownItem()
-                    //{
-                    //    Text = "Filter"
-                    //});
                 }
             }
         }

@@ -6,7 +6,8 @@
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"               
              xmlns:src="clr-namespace:NeoTracker.ViewModels"
-             mc:Ignorable="d" >
+             mc:Ignorable="d" 
+             Loaded="UserControl_Loaded">
     <Grid Style="{StaticResource ContentRoot}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -101,6 +102,11 @@
                 <Label Content="IsActive"/>
                 <CheckBox IsChecked="{Binding Operation.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
+                <Separator Height="10" Background="Transparent"/>
+                
+                <mui:ModernButton x:Name="ClearUser" Click="ClearUser_Click" />
+                <ComboBox x:Name="UserCb"  DisplayMemberPath="LongName" SelectedItem="{Binding Operation.User, UpdateSourceTrigger=LostFocus}"/>
+                
                 <Separator Height="40" Background="Transparent"/>
 
                 <Grid>

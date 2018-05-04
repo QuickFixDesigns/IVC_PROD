@@ -77,10 +77,10 @@ namespace NeoTracker.DAL
 
                     foreach (var prop in change.OriginalValues.PropertyNames.Where(x => !x.Equals("UpdatedBy") && !x.Equals("UpdatedAt") && !x.Equals("CreatedBy") && !x.Equals("CreatedAt")))
                     {
-                        if (prop == "ItemID")
-                        {
-                            //var x = DatabaseValues.GetValue<object>(prop).GetType();
-                        }
+                        //if (prop == "ItemID")
+                        //{
+                        //    //var x = DatabaseValues.GetValue<object>(prop).GetType();
+                        //}
 
                         string originalValue = string.Empty;
                         string currentValue = string.Empty;

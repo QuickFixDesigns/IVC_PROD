@@ -11,7 +11,7 @@ namespace NeoTracker.Models
 
         public int? SortOrder { get; set; }
 
-        public int? DepartmentID { get; set; }
+        public int DepartmentID { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "Cannot be longer than 100 characters.")]
@@ -30,8 +30,11 @@ namespace NeoTracker.Models
 
         public bool IsCompleted { get; set; }
 
+        public int? UserID { get; set; }
+
         //navigation
         public Item Item { get; set; }
         public Department Department { get; set; }
+        public User User { get; set; }
     }
 }

@@ -29,7 +29,6 @@ namespace NeoTracker.Models
                 return _clickCommand ?? (_clickCommand = new CommandHandler(async () => await Save(), true));
             }
         }
-
         public int OperationID { get; set; }
         public int ItemID { get; set; }
 
@@ -78,13 +77,19 @@ namespace NeoTracker.Models
             get { return _Department; }
             set { SetProperty(ref _Department, value); }
         }
+        private User _User = new User();
+        public User User
+        {
+            get { return _User; }
+            set { SetProperty(ref _User, value); }
+        }
 
         //For database
         public Operation GetModel()
         {
             return new Operation()
             {
-                DepartmentID = Department != null && Department.DepartmentID != 0 ? Department.DepartmentID : (int?)null,
+                DepartmentID = Department.DepartmentID,
                 SortOrder = SortOrder,
                 Name = Name,
                 EndDate = EndDate,
@@ -93,6 +98,7 @@ namespace NeoTracker.Models
                 ItemID = ItemID,
                 OperationID = OperationID,
                 StartDate = StartDate,
+                UserID = User != null && User.UserID != 0 ? User.UserID : (int?)null,
                 IsActive = IsActive,
                 CreatedBy = CreatedBy,
                 CreatedAt = CreatedAt,

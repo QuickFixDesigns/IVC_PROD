@@ -58,7 +58,7 @@
                 <Separator Height="20" Background="Transparent"/>
 
                 <mui:ModernButton x:Name="ClearItem" Click="ClearItem_Click" />
-                <ComboBox ItemsSource="{Binding Path=Project.Items}" DisplayMemberPath="Name" SelectedItem="{Binding Event.EventItem, UpdateSourceTrigger=LostFocus}"/>
+                <ComboBox ItemsSource="{Binding Path=Project.Items}" DisplayMemberPath="LongName" SelectedItem="{Binding Event.EventItem, UpdateSourceTrigger=LostFocus}"/>
 
                 <mui:ModernButton x:Name="ClearDepartment" Click="ClearDepartment_Click"></mui:ModernButton>
                 <ComboBox ItemsSource="{Binding Path=Departments}" DisplayMemberPath="Name" SelectedItem="{Binding Event.Department, UpdateSourceTrigger=LostFocus}" />

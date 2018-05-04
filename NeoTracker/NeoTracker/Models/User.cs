@@ -40,7 +40,7 @@ namespace NeoTracker.Models
         {
             get
             {
-                return string.Concat(LastName, ", ", FirstName, " (", Alias, ")");
+                return string.Concat(FirstName, " ", LastName, " (", Alias, ")");
             }
         }
         public override bool Equals(object obj)
