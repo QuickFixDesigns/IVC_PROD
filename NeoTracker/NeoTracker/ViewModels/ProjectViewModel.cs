@@ -175,6 +175,7 @@ namespace NeoTracker.Models
                     {
                         ItemID = x.ItemID,
                         Code = x.Code,
+                        SortKey =x.SortKey,
                         DueDate = x.DueDate,
                         EndDate = x.EndDate,
                         Status = new StatusViewModel()

@@ -69,31 +69,26 @@ namespace NeoTracker.DAL
             using (var genius = new IVCLIVEDBEntities())
             using (var context = new NeoTrackerContext())
             {
-                var projects = await context.Projects.Include(x => x.ProjectType).Include(x => x.Items).OrderBy(x => x.Name).ToListAsync();
+                return await context.Projects.Include(x => x.ProjectType).Include(x => x.Items).OrderBy(x => x.Name).Select(x => new ProjectViewModel()
+                {
+                    Code = x.Code,
+                    Comment = x.Comment,
+                    Name = x.Name,
+                    Client = x.Client,
+                    PurchaseOrder = x.PurchaseOrder,
+                    ProjectID = x.ProjectID,
+                    ProjectType = x.ProjectTypeID.HasValue ? new ProjectTypeViewModel()
+                    {
+                        ProjectTypeID = x.ProjectType.ProjectTypeID,
+                        Name = x.ProjectType.Name,
+                    } : null,
+                    IsActive = x.IsActive,
+                    CreatedBy = x.CreatedBy,
+                    CreatedAt = x.CreatedAt,
+                    UpdatedAt = x.UpdatedAt,
+                    UpdatedBy = x.UpdatedBy,
+                }).ToListAsync();
 
-                var data = (from x in projects
-                            join comm in genius.Comms on x.Code equals comm.No_Com
-                        select new ProjectViewModel()
-                        {
-                            Code = x.Code,
-                            Comment = x.Comment,
-                            Name = x.Name,
-                            Client = comm.Fact_A1,
-                            PurchaseOrder = comm.No_Po,
-                            ProjectID = x.ProjectID,
-                            ProjectType = x.ProjectTypeID.HasValue ? new ProjectTypeViewModel()
-                            {
-                                ProjectTypeID = x.ProjectType.ProjectTypeID,
-                                Name = x.ProjectType.Name,
-                            } : null,
-                            IsActive = x.IsActive,
-                            CreatedBy = x.CreatedBy,
-                            CreatedAt = x.CreatedAt,
-                            UpdatedAt = x.UpdatedAt,
-                            UpdatedBy = x.UpdatedBy,
-                        }).ToList();
-
-                return data;
             }
         }
         public static async Task<List<ProjectTypeViewModel>> GetProjectTypeList()
