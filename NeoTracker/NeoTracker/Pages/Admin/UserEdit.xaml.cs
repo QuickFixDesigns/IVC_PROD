@@ -25,7 +25,6 @@ namespace NeoTracker.Pages.Admin
     public partial class UserEdit : UserControl, IContent
     {
         private Buttons btn = new Buttons();
-        private Utilities util = new Utilities();
 
         public UserEdit()
         {
@@ -82,7 +81,7 @@ namespace NeoTracker.Pages.Admin
         {
             App.nav.SetLastUri("/Pages/Admin/UserEdit.xaml");
             App.vm.User.BeginEdit();
-            util.AutoFitListView(GridListView);
+            Utilities.AutoFitListView(GridListView);
         }
 
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)

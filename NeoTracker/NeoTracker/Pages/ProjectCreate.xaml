@@ -93,7 +93,7 @@
                                 </GridViewColumn.Header>
                             </GridViewColumn>
 
-                            <GridViewColumn DisplayMemberBinding="{Binding ClientDate }">
+                            <GridViewColumn DisplayMemberBinding="{Binding ClientDate,StringFormat={}{0:yyyy-MM-dd} }">
                                 <GridViewColumn.Header>
                                     <GridViewColumnHeader Tag="ClientDate">ClientDate</GridViewColumnHeader>
                                 </GridViewColumn.Header>

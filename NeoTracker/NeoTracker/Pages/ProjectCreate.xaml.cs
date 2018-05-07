@@ -29,7 +29,6 @@ namespace NeoTracker.Pages
     public partial class ProjectCreate : UserControl
     {
         private Buttons btn = new Buttons();
-        private Utilities util = new Utilities();
 
         public ProjectCreate()
         {
@@ -53,7 +52,7 @@ namespace NeoTracker.Pages
             else
             {
                 var order = item as OrderViewModel;
-                return order.Code.ToUpper().Contains(SearchBox.Text.ToUpper()) || order.Po.ToUpper().Contains(SearchBox.Text.ToUpper()) || order.Client.ToUpper().Contains(SearchBox.Text.ToUpper());
+                return Utilities.Contains(order.Code, SearchBox.Text) || Utilities.Contains(order.Po, SearchBox.Text) || Utilities.Contains(order.Client, SearchBox.Text);
             }
         }
         private async void ApplyButton_Click(object sender, RoutedEventArgs e)

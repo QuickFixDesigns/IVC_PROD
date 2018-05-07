@@ -28,7 +28,6 @@ namespace NeoTracker.Pages
     public partial class ProjectList : UserControl, IContent
     {
         private Buttons btn = new Buttons();
-        private Utilities util = new Utilities();
 
         public ProjectList()
         {
@@ -45,8 +44,7 @@ namespace NeoTracker.Pages
             else
             {
                 var project = item as ProjectViewModel;
-                return ((project.Code ?? "").Contains(SearchBox.Text) || project.Name.Contains(SearchBox.Text) || (project.PurchaseOrder ?? "").Contains(SearchBox.Text) || (project.Client ?? "").Contains(SearchBox.Text)) 
-                    && (ProjecTypeFilter.SelectedIndex == -1 || ProjecTypeFilter.Text == project.ProjectType.Name);
+                return Utilities.Contains(project.Code, SearchBox.Text) || Utilities.Contains(project.Name, SearchBox.Text) || Utilities.Contains(project.PurchaseOrder, SearchBox.Text) || Utilities.Contains(project.Client, SearchBox.Text);
             }
         }
         private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -81,7 +79,7 @@ namespace NeoTracker.Pages
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
             App.nav.SetLastUri("/Pages/ProjectList.xaml");
-            util.AutoFitListView(GridListView);
+            Utilities.AutoFitListView(GridListView);
         }
 
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)

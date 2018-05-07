@@ -28,7 +28,6 @@ namespace NeoTracker.Pages.Admin
     public partial class UserList : UserControl, IContent
     {
         private Buttons btn = new Buttons();
-        private Utilities util = new Utilities();
 
         public UserList()
         {
@@ -67,7 +66,7 @@ namespace NeoTracker.Pages.Admin
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
             App.nav.SetLastUri("/Pages/Admin/UserList.xaml");
-            util.AutoFitListView(GridListView);
+            Utilities.AutoFitListView(GridListView);
         }
 
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)

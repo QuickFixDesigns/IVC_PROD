@@ -29,7 +29,6 @@ namespace NeoTracker.Pages
     public partial class OperationEdit : UserControl
     {
         private Buttons btn = new Buttons();
-        private Utilities util = new Utilities();
 
         public OperationEdit()
         {
@@ -79,7 +78,7 @@ namespace NeoTracker.Pages
 
         private void ClearUser_Click(object sender, RoutedEventArgs e)
         {
-
+            App.vm.Operation.User = null;
         }
     }
 }

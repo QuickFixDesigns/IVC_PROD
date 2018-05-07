@@ -8,9 +8,13 @@ using System.Windows.Controls;
 
 namespace NeoTracker.Content
 {
-    public class Utilities
+    public static class Utilities
     {
-        public bool GetDialogYesNo(string title, string content)
+        public static bool Contains(string toComp, string comp)
+        {
+            return (toComp.ToUpper() ?? "").Contains(comp.ToUpper());
+        }
+        public static bool GetDialogYesNo(string title, string content)
         {
             var dlg = new ModernDialog()
             {
@@ -22,7 +26,7 @@ namespace NeoTracker.Content
 
             return dlg.DialogResult.HasValue && dlg.DialogResult.Value;
         }
-        public void AutoFitListView(GridView gv)
+        public static void AutoFitListView(GridView gv)
         {
             foreach (GridViewColumn c in gv.Columns)
             {
@@ -33,7 +37,7 @@ namespace NeoTracker.Content
                 c.Width = double.NaN;
             }
         }
-        public void AutoFitPanel(Panel p)
+        public static void AutoFitPanel(Panel p)
         {
             if (double.IsNaN(p.Width))
             {

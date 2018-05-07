@@ -15,7 +15,6 @@ namespace NeoTracker.Pages
     public partial class ProjectEdit : UserControl, IContent
     {
         private Buttons btn = new Buttons();
-        private Utilities util = new Utilities();
 
         public ProjectEdit()
         {

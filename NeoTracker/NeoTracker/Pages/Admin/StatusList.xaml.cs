@@ -28,13 +28,12 @@ namespace NeoTracker.Pages.Admin
     public partial class StatusList : UserControl, IContent
     {
         private Buttons btn = new Buttons();
-        private Utilities util = new Utilities();
 
         public StatusList()
         {
             InitializeComponent();
             btn.SetButton(CreateButton, true, "Create", "New status", "Create new status");
-            util.AutoFitListView(GridListView);
+            Utilities.AutoFitListView(GridListView);
         }
         private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -67,7 +66,7 @@ namespace NeoTracker.Pages.Admin
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
             App.nav.SetLastUri("/Pages/Admin/StatusList.xaml");
-            util.AutoFitListView(GridListView);
+            Utilities.AutoFitListView(GridListView);
         }
 
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)

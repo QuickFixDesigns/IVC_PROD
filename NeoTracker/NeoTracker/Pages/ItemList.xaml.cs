@@ -24,8 +24,6 @@ namespace NeoTracker.Pages
     /// </summary>
     public partial class ItemList : UserControl
     {
-        private Utilities util = new Utilities();
-
         public ItemList()
         {
             InitializeComponent();
@@ -41,7 +39,7 @@ namespace NeoTracker.Pages
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            util.AutoFitListView(GridListView);
+            Utilities.AutoFitListView(GridListView);
         }
     }
 }

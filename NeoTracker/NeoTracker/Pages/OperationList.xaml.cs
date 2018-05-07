@@ -26,7 +26,6 @@ namespace NeoTracker.Pages
     /// </summary>
     public partial class OperationList : UserControl
     {
-        private Utilities util = new Utilities();
         private Buttons btn = new Buttons();
         private bool SelectAll = true;
         private string EmptyCbText = "No selection";
@@ -69,7 +68,7 @@ namespace NeoTracker.Pages
                     view.Filter = i => Filter(i);
                 }
                 ListView.ItemsSource = view;
-                util.AutoFitListView(GridListView);
+                Utilities.AutoFitListView(GridListView);
             }
         }
         private bool Filter(object item)

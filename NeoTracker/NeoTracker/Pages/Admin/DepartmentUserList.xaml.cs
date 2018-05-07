@@ -24,8 +24,6 @@ namespace NeoTracker.Pages.Admin
     /// </summary>
     public partial class DepartmentUserList : UserControl, IContent
     {
-        private Utilities util = new Utilities();
-
         public DepartmentUserList()
         {
             InitializeComponent();
@@ -42,7 +40,7 @@ namespace NeoTracker.Pages.Admin
 
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
-            util.AutoFitListView(GridListView);
+            Utilities.AutoFitListView(GridListView);
         }
 
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)

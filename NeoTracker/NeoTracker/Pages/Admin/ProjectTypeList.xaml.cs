@@ -28,13 +28,12 @@ namespace NeoTracker.Pages.Admin
     public partial class ProjectTypeList : UserControl, IContent
     {
         private Buttons btn = new Buttons();
-        private Utilities util = new Utilities();
 
         public ProjectTypeList()
         {
             InitializeComponent();
             btn.SetButton(CreateButton, true, "Create", "New ProjectType", "Create new project Type");
-            util.AutoFitListView(GridListView);
+            Utilities.AutoFitListView(GridListView);
         }
         private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -68,7 +67,7 @@ namespace NeoTracker.Pages.Admin
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
             App.nav.SetLastUri("/Pages/Admin/ProjectTypeList.xaml");
-            util.AutoFitListView(GridListView);
+            Utilities.AutoFitListView(GridListView);
         }
 
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)

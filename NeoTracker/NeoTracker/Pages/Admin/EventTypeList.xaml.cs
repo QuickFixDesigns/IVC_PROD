@@ -28,13 +28,12 @@ namespace NeoTracker.Pages.Admin
     public partial class EventTypeList : UserControl, IContent
     {
         private Buttons btn = new Buttons();
-        private Utilities util = new Utilities();
 
         public EventTypeList()
         {
             InitializeComponent();
             btn.SetButton(CreateButton, true, "Create", "New EventType", "Create new Event Type");
-            util.AutoFitListView(GridListView);
+            Utilities.AutoFitListView(GridListView);
         }
         private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -68,7 +67,7 @@ namespace NeoTracker.Pages.Admin
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
             App.nav.SetLastUri("/Pages/Admin/EventTypeList.xaml");
-            util.AutoFitListView(GridListView);
+            Utilities.AutoFitListView(GridListView);
         }
 
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)

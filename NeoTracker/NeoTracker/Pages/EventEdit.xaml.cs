@@ -29,7 +29,6 @@ namespace NeoTracker.Pages
     public partial class EventEdit : UserControl
     {
         private Buttons btn = new Buttons();
-        private Utilities util = new Utilities();
 
         public EventEdit()
         {
