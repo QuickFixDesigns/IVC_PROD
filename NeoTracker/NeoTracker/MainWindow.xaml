@@ -26,6 +26,7 @@
         </mui:LinkGroup>
         <mui:LinkGroup DisplayName="settings" GroupKey="settings">
             <mui:LinkGroup.Links>
+                <mui:Link DisplayName="Back to project" Source="/Pages/ProjectList.xaml" />
                 <mui:Link DisplayName="software" Source="/Pages/SettingsPage.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
