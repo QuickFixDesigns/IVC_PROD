@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:src="clr-namespace:NeoTracker.ViewModels"
+             Loaded="UserControl_Loaded"
              mc:Ignorable="d" >
     <Grid Style="{StaticResource ContentRoot}">
         
@@ -52,7 +53,7 @@
 
                 <Separator Height="10" Background="Transparent"/>
 
-                <Label Content="EventType"/>
+                <Label Content="Type"/>
                 <ComboBox ItemsSource="{Binding Path=EventTypes}" DisplayMemberPath="Name" SelectedItem="{Binding Event.EventType, UpdateSourceTrigger=LostFocus}" />
 
                 <Separator Height="20" Background="Transparent"/>
@@ -68,8 +69,34 @@
 
                 <Separator Height="10" Background="Transparent"/>
                 
-                <Label Content="IsActive"/>
+                <Label Content="Active"/>
                 <CheckBox IsChecked="{Binding Event.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <Label Content="CreatedAt" Grid.Row="0" />
+                    <TextBox  IsReadOnly="True" IsEnabled="False"  Text="{Binding Event.CreatedAt,StringFormat={}{0:yyyy-MM-dd}}"  Grid.Row="1"/>
+                    <Label Content="CreatedBy" Grid.Row="0" Grid.Column="2"/>
+                    <TextBox  IsReadOnly="True" IsEnabled="False"  Text="{Binding Event.CreatedBy}"  Grid.Row="1" Grid.Column="2"/>
+
+                    <Label Content="UpdatedAt" Grid.Row="2" Grid.Column="0"/>
+                    <TextBox  IsReadOnly="True"  IsEnabled="False"  Text="{Binding Event.UpdatedAt,StringFormat={}{0:yyyy-MM-dd}}"  Grid.Row="3" Grid.Column="0"/>
+                    <Label Content="UpdatedBy" Grid.Row="2" Grid.Column="2"/>
+                    <TextBox  IsReadOnly="True" IsEnabled="False" Text="{Binding Event.UpdatedBy}"  Grid.Row="3" Grid.Column="2"/>
+                </Grid>
+
             </StackPanel>
         </ScrollViewer>
 

@@ -73,7 +73,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Content="Start" Grid.Row="0" Grid.Column="0"/>
-                    <TextBox  Grid.Row="1" Grid.Column="0"  Text="{Binding Operation.StartDate,StringFormat={}{0:yyyy-MM-dd}}"  />
+                    <xctk:DateTimePicker Grid.Row="1" Grid.Column="0" Value="{Binding Operation.StartDate, UpdateSourceTrigger=PropertyChanged}" Format="ShortDate"/>
 
                     <Label Content="End" Grid.Row="0" Grid.Column="2"/>
                     <xctk:DateTimePicker Grid.Row="1" Grid.Column="2" Value="{Binding Operation.EndDate, UpdateSourceTrigger=PropertyChanged}" Format="ShortDate"/>
@@ -94,7 +94,7 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
 
-                    <Label Content="IsActive" Grid.Row="0" Grid.Column="0"/>
+                    <Label Content="Active" Grid.Row="0" Grid.Column="0"/>
                     <CheckBox Grid.Row="1" Grid.Column="0" IsChecked="{Binding Operation.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                     
                     <Label Content="Done" Grid.Row="0" Grid.Column="2"/>

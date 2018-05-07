@@ -8,6 +8,7 @@
              mc:Ignorable="d" 
              Loaded="UserControl_Loaded"
              d:DesignHeight="300" d:DesignWidth="300">
+   
     <Grid Style="{StaticResource ContentRoot}">
 
         <ScrollViewer>
@@ -42,14 +43,14 @@
                     <ListView.View>
                         <GridView x:Name="GridListView">
 
-                            <!--<GridViewColumn Header="No" DisplayMemberBinding="{Binding SortOrder}" x:Name="SortOrder" Width="30"/>-->
+                            <GridViewColumn Header="No" DisplayMemberBinding="{Binding SortOrder}" x:Name="SortOrder" Width="30"/>
                             <GridViewColumn Header="Department" DisplayMemberBinding="{Binding Department.Name}" x:Name="Department"/>
                             <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" x:Name="Name"/>
                             <GridViewColumn Header="Start" DisplayMemberBinding="{Binding StartDate,StringFormat={}{0:yyyy-MM-dd}}" x:Name="StartDate"/>
                             <GridViewColumn Header="End" DisplayMemberBinding="{Binding EndDate,StringFormat={}{0:yyyy-MM-dd}}" x:Name="EndDate"/>
                             <GridViewColumn Header="Time" DisplayMemberBinding="{Binding OperationTime}" x:Name="OperationTime"/>
                             <GridViewColumn Header="User" DisplayMemberBinding="{Binding User.LongName}"/>
-                            
+
                             <GridViewColumn Header="Done" x:Name="IsCompleted">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>

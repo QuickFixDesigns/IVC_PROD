@@ -54,7 +54,7 @@
                 <Label Content="OperationTime" />
                 <xctk:DecimalUpDown DefaultValue ="0" Value="{Binding DepartmentOperation.OperationTime, UpdateSourceTrigger=PropertyChanged}"/>
 
-                <Label Content="IsActive"/>
+                <Label Content="Active"/>
                 <CheckBox IsChecked="{Binding DepartmentOperation.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Label Content="CreatedAt" />

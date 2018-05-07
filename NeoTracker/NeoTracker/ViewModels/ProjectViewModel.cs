@@ -160,7 +160,7 @@ namespace NeoTracker.Models
                 {
                     Code = x.No_Com,
                     Client = x.Fact_A1,
-                    Date = x.Datecli,
+                    ClientDate = x.Datecli,
                     Po = x.No_Po,
                 }).ToListAsync();
             }
@@ -176,6 +176,8 @@ namespace NeoTracker.Models
                         ItemID = x.ItemID,
                         Code = x.Code,
                         SortKey =x.SortKey,
+                        QtyDelivery = x.QtyDelivery,
+                        QtyOrder = x.QtyOrder,
                         DueDate = x.DueDate,
                         EndDate = x.EndDate,
                         Status = new StatusViewModel()

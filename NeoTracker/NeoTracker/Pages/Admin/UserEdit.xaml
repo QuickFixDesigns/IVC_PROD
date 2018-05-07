@@ -69,7 +69,7 @@
                 <Label Content="EmailNotifications"/>
                 <CheckBox  IsChecked="{Binding User.EmailNotifications, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
-                <Label Content="IsActive"/>
+                <Label Content="Active"/>
                 <CheckBox IsChecked="{Binding User.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                 
                 <Label Content="UpdatedBy" />

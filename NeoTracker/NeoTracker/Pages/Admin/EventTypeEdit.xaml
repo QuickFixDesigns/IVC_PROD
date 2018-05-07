@@ -61,7 +61,7 @@
                 <Label Content="IsDueDateChange"/>
                 <CheckBox IsChecked="{Binding EventType.IsDueDateChange, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
-                <Label Content="IsActive"/>
+                <Label Content="Active"/>
                 <CheckBox IsChecked="{Binding EventType.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Label Content="CreatedAt" />

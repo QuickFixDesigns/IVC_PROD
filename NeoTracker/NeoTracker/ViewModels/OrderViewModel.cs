@@ -33,11 +33,11 @@ namespace NeoTracker.Models
             get { return _Po; }
             set { SetProperty(ref _Po, value); }
         }
-        private DateTime? _Date;
-        public DateTime? Date
+        private DateTime? _ClientDate;
+        public DateTime? ClientDate
         {
-            get { return _Date; }
-            set { SetProperty(ref _Date, value); }
+            get { return _ClientDate; }
+            set { SetProperty(ref _ClientDate, value); }
         }
     }
 }

@@ -26,7 +26,7 @@ namespace NeoTracker.Pages
     /// <summary>
     /// Interaction logic for DepartmentEdit.xaml
     /// </summary>
-    public partial class ProjectCreate : UserControl, IContent
+    public partial class ProjectCreate : UserControl
     {
         private Buttons btn = new Buttons();
         private Utilities util = new Utilities();
@@ -37,7 +37,7 @@ namespace NeoTracker.Pages
             btn.SetButton(ApplyButton, true, "Apply", null, null);
             btn.SetButton(CancelButton, true, "Cancel", null, null);
 
-            btn.SetButton(RemoveFilterBtn, false, "Reset", null, null);
+            btn.SetButton(RemoveFilterBtn, false, "Reset", "Filter", "Reset filter");
 
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(App.vm.Project.Orders);
             view.Filter = i => UserFilter(i);
@@ -53,7 +53,7 @@ namespace NeoTracker.Pages
             else
             {
                 var order = item as OrderViewModel;
-                return order.Code.Contains(SearchBox.Text) || order.Po.Contains(SearchBox.Text) || order.Client.Contains(SearchBox.Text);
+                return order.Code.ToUpper().Contains(SearchBox.Text.ToUpper()) || order.Po.ToUpper().Contains(SearchBox.Text.ToUpper()) || order.Client.ToUpper().Contains(SearchBox.Text.ToUpper());
             }
         }
         private async void ApplyButton_Click(object sender, RoutedEventArgs e)
@@ -80,23 +80,14 @@ namespace NeoTracker.Pages
         {
             CollectionViewSource.GetDefaultView(ListView.ItemsSource).Refresh();
         }
-        public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
 
-        public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            //throw new NotImplementedException();
-        }
-
-        public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
-        {
-            App.nav.SetLastUri("/Pages/ProjectList.xaml");
-            App.vm.Project.BeginEdit();
-        }
-        public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
-        {
+            if(App.vm.Project != null)
+            {
+                App.nav.SetLastUri("/Pages/ProjectList.xaml");
+                App.vm.Project.BeginEdit();
+            }
         }
     }
 }

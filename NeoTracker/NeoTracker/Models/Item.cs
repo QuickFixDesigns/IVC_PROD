@@ -31,6 +31,9 @@ namespace NeoTracker.Models
         [DataType(DataType.Date)]
         public DateTime? DueDate { get; set; }
 
+        public decimal QtyOrder { get; set; }
+        public decimal QtyDelivery { get; set; }
+
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime? EndDate { get; set; }

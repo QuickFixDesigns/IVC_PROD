@@ -77,7 +77,7 @@
 
                 <Separator Height="10" Background="Transparent"/>
                 
-                <Label Content="IsActive"/>
+                <Label Content="Active"/>
                 <CheckBox IsChecked="{Binding Project.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Separator Height="40" Background="Transparent"/>

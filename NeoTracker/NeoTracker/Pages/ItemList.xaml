@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
+             Loaded="UserControl_Loaded"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Style="{StaticResource ContentRoot}">
         <ScrollViewer Grid.Column="4">
@@ -13,13 +14,14 @@
                 <ListView x:Name="ListView" ItemsSource="{Binding Project.Items, UpdateSourceTrigger=PropertyChanged}" MouseDoubleClick="ListView_MouseDoubleClick">
                     <ListView.View>
                         <GridView x:Name="GridListView">
-                            <GridViewColumn Header="SortOrder" DisplayMemberBinding="{Binding SortOrder}" />
-                            <GridViewColumn Header="Code" DisplayMemberBinding="{Binding Code}" />
-                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"  />
+                            <GridViewColumn Header="No" DisplayMemberBinding="{Binding SortOrder}" />
+                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding LongName}"  />
                             <GridViewColumn Header="DueDate" DisplayMemberBinding="{Binding DueDate,StringFormat={}{0:yyyy-MM-dd}}"  />
+                            <GridViewColumn Header="QtyOrder" DisplayMemberBinding="{Binding QtyOrder}"  />
+                            <GridViewColumn Header="QtyDelivery" DisplayMemberBinding="{Binding QtyDelivery}"  />
                             <GridViewColumn Header="EndDate" DisplayMemberBinding="{Binding EndDate,StringFormat={}{0:yyyy-MM-dd}}" />
                             <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status.Name}"  />
-                            <GridViewColumn Header="OperationCount" DisplayMemberBinding="{Binding OperationCount}"  />
+                            <GridViewColumn Header="%" DisplayMemberBinding="{Binding OperationCount}"  />
                         </GridView>
                     </ListView.View>
                 </ListView>

@@ -26,7 +26,7 @@ namespace NeoTracker.Pages
     /// <summary>
     /// Interaction logic for DepartmentEdit.xaml
     /// </summary>
-    public partial class EventEdit : UserControl, IContent
+    public partial class EventEdit : UserControl
     {
         private Buttons btn = new Buttons();
         private Utilities util = new Utilities();
@@ -63,26 +63,6 @@ namespace NeoTracker.Pages
             App.vm.Event = null;
             App.nav.GoBack(this);
         }
-        public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
-
-        public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
-
-        public async void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
-        {
-            App.nav.SetLastUri("/Pages/EventEdit.xaml");
-            App.vm.Event.BeginEdit();
-
-            await App.vm.LoadChangeLog("Event", App.vm.Event.EventID);
-        }
-        public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
-        {
-        }
         private void ClearDepartment_Click(object sender, RoutedEventArgs e)
         {
             App.vm.Event.Department = null;
@@ -96,6 +76,14 @@ namespace NeoTracker.Pages
         private void ClearStatus_Click(object sender, RoutedEventArgs e)
         {
             App.vm.Event.Status = null;
+        }
+
+        private async void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            App.nav.SetLastUri("/Pages/EventEdit.xaml");
+            App.vm.Event.BeginEdit();
+
+            await App.vm.LoadChangeLog("Event", App.vm.Event.EventID);
         }
     }
 }

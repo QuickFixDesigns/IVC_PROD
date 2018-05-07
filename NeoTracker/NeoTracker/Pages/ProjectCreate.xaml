@@ -5,15 +5,22 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:src="clr-namespace:NeoTracker.ViewModels"
+             Loaded="UserControl_Loaded"
              mc:Ignorable="d" >
     <Grid Style="{StaticResource ContentRoot}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="1"/>
-            <ColumnDefinition Width="auto" MinWidth="460"/>
+            <ColumnDefinition Width="420"/>
+            <ColumnDefinition Width="1"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <ScrollViewer Grid.Column="0" >
+        <ScrollViewer Grid.Column="0" Grid.Row="0">
             <StackPanel HorizontalAlignment="Left" Margin="0,0,10,0">
                 <mui:ModernButton x:Name="ApplyButton" Click="ApplyButton_Click"/>
                 <mui:ModernButton x:Name="CancelButton" Click="CancelButton_Click" />
@@ -24,7 +31,7 @@
             </StackPanel>
         </ScrollViewer>
 
-        <GridSplitter Grid.Column="1" />
+        <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"/>
 
         <ScrollViewer Grid.Column="2">
             <StackPanel Name="panel" Margin="10,0,10,0">
@@ -47,30 +54,24 @@
                 <TextBlock Text="Create new project" Style="{StaticResource Heading2}" />
                 <Separator Height="10" Background="Transparent"/>
 
+                <Label Content="Name"/>
+                <TextBox  Text="{Binding Project.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                
                 <Label Content="ProjectType"/>
                 <ComboBox ItemsSource="{Binding Path=ProjectTypes}" DisplayMemberPath="Name" SelectedItem="{Binding Project.ProjectType, UpdateSourceTrigger=LostFocus}" />
 
-                <Label Content="Name"/>
-                <TextBox  Text="{Binding Project.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                
+                <TextBlock Text="Choose Order from Genius" Style="{StaticResource Heading2}" Margin="0,20,0,10"/>
 
-                <Separator Height="20" Visibility="Hidden"/>
+                <mui:ModernButton  x:Name="RemoveFilterBtn" Click="RemoveFilterBtn_Click"/>
+                <TextBox  x:Name="SearchBox" TextChanged="SearchBox_TextChanged" />
+                
+            </StackPanel>
+        </ScrollViewer>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="auto" />
-                    </Grid.ColumnDefinitions>
-
-                    <Label Grid.Column="0" Content="Search box"/>
-                    <mui:ModernButton Grid.Column="2"  x:Name="RemoveFilterBtn" Click="RemoveFilterBtn_Click"/>
-                </Grid>
-
-                <TextBox Grid.Row="1" x:Name="SearchBox" TextChanged="SearchBox_TextChanged" MaxLength="75"/>
-
-                <Separator Height="10" Background="Transparent"/>
-
-                <ListView  x:Name="ListView" SelectionMode="Single" ItemsSource="{Binding Project.Orders, UpdateSourceTrigger=PropertyChanged}">
+        <ScrollViewer Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Margin="10,20,10,20">
+            <StackPanel>
+                <ListView   x:Name="ListView" SelectionMode="Single" ItemsSource="{Binding Project.Orders, UpdateSourceTrigger=PropertyChanged}">
                     <ListView.View>
                         <GridView x:Name="GridListView">
 
@@ -92,15 +93,14 @@
                                 </GridViewColumn.Header>
                             </GridViewColumn>
 
-                            <GridViewColumn DisplayMemberBinding="{Binding Date }">
+                            <GridViewColumn DisplayMemberBinding="{Binding ClientDate }">
                                 <GridViewColumn.Header>
-                                    <GridViewColumnHeader Tag="Date ">Date</GridViewColumnHeader>
+                                    <GridViewColumnHeader Tag="ClientDate">ClientDate</GridViewColumnHeader>
                                 </GridViewColumn.Header>
                             </GridViewColumn>
                         </GridView>
                     </ListView.View>
                 </ListView>
-
             </StackPanel>
         </ScrollViewer>
     </Grid>

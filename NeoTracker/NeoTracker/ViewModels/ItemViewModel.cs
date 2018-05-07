@@ -49,6 +49,10 @@ namespace NeoTracker.Models
             get { return _DueDate; }
             set { SetProperty(ref _DueDate, value); }
         }
+
+        public decimal QtyOrder { get; set; }
+        public decimal QtyDelivery { get; set; }
+
         private DateTime? _EndDate;
         public DateTime? EndDate
         {

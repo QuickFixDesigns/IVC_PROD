@@ -17,13 +17,13 @@
 
                             <GridViewColumn DisplayMemberBinding="{Binding PropertyName}">
                                 <GridViewColumn.Header>
-                                    <GridViewColumnHeader Tag="PropertyName">Change</GridViewColumnHeader>
+                                    <GridViewColumnHeader Tag="PropertyName">Attribut</GridViewColumnHeader>
                                 </GridViewColumn.Header>
                             </GridViewColumn>
 
                             <GridViewColumn DisplayMemberBinding="{Binding OldValue}">
                                 <GridViewColumn.Header>
-                                    <GridViewColumnHeader Tag="OldValue">Value</GridViewColumnHeader>
+                                    <GridViewColumnHeader Tag="OldValue">Change</GridViewColumnHeader>
                                 </GridViewColumn.Header>
                             </GridViewColumn>
 

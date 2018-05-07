@@ -75,7 +75,7 @@
                 <Label Content="CanManageProject"/>
                 <CheckBox IsChecked="{Binding Department.CanManageProject, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
-                <Label Content="IsActive"/>
+                <Label Content="Active"/>
                 <CheckBox IsChecked="{Binding Department.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Label Content="CreatedBy" />

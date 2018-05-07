@@ -26,7 +26,7 @@ namespace NeoTracker.Pages
     /// <summary>
     /// Interaction logic for DepartmentEdit.xaml
     /// </summary>
-    public partial class ItemEdit : UserControl, IContent
+    public partial class ItemEdit : UserControl
     {
         private Buttons btn = new Buttons();
         private Utilities util = new Utilities();
@@ -51,31 +51,14 @@ namespace NeoTracker.Pages
             App.vm.Item = null;
             App.nav.GoBack(this);
         }
-        //private void DeleteButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    vm.Delete();
-        //    App.nav.GoBack(this);
-        //}
-        public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
 
-        public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
-
-        public async void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        private async void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             App.nav.SetLastUri("/Pages/ItemEdit.xaml");
             App.vm.Item.BeginEdit();
 
-            //await App.vm.Item.LoadOperations();
+            await App.vm.Item.LoadOperations();
             await App.vm.LoadChangeLog("Item", App.vm.Item.ItemID);
-        }
-        public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
-        {
         }
     }
 }
