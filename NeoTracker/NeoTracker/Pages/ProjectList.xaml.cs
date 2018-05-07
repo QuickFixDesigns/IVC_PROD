@@ -33,18 +33,19 @@ namespace NeoTracker.Pages
         {
             InitializeComponent();
             btn.SetButton(CreateButton, true, "Create", "Add project", "Add new project");
-            btn.SetButton(ClearProjectTypeFilter, false, "Reset", null, null);
+            btn.SetButton(ClearProjectTypeFilter, false, "Reset", "Project type", "Reset filter");
         }
         private bool ProjectFilter(object item)
         {
+            var project = item as ProjectViewModel;
+
             if (string.IsNullOrEmpty(SearchBox.Text) && ProjecTypeFilter.SelectedIndex == -1)
             {
-                return true;
+                return project.IsActive == IsActiveFilter.IsChecked.Value;
             }
             else
             {
-                var project = item as ProjectViewModel;
-                return Utilities.Contains(project.Code, SearchBox.Text) || Utilities.Contains(project.Name, SearchBox.Text) || Utilities.Contains(project.PurchaseOrder, SearchBox.Text) || Utilities.Contains(project.Client, SearchBox.Text);
+                return project.IsActive == IsActiveFilter.IsChecked.Value && (Utilities.Contains(project.Code, SearchBox.Text) || Utilities.Contains(project.Name, SearchBox.Text) || Utilities.Contains(project.PurchaseOrder, SearchBox.Text) || Utilities.Contains(project.Client, SearchBox.Text));
             }
         }
         private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -87,11 +88,6 @@ namespace NeoTracker.Pages
             //throw new NotImplementedException();
         }
 
-        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            CollectionViewSource.GetDefaultView(ListView.ItemsSource).Refresh();
-        }
-
         private void ProjecTypeFilter_LostFocus(object sender, RoutedEventArgs e)
         {
             CollectionViewSource.GetDefaultView(ListView.ItemsSource).Refresh();
@@ -115,6 +111,15 @@ namespace NeoTracker.Pages
 
                 ListView.ItemsSource = view;
             }
+        }
+
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(ListView.ItemsSource).Refresh();
+        }
+        private void IsActiveFilter_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(ListView.ItemsSource).Refresh();
         }
     }
 }

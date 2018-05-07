@@ -19,22 +19,19 @@
         <ScrollViewer Margin="{StaticResource SplitLeft}">
             <StackPanel HorizontalAlignment="Left" Margin="0,0,10,10">
 
-                <Grid Margin="0,10,0,0">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                        <Label Content="ProjectType"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <mui:ModernButton x:Name="ClearProjectTypeFilter" Click="ClearProjectTypeFilter_Click"></mui:ModernButton>
-                    </StackPanel>
-                </Grid>
-
+                <mui:ModernButton x:Name="ClearProjectTypeFilter" Click="ClearProjectTypeFilter_Click"></mui:ModernButton>
                 <ComboBox x:Name="ProjecTypeFilter" ItemsSource="{Binding Path=ProjectTypes}" DisplayMemberPath="Name" SelectedValue="Id" LostFocus="ProjecTypeFilter_LostFocus"/>
 
                 <Separator Height="5" Visibility="Hidden"/>
                 
                 <Label Content="SearchBox"/>
                 <TextBox x:Name="SearchBox" TextChanged="SearchBox_TextChanged"/>
+
+                <Separator Height="5" Visibility="Hidden"/>
                 
+                <Label Content="Active"/>
+                <CheckBox x:Name="IsActiveFilter" Click="IsActiveFilter_Click" IsChecked="True"/>
+
                 <Separator Height="20" Visibility="Hidden"/>
                 <mui:ModernButton x:Name="CreateButton" Click="CreateButton_Click"/>
                 

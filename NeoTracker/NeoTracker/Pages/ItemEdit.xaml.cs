@@ -53,11 +53,14 @@ namespace NeoTracker.Pages
 
         private async void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            App.nav.SetLastUri("/Pages/ItemEdit.xaml");
-            App.vm.Item.BeginEdit();
+            if (App.vm.Item != null)
+            {
+                App.nav.SetLastUri("/Pages/ItemEdit.xaml");
+                App.vm.Item.BeginEdit();
 
-            await App.vm.Item.LoadOperations();
-            await App.vm.LoadChangeLog("Item", App.vm.Item.ItemID);
+                await App.vm.Item.LoadOperations();
+                await App.vm.LoadChangeLog("Item", App.vm.Item.ItemID);
+            }
         }
     }
 }

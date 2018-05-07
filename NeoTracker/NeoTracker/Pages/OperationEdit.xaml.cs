@@ -66,13 +66,12 @@ namespace NeoTracker.Pages
                 App.nav.SetLastUri("/Pages/OperationEdit.xaml");
                 App.vm.Operation.BeginEdit();
 
-                await App.vm.LoadChangeLog("Operation", App.vm.Operation.OperationID);
-
                 using (var context = new NeoTrackerContext())
                 {
                     var data = await context.DepartmentUsers.Where(x => x.DepartmentID == App.vm.Operation.Department.DepartmentID).Include(x => x.User).Select(x => x.User).ToListAsync();
                     UserCb.ItemsSource = data;
                 }
+                await App.vm.LoadChangeLog("Operation", App.vm.Operation.OperationID);
             }
         }
 
