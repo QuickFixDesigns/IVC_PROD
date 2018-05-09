@@ -69,20 +69,12 @@ namespace NeoTracker.Pages
 
         private void ClearItem_Click(object sender, RoutedEventArgs e)
         {
-            App.vm.Event.EventItem = null ;
+            App.vm.Event.EventItem = null;
         }
 
         private void ClearStatus_Click(object sender, RoutedEventArgs e)
         {
             App.vm.Event.Status = null;
-        }
-
-        private async void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            App.nav.SetLastUri("/Pages/EventEdit.xaml");
-            App.vm.Event.BeginEdit();
-
-            await App.vm.LoadChangeLog("Event", App.vm.Event.EventID);
         }
     }
 }

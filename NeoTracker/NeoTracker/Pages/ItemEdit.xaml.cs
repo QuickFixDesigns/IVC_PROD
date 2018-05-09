@@ -50,17 +50,5 @@ namespace NeoTracker.Pages
             App.vm.Item = null;
             App.nav.GoBack(this);
         }
-
-        private async void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (App.vm.Item != null)
-            {
-                App.nav.SetLastUri("/Pages/ItemEdit.xaml");
-                App.vm.Item.BeginEdit();
-
-                await App.vm.Item.LoadOperations();
-                await App.vm.LoadChangeLog("Item", App.vm.Item.ItemID);
-            }
-        }
     }
 }

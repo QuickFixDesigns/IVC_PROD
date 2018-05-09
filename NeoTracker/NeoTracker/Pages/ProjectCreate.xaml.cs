@@ -79,14 +79,5 @@ namespace NeoTracker.Pages
         {
             CollectionViewSource.GetDefaultView(ListView.ItemsSource).Refresh();
         }
-
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            if(App.vm.Project != null)
-            {
-                App.nav.SetLastUri("/Pages/ProjectList.xaml");
-                App.vm.Project.BeginEdit();
-            }
-        }
     }
 }

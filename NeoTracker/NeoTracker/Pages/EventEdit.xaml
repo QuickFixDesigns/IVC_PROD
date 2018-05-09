@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:src="clr-namespace:NeoTracker.ViewModels"
-             Loaded="UserControl_Loaded"
              mc:Ignorable="d" >
     <Grid Style="{StaticResource ContentRoot}">
         

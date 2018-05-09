@@ -29,11 +29,16 @@ namespace NeoTracker.Pages
         {
             InitializeComponent();
         }
-        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private async void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (ListView.SelectedIndex != -1)
             {
                 App.vm.Event = ((EventViewModel)ListView.SelectedItem);
+                App.vm.Event.BeginEdit();
+
+                await App.vm.LoadChangeLog("Event", App.vm.Event.EventID);
+
+                App.nav.SetLastUri("/Pages/EventEdit.xaml");
                 App.nav.NavigateTo("/Pages/EventEdit.xaml", this);
             }
         }

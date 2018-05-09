@@ -72,6 +72,8 @@ namespace NeoTracker.ViewModels
         }
         public async Task LoadChangeLog(string entityName, int pk)
         {
+            ChangeLog.Clear();
+
             using (var context = new NeoTrackerContext())
             {
                 var logs = await context.ChangeLogs.Where(x => x.EntityName == entityName && x.PrimaryKeyValue == pk).OrderByDescending(x => x.UpdatedAt).ToListAsync();

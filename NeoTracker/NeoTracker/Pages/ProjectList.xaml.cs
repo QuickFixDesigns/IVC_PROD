@@ -48,11 +48,18 @@ namespace NeoTracker.Pages
                 return project.IsActive == IsActiveFilter.IsChecked.Value && (Utilities.Contains(project.Code, SearchBox.Text) || Utilities.Contains(project.Name, SearchBox.Text) || Utilities.Contains(project.PurchaseOrder, SearchBox.Text) || Utilities.Contains(project.Client, SearchBox.Text));
             }
         }
-        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private async void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (ListView.SelectedIndex != -1)
             {
                 App.vm.Project = ((ProjectViewModel)ListView.SelectedItem);
+                App.vm.Project.BeginEdit();
+
+                await App.vm.Project.LoadEvents();
+                await App.vm.Project.LoadItems();
+                await App.vm.LoadChangeLog("Project", App.vm.Project.ProjectID);
+
+                App.nav.SetLastUri("/Pages/ProjectEdit.xaml");
                 App.nav.NavigateTo("/Pages/ProjectEdit.xaml", this);
             }
         }
@@ -63,7 +70,11 @@ namespace NeoTracker.Pages
             {
                 ProjectType = App.vm.ProjectTypes.OrderBy(x=>x.SortOrder).ThenBy(x=>x.Name).FirstOrDefault()
             };
+            App.vm.Project.BeginEdit();
+
             await App.vm.Project.LoadOrders();
+
+            App.nav.SetLastUri("/Pages/ProjectList.xaml");
             App.nav.NavigateTo("/Pages/ProjectCreate.xaml", this);
         }
 

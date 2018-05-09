@@ -6,7 +6,6 @@
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"               
              xmlns:src="clr-namespace:NeoTracker.ViewModels"
-             Loaded="UserControl_Loaded"
              mc:Ignorable="d" >
     <Grid Style="{StaticResource ContentRoot}">
 

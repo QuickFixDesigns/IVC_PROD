@@ -2,6 +2,7 @@
 using FirstFloor.ModernUI.Windows.Controls;
 using FirstFloor.ModernUI.Windows.Navigation;
 using NeoTracker.Content;
+using NeoTracker.DAL;
 using NeoTracker.Models;
 using NeoTracker.Pages.Dialogs;
 using System;
@@ -45,11 +46,15 @@ namespace NeoTracker.Pages
         {
             RefreshListView();
         }
-        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private async void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (ListView.SelectedIndex != -1)
             {
                 App.vm.Operation = ((OperationViewModel)ListView.SelectedItem);
+                App.vm.Operation.BeginEdit();
+                await App.vm.LoadChangeLog("Operation", App.vm.Operation.OperationID);
+
+                App.nav.SetLastUri("/Pages/OperationEdit.xaml");
                 App.nav.NavigateTo("/Pages/OperationEdit.xaml", this);
             }
         }
